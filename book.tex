@@ -1,0 +1,104 @@
+\input{settings}
+
+\begin{comment}
+
+to find all files that contain a term (useful for creating index)
+
+grep -r term * | grep tex | sed 's/:/ /g' | awk '{print $1}' | sort | uniq
+
+\end{comment}
+
+\newcommand{\progpath}{\basepath/programs}
+
+\makeatletter
+\def\seealso#1#2{{\em see also\/} #1, #2}
+\makeatother
+
+
+\begin{document}
+
+\begin{comment}
+reduce space
+
+titlesec
+http://www.ctex.org/documents/packages/layout/titlesec.pdf
+wrapfig
+
+\end{comment}
+
+\frontmatter
+\title{
+Machine Learning and Software Engineering: Build
+Trustable Systems and Avoid Pitfalls
+}
+\author{Yung-Hsiang Lu
+and George K. Thiruvathukal}
+\maketitle
+
+\begin{comment}
+Topics:
+
+Part1: Software Tools and Development Process
+   Chapter 0: Python Basics
+   Chapter 1: Version Control, Pull Requests
+   Chapter 2: Continuous Integration, Unit Tests
+   Chapter 3: Branch and Web Services
+   Chapter 4: Documentation
+   Chapter 5: Graphics Packages
+
+Part 2: Machine Learning I: Unsupervised Learning (mathematics)
+   Chapter 6: k-mean
+   Chapter 7: Hierarchical Clustering
+   Chapter 8: Support vector machines
+
+Part 3: Machine Learning II: Supervised Learning (mathematics)
+   Chapter 9: Linearc Regression
+   Chapter 10: Logistic Regression
+   Chapter 11: Neural Network
+
+Part 4: Implementing Machine Learning
+   Chapter 12: k-mean
+   Chapter 13: Hierarchical Clustering
+   Chapter 14: Support vector machines
+   Chapter 15: Linearc Regression
+   Chapter 16: Logistic Regression
+   Chapter 17: Neural Network
+
+Part 5: Applications
+   Chapter 18: Movie Preference
+   Chapter 19: Handwritten Digit Recognition
+   Chapter 20: Object Detection in Images
+   
+     
+
+Reinforcement Learning
+   
+
+\end{comment}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\begin{comment}
+
+\input{frontmatter/front}
+% \input{frontmatter/rules}
+
+\mainmatter
+\input{environment/env}
+%  \input{storage/storage}
+%  \input{recursion/recursion}
+% \input{structure/structure}
+% \input{application/application}
+
+\appendix
+\backmatter
+% \input{thankyou}
+\bibliographystyle{unsrt}
+\bibliography{references}
+\end{comment}
+\printindex
+% \input{backmatter/back}
+
+\end{document}

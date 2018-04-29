@@ -1,0 +1,61 @@
+\documentclass[ChapterTOCs,sunil2]{sunil}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{enumitem}
+\usepackage{fixltx2e,fix-cm}
+\usepackage{graphicx}
+\usepackage{hhline}
+\usepackage{lineno}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{makeidx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{subfigure}
+\usepackage{url}
+\usepackage{verbatim}
+% \lstset{breaklines=true}
+% \lstset{breakatwhitespace=true}
+\lstset{
+  language=C,
+  breakatwhitespace=true,
+  breaklines=true,
+  basicstyle=\ttfamily,
+  keywordstyle=\bf,
+  morekeywords={void}
+}
+\frenchspacing
+\tolerance=5000
+
+\makeindex
+
+% only for draft
+\usepackage{draftwatermark}
+\SetWatermarkScale{0.2}
+% \SetWatermarkText{DRAFT. DO NOT DISTRIBUTE. \today}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{exercise}{Exercise}[chapter]
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+\newtheorem{proof}{Proof}
+
+
+\begin{comment}
+% make table of content clickable, suggested at
+% https://tex.stackexchange.com/questions/73862/how-can-i-make-a-clickable-table-of-contents
+
+\usepackage{color}
+%May be necessary if you want to color links
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  %set true if you want colored links
+  linktoc=all,
+  %set to all if you want both sections and subsections linked
+  linkcolor=blue,
+  %choose some color if you want links to stand out
+}
+\end{comment}
