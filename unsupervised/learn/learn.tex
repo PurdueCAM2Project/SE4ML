@@ -1,0 +1,181 @@
+\chapter{Machine Learning}
+
+Learning Objectives
+
+\begin{itemize}
+\item Understand the strength and limitations of machine learning
+\item Distinguish  unsupervised learning,  supervised learning, and reinforcement learning
+\end{itemize}
+
+\section{Decision Problems}
+
+\index{decision problem}
+
+\subsection{Bring an Umbrella?}
+
+Machine learning means using computer programs to discover patterns
+(i.e., ``learn'') from data. How is this different from typical
+computer programs?  Let us consider a {\it decision problem}:
+Should you bring an umbrella or not?  This should be easy, right?
+
+
+\begin{verbatim}
+If it is raining then
+   Bring an umbrella
+Otherwise
+   Do not bring an umbrella
+
+% YHL: I have problems using 
+% \usepackage{algorithmic} or
+% \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\end{verbatim}
+
+This is simple enough.  If you always follow this rule, you will soon
+encounter situations when this rule is not good.  Maybe it is not raining
+right now but it is expected to rain soon. Thus, you add one more rule:
+
+\begin{verbatim}
+If it is raining then
+   Bring an umbrella
+Otherwise
+   If it is expected to rain soon then
+      Bring an umbrella
+   Otherwise
+      Do not bring an umbrella
+\end{verbatim}
+
+If you follow these rules, you will soon discover that they are not
+sufficient.  If you are going to walk in covered areas (such as subway
+stations or shopping malls), maybe you do not need an umbrella.  Thus,
+you add another rule:
+
+\begin{verbatim}
+If it is raining and walk outside covered areas then
+   Bring an umbrella
+Otherwise
+   If it is expected to rain soon and walk outside covered areas then
+      Bring an umbrella
+   Otherwise
+      Do not bring an umbrella
+\end{verbatim}
+
+If you are carrying a box and it does not rain heavily, maybe you
+do not want to take an umbrella because it is inconvenient to carry
+the box and to hold an umbrella at the same time. As a result,
+the rules become
+
+\begin{verbatim}
+If it is raining and walk outside covered areas then
+   If carrying a box and the rain is light then
+       Do not bring an umbrella
+   Otherwise
+       Bring an umbrella
+Otherwise
+   If it is expected to rain soon and walk outside covered areas then
+      Bring an umbrella
+   Otherwise
+      Do not bring an umbrella
+\end{verbatim}
+
+The rules become more and more complex.  You may also want to consider
+whether it is windy. If it is, you may want to wear a raincoat instead
+of bringing an umbrella. If you want to ride a bike, you may want to
+choose a rain coat instead of an umbrella.  As you can see, this
+decision problem has so many different scenarios hat writing these if
+conditions become really complex.
+
+\subsection{Cross a Stree Intersection?}
+
+If you drive a car, should you cross a street intersection or not?
+You may think this is easy:
+
+\begin{verbatim}
+If the traffic light is green then
+   Cross the intersection
+Otherwise
+   Do not cross the intersection
+\end{verbatim}
+
+Sometimes, you cannot enter the inserction because it is blocked
+by vehicles already. If you enter the intersection, you will park
+at the intersection and worsen traffic jam. Thus, you add more rules:
+
+\begin{verbatim}
+If the traffic light is green and the intersection is not occupied then
+   Cross the intersection
+Otherwise
+   Do not cross the intersection
+\end{verbatim}
+
+If you hear the siren of an ambulance, you should allow it to pass first.
+Consequently, the rule gets more complex:
+
+\begin{verbatim}
+If the traffic light is green and the intersection is not occupied and no siren then
+   Cross the intersection
+Otherwise
+   Do not cross the intersection
+\end{verbatim}
+
+If there is a jaywalker, you don't want to hit the person. Let's add that into the rule:
+
+\begin{verbatim}
+If the traffic light is green and the intersection is not occupied and no siren and no jaywalker then
+   Cross the intersection
+Otherwise
+   Do not cross the intersection
+\end{verbatim}
+
+If there is a construction and a flagman, you should follow the
+flagman's instruction, not the traffic light.  
+
+\begin{verbatim}
+If a flagman signals to cross the intersection then
+   Cross the intersection
+Otherwise
+   If the traffic light is green and the intersection is not occupied and no siren and no jaywalker then
+       Cross the intersection
+   Otherwise
+       Do not cross the intersection
+\end{verbatim}
+
+We can keep adding more and more rules to cover many different
+scenarios.  As you can see, this decision problem may consider many
+factors and writing down these rules become increasingly complex and
+difficult.
+
+\subsection{Approve a Mortgate Application?}
+
+If you are a bank manager and evaluate a mortgage application, how do
+you decide whether to approve or not?  If you approve the application
+and the person pays back regularly, your bank makes money from fees
+and interests.  If the person fails to pay (called ``defaults''), the
+bank {\it may} lose money. It is possible that the bank does not lose
+money if the house's value is sufficient to cover the mortgage
+(through foreclosure). Foreclosure can be a lengthy process and most
+banks want to avoid it.  How do you decide? Maybe you decide
+based on the person's regular income:
+
+
+\begin{verbatim}
+If the montly income is great than twice or the monthly payment then
+   Approve the mortgate application
+Otherwise
+   Deny the mortgate application
+\end{verbatim}
+
+If you do this, your bank will likely lose a lot of money because you
+need to consider other factors, for example, whether the person
+already has a lot of debt. You probably also want to consider whether
+this person has a record of failing to pay bills.  If the house is not
+in a popular location, you definitely want to avoid the possibility of
+foreclosure. If the person has been doing business with the bank for
+several years, you would trust this person more than a new customer.
+Do you want to consider whether this person already own one or more
+houses?  How about this person's age?  Would the marital status affect
+your decision? If you want to consider many factors, are some factors
+are more important than the others? How do you choose the important
+factors?  This problem, again, shows that considering many factors and
+writing down the rules become increasingly complex and difficult.
+
+\section{Knowledge in Data}
