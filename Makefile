@@ -15,6 +15,8 @@ common:
 clean:
 	/bin/rm -f *.aux *.idx *.lof *.log *.ilg *.lot 
 	/bin/rm -f *.out *.pdf *.toc *.ind settings.tex
+	/bin/rm -f book.bbl, book.blg
+
 
 
 

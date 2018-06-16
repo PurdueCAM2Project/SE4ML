@@ -308,24 +308,52 @@ You may need to add some more factors into consideration.
 \index{limit of machine learning}
 
 \index{supervised learning}
-
 \index{unsupervised learning}
+\index{reinforcement learning}
+\index{reward}
 
 There are different types of
-learning~\cite{Goodfellow2016DeepLearning}.  {\it Supervised learning}
-means that there is a ``teacher'' telling a ``student'' what is right
-or wrong. Imagine that a teacher shows an image of flowers and tell
-students that these are flowers. The teacher shows another image of an
-elephant and says that it is an elephant.  {\it Unsupervised learning}
-has no teacher. Imagine that you want to stock your store on a Friday
-evening for sales on Saturday.  There is no correct answer what
-merchandize you should put on shelves.  You can analyze the past sales
-records, together with factors such as weather and season.  You may
-also want to consider whether there is a major sport event on that
-Saturday.  This is different from supervised learning because there is
-no teacher telling you ``Yes, you should stock this item on shelves.''
-or ``No, do not stock that item because nobody will buy it this coming
-Saturday.''
+learning~\cite{Goodfellow2016DeepLearning,
+  Sutton2017ReinforcementLearningIntroduction}.  {\it Supervised
+  learning} means that there is a ``teacher'' telling a ``student''
+what is right or wrong. Imagine that a teacher shows an image of
+flowers and tell students that these are flowers. The teacher shows
+another image of an elephant and says that it is an elephant.  {\it
+  Unsupervised learning} has no teacher. Imagine that you want to
+stock your store on a Friday evening for sales on Saturday.  There is
+no correct answer what merchandize you should put on shelves.  You can
+analyze the past sales records, together with factors such as weather
+and season.  You may also want to consider whether there is a major
+sport event on that Saturday.  This is different from supervised
+learning because there is no teacher telling you ``Yes, you should
+stock this item on shelves.''  or ``No, do not stock that item because
+nobody will buy it this coming Saturday.''  Unsupervised learning is
+often used to discover (unknown) properties in data, for example, what
+people buy on a Saturday.  The third type of learning is called {\it
+  reinforcement learning}.  This type of learning considers sequences
+of actions and the {\it rewards} of these actions.  Consider playing
+chess as an example.  Reinforcement learning is different from
+supervised learning because most decisions cannot be consider right or
+wrong (some decisions such as checkmate are obviously right
+decisions). Instead, the sequence of decisions leads to a result,
+either winning or losing. Reinforcement learning is usually used for
+developing strategies solving problems through sequences of actions.
+Table~\ref{table:threetypesoflearning} summarizes the three types of
+learning.
+
+\vspace{0.1in}
+\begin{table}
+  \begin{tabular}{p{1.2in}p{1.2in}p{1.2in}p{1.2in}}
+    &    {\bf Supervised} & {\bf Unsupervised} & {\bf Reinforcement} \\
+    \hline
+    Teacher & Yes & No & No \\
+    Correct Answer & Yes & No & No \\
+    Consider Sequences & No & No & Yes \\
+  \end{tabular}
+  \caption{Three types of learning}
+  \label{table:threetypesoflearning}
+\end{table}
+\vspace{0.1in}
 
 \begin{comment}
 http://incompleteideas.net/book/bookdraft2017nov5.pdf
@@ -339,5 +367,43 @@ Richard S. Sutton and Andrew G. Barto
     {\bf Definition of Learning}
  \end{center}
 
+  We have talked about ``learning'' without defining it.  What is
+  learning? Michelle~\cite{Mitchell1997MachineLearning} defines
+
+  \\
+  
+  {\it
+    A computer program is said to learn from experience E with respect
+    to some class of tasks T and performance measure P, if its
+    performance at tasks in T, as measured by P, improves with
+    experience E.}
+
+  \\
+
+  To explain this in a more intuitive way, a computer program can
+  learn if it can ``get better'' by doing something more.  One way to
+  understand learning is by comparing it with something that cannot
+  learn. Consider the calculator program on your computer (or your
+  mobile phone). It does not get better after you use it.  In
+  contrast, a program that determines whether an email is spam may get
+  better after you mark some emails as
+  spam~\cite{Hastie2009ElementsStatisticalLearning}.  By marking spam
+  emails, you play the role of a teacher and this is an example of
+  supervised learning.
 
 \end{tabular}\vspace{0.1in}
+
+This definition does not speficy what is ``experience''.  From
+computers' viewpoint, the experience often refers to ``data''.  If
+more data is used (assuming the data follows specific patterns), then
+the computer program can perform better (such as making more correct
+decisions in mortgage applications).
+
+\section{Applications of Machine Learning}
+
+As explained earlier, machine learning can be used when many factors
+need to be considered.  Machine learning has already been used in many
+applications~\cite{Alpaydin2010IntroductiontoMachine}, such as
+improving customer relationships, making financial decisions,
+diagnosize illness, identify spam emails, recognize speeches and
+objects in images.
