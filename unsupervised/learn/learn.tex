@@ -144,6 +144,7 @@ scenarios.  As you can see, this decision problem may consider many
 factors and writing down these rules become increasingly complex and
 difficult.
 
+\index{mortgage}
 \subsection{Approve a Mortgate Application?}
 
 If you are a bank manager and evaluate a mortgage application, how do
@@ -155,6 +156,7 @@ money if the house's value is sufficient to cover the mortgage
 (through foreclosure). Foreclosure can be a lengthy process and most
 banks want to avoid it.  How do you decide? Maybe you decide
 based on the person's regular income:
+\index{default}
 
 
 \begin{verbatim}
@@ -172,10 +174,170 @@ in a popular location, you definitely want to avoid the possibility of
 foreclosure. If the person has been doing business with the bank for
 several years, you would trust this person more than a new customer.
 Do you want to consider whether this person already own one or more
-houses?  How about this person's age?  Would the marital status affect
-your decision? If you want to consider many factors, are some factors
-are more important than the others? How do you choose the important
-factors?  This problem, again, shows that considering many factors and
-writing down the rules become increasingly complex and difficult.
+houses?  Should you consider this person's age?  Would the marital
+status affect your decision?  You may want to consider the economy as
+well. If economy is strong, this applicant is likely to keep the
+current job or even get a raise; thus, this applicant is likely to pay
+the mortgage. If economy is weak, this applicant may lose the current
+job and fails to pay.  If you want to consider many factors, are some
+factors are more important than the others? How do you choose the
+important factors?  This problem, again, shows that considering many
+factors and writing down the rules become increasingly complex and
+difficult.
+
+\section{Decisions and Feedback}
+
+In our everyday life, we make hundreds of decisions: what clothes to
+wear, where to go for lunch, what to buy in a store, what birthday
+gift to send to a friend, etc.  The previous examples show that
+decision problems often need to consider many factors.  The reason we
+need to consider many factors is to prevent making wrong decisions.
+What are ``wrong'' decisions? If you bring an umbrella and it does not
+rain, it is a wrong decision.  If you do not bring an umbrella and it
+rain heavily, it is a wrong decision.  Some wrong decisions have
+negligible consequences: bringing an umbrella (if it is small and
+light) without using it may not be a big problem.  Some wrong
+decisions can have dire consequences: approving a mortgage and it
+defaults, the bank loses a lot of money, possibly many thousands or
+millions.
+
+What is a ``wrong'' decision? It may not be so obvious.  A bank may
+deny all mortgage applications that have slight chances of
+defaults. This may completely avoid defaults but the bank also loses
+opportunities making money from the applications that may, but do not,
+default.  In this case, ``preventing defaults'' and ``making money''
+are two related but different goals.
+
+After knowing the consequences of a decision, we may conclude that it
+is a right or a wrong decision. This is the {\it feedback} of the
+decision.  With the feedback, we hope to make better decisions in the
+future. For example, if the bank approves a mortgage and it defaults,
+the bank would probably deny the next application that is ``similar''
+to the defaulted one.  The problem is how to determine two mortgage
+applications are ``similar''.
+
+For some problems, it is impossible (or almost impossible) to know
+whether a wrong has been made. Suppose you are a bank manager and you
+deny a mortgage application. You will not know whether this person
+would be able to pay mortgage regularly if you had approved it.
+
+
+\index{feedback}
 
 \section{Knowledge in Data}
+
+\index{infer}
+\index{pattern}
+
+The examples described earlier are decision problems: whether to bring
+an umbrella, whether to approve a mortgage application, etc. Each
+problem needs to consider many factors and it is not clear which
+factor is more than the other. One way to solve these problems is to
+examine similar scenarios in the past and their results: if the
+current mortgage application is ``similar'' to one that approved in
+the past, was that approval a right decisoin (i.e., did not default)?
+Instead of writing rules, this new approach uses past data to guide
+future decisions.  This is what {\it machine learning} can be helpful:
+computer programs discover (i.e., ``learn'') patterns from data.  Past
+data may help decide which factors are important for making decisions
+{\it if the past data and the new decision problem have similar
+  patterns.}  Having the same pattern is an essential assumption in
+machine learning.  Think about how humans learn: a person observes
+something and then when the person sees {\it similar} things, the
+person uses past knowledge and experience to {\it infer} what that new
+things are.  If a person sees something that is dissimilar to
+everything seen before, this person is unable to recognize the
+patterns and what it is.
+
+\vspace{0.1in}\begin{tabular}{p{5in}}
+\index{black swan event}
+  \begin{center}
+    {\bf Black Swan Event}
+  \end{center}
+  A {\it black swan event} is something that has never been seen
+  before and thus considered
+  impossible~\cite{Taleb2010BlackSwan}.  People
+  used to believe that swans must be white. Apparently, it is not
+  possible to learn and infer the existence of a black swan.
+
+  \\
+  
+  Black
+  swan events are everywhere, if you pay close attention.  Before
+  1941/12/07, few people, if any, in USA had expected that Japan Navy
+  would attack the US navy base. Before 1969/07/20, nobody could
+  expect that a man would be able to walk on the moon. Before April
+  2010, nobody would expect a volcano eruption could cause worldwide
+  disruption of air travel.  Before the first iPhone was announced,
+  there was no iPhone. Before Michael Phelps won 28 Olympic medals,
+  nobody had won 28 Olympic medals.
+
+  \\
+
+  If something has been observed, it is definitely possible.  After a
+  black swan has been seen, people know that swans can be black.  If
+  something has not been observed, it is difficult to say whether it
+  is impossible or not. Maybe it can be observed later.
+
+  \\
+
+  Even though black swan events cannot be inferred  from known patterns,
+  it is possible to predict the occurrence {\it by some people} that
+  are willing to challenge these patterns and consider
+  possibilities that have no been observed (i.e., learned). This
+  is where {\it imagination} and {\it creativity} come in.
+  This book focuses on learning  and does not discuss imagination or
+  creativity further.
+
+  \index{imagination}
+  \index{creativity}
+    
+  
+\end{tabular}\vspace{0.1in}
+
+Machine learning relies on the assumption that past observations and
+new, unseen, situations have similar patterns.  This assumption is
+essential to the success of machine learning.  Imagine that you are
+the bank manager and have discovered a good way to determine whether
+to approve or deny mortgage applications.  If you move to another city
+or another country, your method may be wrong more often than you
+expected. Maybe the demographics are different. Maybe the cultural
+norms are different.  Maybe the real estate markets are different.
+This indicates that your machine learning method has its limitations.
+You may need to add some more factors into consideration.
+\index{limit of machine learning}
+
+\index{supervised learning}
+
+\index{unsupervised learning}
+
+There are different types of
+learning~\cite{Goodfellow2016DeepLearning}.  {\it Supervised learning}
+means that there is a ``teacher'' telling a ``student'' what is right
+or wrong. Imagine that a teacher shows an image of flowers and tell
+students that these are flowers. The teacher shows another image of an
+elephant and says that it is an elephant.  {\it Unsupervised learning}
+has no teacher. Imagine that you want to stock your store on a Friday
+evening for sales on Saturday.  There is no correct answer what
+merchandize you should put on shelves.  You can analyze the past sales
+records, together with factors such as weather and season.  You may
+also want to consider whether there is a major sport event on that
+Saturday.  This is different from supervised learning because there is
+no teacher telling you ``Yes, you should stock this item on shelves.''
+or ``No, do not stock that item because nobody will buy it this coming
+Saturday.''
+
+\begin{comment}
+http://incompleteideas.net/book/bookdraft2017nov5.pdf
+Reinforcement Learning: An Introduction
+Richard S. Sutton and Andrew G. Barto
+\end{comment}
+
+\vspace{0.1in}\begin{tabular}{p{5in}}
+\index{definition of learning}
+  \begin{center}
+    {\bf Definition of Learning}
+ \end{center}
+
+
+\end{tabular}\vspace{0.1in}
