@@ -1,0 +1,141 @@
+\chapter{K-Mean}
+
+{\bf Learning Objective:}
+
+\begin{itemize}
+
+\item Learn the concept of data clustering  
+  
+\item Understand the k-mean algorithm
+
+\item Implement the algorithm in Python
+
+\item Write a test generator for creating test cases
+  
+\end{itemize}
+
+\section{Clustering Data}
+
+Clustering {\it high-dimensional data} is frequently used. Consider
+the following examples:
+A department store is planning the annual promotion. The store wants
+to give customers discount coupons based on their purchase history.
+If a customer has purchased furniture at this store, the customer may
+give a coupon for furniture.  The store sells thousands of products
+and it does not to give one type of coupon for each product because
+doing so would create thousands of types of coupons.  Instead, the
+store wants to provide only a few (say 10) types of coupons.  The
+store wants to group the customers based on what they bought {\it
+  together}.  For example, if many customers buy ice cream, popcorn,
+and soda (of any brand) together, then these customers will be
+classified into one group and only one coupon will be sent to all
+these customers.  Similarly, if many customers purchase milk, ceral,
+and coffee, these customers will get only one type of coupons.  The
+data will be high-dimensional (thousands of dimensions) because each
+sold item is represented by one dimension.
+
+A social media wants to recommend users to become friends.  The media
+use the profiles information, such as age, location, work, education,
+marital status as well as mutual friends to recommend friends.  The
+media wants to put the users into different groups and encourage
+people to make friends within the group.
+
+Both examples are {\it clustering} problems. Clustering problems
+divide data into groups so that the data inside each group is similar
+and the data in different group is dissimilar.  This is {\it
+  unsupervised learning} because there is no teacher telling computers
+whether two pieces of data belong to the same group.  The correct
+answer depends on the other pieces of data.
+
+\section{K-Mean Algorithm}
+\index{k-mean clustering algorithm}
+
+Consider the department store coupon problem again. Suppose the store
+decides to issue exactly ten types of coupons.  The problem becomes
+dividing the customers into ten groups based on their puchase history.
+This section describes the {\it k-mean clustering algorithm};
+here, $k$ is a number assigned to the problem.
+For the department store, $k$ is 10.
+This algorithm works in the following way:
+\index{centroid}
+
+Input: the data and the given value k
+
+n: the number of data points, n should be greater than k
+d: the dimension of data
+
+Procedure:
+
+Pick k points (called {\it centroids}) randomly as the initial centers of the k group
+
+For each data point, find the closet centroid. Assign this data point to the group represented by this centroid.
+
+For each group, compute the center of all data points belonging to this group. This is the new location of the centroid.
+
+Repeat steps until the convergence condition is met.
+
+\index{Euclidean distance}
+
+This algorithm has many different interpretations. First, it does not
+specify how to calculate the distance between a data point and a
+centroid.  The data is likely high-dimensional.  The most common
+definition is the {\it Euclidean distance} but other definitions may
+be adopted.  Suppose $x = (x_1, x_2, ..., x_d)$ and $c = (c_1, c_2,
+..., c_d)$ are one data point and one centroid.  Here are some
+commonly used definitions of distance:
+
+\begin{gather}
+  \sqrt{(x_1 - c_1) ^ 2 + (x_2 - c_2) ^ 2 + ... + (x_d - c_d) ^ 2} = \sqrt{\underset{i=1}{\overset{d}{\sum}} (x_i - c_i) ^ 2}.
+  \label{equ:EuclideanDistance}
+    \\
+    |x_1 - c_1 |  + | x_2 - c_2 |  + ... + | x_d - c_d | = \underset{i=1}{\overset{d}{\sum}} |x_i - c_i|.
+    \label{equ:1NormDistance}
+\end{gather}
+
+A more general definition is
+
+\begin{gather}
+  (\underset{i=1}{\overset{d}{\sum}} |x_i - c_i| ^ p) ^ {\frac{1}{p}}.
+\end{gather}
+
+In fact, definitions (\ref{equ:EuclideanDistance}) and
+(\ref{equ:1NormDistance}) are special cases when $p$ is 2 and 1
+respectively.  Another special case is when $p$ approaches
+infinity and only  the largest distance of a particular
+dimension is left:
+
+\begin{gather}
+  \underset{p \rightarrow \infty}{\lim}(\underset{i=1}{\overset{d}{\sum}} |x_i - c_i| ^ p) ^ {\frac{1}{p}}
+  = \max(|x_1 - c_1|, |x_2 - c_2|, ..., |x_d - c_d|).
+\end{gather}
+
+The method does not specify how to ``randomly'' initialize the
+centroids. One solution is to initialize the $k$ centroids anywhere in
+the $d$-dimensional space.  This can have a serious problem: One (or
+several) centroids can be very far away from all data points and have
+almost the same distances.  Another solution first finds the smallest
+and the largest values in each dimension and set the centroids within
+these ranges.  This solution also has potential problems: multiple
+centroids could be close to the centers of many data points and lose
+the capability of differentiating the data points.  Imagine that a
+centroid is close to the center of {\it all} data points.  The third
+solution chooses $k$ data points randomly.  This method can be further
+improved by choosing $k$ data points that are as far as possible away
+from the other data points.
+
+
+
+
+
+
+Also, the convergence condition can be (a) when no data
+point changes to another group, (b) when steps 3-4 have executed a
+fixed number of iterations (say 1,000), or (c) something else.
+
+This assignment uses the Euclidean distance and convergence condition
+(a).
+
+You can assume that all data points fall within [-1000000, 1000000] in
+   each dimension. You should initilize centroids within this range.
+
+   
