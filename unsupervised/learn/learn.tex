@@ -464,6 +464,55 @@ more data is used (assuming the data follows specific patterns), then
 the computer program can perform better (such as making more correct
 decisions in mortgage applications).
 
+What is {\it machine learning} really?  Machine learning is pretty
+broad (and somewhat vague).  In this book (and many other books),
+machine learning refers to {\it statistical learning} or {\it
+  data-driven discovery}: finding information from data.  Successful
+machine learning often requires vast amounts of data to learn from.
+Machine learning discovers {\it patterns} in the data and uses the
+patterns to {\it predict} or {\it infer} that unseen data has the same
+(or similar) patterns.  For example, a computer program may discover
+that a person has a high debt-income ratio is likely to default in a
+mortgage.  If a future mortgage applicant has a high debt-income
+ratio, the program could suggest denying the application due to the
+higher risk.
+
+More rigorously, machine learning aims to discover
+a model $\mathcal{M}$ 
+
+
+\section{Limitations of Machine Learning}
+
+Machine learning is not perfect; machine learning has some
+limitations.  First, what can be learned depends on the input data. If
+some important pieces of data are missing (for example, there are no
+cases of high debt-income ratios), then the computer program cannot
+learn.  To think of this in a different way, a person that grows up
+inland and has never seen a cargo ship will thus not know existence of
+cargo ships.  Second, it is difficult to determine when the data is
+``sufficient'' or ``representative''.  The patterns are unknown
+(otherwise, there is no need to learn) so it is hard to tell when
+there is enough data to discover the patterns.  Third, the data may be
+``biased'' and the it is not easy to define success. Imagine that you
+are designing a machine learning program to diagnose a rare illness.
+If a person has this illness, the program says ``Yes''; otherwise, the
+program says, ``No''.  Suppose the probability is one out of 100,000
+people.  The program would be 99.999\% accurate if it always says
+``No''.  However, this high accuracy does not really help.
+Fourth, each machine learning program reflects a specific {\it model}
+there is no easy solution w
+
+
+
+Sidebar about precision and recall.
+
+\index{statistical learning}
+\index{data-driven discovery}
+\index{infer}
+\index{predict}
+\index{data bias}
+\index{model}
+
 \section{Applications of Machine Learning}
 
 As explained earlier, machine learning can be used when many factors
