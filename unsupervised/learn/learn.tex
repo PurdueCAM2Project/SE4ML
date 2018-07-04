@@ -44,13 +44,13 @@ Otherwise
       Do not bring an umbrella
 \end{verbatim}
 
-If you follow these rules, you will soon discover that they are not
-sufficient.  If you are going to walk in covered areas (such as subway
-stations or shopping malls), maybe you do not need an umbrella.  Thus,
-you add another rule:
+If you follow these rules, you will soon discover that they are still
+insufficient.  If you are going to walk in covered areas (such as
+subway stations or shopping malls), maybe you do not need an umbrella.
+Thus, you add another rule:
 
 \begin{verbatim}
-If it is raining and walk outside covered areas then
+If it is raining and you will walk outside covered areas then
    Bring an umbrella
 Otherwise
    If it is expected to rain soon and walk outside covered areas then
@@ -65,7 +65,7 @@ the box and to hold an umbrella at the same time. As a result,
 the rules become
 
 \begin{verbatim}
-If it is raining and walk outside covered areas then
+If it is raining and you will walk outside covered areas then
    If carrying a box and the rain is light then
        Do not bring an umbrella
    Otherwise
@@ -80,14 +80,15 @@ Otherwise
 The rules become more and more complex.  You may also want to consider
 whether it is windy. If it is, you may want to wear a raincoat instead
 of bringing an umbrella. If you want to ride a bike, you may want to
-choose a rain coat instead of an umbrella.  As you can see, this
-decision problem has so many different scenarios hat writing these if
-conditions become really complex.
+choose a rain coat instead of an umbrella.  Maybe it is very hot and
+you want to walk in rain to cool.  As you can see, this decision
+problem has so many different scenarios and writing all these {\tt
+  if}-{\tt else} conditions becomes really complex.
 
 \subsection{Cross a Stree Intersection?}
 
 If you drive a car, should you cross a street intersection or not?
-You may think this is easy:
+You may think this is really easy:
 
 \begin{verbatim}
 If the traffic light is green then
@@ -98,10 +99,10 @@ Otherwise
 
 Sometimes, you cannot enter the inserction because it is blocked
 by vehicles already. If you enter the intersection, you will park
-at the intersection and worsen traffic jam. Thus, you add more rules:
+at the intersection and worsen traffic jam. Thus, you add another rule:
 
 \begin{verbatim}
-If the traffic light is green and the intersection is not occupied then
+If the traffic light is green and the intersection is clear then
    Cross the intersection
 Otherwise
    Do not cross the intersection
@@ -111,7 +112,7 @@ If you hear the siren of an ambulance, you should allow it to pass first.
 Consequently, the rule gets more complex:
 
 \begin{verbatim}
-If the traffic light is green and the intersection is not occupied and no siren then
+If the traffic light is green and the intersection is clear and there is no siren then
    Cross the intersection
 Otherwise
    Do not cross the intersection
@@ -120,7 +121,8 @@ Otherwise
 If there is a jaywalker, you don't want to hit the person. Let's add that into the rule:
 
 \begin{verbatim}
-If the traffic light is green and the intersection is not occupied and no siren and no jaywalker then
+If the traffic light is green and the intersection is not occupied 
+ and no siren and no jaywalker then
    Cross the intersection
 Otherwise
    Do not cross the intersection
@@ -133,7 +135,8 @@ flagman's instruction, not the traffic light.
 If a flagman signals to cross the intersection then
    Cross the intersection
 Otherwise
-   If the traffic light is green and the intersection is not occupied and no siren and no jaywalker then
+   If the traffic light is green and the intersection is clear 
+     and no siren and no jaywalker then
        Cross the intersection
    Otherwise
        Do not cross the intersection
@@ -147,20 +150,19 @@ difficult.
 \index{mortgage}
 \subsection{Approve a Mortgate Application?}
 
-If you are a bank manager and evaluate a mortgage application, how do
+If you are a bank manager and evaluate mortgage applications, how do
 you decide whether to approve or not?  If you approve the application
-and the person pays back regularly, your bank makes money from fees
-and interests.  If the person fails to pay (called ``defaults''), the
-bank {\it may} lose money. It is possible that the bank does not lose
-money if the house's value is sufficient to cover the mortgage
-(through foreclosure). Foreclosure can be a lengthy process and most
-banks want to avoid it.  How do you decide? Maybe you decide
-based on the person's regular income:
-\index{default}
+and the person pays regularly, your bank makes money from fees and
+interests.  If the person fails to pay (called ``defaults''), the bank
+may lose money. It is possible that the bank does not lose money
+if the house's value is sufficient to cover the mortgage (through
+foreclosure). Foreclosure can be a lengthy process and most banks want
+to avoid it.  How do you decide? Maybe you decide based on the
+person's regular income: \index{default} \index{foreclosure}
 
 
 \begin{verbatim}
-If the montly income is great than twice or the monthly payment then
+If the montly income is great than twice of the monthly payment then
    Approve the mortgate application
 Otherwise
    Deny the mortgate application
@@ -198,8 +200,8 @@ rain heavily, it is a wrong decision.  Some wrong decisions have
 negligible consequences: bringing an umbrella (if it is small and
 light) without using it may not be a big problem.  Some wrong
 decisions can have dire consequences: approving a mortgage and it
-defaults, the bank loses a lot of money, possibly many thousands or
-millions.
+defaults, the bank loses a lot of money, possibly 
+millions of dollars.
 
 What is a ``wrong'' decision? It may not be so obvious.  A bank may
 deny all mortgage applications that have slight chances of
@@ -217,9 +219,10 @@ to the defaulted one.  The problem is how to determine two mortgage
 applications are ``similar''.
 
 For some problems, it is impossible (or almost impossible) to know
-whether a wrong has been made. Suppose you are a bank manager and you
-deny a mortgage application. You will not know whether this person
-would be able to pay mortgage regularly if you had approved it.
+whether a wrong mistake has been made. Suppose you are a bank manager
+and you deny a mortgage application. You will not know whether this
+person would be able to pay mortgage regularly because you have denied
+the application.
 
 
 \index{feedback}
@@ -249,52 +252,6 @@ things are.  If a person sees something that is dissimilar to
 everything seen before, this person is unable to recognize the
 patterns and what it is.
 
-\vspace{0.1in}\begin{tabular}{p{5in}}
-\index{black swan event}
-  \begin{center}
-    {\bf Black Swan Event}
-  \end{center}
-  A {\it black swan event} is something that has never been seen
-  before and thus considered
-  impossible~\cite{Taleb2010BlackSwan}.  People
-  used to believe that swans must be white. Apparently, it is not
-  possible to learn and infer the existence of a black swan.
-
-  \\
-  
-  Black
-  swan events are everywhere, if you pay close attention.  Before
-  1941/12/07, few people, if any, in USA had expected that Japan Navy
-  would attack the US navy base. Before 1969/07/20, nobody could
-  expect that a man would be able to walk on the moon. Before April
-  2010, nobody would expect a volcano eruption could cause worldwide
-  disruption of air travel.  Before the first iPhone was announced,
-  there was no iPhone. Before Michael Phelps won 28 Olympic medals,
-  nobody had won 28 Olympic medals.
-
-  \\
-
-  If something has been observed, it is definitely possible.  After a
-  black swan has been seen, people know that swans can be black.  If
-  something has not been observed, it is difficult to say whether it
-  is impossible or not. Maybe it can be observed later.
-
-  \\
-
-  Even though black swan events cannot be inferred  from known patterns,
-  it is possible to predict the occurrence {\it by some people} that
-  are willing to challenge these patterns and consider
-  possibilities that have no been observed (i.e., learned). This
-  is where {\it imagination} and {\it creativity} come in.
-  This book focuses on learning  and does not discuss imagination or
-  creativity further.
-
-  \index{imagination}
-  \index{creativity}
-    
-  
-\end{tabular}\vspace{0.1in}
-
 Machine learning relies on the assumption that past observations and
 new, unseen, situations have similar patterns.  This assumption is
 essential to the success of machine learning.  Imagine that you are
@@ -312,13 +269,16 @@ You may need to add some more factors into consideration.
 \index{reinforcement learning}
 \index{reward}
 
+
+\section{Supervised, Unsupervised, and Reinforcement Learning}
+
 There are different types of
 learning~\cite{Goodfellow2016DeepLearning,
   Sutton2017ReinforcementLearningIntroduction}.  {\it Supervised
   learning} means that there is a ``teacher'' telling a ``student''
-what is right or wrong. Imagine that a teacher shows an image of
-flowers and tell students that these are flowers. The teacher shows
-another image of an elephant and says that it is an elephant.  {\it
+what is right or wrong. Imagine that a teacher shows images of flowers
+and tell students that these are flowers. The teacher shows another
+image of an elephant and says that it is an elephant.  {\it
   Unsupervised learning} has no teacher. Imagine that you want to
 stock your store on a Friday evening for sales on Saturday.  There is
 no correct answer what merchandize you should put on shelves.  You can
@@ -327,24 +287,23 @@ and season.  You may also want to consider whether there is a major
 sport event on that Saturday.  This is different from supervised
 learning because there is no teacher telling you ``Yes, you should
 stock this item on shelves.''  or ``No, do not stock that item because
-nobody will buy it this coming Saturday.''  Unsupervised learning is
-often used to discover (unknown) properties in data, for example, what
-people buy on a Saturday.  The third type of learning is called {\it
-  reinforcement learning}.  This type of learning considers sequences
-of actions and the {\it rewards} of these actions.  Consider playing
-chess as an example.  Reinforcement learning is different from
-supervised learning because most decisions cannot be consider right or
-wrong (some decisions such as checkmate are obviously right
-decisions). Instead, the sequence of decisions leads to a result,
-either winning or losing. Reinforcement learning is usually used for
-developing strategies solving problems through sequences of actions.
-Sutton and Barto said, ``The most important feature distinguishing
-reinforcement learning from other types of learning is that it uses
-training information that evaluates the actions taken rather than
-instructs by giving correct
+few people will buy it this coming Saturday.''  Unsupervised learning
+is often used to discover (unknown) properties in data, for example,
+what people buy on a Saturday.  The third type of learning is called
+{\it reinforcement learning}.  It considers sequences of actions (such
+as moves in chess) and the {\it rewards} (such as winning a chess
+game) of these actions.  Consider playing chess as an example.
+Reinforcement learning is different from supervised learning because
+most decisions cannot be consider right or wrong. Some decisions such
+as checkmate are obviously right decisions but the effects of most
+decisions are unkonwn until much later. Instead, the sequence of
+decisions leads to a result, either winning or losing. Reinforcement
+learning is usually used for developing strategies solving problems
+through sequences of actions.  Sutton and Barto said, ``The most
+important feature distinguishing reinforcement learning from other
+types of learning is that it uses training information that evaluates
+the actions taken rather than instructs by giving correct
 actions.''~\cite{Sutton2017ReinforcementLearningIntroduction}.
-
-
 Table~\ref{table:threetypesoflearning} summarizes the three types of
 learning.
 
@@ -356,7 +315,7 @@ learning.
     Teacher & Yes & No & No \\
     Correct Answer & Yes & No & No \\
     Consider Sequences & No & No & Yes \\
-    Applications & Answer Yes/No questions & Cluster data & Develop strategies \\
+    Applications & Answer Yes/No & Cluster data & Develop strategies \\
   \end{tabular}
   \caption{Three types of learning}
   \label{table:threetypesoflearning}
@@ -368,57 +327,19 @@ people: babies learn parents' faces when the parents say ``Daddy'' and
 ``Mommy''.  Students learn from teachers in classrooms.  Supervised
 learning, however, can be expensive because teachers are needed.  As
 computer technologies improve, acquiring data becomes very easy and
-inexpensive.  At less than \$100, you can buy a video camera and the
-it can easily generate thousands of images (more precisely, video
-frames) per day. Teachig computer the information in the {\it visual
-  data} (images or videos) requires humans as teachers because
-computer programs cannot analyze visual data perfectly yet.  Teaching
-computers by marking what is in the visual data is called {\it
-  labeling} or {\it annnotating}.  In some cases, labeling can be {\it
-  crowdsourced} {\bf Cite examples of crowdsourcing labeling}.
-\index{crowdsourced} In some other cases, the ``teachers'' of
-computers must have special qualifications; for example, medical
-images are evaluated by trained medical doctors.
-
-\vspace{0.1in}
-  \begin{tabular}{p{5in}}
-\index{computer vision}
-  \begin{center}
-    {\bf Computer Vision}
-  \end{center}
-
-  Computer vision is the technologies understanding what is in
-
- The
-technologies intend to solve many different types of problems, for
-example,
-
-\begin{itemize}
-\item Classification of the content: Is the visual data taken indoor
-  or outdoor?  Is this a sport event?  Is this downtown or forest?
-
-\item Object Detection: Does the visual data contain a car, a person,
-  a bridge, a computer, or something else?  Where is the detected
-  object?
-
-\item Action: Is a person playing tennis? Are two people talking?
-  Is that airplane taking off?
-
-\item Emotion: Is a peron happy, sad, bored?
-
-\end{itemize}
-
-
-
-  \end{tabular}
-\vspace{0.1in}
-
-
-
+inexpensive.  Spending \$100, you can buy a video camera and the it
+can easily generate thousands of images (more precisely, video frames)
+per day. Teachig computer the information in the images requires
+humans as teachers because computer programs cannot perfectly analyze
+images yet.  Teaching computers by marking what is in the images is
+called {\it labeling} or {\it annnotating}.  In some cases, labeling
+can be {\it crowdsourced}.  Labeling one million images can take more
+than one year~\cite{imagenet}.  \index{crowdsourced} In some other
+cases, the ``teachers'' of computers must have special qualifications;
+for example, medical images are evaluated by trained medical doctors.
 \index{visual data}
 \index{label}
 \index{annotating}
-
 
 \begin{comment}
 http://incompleteideas.net/book/bookdraft2017nov5.pdf
@@ -432,8 +353,9 @@ Richard S. Sutton and Andrew G. Barto
     {\bf Definition of Learning}
  \end{center}
 
-  We have talked about ``learning'' without defining it.  What is
-  learning? Michelle~\cite{Mitchell1997MachineLearning} defines
+  We have talked about ``learning'' without actually defining it.
+  What is learning? Michelle~\cite{Mitchell1997MachineLearning}
+  defines
 
   \\
   
@@ -499,9 +421,59 @@ If a person has this illness, the program says ``Yes''; otherwise, the
 program says, ``No''.  Suppose the probability is one out of 100,000
 people.  The program would be 99.999\% accurate if it always says
 ``No''.  However, this high accuracy does not really help.
-Fourth, each machine learning program reflects a specific {\it model}
-there is no easy solution w
 
+Fourth, each machine learning program reflects a specific {\it model}
+that is designed to recognize the patterns in the data.  Different
+models have different capabilities: some models can recognize complex
+patterns and some others cannot.  This is an analogy about models'
+capabilities: humans are the only known species that can handle
+written communications.  Some other animals can communicate in sound
+that is not understood by humans. It is not yet clear whether humans
+will ever be able to understand the sound.  Maybe human brains are
+incapable of learning the sound.
+
+\vspace{0.1in}\begin{tabular}{p{5in}}
+\index{black swan event}
+  \begin{center}
+    {\bf Black Swan Event}
+  \end{center}
+  A {\it black swan event} is something that has never been seen
+  before and thus considered
+  impossible~\cite{Taleb2010BlackSwan}.  People
+  used to believe that swans must be white. Apparently, it is not
+  possible to learn and infer the existence of a black swan.
+
+  \\
+  
+  Black swan events are everywhere, if you pay close attention.
+  Before 1969/07/20, nobody could expect that a man would be able to
+  walk on the moon. Before April 2010, nobody would expect a volcano
+  eruption could cause worldwide disruption of air travel.  Before the
+  first iPhone was announced, there was no iPhone. Before Michael
+  Phelps won 28 Olympic medals, nobody had won 28 Olympic medals.
+
+  \\
+
+  If something has been observed, it is definitely possible.  After a
+  black swan has been seen, people know that swans can be black.  If
+  something has not been observed, it is difficult to say whether it
+  is impossible or not. Maybe it can be observed later.
+
+  \\
+
+  Even though black swan events cannot be inferred  from known patterns,
+  it is possible to predict the occurrence {\it by some people} that
+  are willing to challenge these patterns and consider
+  possibilities that have no been observed (i.e., learned). This
+  is where {\it imagination} and {\it creativity} come in.
+  This book focuses on learning  and does not discuss imagination or
+  creativity further.
+
+  \index{imagination}
+  \index{creativity}
+    
+  
+\end{tabular}\vspace{0.1in}
 
 
 Sidebar about precision and recall.
@@ -521,3 +493,38 @@ applications~\cite{Alpaydin2010IntroductiontoMachine}, such as
 improving customer relationships, making financial decisions,
 diagnosize illness, identify spam emails, recognize speeches and
 objects in images.
+
+\vspace{0.1in}
+  \begin{tabular}{p{5in}}
+\index{computer vision}
+  \begin{center}
+    {\bf Computer Vision (not sure it belongs here, maybe move to
+    somewhere later}
+  \end{center}
+
+  Computer vision is the technologies understanding what is in
+
+ The
+technologies intend to solve many different types of problems, for
+example,
+
+\begin{itemize}
+\item Classification of the content: Is the visual data taken indoor
+  or outdoor?  Is this a sport event?  Is this downtown or forest?
+
+\item Object Detection: Does the visual data contain a car, a person,
+  a bridge, a computer, or something else?  Where is the detected
+  object?
+
+\item Action: Is a person playing tennis? Are two people talking?
+  Is that airplane taking off?
+
+\item Emotion: Is a peron happy, sad, bored?
+
+\end{itemize}
+
+  \end{tabular}
+\vspace{0.1in}
+
+
+
