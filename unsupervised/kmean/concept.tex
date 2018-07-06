@@ -132,10 +132,35 @@ Also, the convergence condition can be (a) when no data
 point changes to another group, (b) when steps 3-4 have executed a
 fixed number of iterations (say 1,000), or (c) something else.
 
-This assignment uses the Euclidean distance and convergence condition
+This chapter uses the Euclidean distance and convergence condition
 (a).
 
 You can assume that all data points fall within [-1000000, 1000000] in
    each dimension. You should initilize centroids within this range.
 
+   
+\section{Create Test Cases}
+
+Lacking test cases of known properties is one common problem in
+developing software for machine learning.  If the purpose of machine
+learning is to recognize unknown patterns in data, we do not know the
+patterns in advance.  How can we know that the programs are correct?
+If we do not know that the programs are correct, how do we know the
+patterns discovered by the programs are correct?  Two solutions are
+commonly used: (1) Creating simple test cases manually with known
+properties or (2) Adopting widely used test cases whose properties
+have already been studied. The first approach is restricted to only
+very small test cases that are unlikely to have sophisticated patterns
+needed to test computer programs.  The second approach, in contrast,
+may sophisticated patterns but the data may be too complex for
+identify problems (i.e., ``bugs'') in the programs.
+
+This book suggests the third approach: write another program (or
+several programs) to generate test cases of known properties.  More
+specifically, for this problem, we can write a program that generates
+$n$ data points in $k$ clusters ($n > k$). Moreover, we can
+intentionally set $k$ centroids that are far apart. Each data point is
+close to one particular centroid and far aways from the other
+centroids.  Since the data points are generated intentionally, it is
+easy to test whether a k-mean program is correct.
    
