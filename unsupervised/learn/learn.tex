@@ -1,6 +1,9 @@
 \chapter{Machine Learning}
 
+
+
 Learning Objectives
+
 
 \begin{itemize}
 \item Understand the strength and limitations of machine learning
@@ -11,7 +14,10 @@ Learning Objectives
 
 \index{decision problem}
 
+
 \subsection{Bring an Umbrella?}
+
+
 
 Machine learning means using computer programs to discover patterns
 (i.e., ``learn'') from data. How is this different from typical
@@ -43,6 +49,8 @@ Otherwise
    Otherwise
       Do not bring an umbrella
 \end{verbatim}
+
+
 
 If you follow these rules, you will soon discover that they are still
 insufficient.  If you are going to walk in covered areas (such as
@@ -262,6 +270,7 @@ expected. Maybe the demographics are different. Maybe the cultural
 norms are different.  Maybe the real estate markets are different.
 This indicates that your machine learning method has its limitations.
 You may need to add some more factors into consideration.
+
 \index{limit of machine learning}
 
 \index{supervised learning}
@@ -341,23 +350,34 @@ for example, medical images are evaluated by trained medical doctors.
 \index{label}
 \index{annotating}
 
+\index{transfer learning}
+
+Yet another type of learning is called {\it transfer learning}.  In
+transfer learning, the sample data for learning and the test data have
+different patterns.  The knowledge learned from the sample data is
+``transferred'' to a new set of test data.  An analogy is that a
+person learns English and then uses the knowelege about sentence
+structures and tenses to learn French. Transfer learning can be very
+useful if there are many examples in the first set of data and much
+fewer examples in the second set of data.
+
+
 \begin{comment}
 http://incompleteideas.net/book/bookdraft2017nov5.pdf
 Reinforcement Learning: An Introduction
 Richard S. Sutton and Andrew G. Barto
 \end{comment}
 
-\vspace{0.1in}\begin{tabular}{p{5in}}
+
+
 \index{definition of learning}
-  \begin{center}
     {\bf Definition of Learning}
- \end{center}
 
   We have talked about ``learning'' without actually defining it.
   What is learning? Michelle~\cite{Mitchell1997MachineLearning}
   defines
 
-  \\
+  
   
   {\it
     A computer program is said to learn from experience E with respect
@@ -365,7 +385,7 @@ Richard S. Sutton and Andrew G. Barto
     performance at tasks in T, as measured by P, improves with
     experience E.}
 
-  \\
+  
 
   To explain this in a more intuitive way, a computer program can
   learn if it can ``get better'' by doing something more.  One way to
@@ -378,7 +398,8 @@ Richard S. Sutton and Andrew G. Barto
   emails, you play the role of a teacher and this is an example of
   supervised learning.
 
-\end{tabular}\vspace{0.1in}
+
+
 
 This definition does not speficy what is ``experience''.  From
 computers' viewpoint, the experience often refers to ``data''.  If
@@ -401,7 +422,6 @@ higher risk.
 
 More rigorously, machine learning aims to discover
 a model $\mathcal{M}$ 
-
 
 \section{Limitations of Machine Learning}
 
@@ -432,18 +452,17 @@ that is not understood by humans. It is not yet clear whether humans
 will ever be able to understand the sound.  Maybe human brains are
 incapable of learning the sound.
 
-\vspace{0.1in}\begin{tabular}{p{5in}}
 \index{black swan event}
-  \begin{center}
+
     {\bf Black Swan Event}
-  \end{center}
+
+    
   A {\it black swan event} is something that has never been seen
   before and thus considered
   impossible~\cite{Taleb2010BlackSwan}.  People
   used to believe that swans must be white. Apparently, it is not
   possible to learn and infer the existence of a black swan.
 
-  \\
   
   Black swan events are everywhere, if you pay close attention.
   Before 1969/07/20, nobody could expect that a man would be able to
@@ -452,14 +471,13 @@ incapable of learning the sound.
   first iPhone was announced, there was no iPhone. Before Michael
   Phelps won 28 Olympic medals, nobody had won 28 Olympic medals.
 
-  \\
 
   If something has been observed, it is definitely possible.  After a
   black swan has been seen, people know that swans can be black.  If
   something has not been observed, it is difficult to say whether it
   is impossible or not. Maybe it can be observed later.
 
-  \\
+
 
   Even though black swan events cannot be inferred  from known patterns,
   it is possible to predict the occurrence {\it by some people} that
@@ -473,7 +491,6 @@ incapable of learning the sound.
   \index{creativity}
     
   
-\end{tabular}\vspace{0.1in}
 
 
 Sidebar about precision and recall.
@@ -495,12 +512,12 @@ diagnosize illness, identify spam emails, recognize speeches and
 objects in images.
 
 \vspace{0.1in}
-  \begin{tabular}{p{5in}}
+
 \index{computer vision}
-  \begin{center}
+
     {\bf Computer Vision (not sure it belongs here, maybe move to
     somewhere later}
-  \end{center}
+
 
   Computer vision is the technologies understanding what is in
 
@@ -508,23 +525,19 @@ objects in images.
 technologies intend to solve many different types of problems, for
 example,
 
-\begin{itemize}
-\item Classification of the content: Is the visual data taken indoor
+ Classification of the content: Is the visual data taken indoor
   or outdoor?  Is this a sport event?  Is this downtown or forest?
 
-\item Object Detection: Does the visual data contain a car, a person,
+ Object Detection: Does the visual data contain a car, a person,
   a bridge, a computer, or something else?  Where is the detected
   object?
 
-\item Action: Is a person playing tennis? Are two people talking?
+ Action: Is a person playing tennis? Are two people talking?
   Is that airplane taking off?
 
-\item Emotion: Is a peron happy, sad, bored?
+ Emotion: Is a peron happy, sad, bored?
 
-\end{itemize}
 
-  \end{tabular}
-\vspace{0.1in}
 
 
 
