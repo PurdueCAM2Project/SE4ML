@@ -1,6 +1,6 @@
 % \documentclass[ChapterTOCs,sunil2]{sunil}
 \documentclass{tufte-book}
-% \usepackage{algorithmic}
+\usepackage{algorithmic}
 % \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -18,19 +18,9 @@
 \usepackage{subfigure}
 \usepackage{url}
 \usepackage{verbatim}
-% \lstset{breaklines=true}
-% \lstset{breakatwhitespace=true}
-\lstset{
-  language=C,
-  breakatwhitespace=true,
-  breaklines=true,
-  basicstyle=\ttfamily,
-  keywordstyle=\bf,
-  morekeywords={void}
-}
-\frenchspacing
-\tolerance=5000
+\usepackage[none]{hyphenat}
 
+  
 \makeindex
 
 % only for draft
@@ -38,6 +28,7 @@
 \SetWatermarkScale{0.2}
 \SetWatermarkText{DRAFT. Work-in-Progress. \today}
 
+\begin{comment}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{exercise}{Exercise}[chapter]
@@ -46,7 +37,6 @@
 \newtheorem{proof}{Proof}
 
 
-\begin{comment}
 % make table of content clickable, suggested at
 % https://tex.stackexchange.com/questions/73862/how-can-i-make-a-clickable-table-of-contents
 
@@ -61,4 +51,22 @@
   linkcolor=blue,
   %choose some color if you want links to stand out
 }
+\end{comment}
+
+% I am not sure what these mean- YHL
+
+\begin{comment}
+
+% \lstset{breaklines=true}
+% \lstset{breakatwhitespace=true}
+\lstset{
+  language=C,
+  breakatwhitespace=true,
+  breaklines=true,
+  basicstyle=\ttfamily,
+  keywordstyle=\bf,
+  morekeywords={void}
+}
+\frenchspacing
+\tolerance=5000
 \end{comment}
