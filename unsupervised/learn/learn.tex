@@ -23,66 +23,68 @@ Machine learning means using computer programs to discover patterns
 computer programs?  Let us consider a {\it decision problem}:
 Should you bring an umbrella or not?  This should be easy, right?
 
-
-\begin{verbatim}
-If it is raining then
-   Bring an umbrella
-Otherwise
-   
-
-% YHL: I have problems using 
-% \usepackage{algorithmic} or
-% \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
-\end{verbatim}
+\begin{algorithm}
+%    \caption[]{Decision to Bring An Umbrella (1)}
+    \begin{algorithmic}[1]
+      \If {It is raining}
+      \State Bring an umbrella
+      \Else
+      \State Do not bring an umbrella
+      \EndIf
+    \end{algorithmic}
+\end{algorithm}
 
 This is simple enough.  If you always follow this rule, you will soon
 encounter situations when this rule is not good.  Maybe it is not raining
 right now but it is expected to rain soon. Thus, you add one more rule:
 
-\begin{verbatim}
-If it is raining then
-   Bring an umbrella
-Otherwise
-   If it is expected to rain soon then
-      Bring an umbrella
-   Otherwise
-      Do not bring an umbrella
-\end{verbatim}
-
-
+\begin{algorithm}
+%    \caption[]{Decision to Bring An Umbrella (2)}
+    \begin{algorithmic}[1]
+      \If {(It is raining) or
+        (It is expected to rain soon)}
+      \State Bring an umbrella
+      \Else
+      \State Do not bring an umbrella
+      \EndIf
+    \end{algorithmic}
+\end{algorithm}
 
 If you follow these rules, you will soon discover that they are still
 insufficient.  If you are going to walk in covered areas (such as
 subway stations or shopping malls), maybe you do not need an umbrella.
 Thus, you add another rule:
 
-\begin{verbatim}
-If it is raining and you will walk outside covered areas then
-   Bring an umbrella
-Otherwise
-   If it is expected to rain soon and walk outside covered areas then
-      Bring an umbrella
-   Otherwise
-      Do not bring an umbrella
-\end{verbatim}
+\begin{algorithm}
+%    \caption[]{Decision to Bring An Umbrella (2)}
+    \begin{algorithmic}[1]
+      \If {(You will walk in uncovered areas) and ((It is raining) or
+        (It is expected to rain soon))}
+      \State Bring an umbrella
+      \Else
+      \State Do not bring an umbrella
+      \EndIf
+    \end{algorithmic}
+\end{algorithm}
+
 
 If you are carrying a box and it does not rain heavily, maybe you
 do not want to take an umbrella because it is inconvenient to carry
 the box and to hold an umbrella at the same time. As a result,
 the rules become
 
-\begin{verbatim}
-If it is raining and you will walk outside covered areas then
-   If carrying a box and the rain is light then
-       Do not bring an umbrella
-   Otherwise
-       Bring an umbrella
-Otherwise
-   If it is expected to rain soon and walk outside covered areas then
-      Bring an umbrella
-   Otherwise
-      Do not bring an umbrella
-\end{verbatim}
+\begin{algorithm}
+%    \caption[]{Decision to Bring An Umbrella (2)}
+    \begin{algorithmic}[1]
+      \If {(You will walk in uncovered areas) and (You are not carrying a box) and
+        ((It is raining heavily) or
+        (It is expected to rain heavily soon))}
+      \State Bring an umbrella
+      \Else
+      \State Do not bring an umbrella
+      \EndIf
+    \end{algorithmic}
+\end{algorithm}
 
 The rules become more and more complex.  You may also want to consider
 whether it is windy. If it is, you may want to wear a raincoat instead
@@ -97,12 +99,16 @@ problem has so many different scenarios and writing all these {\tt
 If you drive a car, should you cross a street intersection or not?
 You may think this is really easy:
 
-\begin{verbatim}
-If the traffic light is green then
-   Cross the intersection
-Otherwise
-   Do not cross the intersection
-\end{verbatim}
+\begin{algorithm}
+%    \caption[]{Decision to Bring An Umbrella (2)}
+    \begin{algorithmic}[1]
+      \If {Traffic light is green}
+      \State Cross the intersection
+      \Else
+      \State Do not cross the intersection
+      \EndIf
+    \end{algorithmic}
+\end{algorithm}
 
 Sometimes, you cannot enter the inserction because it is blocked
 by vehicles already. If you enter the intersection, you will park
