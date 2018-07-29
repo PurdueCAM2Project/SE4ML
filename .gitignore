@@ -99,3 +99,27 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# LaTeX files
+
+*.aux
+*.log
+*.bbl
+*.blg
+*.out
+*.gz
+tmp.inputs
+*.fdb_latexmk
+*.dvi
+*.fls
+*.idx
+*.ilg
+*.ind
+*.toc
+*.thm
+*.tdo
+*.lot
+*.lof
+settings.tex
+book.pdf
+
