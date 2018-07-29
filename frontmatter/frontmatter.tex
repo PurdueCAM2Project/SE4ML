@@ -1,9 +1,14 @@
-\newcommand{\frontpath}{\basepath/frontmatter}
-\input{\frontpath/foreword}
-\newpage
-\input{\frontpath/preface}
-\newpage
-\input{\frontpath/author}
+\renewcommand{\thispartpath}{\basepath/frontmatter}
 
+\renewcommand{\thischapterpath}{\thispartpath/foreword}
+\input{\thischapterpath/foreword}
+\newpage
 
+\renewcommand{\thischapterpath}{\thispartpath/preface}
+\input{\thischapterpath/preface}
+\newpage
+
+\renewcommand{\thischapterpath}{\thispartpath/author}
+\input{\thischapterpath/author}
+\newpage
 

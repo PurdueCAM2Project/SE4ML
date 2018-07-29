@@ -1,5 +1,9 @@
 % \newcommand{\kmeancode}{\progpath/application/kmean/}
-\newcommand{\kmeanpath}{\unsuppath/kmean}
+
+% Note to YHL: Any chapter can determine its location using \thischapter path. 
+% \kmeanpath (your variable) is set from \thischapterpath. This macro's definition changes on a per chapter basis!
+
+\newcommand{\kmeanpath}{\thischapterpath}
 \index{K-Mean|(} 
 \input{\kmeanpath/concept}
 \input{\kmeanpath/code}

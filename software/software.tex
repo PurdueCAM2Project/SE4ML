@@ -1,14 +1,29 @@
-\newcommand{\softpath}{\basepath/software}
+\renewcommand{\thispartpath}{\basepath/software}
 
 \part{Software Engineering}
 
-\input{\softpath/python/python}
-\input{\softpath/vc/vc}
-\input{\softpath/ci/ci}
-\input{\softpath/branching/branching}
-\input{\softpath/ws/ws}
-\input{\softpath/graphics/graphics}
+\renewcommand{\thischapterpath}{\thispartpath/python}
+\input{\thischapterpath/python}
+\newpage
 
+\renewcommand{\thischapterpath}{\thispartpath/vc}
+\input{\thischapterpath/vc}
+\newpage
+
+\renewcommand{\thischapterpath}{\thispartpath/branching}
+\input{\thischapterpath/branching}
+\newpage
+
+\renewcommand{\thischapterpath}{\thispartpath/ci}
+\input{\thischapterpath/ci}
+\newpage
+
+\renewcommand{\thischapterpath}{\thispartpath/ws}
+\input{\thischapterpath/ws}
+\newpage
+
+\renewcommand{\thischapterpath}{\thispartpath/graphics}
+\input{\thischapterpath/graphics}
 \newpage
 
 

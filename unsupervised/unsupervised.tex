@@ -1,10 +1,11 @@
-\newcommand{\unsuppath}{\basepath/unsupervised}
-
 \part{Machine Learning}
 
-\input{\unsuppath/learn/learn}
-\input{\unsuppath/kmean/kmean}
+\renewcommand{\thispartpath}{\basepath/unsupervised}
+
+\renewcommand{\thischapterpath}{\thispartpath/learn}
+\input{\thischapterpath/learn}
 \newpage
 
-
-
+\renewcommand{\thischapterpath}{\thispartpath/kmean}
+\input{\thischapterpath/kmean}
+\newpage
