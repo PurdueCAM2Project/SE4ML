@@ -101,8 +101,7 @@ problem has so many different scenarios and writing all these {\tt
 If you drive a car, should you cross a street intersection or not?
 You may think this is really easy:
 
-\begin{algorithm}
-%    \caption[]{Decision to Bring An Umbrella (2)}
+\begin{algorithm}[H]
     \begin{algorithmic}[1]
       \If {Traffic light is green}
       \State Cross the intersection
@@ -116,8 +115,7 @@ Sometimes, you cannot enter the inserction because it is blocked
 by vehicles already. If you enter the intersection, you will park
 at the intersection and worsen traffic jam. Thus, you add another rule:
 
-\begin{algorithm}
-%    \caption[]{Decision to Bring An Umbrella (2)}
+\begin{algorithm}[H]
     \begin{algorithmic}[1]
       \If {(Traffic light is green) and (The intersection is clear)}
       \State Cross the intersection
@@ -130,36 +128,47 @@ at the intersection and worsen traffic jam. Thus, you add another rule:
 If you hear the siren of an ambulance, you should allow it to pass first.
 Consequently, the rule gets more complex:
 
-\begin{verbatim}
-If the traffic light is green and the intersection is clear and there is no siren then
-   Cross the intersection
-Otherwise
-   Do not cross the intersection
-\end{verbatim}
+\begin{algorithm}[H]
+    \begin{algorithmic}[1]
+      \If {(Traffic light is green) and (The intersection is clear)
+      and (There is no siren)}
+      \State Cross the intersection
+      \Else
+      \State Do not cross the intersection
+      \EndIf
+    \end{algorithmic}
+\end{algorithm}
 
 If there is a jaywalker, you don't want to hit the person. Let's add that into the rule:
 
-\begin{verbatim}
-If the traffic light is green and the intersection is not occupied 
- and no siren and no jaywalker then
-   Cross the intersection
-Otherwise
-   Do not cross the intersection
-\end{verbatim}
+\begin{algorithm}[H]
+    \begin{algorithmic}[1]
+      \If {(Traffic light is green) and (The intersection is clear)
+      and (There is no siren) and (There is no jaywalker)}
+      \State Cross the intersection
+      \Else
+      \State Do not cross the intersection
+      \EndIf
+    \end{algorithmic}
+\end{algorithm}
 
 If there is a construction and a flagman, you should follow the
 flagman's instruction, not the traffic light.  
 
-\begin{verbatim}
-If a flagman signals to cross the intersection then
-   Cross the intersection
-Otherwise
-   If the traffic light is green and the intersection is clear 
-     and no siren and no jaywalker then
-       Cross the intersection
-   Otherwise
-       Do not cross the intersection
-\end{verbatim}
+\begin{algorithm}[H]
+    \begin{algorithmic}[1]
+      \If {There is a flagman}
+      \State Follow the instruction
+      \Else
+      \If {(Traffic light is green) and (The intersection is clear)
+      and (There is no siren) and (There is no jaywalker)}
+      \State Cross the intersection
+      \Else
+      \State Do not cross the intersection
+      \EndIf
+      \EndIf
+    \end{algorithmic}
+\end{algorithm}
 
 We can keep adding more and more rules to cover many different
 scenarios.  As you can see, this decision problem may consider many
@@ -180,12 +189,15 @@ to avoid it.  How do you decide? Maybe you decide based on the
 person's regular income: \index{default} \index{foreclosure}
 
 
-\begin{verbatim}
-If the montly income is great than twice of the monthly payment then
-   Approve the mortgate application
-Otherwise
-   Deny the mortgate application
-\end{verbatim}
+\begin{algorithm}[H]
+    \begin{algorithmic}[1]
+      \If {An applicant's monthly income is more than twice the mortgage payment}
+      \State Approve the application
+      \Else
+      \State Deny the application
+      \EndIf
+    \end{algorithmic}
+\end{algorithm}
 
 If you do this, your bank will likely lose a lot of money because you
 need to consider other factors, for example, whether the person
@@ -194,7 +206,7 @@ this person has a record of failing to pay bills.  If the house is not
 in a popular location, you definitely want to avoid the possibility of
 foreclosure. If the person has been doing business with the bank for
 several years, you would trust this person more than a new customer.
-Do you want to consider whether this person already own one or more
+Do you want to consider whether this person already owns one or more
 houses?  Should you consider this person's age?  Would the marital
 status affect your decision?  You may want to consider the economy as
 well. If economy is strong, this applicant is likely to keep the
@@ -219,8 +231,7 @@ rain heavily, it is a wrong decision.  Some wrong decisions have
 negligible consequences: bringing an umbrella (if it is small and
 light) without using it may not be a big problem.  Some wrong
 decisions can have dire consequences: approving a mortgage and it
-defaults, the bank loses a lot of money, possibly 
-millions of dollars.
+defaults, the bank loses a lot of money.
 
 What is a ``wrong'' decision? It may not be so obvious.  A bank may
 deny all mortgage applications that have slight chances of
@@ -228,6 +239,8 @@ defaults. This may completely avoid defaults but the bank also loses
 opportunities making money from the applications that may, but do not,
 default.  In this case, ``preventing defaults'' and ``making money''
 are two related but different goals.
+
+\index{feedback}
 
 After knowing the consequences of a decision, we may conclude that it
 is a right or a wrong decision. This is the {\it feedback} of the
@@ -252,24 +265,24 @@ the application.
 \index{pattern}
 
 The examples described earlier are decision problems: whether to bring
-an umbrella, whether to approve a mortgage application, etc. Each
-problem needs to consider many factors and it is not clear which
-factor is more than the other. One way to solve these problems is to
-examine similar scenarios in the past and their results: if the
-current mortgage application is ``similar'' to one that approved in
-the past, was that approval a right decisoin (i.e., did not default)?
-Instead of writing rules, this new approach uses past data to guide
-future decisions.  This is what {\it machine learning} can be helpful:
+an umbrella, whether to enter a traffic intersection, whether to
+approve a mortgage application, etc. Each problem needs to consider
+many factors and it is not always clear which factor is more important
+than the other. One way to solve these problems is to examine similar
+scenarios in the past and their results: if the current mortgage
+application is ``similar'' to one that was approved in the past, was
+that approval a right decisoin (i.e., did not default)?  Instead of
+writing rules, this new approach uses past data to guide future
+decisions.  This is what {\it machine learning} can be helpful:
 computer programs discover (i.e., ``learn'') patterns from data.  Past
 data may help decide which factors are important for making decisions
 {\it if the past data and the new decision problem have similar
-  patterns.}  Having the same pattern is an essential assumption in
+  patterns.}  Having similar patterns is an essential assumption in
 machine learning.  Think about how humans learn: a person observes
-something and then when the person sees {\it similar} things, the
-person uses past knowledge and experience to {\it infer} what that new
-things are.  If a person sees something that is dissimilar to
-everything seen before, this person is unable to recognize the
-patterns and what it is.
+something and then when the person sees {\it similar} problems, the
+person uses past knowledge and experience to {\it infer} the solutions
+for the new problems.  If a person has never seen anything similar,
+the person would not able to draw from past knowledge or experience.
 
 Machine learning relies on the assumption that past observations and
 new, unseen, situations have similar patterns.  This assumption is
@@ -277,10 +290,11 @@ essential to the success of machine learning.  Imagine that you are
 the bank manager and have discovered a good way to determine whether
 to approve or deny mortgage applications.  If you move to another city
 or another country, your method may be wrong more often than you
-expected. Maybe the demographics are different. Maybe the cultural
-norms are different.  Maybe the real estate markets are different.
-This indicates that your machine learning method has its limitations.
-You may need to add some more factors into consideration.
+expect. Maybe the demographics are different. Maybe the cultural norms
+are different.  Maybe the real estate markets are different.  This
+indicates that your machine learning method has its limitations.  You
+may need to add some more data into building your knowledge about the
+new problem.
 
 \index{limit of machine learning}
 
@@ -290,88 +304,87 @@ You may need to add some more factors into consideration.
 \index{reward}
 
 
-\section{Supervised, Unsupervised, and Reinforcement Learning}
+\section{Supervised, Unsupervised,  Reinforcement, and Transfer Learning}
 
 There are different types of
-learning~\cite{Goodfellow2016DeepLearning,
-  Sutton2017ReinforcementLearningIntroduction}.  {\it Supervised
-  learning} means that there is a ``teacher'' telling a ``student''
-what is right or wrong. Imagine that a teacher shows images of flowers
-and tell students that these are flowers. The teacher shows another
-image of an elephant and says that it is an elephant.  {\it
-  Unsupervised learning} has no teacher. Imagine that you want to
-stock your store on a Friday evening for sales on Saturday.  There is
-no correct answer what merchandize you should put on shelves.  You can
-analyze the past sales records, together with factors such as weather
-and season.  You may also want to consider whether there is a major
-sport event on that Saturday.  This is different from supervised
-learning because there is no teacher telling you ``Yes, you should
-stock this item on shelves.''  or ``No, do not stock that item because
-few people will buy it this coming Saturday.''  Unsupervised learning
-is often used to discover (unknown) properties in data, for example,
-what people buy on a Saturday.  The third type of learning is called
-{\it reinforcement learning}.  It considers sequences of actions (such
-as moves in chess) and the {\it rewards} (such as winning a chess
-game) of these actions.  Consider playing chess as an example.
-Reinforcement learning is different from supervised learning because
-most decisions cannot be consider right or wrong. Some decisions such
-as checkmate are obviously right decisions but the effects of most
-decisions are unkonwn until much later. Instead, the sequence of
-decisions leads to a result, either winning or losing. Reinforcement
-learning is usually used for developing strategies solving problems
-through sequences of actions.  Sutton and Barto said, ``The most
-important feature distinguishing reinforcement learning from other
-types of learning is that it uses training information that evaluates
-the actions taken rather than instructs by giving correct
-actions.''~\cite{Sutton2017ReinforcementLearningIntroduction}.
-Table~\ref{table:threetypesoflearning} summarizes the three types of
-learning.
+learning~\cite{Goodfellow2016DeepLearning}.  {\it Supervised learning}
+means that there is a ``teacher'' telling a ``student'' what is right
+or wrong. Imagine that a teacher shows images of flowers and tell
+students that these are flowers. The teacher shows another image of an
+elephant and says that it is an elephant.  {\it Unsupervised learning}
+has no teacher. Imagine that you want to stock your store on a Friday
+evening for sales on Saturday.  There is no correct answer what
+products you should put on shelves.  You can analyze the past sales
+records, together with factors such as weather and season.  You may
+also want to consider whether there is a major sport event on that
+Saturday.  This is different from supervised learning because there is
+no teacher telling you ``Yes, you should stock this item on shelves.''
+or ``No, do not stock that item because few people will buy it this
+coming Saturday.''  Unsupervised learning is often used to discover
+(unknown) properties in data, for example, what people buy on a
+Saturday.  The third type of learning is called {\it reinforcement
+  learning}.  It considers sequences of actions (such as moves in
+chess) and the {\it rewards} (such as winning a chess game) of these
+actions.  Reinforcement learning is different from supervised learning
+because most decisions cannot be consider right or wrong. Some
+decisions such as checkmate are obviously right decisions but the
+effects of most decisions are unkonwn until much later. Instead, the
+sequence of decisions leads to a result, either winning or
+losing. Reinforcement learning is usually used for developing
+strategies solving problems through sequences of
+actions~\cite{Sutton2017ReinforcementLearningIntroduction}.  The
+fourth type of learning is called {\it transfer learning}.  The
+knowledge learned from the sample data is ``transferred'' to a new set
+of test data.  An analogy is that a person learns English and then
+uses the knowelege about sentence structures and tenses to learn
+French.
+% Transfer learning can be useful if there are many examples in the
+% first set of data and much fewer examples in the second set of data.
+% Table~\ref{table:threetypesoflearning} summarizes the three types of
+% learning.
 
-\vspace{0.1in}
-\begin{table}
-  \begin{tabular}{p{1.2in}p{1.2in}p{1.2in}p{1.2in}}
-    &    {\bf Supervised} & {\bf Unsupervised} & {\bf Reinforcement} \\
-    \hline
-    Teacher & Yes & No & No \\
-    Correct Answer & Yes & No & No \\
-    Consider Sequences & No & No & Yes \\
-    Applications & Answer Yes/No & Cluster data & Develop strategies \\
-  \end{tabular}
-  \caption{Three types of learning}
-  \label{table:threetypesoflearning}
-\end{table}
-\vspace{0.1in}
+\index{transfer learning}
 
-Supervised learning may be the most familar form of learning for many
-people: babies learn parents' faces when the parents say ``Daddy'' and
-``Mommy''.  Students learn from teachers in classrooms.  Supervised
-learning, however, can be expensive because teachers are needed.  As
-computer technologies improve, acquiring data becomes very easy and
+
+Supervised learning may be the most familar form of learning: babies
+learn parents' faces when the parents say ``Daddy'' and ``Mommy''.
+Students learn from teachers in classrooms.  Supervised learning,
+however, can be expensive because teachers are needed.  As computer
+technologies improve, acquiring data becomes very easy and
 inexpensive.  Spending \$100, you can buy a video camera and the it
 can easily generate thousands of images (more precisely, video frames)
 per day. Teachig computer the information in the images requires
 humans as teachers because computer programs cannot perfectly analyze
 images yet.  Teaching computers by marking what is in the images is
 called {\it labeling} or {\it annnotating}.  In some cases, labeling
-can be {\it crowdsourced}.  Labeling one million images can take more
-than one year~\cite{imagenet}.  \index{crowdsourced} In some other
-cases, the ``teachers'' of computers must have special qualifications;
-for example, medical images are evaluated by trained medical doctors.
+can be {\it crowdsourced}.  Labeling one million images by humans
+would not be easy~\cite{Russakovsky2015ImageNetLargeScale211252}.
+\index{crowdsourced} In some other cases, the ``teachers'' of
+computers must have special qualifications; for example, medical
+images are evaluated by trained medical doctors.
+
 \index{visual data}
-\index{label}
-\index{annotating}
+\index{label} \index{annotating}
 
-\index{transfer learning}
 
-Yet another type of learning is called {\it transfer learning}.  In
-transfer learning, the sample data for learning and the test data have
-different patterns.  The knowledge learned from the sample data is
-``transferred'' to a new set of test data.  An analogy is that a
-person learns English and then uses the knowelege about sentence
-structures and tenses to learn French. Transfer learning can be very
-useful if there are many examples in the first set of data and much
-fewer examples in the second set of data.
+\begin{comment}
+\vspace{0.1in}
+\begin{table}
+  \caption{Four types of learning}
+  \begin{tabular}{p{1in}p{1in}p{1in}p{1in}p{1in}}
+    &    {\bf Supervised} & {\bf Unsupervised} & {\bf Reinforcement} & {\bf Transfer}\\
+    \hline
+    Teacher & Yes & No & No \\
+    Correct Answer & Yes & No & No \\
+    Consider Sequences & No & No & Yes \\
+    Applications & Answer Yes/No & Cluster data & Develop strategies \\
+  \end{tabular}
 
+  \label{table:threetypesoflearning}
+\end{table}
+\vspace{0.1in}
+
+\end{comment}
 
 \begin{comment}
 http://incompleteideas.net/book/bookdraft2017nov5.pdf
@@ -381,12 +394,13 @@ Richard S. Sutton and Andrew G. Barto
 
 
 
-\index{definition of learning}
-    {\bf Definition of Learning}
+\index{learning}
+
+\section{Define Learning}
 
   We have talked about ``learning'' without actually defining it.
-  What is learning? Michelle~\cite{Mitchell1997MachineLearning}
-  defines
+  What is learning? Michelle~\cite{Mitchell1997MachineLearning}'s
+  definition is
 
   
   
@@ -401,13 +415,12 @@ Richard S. Sutton and Andrew G. Barto
   To explain this in a more intuitive way, a computer program can
   learn if it can ``get better'' by doing something more.  One way to
   understand learning is by comparing it with something that cannot
-  learn. Consider the calculator program on your computer (or your
-  mobile phone). It does not get better after you use it.  In
-  contrast, a program that determines whether an email is spam may get
-  better after you mark some emails as
-  spam~\cite{Hastie2009ElementsStatisticalLearning}.  By marking spam
-  emails, you play the role of a teacher and this is an example of
-  supervised learning.
+  learn. Consider the calculator program on your mobile phone. It does
+  not get better after you use it.  In contrast, a program that
+  determines whether an email is spam may get better after you mark
+  some emails as spam~\cite{Hastie2009ElementsStatisticalLearning}.
+  By marking spam emails, you play the role of a teacher and this is
+  an example of supervised learning.
 
 
 
@@ -431,8 +444,13 @@ mortgage.  If a future mortgage applicant has a high debt-income
 ratio, the program could suggest denying the application due to the
 higher risk.
 
-More rigorously, machine learning aims to discover
-a model $\mathcal{M}$ 
+As explained earlier, machine learning can be used when many factors
+need to be considered.  Machine learning has already been used in many
+applications~\cite{Alpaydin2010IntroductiontoMachine}, such as
+improving customer relationships, making financial decisions,
+diagnosize illness, identify spam emails, recognize speeches and
+objects in images.
+
 
 \section{Limitations of Machine Learning}
 
@@ -449,10 +467,12 @@ there is enough data to discover the patterns.  Third, the data may be
 ``biased'' and the it is not easy to define success. Imagine that you
 are designing a machine learning program to diagnose a rare illness.
 If a person has this illness, the program says ``Yes''; otherwise, the
-program says, ``No''.  Suppose the probability is one out of 100,000
-people.  The program would be 99.999\% accurate if it always says
-``No''.  However, this high accuracy does not really help.
+program says, ``No''.  Suppose the probability of this illness is one
+out of 100,000 people.  The program would be 99.999\% accurate if it
+always says ``No''.  However, this high accuracy does not really help.
 
+
+\begin{comment}
 Fourth, each machine learning program reflects a specific {\it model}
 that is designed to recognize the patterns in the data.  Different
 models have different capabilities: some models can recognize complex
@@ -463,16 +483,18 @@ that is not understood by humans. It is not yet clear whether humans
 will ever be able to understand the sound.  Maybe human brains are
 incapable of learning the sound.
 
+\end{comment}
+
 \index{black swan event}
 
-    {\bf Black Swan Event}
+\section{Black Swan Event}
 
     
   A {\it black swan event} is something that has never been seen
-  before and thus considered
-  impossible~\cite{Taleb2010BlackSwan}.  People
-  used to believe that swans must be white. Apparently, it is not
-  possible to learn and infer the existence of a black swan.
+  before and thus considered impossible~\cite{Taleb2010BlackSwan}.
+  People used to believe that swans must be white. Apparently, it is
+  not possible to learn by looking at white swans and infer the
+  existence of a black swan.
 
   
   Black swan events are everywhere, if you pay close attention.
@@ -488,8 +510,6 @@ incapable of learning the sound.
   something has not been observed, it is difficult to say whether it
   is impossible or not. Maybe it can be observed later.
 
-
-
   Even though black swan events cannot be inferred  from known patterns,
   it is possible to predict the occurrence {\it by some people} that
   are willing to challenge these patterns and consider
@@ -498,14 +518,13 @@ incapable of learning the sound.
   This book focuses on learning  and does not discuss imagination or
   creativity further.
 
+  The following chapters will describe some widely used machine
+  learning techniques for analyzing data.
+
   \index{imagination}
   \index{creativity}
     
   
-
-
-Sidebar about precision and recall.
-
 \index{statistical learning}
 \index{data-driven discovery}
 \index{infer}
@@ -513,14 +532,10 @@ Sidebar about precision and recall.
 \index{data bias}
 \index{model}
 
+\begin{comment}
+
 \section{Applications of Machine Learning}
 
-As explained earlier, machine learning can be used when many factors
-need to be considered.  Machine learning has already been used in many
-applications~\cite{Alpaydin2010IntroductiontoMachine}, such as
-improving customer relationships, making financial decisions,
-diagnosize illness, identify spam emails, recognize speeches and
-objects in images.
 
 \vspace{0.1in}
 
@@ -552,3 +567,4 @@ example,
 
 
 
+\end{comment}
