@@ -13,9 +13,10 @@ common:
 	echo '\\newcommand{\\basepath}{'$(PWD)'}' >> settings.tex
 
 clean:
-	/bin/rm -f *.aux *.idx *.lof *.log *.ilg *.lot 
+	/bin/rm -f *.aux *.idx *.lof *.log *.ilg *.lot  *.fdb_latexmk book.fls
 	/bin/rm -f *.out *.pdf *.toc *.ind settings.tex
 	/bin/rm -f book.bbl book.blg book.bib.bak
+
 
 
 
