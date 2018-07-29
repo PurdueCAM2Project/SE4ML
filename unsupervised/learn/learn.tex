@@ -114,12 +114,16 @@ Sometimes, you cannot enter the inserction because it is blocked
 by vehicles already. If you enter the intersection, you will park
 at the intersection and worsen traffic jam. Thus, you add another rule:
 
-\begin{verbatim}
-If the traffic light is green and the intersection is clear then
-   Cross the intersection
-Otherwise
-   Do not cross the intersection
-\end{verbatim}
+\begin{algorithm}
+%    \caption[]{Decision to Bring An Umbrella (2)}
+    \begin{algorithmic}[1]
+      \If {(Traffic light is green) and (The intersection is clear)}
+      \State Cross the intersection
+      \Else
+      \State Do not cross the intersection
+      \EndIf
+    \end{algorithmic}
+\end{algorithm}
 
 If you hear the siren of an ambulance, you should allow it to pass first.
 Consequently, the rule gets more complex:
