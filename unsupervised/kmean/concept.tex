@@ -61,7 +61,7 @@ because there is no teacher telling computers whether two pieces of
 data belong to the same group.  The correct answer depends on the
 other pieces of data.  \index{unsupervised learning}
 
-\section{K-Mean Clustering Problem}
+\section{Clustering into $k$ Groups}
 \index{k-mean clustering algorithm}
 
 Consider the department store coupon problem again. Suppose the store
@@ -160,7 +160,7 @@ Equation (\ref{eqn:kmeancost1}) can be written as
 
 \index{set partition problem}
 
-\subsection{Number of Solutions for Clustering}
+\section{Number of Solutions for Clustering}
 
 This is a difficult problem because there are many possible solutions
 when $n$ and $k$ are large. How many possible solutions are there?
@@ -193,10 +193,12 @@ assigned to one of the $k$ clusters. Thus there are
 
 possible solutions.
 
-{\bf YHL: these two should give the same result, right? GTK, please check.}
-
+{\bf YHL: these two should give the same result, right? GKT, please check.}
 
 \section{K-Mean Algorithm}
+
+When $n$ and $k$ are large, there are too many possible solutions and finding the
+best solution would be difficult. 
 
 
 This algorithm works in the
