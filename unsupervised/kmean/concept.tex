@@ -82,10 +82,12 @@ shirts, no shoes, no pants, and 2 sweaters.  If $x_2 = <0, 1, 1, 0, 0,
 1, 0, 0>$ means the second customer has bought no refrigerator, one
 waser, one dryer, no jackets, no shirts, one pair of shoes, no pants,
 and no sweater.  We want to group these $n$ data points into $k$
-non-overlapping clusters: $C_1$, $C_2$, ..., $C_k$.  Each cluser is a
-set.  \marginnote{In this book, a vector uses a lower case letter such
-  as $x$. A set uses an upper case letter such as $C$.} The following
-properties must be satisfied:
+non-overlapping clusters: $C_1$, $C_2$, ..., $C_k$. Obviously $k$ must
+not exceed $n$. In reality, $k$ is usually must smaller than $n$,
+i.e., $k \ll n$.  Each cluser is a set.  \marginnote{In this book, a
+  vector uses a lower case letter such as $x$. A set uses an upper
+  case letter such as $C$.} The following properties must be
+satisfied:
 
 \begin{itemize}
 \item A data point must belong to one cluster: $\forall i, 1 \le i \le
@@ -117,7 +119,8 @@ $x_1$, $x_2$, ..., $x_n$ to $C_1$, $C_2$, ..., $C_k$
 so that
 
 \begin{equation}
-\underset{j = 1}{\overset{k}{\sum}} \mathds{D}(C_j) 
+  \underset{j = 1}{\overset{k}{\sum}} \mathds{D}(C_j)
+  \label{eqn:kmeancost1}
 \end{equation}
 
 is as small as possible.
@@ -131,6 +134,16 @@ used definition is the sum of pairwise Euclidean disance:
 \mathds{D}(C_j) = \underset{x_r, x_s \in C_j}{\sum} (x_r - x_s)^ 2.
 \end{equation}
 
+If $x_r$ and $x_s$ are $p$-dimensional vectors:
+$x_r = (x_{r1}, x_{r2}, ..., x_{rp})$ and
+$x_s = (x_{s1}, x_{s2}, ..., x_{sp})$.
+The distance of them is defined as the sum of the square
+of the difference in each dimension:
+
+\begin{equation}
+(x_r - x_s)^ 2 = \underset{i = 1}{\overset{p}{\sum}} (x_{ri} - x_{si})^2.
+\end{equation}
+
 It is common to divide $\mathds{D}(C_j)$ by the number of data points
 in $C_j$ so that clusters of different sizes
 are treated equally. Thus, $\mathds{D}(C_j)$ is redefined as
@@ -139,7 +152,48 @@ are treated equally. Thus, $\mathds{D}(C_j)$ is redefined as
 \mathds{D}(C_j) = \frac{1}{|C_j|} \underset{x_r, x_s \in C_j}{\sum} (x_r - x_s)^ 2.
 \end{equation}
 
+Equation (\ref{eqn:kmeancost1}) can be written as
 
+\begin{equation}
+\min \underset{j = 1}{\overset{k}{\sum}}  \frac{1}{|C_j|} \underset{x_r, x_s \in C_j}{\sum} (x_r - x_s)^ 2.
+\end{equation}
+
+\index{set partition problem}
+
+\subsection{Number of Solutions for Clustering}
+
+This is a difficult problem because there are many possible solutions
+when $n$ and $k$ are large. How many possible solutions are there?
+This is equivalent to the {\it set partition problem}.  The set
+partition problem divided a set of $n$ elements into $k$
+non-overlapping non-empty subsets.    Suppose the
+$n$ data points can be assigned to any of the $k$ clusters, there are
+$k^n$ possibilities.  This, however, allows empty clusters.
+Thus, we have to exclude the situation when one 
+cluster is empty. In this case, there are $(k-1)^n$ options.
+If two clusters are empty, there are $(k-2)^n$ options.
+Continue until all except one cluster is empty. The total number of
+options is
+\marginnote{One book says there
+  are $k^n$ ways to cluster the data points. The book is wrong because
+  $k^n$ includes the results that have empty clusters.}
+\begin{equation}
+k^n - (k-1)^n - (k -2) ^ n ... - 1^n = k^n - \underset{i = 1}{\overset{k-1} \sum} (k-i)^n.
+\end{equation}  
+
+Another way to calculte the number of possible solution is as follows.
+We first select $k$ out of the $n$ data points to as the first data
+point in each cluster of the $k$ clusters. There are $\binom{n}{k}$
+ways to do that.  For the remaining $n-k$ data points, each can be
+assigned to one of the $k$ clusters. Thus there are
+
+\begin{equation}
+  \binom{n}{k} k^{n-k}
+\end{equation}
+
+possible solutions.
+
+{\bf YHL: these two should give the same result, right? GTK, please check.}
 
 
 \section{K-Mean Algorithm}
