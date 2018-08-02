@@ -2,13 +2,14 @@
 
 \chapter{Machine Learning}
 
-
-
 \section{Learning Objectives}
 
 
 \begin{itemize}
-\item Understand the strength and limitations of machine learning
+\item Learn what machine learning is 
+  
+\item Understand the strength and limitations 
+  
 \item Distinguish  unsupervised learning,  supervised learning,  reinforcement learning, and transfer
   learning
 \end{itemize}
@@ -21,9 +22,12 @@
 \subsection{Bring an Umbrella or not?}
 
 Machine learning means using computer programs to discover patterns
-(i.e., ``learn'') from data. How is this different from typical
-computer programs?  Let us consider a {\it decision problem}:
-Should you bring an umbrella or not?  This should be easy, right?
+(i.e., ``learn'') from data.  \marginnote{Strictly speaking, data is
+  plural and datum is singula.  However, most people treat data as
+  singular now and this book follows the same convention treating data
+  as singular.}  How is this different from typical computer programs?
+Let us consider a {\it decision problem}: Should you bring an umbrella
+or not?  This should be easy, right?
 
 \begin{algorithm}
 %    \caption[]{Decision to Bring An Umbrella (1)}
@@ -362,6 +366,20 @@ would not be easy~\cite{Russakovsky2015ImageNetLargeScale211252}.
 \index{crowdsourced} In some other cases, the ``teachers'' of
 computers must have special qualifications; for example, medical
 images are evaluated by trained medical doctors.
+
+Unsupervised learning is applied when a person mimicks the behaviors
+of another person.  Imagine that you have a vacation in Korea and hear
+people saying ``안녕하세요'' when they meet.  Even though nobody
+(i.e., there is no teacher) tells you what it means, you start saying
+``안녕하세요'' when you meet people.  This is an example of
+unsupervised learning.  Unsupervised learning can also be used to
+discover patterns in data, for example, people that buy apples are
+liekly to buy organes also.  Web search engines are examples of
+unsupervised learning.  These engines analyze many websites and rank
+websites for different search keywords. There is no ``teacher''
+specifying the correct orders.
+
+\index{web search engine}
 
 \index{visual data}
 \index{label} \index{annotating}

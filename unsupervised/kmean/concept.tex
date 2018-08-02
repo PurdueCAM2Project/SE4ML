@@ -1,12 +1,12 @@
 \chapter{K-Mean}
 
-{\bf Learning Objective:}
+\section{Learning Objectives}
 
 \begin{itemize}
 
-\item Learn the concept of data clustering  
+\item Understand data clustering  
   
-\item Understand the k-mean algorithm
+\item Learn the k-mean algorithm
 
 \item Implement the algorithm in Python
 
@@ -16,48 +16,137 @@
 
 \section{Clustering Data}
 
-Clustering {\it high-dimensional data} is frequently used. Consider
-the following examples:
-A department store is planning the annual promotion. The store wants
-to give customers discount coupons based on their purchase history.
-If a customer has purchased furniture at this store, the customer may
-give a coupon for furniture.  The store sells thousands of products
-and it does not to give one type of coupon for each product because
-doing so would create thousands of types of coupons.  Instead, the
-store wants to provide only a few (say 10) types of coupons.  The
-store wants to group the customers based on what they bought {\it
-  together}.  For example, if many customers buy ice cream, popcorn,
-and soda (of any brand) together, then these customers will be
-classified into one group and only one coupon will be sent to all
-these customers.  Similarly, if many customers purchase milk, ceral,
-and coffee, these customers will get only one type of coupons.  The
-data will be high-dimensional (thousands of dimensions) because each
-sold item is represented by one dimension.
+Consider the following scenario: A department store is planning the
+annual promotion. The store wants to give customers discount coupons
+based on their purchase history.  If a customer has purchased a desk
+at this store, the customer is given a coupon for a desk.
+\marginnote{In reality, stores would give customers coupons for what
+  they may buy later.  For example, if a customer has bought a desk,
+  the customer is unlikely to buy another desk soon.  Instead of
+  giving a coupon for another desk, the store may give a coupon for
+  buying a chair.  If a customer has bought a jacket, the store may
+  give a coupon for a sweater.  } If a customer has purchased shoes,
+the customer is given a coupon for shoes.  If a customer has purchased
+a jacket, the customer is given a coupon for a jacket.  The store
+sells thousands of products and it does not want to give one type of
+coupon for each product because doing so would create thousands of
+types of coupons.  It would be too expensive making so many types of
+coupons and programming the checkout machines to recognize these many
+types of coupons.  Instead, the store wants to provide only a few (say
+10) types of coupons.  The store wants to group the customers based on
+what they bought together.  For example, if a customer has bought
+shirts, shoes, and a sweather together, this customer is given a
+coupon for clothes.  If another customer has bought a desk, a dining
+table, and four chairs, this customer is given a coupon for furniture.
+If a third customer has bought a tie and shoes, this customer also
+receives a coupon for clothes (not for furniture).  If the fourth
+customer has bought chair and a desk, this customer receives a coupon
+for furniture (not for clothes).  The problem is that the store does
+not know how to group the customers so that the same group of
+customers gets the same coupon.  In other words, the store wants to
+divide the customers into groups so that the customers in each group
+have bought similar items. 
 
-A social media wants to recommend users to become friends.  The media
-use the profiles information, such as age, location, work, education,
-marital status as well as mutual friends to recommend friends.  The
-media wants to put the users into different groups and encourage
-people to make friends within the group.
+Consider another example: A research project wants to find the
+commonalities among lung cancer patients. They want to divide the
+patients into group based on personal information and behavior, such
+as age, location, occupation, education, marital status, diet, amounts
+of sleep, etc. They want to know whether one group has more patients
+than the other groups.
 
-Both examples are {\it clustering} problems. Clustering problems
-divide data into groups so that the data inside each group is similar
-and the data in different group is dissimilar.  This is {\it
-  unsupervised learning} because there is no teacher telling computers
-whether two pieces of data belong to the same group.  The correct
-answer depends on the other pieces of data.
+Both examples are {\it clustering} problems: these problems divide
+data into groups so that the data inside each group is similar and the
+data in different group is dissimilar.  This is unsupervised learning
+because there is no teacher telling computers whether two pieces of
+data belong to the same group.  The correct answer depends on the
+other pieces of data.  \index{unsupervised learning}
 
-\section{K-Mean Algorithm}
+\section{K-Mean Clustering Problem}
 \index{k-mean clustering algorithm}
 
 Consider the department store coupon problem again. Suppose the store
 decides to issue exactly ten types of coupons.  The problem becomes
 dividing the customers into ten groups based on their puchase history.
-This section describes the {\it k-mean clustering algorithm};
-here, $k$ is a number assigned to the problem.
-For the department store, $k$ is 10.
-This algorithm works in the following way:
-\index{centroid}
+This section describes the {\it k-mean clustering algorithm}; here,
+$k$\marginnote{An obvious question is how to decide the value of
+  $k$. This book will discuss that later.}  is a number assigned to
+the problem as the number of groups.  For the department store, $k$ is
+10.  Before explaining how this clustering method works, let us
+understand what this method wants to accomplish.
+
+Suppose there are $n$ data points: $x_1$, $x_2$, ..., $x_n$. Each data
+point is a high-dimensional vector.  For example, $x_1 = <1, 0, 0, 3,
+5, 0, 0, 2>$ means that in the past twelve months the first customer
+has bought one refrigerator, no waser, no dryer, three jackets, five
+shirts, no shoes, no pants, and 2 sweaters.  If $x_2 = <0, 1, 1, 0, 0,
+1, 0, 0>$ means the second customer has bought no refrigerator, one
+waser, one dryer, no jackets, no shirts, one pair of shoes, no pants,
+and no sweater.  We want to group these $n$ data points into $k$
+non-overlapping clusters: $C_1$, $C_2$, ..., $C_k$.  Each cluser is a
+set.  \marginnote{In this book, a vector uses a lower case letter such
+  as $x$. A set uses an upper case letter such as $C$.} The following
+properties must be satisfied:
+
+\begin{itemize}
+\item A data point must belong to one cluster: $\forall i, 1 \le i \le
+  n, \exists m, 1 \le m \le k$, such that $x_i \in C_m$. This means
+  for any value of $i$ between 1 and $n$ (inclusively), there is a
+  value $m$ between 1 and $k$ (inclusively), such that $x_i$ is an
+  element of $C_m$.
+
+  
+\item Each cluster contains one or more data points, i.e.,
+  $|C_j| \ge 1$, for $1 \le j \le k$.  In other words, an
+  empty cluster cannot be accepted.
+  
+\item The clusters together includes all data points: $C_1 \cup C_2
+  \cup ... \cup C_k = \{x_1, x_2, ..., x_n\}$.
+
+\item A data point must not belong to two or more clusters: $\forall
+  i, 1 \le i \le n$ if $x_i \in C_j$ and $x_i \in C_m$ then $j = m$,
+  here $1 \le j, m \le k$.  To put it in another way, $C_j$ and $C_m$
+  has no overlap if $j \ne m$: $C_j \cap C_m = \emptyset$.
+  
+\end{itemize}
+
+How is the problem defined? Suppose $\mathds{D}$ defines how
+dissimilar the data points of each cluster.  If the data points are
+quite similar, $\mathds{D}$ is small.  If the data points are quite
+dissimilar, $\mathds{D}$ is large.  The goal is to assign
+$x_1$, $x_2$, ..., $x_n$ to $C_1$, $C_2$, ..., $C_k$
+so that
+
+\begin{equation}
+\underset{j = 1}{\overset{k}{\sum}} \mathds{D}(C_j) 
+\end{equation}
+
+is as small as possible.
+
+How is $\mathds{D}$ defined?  It can be defined in many ways. One commonly
+used definition is the sum of pairwise Euclidean disance:
+\index{Euclidean distance}
+
+
+\begin{equation}
+\mathds{D}(C_j) = \underset{x_r, x_s \in C_j}{\sum} (x_r - x_s)^ 2.
+\end{equation}
+
+It is common to divide $\mathds{D}(C_j)$ by the number of data points
+in $C_j$ so that clusters of different sizes
+are treated equally. Thus, $\mathds{D}(C_j)$ is redefined as
+
+\begin{equation}
+\mathds{D}(C_j) = \frac{1}{|C_j|} \underset{x_r, x_s \in C_j}{\sum} (x_r - x_s)^ 2.
+\end{equation}
+
+
+
+
+\section{K-Mean Algorithm}
+
+
+This algorithm works in the
+following way: \index{centroid}
 
 Input: the data and the given value k
 
@@ -163,4 +252,11 @@ intentionally set $k$ centroids that are far apart. Each data point is
 close to one particular centroid and far aways from the other
 centroids.  Since the data points are generated intentionally, it is
 easy to test whether a k-mean program is correct.
-   
+
+Clustering {\it high-dimensional data} is frequently used. Consider
+the following examples:
+
+
+
+Chapter~\ref{ch:clusterlimit}
+will explain some other factors for consideration.
