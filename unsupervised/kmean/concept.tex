@@ -125,6 +125,19 @@ so that
 
 is as small as possible.
 
+This is a {\it minimization problem}. A minimization problem aims to
+make a quantity, called the {\it cost function}, as small as possible.
+Minimization problems are {\it optimization problems}, so are {\it
+  maximization problems}.  A maximization problem aims to make a
+quantity, called the {\it profit function} or {\it score function}, as
+large as possible.
+
+\index{cost function}
+\index{profit function}
+\index{minimization problem}
+\index{maximization problem}
+\index{optimization problem}
+
 How is $\mathds{D}$ defined?  It can be defined in many ways. One commonly
 used definition is the sum of pairwise Euclidean disance:
 \index{Euclidean distance}
@@ -195,110 +208,73 @@ possible solutions.
 
 {\bf YHL: these two should give the same result, right? GKT, please check.}
 
+
+\marginnote{Heuristic solutionsThis approach is frequently adopted
+  in optimization problems.  For many problems, finding the best
+  solution (or solutions) can be computationally difficult because
+  there are too many possibilities to check.  Instead of finding the
+  best solution, an algorithm is adopted to find ``good enough''
+  solutions fast. Such an algorithm usually works well but may find
+  really bad solutions for some cases.  These solutions are usually
+  called {\it heuristic} solutions.  }
+
+\index{heuristic} 
+
 \section{K-Mean Algorithm}
 
-When $n$ and $k$ are large, there are too many possible solutions and finding the
-best solution would be difficult. 
+When $n$ and $k$ are large, there are too many possible solutions and
+finding the best solution (or one of the best solutions, if several
+solutions are equally good and better than the other solutions) would
+be difficult. Instead of find the best solution, a heuristic, called
+the {\it k-mean algorithm}, usually finds good solutions.  This is the
+step of the k-mean algorithm:
 
+\index{centroid}
 
-This algorithm works in the
-following way: \index{centroid}
+\begin{algorithm}
+    \caption[]{K-Mean Algorithm}
+    \begin{algorithmic}[1]
+      \ForAll  {data point $x_i$, $1 \le i \le n$}
+      randomly select a number $j$, $1 \le j \le k$ and assign
+      $x_i$ to $C_j$
+      \EndFor
+      \Repeat 
+      \ForAll {Cluster $C_j$}
+      \State
+      calculate the {\it centroid} of the cluster
+      \EndFor
+      \ForAll {data point  $x_i$}
+      \State find the closest centroid
+      \State assign the data point to  the cluster
+      \EndFor
+      \Until No data point changes clusters
+    \end{algorithmic}
+\end{algorithm}
 
-Input: the data and the given value k
+A cluster's centroid is  the center of the data points assigned to this cluster.
+For cluster $C_j$, its centroid is 
 
-n: the number of data points, n should be greater than k
-d: the dimension of data
+\begin{equation}
+\frac{1}{|C|} \underset{x_r \in C_j}{\sum} x_r.
+\end{equation}  
 
-Procedure:
+Please remember that each data point is a $p$-dimensional vector.
 
-Pick k points (called {\it centroids}) randomly as the initial centers of the k group
-
-For each data point, find the closet centroid. Assign this data point to the group represented by this centroid.
-
-For each group, compute the center of all data points belonging to this group. This is the new location of the centroid.
-
-Repeat steps until the convergence condition is met.
-
-\index{Euclidean distance}
-
-This algorithm has many different interpretations. First, it does not
-specify how to calculate the distance between a data point and a
-centroid.  The data is likely high-dimensional.  The most common
-definition is the {\it Euclidean distance} but other definitions may
-be adopted.  Suppose $x = (x_1, x_2, ..., x_d)$ and $c = (c_1, c_2,
-..., c_d)$ are one data point and one centroid.  Here are some
-commonly used definitions of distance:
-
-\begin{gather}
-  \sqrt{(x_1 - c_1) ^ 2 + (x_2 - c_2) ^ 2 + ... + (x_d - c_d) ^ 2} = \sqrt{\underset{i=1}{\overset{d}{\sum}} (x_i - c_i) ^ 2}.
-  \label{equ:EuclideanDistance}
-    \\
-    |x_1 - c_1 |  + | x_2 - c_2 |  + ... + | x_d - c_d | = \underset{i=1}{\overset{d}{\sum}} |x_i - c_i|.
-    \label{equ:1NormDistance}
-\end{gather}
-
-A more general definition is
-
-\begin{gather}
-  (\underset{i=1}{\overset{d}{\sum}} |x_i - c_i| ^ p) ^ {\frac{1}{p}}.
-\end{gather}
-
-In fact, definitions (\ref{equ:EuclideanDistance}) and
-(\ref{equ:1NormDistance}) are special cases when $p$ is 2 and 1
-respectively.  Another special case is when $p$ approaches
-infinity and only  the largest distance of a particular
-dimension is left:
-
-\begin{gather}
-  \underset{p \rightarrow \infty}{\lim}(\underset{i=1}{\overset{d}{\sum}} |x_i - c_i| ^ p) ^ {\frac{1}{p}}
-  = \max(|x_1 - c_1|, |x_2 - c_2|, ..., |x_d - c_d|).
-\end{gather}
-
-The method does not specify how to ``randomly'' initialize the
-centroids. One solution is to initialize the $k$ centroids anywhere in
-the $d$-dimensional space.  This can have a serious problem: One (or
-several) centroids can be very far away from all data points and have
-almost the same distances.  Another solution first finds the smallest
-and the largest values in each dimension and set the centroids within
-these ranges.  This solution also has potential problems: multiple
-centroids could be close to the centers of many data points and lose
-the capability of differentiating the data points.  Imagine that a
-centroid is close to the center of {\it all} data points.  The third
-solution chooses $k$ data points randomly.  This method can be further
-improved by choosing $k$ data points that are as far as possible away
-from the other data points.
-
-
-
-
-
-
-Also, the convergence condition can be (a) when no data
-point changes to another group, (b) when steps 3-4 have executed a
-fixed number of iterations (say 1,000), or (c) something else.
-
-This chapter uses the Euclidean distance and convergence condition
-(a).
-
-You can assume that all data points fall within [-1000000, 1000000] in
-   each dimension. You should initilize centroids within this range.
-
-   
 \section{Create Test Cases}
 
 Lacking test cases of known properties is one common problem in
-developing software for machine learning.  If the purpose of machine
-learning is to recognize unknown patterns in data, we do not know the
-patterns in advance.  How can we know that the programs are correct?
-If we do not know that the programs are correct, how do we know the
-patterns discovered by the programs are correct?  Two solutions are
-commonly used: (1) Creating simple test cases manually with known
-properties or (2) Adopting widely used test cases whose properties
-have already been studied. The first approach is restricted to only
-very small test cases that are unlikely to have sophisticated patterns
-needed to test computer programs.  The second approach, in contrast,
-may sophisticated patterns but the data may be too complex for
-identify problems (i.e., ``bugs'') in the programs.
+developing software for machine learning.  The purpose of machine
+learning is to recognize unknown patterns in data so we do not know
+the patterns in advance.  How can we know that the programs are
+correct?  If we do not know that the programs are correct, how do we
+know the patterns discovered by the programs are correct?  Two
+solutions are commonly used: (1) Creating simple test cases manually
+with known properties or (2) Adopting widely used test cases whose
+properties have already been studied. The first approach is restricted
+to only very small test cases that are unlikely to have sophisticated
+patterns needed to test computer programs.  The second approach, in
+contrast, may sophisticated patterns but the data may be too complex
+for identify problems (i.e., ``bugs'') in the programs.
 
 This book suggests the third approach: write another program (or
 several programs) to generate test cases of known properties.  More

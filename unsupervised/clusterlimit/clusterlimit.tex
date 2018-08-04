@@ -5,3 +5,33 @@
 
 Clustering methods have limitations and sometimes suprising
 results~\cite{James2013IntroductiontoStatistical}.
+
+
+\section{Units and Normalized Data}
+
+
+
+\begin{gather}
+  \sqrt{(x_1 - c_1) ^ 2 + (x_2 - c_2) ^ 2 + ... + (x_d - c_d) ^ 2} = \sqrt{\underset{i=1}{\overset{d}{\sum}} (x_i - c_i) ^ 2}.
+  \label{equ:EuclideanDistance}
+    \\
+    |x_1 - c_1 |  + | x_2 - c_2 |  + ... + | x_d - c_d | = \underset{i=1}{\overset{d}{\sum}} |x_i - c_i|.
+    \label{equ:1NormDistance}
+\end{gather}
+
+A more general definition is
+
+\begin{gather}
+  (\underset{i=1}{\overset{d}{\sum}} |x_i - c_i| ^ p) ^ {\frac{1}{p}}.
+\end{gather}
+
+In fact, definitions (\ref{equ:EuclideanDistance}) and
+(\ref{equ:1NormDistance}) are special cases when $p$ is 2 and 1
+respectively.  Another special case is when $p$ approaches
+infinity and only  the largest distance of a particular
+dimension is left:
+
+\begin{gather}
+  \underset{p \rightarrow \infty}{\lim}(\underset{i=1}{\overset{d}{\sum}} |x_i - c_i| ^ p) ^ {\frac{1}{p}}
+  = \max(|x_1 - c_1|, |x_2 - c_2|, ..., |x_d - c_d|).
+\end{gather}
