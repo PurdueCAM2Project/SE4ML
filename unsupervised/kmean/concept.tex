@@ -209,14 +209,14 @@ possible solutions.
 {\bf YHL: these two should give the same result, right? GKT, please check.}
 
 
-\marginnote{Heuristic solutionsThis approach is frequently adopted
-  in optimization problems.  For many problems, finding the best
-  solution (or solutions) can be computationally difficult because
-  there are too many possibilities to check.  Instead of finding the
-  best solution, an algorithm is adopted to find ``good enough''
-  solutions fast. Such an algorithm usually works well but may find
-  really bad solutions for some cases.  These solutions are usually
-  called {\it heuristic} solutions.  }
+\marginnote{Heuristic solutions are frequently adopted in optimization
+  problems.  For many problems, finding the best solution (or
+  solutions) can be computationally difficult because there are too
+  many possibilities to check.  Instead of finding the best solution,
+  an algorithm is adopted to find ``good enough'' solutions fast. Such
+  an algorithm usually works well but may find really bad solutions
+  for some cases.  These solutions are usually called {\it heuristic}
+  solutions.  }
 
 \index{heuristic} 
 
@@ -260,35 +260,3 @@ For cluster $C_j$, its centroid is
 
 Please remember that each data point is a $p$-dimensional vector.
 
-\section{Create Test Cases}
-
-Lacking test cases of known properties is one common problem in
-developing software for machine learning.  The purpose of machine
-learning is to recognize unknown patterns in data so we do not know
-the patterns in advance.  How can we know that the programs are
-correct?  If we do not know that the programs are correct, how do we
-know the patterns discovered by the programs are correct?  Two
-solutions are commonly used: (1) Creating simple test cases manually
-with known properties or (2) Adopting widely used test cases whose
-properties have already been studied. The first approach is restricted
-to only very small test cases that are unlikely to have sophisticated
-patterns needed to test computer programs.  The second approach, in
-contrast, may sophisticated patterns but the data may be too complex
-for identify problems (i.e., ``bugs'') in the programs.
-
-This book suggests the third approach: write another program (or
-several programs) to generate test cases of known properties.  More
-specifically, for this problem, we can write a program that generates
-$n$ data points in $k$ clusters ($n > k$). Moreover, we can
-intentionally set $k$ centroids that are far apart. Each data point is
-close to one particular centroid and far aways from the other
-centroids.  Since the data points are generated intentionally, it is
-easy to test whether a k-mean program is correct.
-
-Clustering {\it high-dimensional data} is frequently used. Consider
-the following examples:
-
-
-
-Chapter~\ref{ch:clusterlimit}
-will explain some other factors for consideration.
