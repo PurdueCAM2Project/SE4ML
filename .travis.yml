@@ -7,8 +7,11 @@ addons:
     - texlive-base
     - texlive-latex-base
     - texlive-latex-recommended
-    - texlive-latex-extra
     - texlive-fonts-recommended
+    - texlive-fonts-extra
+    - texlive-latex-extra
+    - texlive-formats-extra
+    - texlive-bibtex-extra
     - texinfo
     - texlive-science
     - latexmk
