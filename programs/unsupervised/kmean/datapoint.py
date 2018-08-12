@@ -14,4 +14,13 @@ class DataPoint:
     def getData(self):
         return self._data
 
+    def getDimension(self):
+        return len(self._data)
+
+    def getCluster(self):
+        return self.cluster
+
+    def printData(self):
+        print self._data, self.cluster
+
     

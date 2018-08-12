@@ -2,57 +2,60 @@
 import sys
 import random
 from datapoint import DataPoint
-'''
-def findCentroid(data, cluster, kval):
-    for ind in range(0, len(cluster)
-    centroid = [[0] * len(data[0]) 
-'''
+from centroid  import Centroid
 
-def cluster(data, kval):
-    cluster = [0]
-    for ind in range(0, len(data)):
-        cluster.append(random.randint(0, kval - 1))
-    print cluster
-    done = false
-    while (done == false):
-        centroid = findCentroid(data, cluster, kval)
-'''
+def distance(datapoint, centroid):
+    sum = 0
+    dim = datapoint.getDimension()
+    for ind in range(0, dim):
+        val1 = datapoint._data[ind]
+        val2 = centroid.data[ind]
+        diff = val1 - val2
+        sum = sum + diff * diff
+    return sum
 
-'''
-def findRange(data):
-    # find the minimum and maximum values in each dimension
-    # return two lists: maxvalues and minvalues
-    # initialize
-    maxval = [0] * len(data[0])
-    minval = [0] * len(data[0])
-    for dim in range(0, len(data[0])):
-        maxval[dim] = data[0][dim]
-        minval[dim] = data[0][dim]
-
-    # find the maximum and minimum in each dimension
-    for row in range(1, len(data)):
-        for dim in range(0, len(data[0])):
-            maxval[dim] = max(maxval[dim], data[row][dim])
-            minval[dim] = min(minval[dim], data[row][dim])
-    print minval
-    print maxval
-    return minval, maxval
-
-def initCentroid(minval, maxval, kval):
-    
-    centroid = [0] * len(minval)
-'''
+def cluster(dataArray, kval):
+    numdp = len(dataArray)
+    centroidArray = []
+    dim = dataArray[0].getDimension()
+    for ind in range(0, kval):
+        ctd = Centroid(dim, ind)
+        centroidArray.append(ctd)
+    done = False
+    while (done == False):
+        done = True
+        for cluindex in range(0, kval):
+            centroidArray[cluindex].reset()
+        # calculate the centroid of each cluster
+        for dpindex in range(0, numdp):
+            clu = dataArray[dpindex].getCluster()
+            centroidArray[clu].addPoint(dataArray[dpindex])
+        for cluindex in range(0, kval):
+            centroidArray[cluindex].findCenter()
+        # find the closet centroid
+        for dpindex in range(0, numdp):
+            mindist = sys.maxint # minimum distance so far
+            minclu  = -1
+            for cluindex in range(0, kval):
+                dist = distance(dataArray[dpindex], centroidArray[cluindex])
+                if (mindist > dist):
+                    mindist = dist
+                    minclu = cluindex
+            curclu = dataArray[dpindex].getCluster()
+            if (curclu != minclu):
+                # this data point is assigned to a different cluster
+                done = False
+                dataArray[dpindex].changeCluster(minclu)
+    return centroidArray
 
 def readfile(fhd, kval):
-    data = []
+    dataArray = []
     for oneline in fhd:
+        # assign each data point to a cluster randomly
         clu = random.randint(0, kval - 1)
         dp = DataPoint(map(int, oneline.split()), clu)
-        data.append(dp)
-        # IMPORTANT: map convert string to int
-        # must use integers for calculation, not string
-    # print data
-    return data
+        dataArray.append(dp)
+    return dataArray
 
 def kmean(filename, kval):
     print "kmean", filename, kval
@@ -60,21 +63,9 @@ def kmean(filename, kval):
         fhd = open(filename)
     except:
         sys.exit('open fail')
-    data = readfile(fhd, kval)
-    centroid = cluster(data, kval)
-    '''
-    centroid = initCentroid(minval, maxval, kval)
-    [] # two dimensional array
-    # first dimension: data points
-    # second dimension: list of numbers as one data point
-    # a data point can be high dimensional
-    # assume all data points have the same length
-    for oneline in fhd:
-        data.append(map(int, oneline.split()))
-        # IMPORTANT: map convert string to int
-        # must use integers, not string
-    print data
-    minval, maxval = findRange(data)
-    centroid = initCentroid(minval, maxval, kval)
-    '''
-        
+    dataArray = readfile(fhd, kval)
+    fhd.close()
+    centroidArray = cluster(dataArray, kval)
+    numdp = len(dataArray)    
+    for dpindex in range(0, numdp):
+        dataArray[dpindex].printData()
