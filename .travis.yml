@@ -12,6 +12,7 @@ addons:
     - texlive-latex-extra
     - texlive-formats-extra
     - texlive-bibtex-extra
+    - texlive-humanities
     - texinfo
     - texlive-science
     - latexmk
