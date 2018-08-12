@@ -1,16 +1,10 @@
 sudo: false
-language: python
 python:
 - '3.4'
 addons:
   apt:
     packages:
-    - texlive-latex-base
-    - texlive-latex-recommended
-    - texlive-latex-extra
-    - texlive-fonts-recommended
-    - texinfo
+    - texlive-full
     - latexmk
-    - latex-xcolor
 install:
   - make book
