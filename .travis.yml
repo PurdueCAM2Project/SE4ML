@@ -11,5 +11,6 @@ addons:
     - texlive-fonts-recommended
     - texinfo
     - latexmk
+    - latex-xcolor
 install:
   - make book
