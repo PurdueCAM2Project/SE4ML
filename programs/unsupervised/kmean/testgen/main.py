@@ -1,4 +1,5 @@
 #! /usr/bin/python
+# main.py for testgen.py
 # Generate test cases for k-mean clustering program
 # This program take three required and one optional arguments:
 #

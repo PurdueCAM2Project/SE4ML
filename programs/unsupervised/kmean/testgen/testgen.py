@@ -1,3 +1,5 @@
+# testgen.py
+
 import random
 def generate(p, m, q, r, s):
     # set the names of the output files

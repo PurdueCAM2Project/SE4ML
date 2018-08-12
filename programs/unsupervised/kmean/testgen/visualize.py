@@ -1,7 +1,7 @@
 #! /usr/bin/python3
+# visualize.py
 # Visualize test cases for k-mean clustering program
 # up to the third dimension
-#
 
 import sys
 import matplotlib.pyplot as pyplot
@@ -35,10 +35,7 @@ def visualize(infile):
                 zval.append(int(numbers[ind]))
             minval = min(int(numbers[ind]), minval)
             maxval = max(int(numbers[ind]), maxval)
-    print (minval, maxval)
-    print (xval)
-    print (yval)
-    print (zval)
+    # print (minval, maxval)
     if (dim == 1):
         yval = [0] * len(xval)
     if (dim <= 2):
