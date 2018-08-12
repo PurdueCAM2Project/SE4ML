@@ -16,5 +16,5 @@ addons:
     - texinfo
     - texlive-science
     - latexmk
-install:
+script:
   - make book
