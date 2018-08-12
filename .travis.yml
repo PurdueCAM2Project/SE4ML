@@ -10,6 +10,7 @@ addons:
     - texlive-latex-extra
     - texlive-fonts-recommended
     - texinfo
+    - texlive-science
     - latexmk
 install:
   - make book
