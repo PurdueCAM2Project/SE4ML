@@ -1,3 +1,5 @@
+# testgen.py
+
 import random
 def generate(p, m, q, r, s):
     # set the names of the output files
@@ -15,9 +17,10 @@ def generate(p, m, q, r, s):
             line = ''
             for dim in range (0, p):
                 # dimension
-                x = center + random.randint(-200, 200)
+                x = center + random.randint(-500, 500)
                 line = line + str(x) + ' '
             fout1.write(line + '\n')
             fout2.write(line + ' ' + str(clu) + '\n')
         center = center + 2000
-        
+    fout1.close()
+    fout2.close()

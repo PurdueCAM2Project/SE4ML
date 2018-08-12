@@ -1,0 +1,10 @@
+sudo: false
+python:
+- '3.4'
+addons:
+  apt:
+    packages:
+    - texlive-full
+    - latexmk
+install:
+  - make book
