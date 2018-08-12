@@ -3,6 +3,7 @@ language: python
 addons:
   apt:
     packages:
+    - latex-xcolor
     - texlive-base
     - texlive-latex-base
     - texlive-latex-recommended
