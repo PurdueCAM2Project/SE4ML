@@ -3,6 +3,7 @@ language: python
 python:
 - '3.4'
 before_install:
+  - sudo apt update -q
   - sudo apt install texlive-latex-base texlive-latex-recommended texlive-latex-extra
   - sudo apt install texlive-fonts-recommended texinfo latexmk
   - sudo tlmgr xcolor
