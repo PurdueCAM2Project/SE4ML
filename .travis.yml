@@ -1,10 +1,7 @@
-sudo: false
-python:
-- '3.4'
-addons:
-  apt:
-    packages:
-    - texlive-full
-    - latexmk
+sudo: true
+before_install:
+  - sudo apt install texlive-latex-base texlive-latex-recommended texlive-latex-extra
+  - sudo apt install texlive-fonts-recommended texinfo latexmk
+  - sudo tlmgr xcolor
 install:
   - make book
