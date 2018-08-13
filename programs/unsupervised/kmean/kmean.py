@@ -65,7 +65,11 @@ def kmean(filename, kval):
         sys.exit('open fail')
     dataArray = readfile(fhd, kval)
     fhd.close()
-    centroidArray = cluster(dataArray, kval)
     numdp = len(dataArray)    
+    for dpindex in range(0, numdp):
+        dataArray[dpindex].printData()
+    print '-------------------------------'
+    centroidArray = cluster(dataArray, kval)
+    print '+++++++++++++++++++++++++++++++'
     for dpindex in range(0, numdp):
         dataArray[dpindex].printData()

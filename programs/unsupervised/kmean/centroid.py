@@ -24,7 +24,7 @@ class Centroid:
 
     def findCenter(self):
         if (self.size == 0):
-            print 'Centroid Without Data'
+            print 'Centroid', self._ID, 'Without Data'
             return
         for ind in range(0, self._dim):
             self.data[ind] = self.data[ind] / self.size

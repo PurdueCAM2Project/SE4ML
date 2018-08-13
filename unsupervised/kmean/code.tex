@@ -74,6 +74,12 @@ file also has $n$ lines; each line has the same $p$ integers,
 following by one integer between $0$ and $m - 1$ to indicate which
 cluster this line belongs to.
 
+This program is pretty simple: it divides $(-1000m, 1000m)$ in each
+dimension into $m$ regions. The centroids of two adjacent regions are
+separated by 2000 in each dimension.  The data points of a particular
+cluster are scattered within 200 around the cluster's centroid.  The
+following is the test case generator.
+
 \resetlinenumber[1]
 \linenumbers
 \begin{tt}
@@ -88,10 +94,69 @@ cluster this line belongs to.
 \end{tt}
 \nolinenumbers
 
-Clustering {\it high-dimensional data} is frequently used. Consider
-the following examples:
+This is a sample output of the program using the default values for
+the arguments: $(p, m, q, r) = (2, 3, 3, 5)$.
+This is an example of the output {\tt data.txt}.
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\kmeanpath/data/data.txt}
+\end{tt}
+\nolinenumbers
+
+This is an example of the corresponding {\tt cluster.txt}.
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\kmeanpath/data/cluster.txt}
+\end{tt}
+\nolinenumbers
+
+\section{Visualize Data}
+
+\index{high-dimensional}
+
+This chapter presents a program that can visualize data up to three
+dimensions.  The purpose of this visualization is to help inspect
+whether the data produced by the test generator is indeeded clustered
+into several regions.
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/unsupervised/kmean/testgen/visualize.py}
+\end{tt}
+\nolinenumbers
+
+\marginnote{It is common that the data of interest is {\it
+    high-dimensional} and visualizing the data would be difficult.  }
+
+The following figures show the generated data in one, two, and three
+dimensions.  The figures are drawn using {\tt visualize.py}.
 
 
+\clearpage
+
+\begin{figure}[h] \centering
+ \subfigure[]
+{\includegraphics[width=3in]{\kmeanpath/figures/figure1.png}}
+  \subfigure[]
+{\includegraphics[width=3in]{\kmeanpath/figures/figure2.png}}
+  \subfigure[]
+{\includegraphics[width=3in]{\kmeanpath/figures/figure3.png}}
+\caption{Visualize the generated test cases in one, two, and, three
+  Dimensions. }
+\label{fig:kmean:visualize}
+\end{figure}
+
+\clearpage
+
+\section{K-Mean Algorithm Implementation}
+
+Now is the time to show how the {\it K-Mean} algorithm
+can be implemented.
 
 Chapter~\ref{ch:clusterlimit}
 will explain some other factors for consideration.
