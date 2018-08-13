@@ -57,7 +57,7 @@ You can see the latest details in my `.travis.yml` file. But here is walkthrough
 
 - Now here is where things get a bit dicey. You need to declare what you want to deploy--and how you're going to do it. In this case, I'm deploying to our project at `PurdueCAM2Project/SE4ML`. In order for this to work, you need to take some preliminary steps. I'll go through each of these.
 
-- There have been a number of changes to Travis lately, owing to the corresponding changes also happening at GitHub, where apps are being phased in and services phased out, respectively. So you will be moving to `travis-ci.com` (as oppposed to `travis-ci.org`). You should set up the `travis` gem (from Ruby) if you haven't done so already. This gives you commmand line support to set up the following block of YAML code (mostly).
+- There have been a number of changes to Travis lately, owing to the corresponding changes also happening at GitHub, where apps are being phased in and services phased out, respectively. So you will be moving to `travis-ci.com` (as opposed to `travis-ci.org`). You should set up the `travis` gem (from Ruby) if you haven't done so already. This gives you command line support to set up the following block of YAML code (mostly).
 
   `travis setup releases --pro`
 
@@ -81,11 +81,11 @@ You can see the latest details in my `.travis.yml` file. But here is walkthrough
 
 # Acknowledgments
 
-- The general resource at [Travis CI](https://docs.travis-ci.com/user/deployment/releases/) provdies a useful overview.
+- The general resource at [Travis CI](https://docs.travis-ci.com/user/deployment/releases/) provides a useful overview.
 
-- This page by [Victor Hurdagaci](https://www.victorhurdugaci.com/github-releases-travis) describes his expeiences and is a helpful starting point. I hope some of the additional details provided above will prove helpful.
+- This page by [Victor Hurdagaci](https://www.victorhurdugaci.com/github-releases-travis) describes his experiences and is a helpful starting point. I hope some of the additional details provided above will prove helpful.
 
 
-# Questons?
+# Questions?
 
 Please don't hesitate to contact me (gkthiruvathukal). See my profile for contact information.
