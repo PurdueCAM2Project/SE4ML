@@ -50,8 +50,10 @@ You can see the latest details in my `.travis.yml` file. But here is walkthrough
 
 - Create your LaTeX book. In my case, I use a Makefile for this. We're going to switch to `latexmk` soon but are having some problems with it, hence the additional package you see in the above.
 
-script:
-- make book
+  ```
+  script:
+  - make book
+  ```
 
 - Now here is where things get a bit dicey. You need to declare what you want to deploy--and how you're going to do it. In this case, I'm deploying to our project at `PurdueCAM2Project/SE4ML`. In order for this to work, you need to take some preliminary steps. I'll go through each of these.
 
@@ -74,7 +76,6 @@ script:
   ```
 
   I say _mostly_ because not all of what you see here is added to your .travis.yml automagically. First, the `api_key:`. You need to use `travis encrypt` to create this. You also need to add the `skip_cleanup: true` and `on: repo:` key you see here (with your own repo-specific info).  We do not cover API keys here as this is easy to do within GitHub, and there are plenty of resources that explain how to do it. Lastly, don't forget the `on: tags:` key. You need to set this in order to trigger a release anytime you apply a tag and push it to your repo. In my case, I don't want every commit to trigger a release--just the milestones (major and minor). We use simple versioning like `v0.1` or `v0.1.1` at this stage. But any legitimate tagging scheme will work. If you `git tag` it, the release will show up.
-
 
   The `file:` key is used to list any files you'd like to be deployed to GitHub Releases for your project. These files will be _in addition to_ the .zip and .tar.gz (tarball) that are done by default. (I am still working on how to disable those. My release is simply the .pdf for those who want to view the book in progress.)
 
