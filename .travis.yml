@@ -24,7 +24,7 @@ deploy:
     secure: NA6E8nfyjpc8clNYP9pT5jBKK95ughnNoneki/V87zvBWg8xFWz58A8ltnFW7ulGn41p2QGZ0tRVysn72bC27X/Ditlr+W8LsLODpLWhXrY6eVp1mTQsYY5DBRKv5fAxCNz5ttQywSz03V8SgJyM4inQlJo9WNzZ7EKt+/MGgh7NIGAxQYc6G8LqvnoDNmbYAMz7ewtyOkEbZvCRrMqCZn/06qFnf4/l14RYsIacnpRyiakRylssA5piiNCG0H5NV772vrPNttDMWFSm/Oi7Z4U9G/uvpX9s0ylZRXJEmn3OGZkonvc15Q2MK0FCxM5AutDzlS+vLGcMFCKdLiV+b7AMN8E/iCJSC8sR036VIc1GLlRUvn+KlL8Txt3wa1i09gmo7cLEtwwrtP8svOnItyqCOyQ/y59ZBLIynhFcrEpg3v/03TblU9j7+c0cJ+tHv3CLh373q1QzZH4XOi+Xy23aRRwRM1sxWBoS398p/51lj54er865E8Nc7NfoINilO1v/yNLFEi7gRSs8rBbzq09u4KIavmel5xTsdQ+KDwmt+tDdTj0Oj5OJWci8dsz1v24xOXNf9BntlDw8wRsV4Ksxe0fppifoGm9/O+6HqXyA5PdVS0ehWVjOIdR1sA92NFCUFXhP0xBidowlD1PvvihYo6aqQYbvp2UL5qw2m3E=
   file:
     - "se4ml.pdf"
-    - "se4ml.bib"
+  skip_cleanup: true
   on:
     repo: PurdueCAM2Project/SE4ML
     tags: true
