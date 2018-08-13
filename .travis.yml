@@ -25,3 +25,4 @@ deploy:
   file: se4ml.pdf
   on:
     repo: PurdueCAM2Project/SE4ML
+    tags: true
