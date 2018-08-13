@@ -18,3 +18,12 @@ addons:
     - latexmk
 script:
   - make book
+deploy:
+     provider: releases
+     api_key:
+         secure: 48e5dd6e1f36586580a2ee9e15404c090386e46b
+     file:
+         - se4ml.pdf
+     skip_cleanup: true
+     on:
+         tags: true
