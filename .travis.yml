@@ -17,13 +17,13 @@ addons:
     - texlive-science
     - latexmk
 script:
-  - make book
+- make book
 deploy:
-     provider: releases
-     api_key:
-         secure: 48e5dd6e1f36586580a2ee9e15404c090386e46b
-     file:
-         - se4ml.pdf
-     skip_cleanup: true
-     on:
-         tags: true
+  provider: releases
+  api_key:
+    secure: MTmiXpLZxB3Z4BoCmC/C9Hibq5PhmKwiivtJGK6ef7PDdpsQ2kduEVCvtFb8VK4OODGG+1r1yYqkhV61kWMd4jHuhRyzGfhNrndUYku4BLjWsifWZt2JQYqKqtbhUM8lyNEonWTJJcYf0wKqjGad2ZeJ9jPjGHa2hEOQWJBiEqWRsXObJnYRZpSi6CNlYfVBZS9M1zaQytrle6kr63Iqtaq1IY3dSNguGqO32eKTCo1VEl7OoEo5YrtHZTBU3WXuLcMcb/YHmj27Q/nGXLla8aA32zYAQvzT+5O/Od9+yEeIDKULnFE58bJ9c6eupFqzhU4/Arn5+fEzzNORMYzqZaI+PlTvzW2q0uv6owtxaihE48pxt1cJ88IHDbxu1tA2LB5qXZAdwpsl24EO9nNr3/XOVPAhUyW8XThnvG9jt0n1LGocmvcZD+3tlmGLmFbck57HbrN6fJ2BiuQu6r88nETd6vivu9DfeTcEEgR2SuIp/5uSnH7e85USsF4kKmQ2Xr+N+M8jJNZgFBDfsDSso4DkSBoB9fI5gdVhCjgtg6hKn8oxXJiRR20rSpXoIVYqtBXUwgEOFpV2zPEGc2d/0uNN52Saz0jyLftBGfqSQSlqbV+JBvYHvs2QfyuMzca2WrTAMdqEsuU7bupWho+Rlg4roGBDo5bffrB5mHwE3rY=
+  file:
+  - se4ml.pdf
+  skip_cleanup: true
+  on:
+    tags: true
