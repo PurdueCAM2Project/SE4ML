@@ -1,7 +1,9 @@
-#! /usr/bin/python
+#! /usr/bin/python3
 # main.py for kmean
 import sys
 import kmean
+import datetime
+import random
 
 if __name__ == "__main__":
     if (len(sys.argv) < 3):

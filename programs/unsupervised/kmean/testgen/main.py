@@ -22,13 +22,13 @@ def nextIntArgument(argv, index):
     return (index, int(v))
 
 def nextStrArgument(argv, index):
-    print ('nextStrArgument' , argv[index])
+    # print ('nextStrArgument' , argv[index])
     index = index + 1
     if (index == len(argv)):
         printUsage()
     v = argv[index]
     index = index + 1
-    print (index, v)
+    # print (index, v)
     return (index, v)
 
 if __name__ == "__main__":

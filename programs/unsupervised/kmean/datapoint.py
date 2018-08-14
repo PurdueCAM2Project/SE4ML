@@ -21,6 +21,6 @@ class DataPoint:
         return self.cluster
 
     def printData(self):
-        print self._data, self.cluster
+        print (self._data, self.cluster)
 
     

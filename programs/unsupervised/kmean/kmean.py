@@ -34,7 +34,7 @@ def cluster(dataArray, kval):
             centroidArray[cluindex].findCenter()
         # find the closet centroid
         for dpindex in range(0, numdp):
-            mindist = sys.maxint # minimum distance so far
+            mindist = sys.maxsize # minimum distance so far
             minclu  = -1
             for cluindex in range(0, kval):
                 dist = distance(dataArray[dpindex], centroidArray[cluindex])
@@ -53,12 +53,13 @@ def readfile(fhd, kval):
     for oneline in fhd:
         # assign each data point to a cluster randomly
         clu = random.randint(0, kval - 1)
-        dp = DataPoint(map(int, oneline.split()), clu)
+        data = list(map(int, oneline.split()))
+        dp = DataPoint(data, clu)
         dataArray.append(dp)
     return dataArray
 
 def kmean(filename, kval):
-    print "kmean", filename, kval
+    # print ('kmean', filename, kval)
     try:
         fhd = open(filename)
     except:
@@ -66,10 +67,10 @@ def kmean(filename, kval):
     dataArray = readfile(fhd, kval)
     fhd.close()
     numdp = len(dataArray)    
-    for dpindex in range(0, numdp):
-        dataArray[dpindex].printData()
-    print '-------------------------------'
+    # for dpindex in range(0, numdp):
+    # dataArray[dpindex].printData()
+    # print ('-------------------------------')
     centroidArray = cluster(dataArray, kval)
-    print '+++++++++++++++++++++++++++++++'
+    # print ('+++++++++++++++++++++++++++++++')
     for dpindex in range(0, numdp):
         dataArray[dpindex].printData()
