@@ -18,6 +18,16 @@ grep -r term * | grep tex | sed 's/:/ /g' | awk '{print $1}' | sort | uniq
 \author{Yung-Hsiang Lu and
 George K. Thiruvathukal}
 
+%
+% Trying this instead of the hyphenat package, which seems to break many things.
+% Credit: https://tex.stackexchange.com/questions/5036/how-to-prevent-latex-from-hyphenating-the-entire-document 
+%
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
 \begin{document}
 
 \begin{comment}
