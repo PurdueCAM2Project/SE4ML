@@ -24,7 +24,6 @@ def visualize(infile):
         numbers = oneline.split()
         # get the number of dimensions
         dim = len (numbers)
-        print (dim)
         # consider up to the first three dimension
         for ind in range(0, min(3, dim)):
             if (ind == 0):
@@ -40,7 +39,7 @@ def visualize(infile):
         yval = [0] * len(xval)
     if (dim <= 2):
         pyplot.scatter(xval, yval)
-    if (dim == 3):
+    if (dim >= 3):
         fig = pyplot.figure()
         ax = fig.add_subplot(111, projection='3d')
         ax.scatter(xval, yval, zval)

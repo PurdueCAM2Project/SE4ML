@@ -1,41 +1,74 @@
-#! /usr/bin/python
+#! /usr/bin/python3
 # main.py for testgen.py
 # Generate test cases for k-mean clustering program
-# This program take three required and one optional arguments:
-#
-# Number of dimension ($p$)
-# Number of clusters ($m$)
-# Minimum numbers of data points per cluster ($q$)
-# Maximum numbers of data points per cluster ($r$)
-# (Optional) Range of the values (called $s$ in this program).
 
 import sys
 import testgen
 
+def printUsage():
+    usage = """usage:
+               -t: truly random. False means the clusters do not overlap
+               -d v: dimension is v
+               -m v: number of clusters is v
+               -q v: each cluster has at least v data points
+               -r v: each cluster has at most v data points
+               -o v: output data file name is v
+               -c v: output cluster file name is v"""
+    print (usage)
+    sys.exit()
+
+def nextIntArgument(argv, index):
+    (index, v) = nextStrArgument(argv, index)
+    return (index, int(v))
+
+def nextStrArgument(argv, index):
+    print ('nextStrArgument' , argv[index])
+    index = index + 1
+    if (index == len(argv)):
+        printUsage()
+    v = argv[index]
+    index = index + 1
+    print (index, v)
+    return (index, v)
+
 if __name__ == "__main__":
     # set the default values
-    p = 2
-    m = 3
-    q = 3
-    r = 5
+    t = False # truly random
+    d = 2 # dimension
+    m = 3 # number of clusters
+    q = 4 # at least q points per cluster
+    r = 5 # at most  r points per cluster
+    output1 = 'data.txt' 
+    output2 = 'cluster.txt'
     # get the arguments, if given
-    if (len(sys.argv) > 1):
-        p = int (sys.argv[1])
-    if (len(sys.argv) > 2):
-        m = int (sys.argv[2])
-    if (len(sys.argv) > 3):        
-        q = int (sys.argv[3])
-    if (len(sys.argv) > 4):        
-        r = int (sys.argv[4])
+    index = 1
+    while (index < len(sys.argv)):
+        if (sys.argv[index] == '-t'):
+            t = True
+            index = index + 1
+            continue
+        if (sys.argv[index] == '-d'):
+            (index, d) = nextIntArgument(sys.argv, index)
+            continue
+        if (sys.argv[index] == '-m'):
+            (index, m) = nextIntArgument(sys.argv, index)
+            continue
+        if (sys.argv[index] == '-q'):
+            (index, q) = nextIntArgument(sys.argv, index)
+            continue
+        if (sys.argv[index] == '-r'):
+            (index, r) = nextIntArgument(sys.argv, index)
+            continue
+        if (sys.argv[index] == '-o'):
+            (index, output1) = nextStrArgument(sys.argv, index)
+            continue
+        if (sys.argv[index] == '-c'):
+            (index, output2) = nextStrArgument(sys.argv, index)
+            continue
     # check whether the arguments are acceptable
-    if (p < 1):
-        sys.exit('# dimension must be 1 or greater')
-    if (m < 2):
-        sys.exit('# clusters must be 2 or greater')
-    if (q < 3):
-        sys.exit('# data point per cluster must be 3 or greater')
-    if (r < q):
-        sys.exit('Maximum # data point per cluster must be greater than r')
-    s = 1000 * m
-    testgen.generate(p, m, q, r, s)
+    if ((d < 1) or (m < 2) or (q < 3) or (r < q)):
+        sys.exit('invalid values for the arguments')
+    s = 1000 * m # the value in each dimension is between (-s, s)
+    # set the names of the output files
+    testgen.testgen(t, d, m, q, r, s, output1, output2)
 
