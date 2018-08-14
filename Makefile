@@ -18,7 +18,7 @@ clean:
 	/bin/rm -f *.out *.pdf *.toc *.ind settings.tex
 	/bin/rm -f $(BOOK).bbl $(BOOK).blg $(BOOK).bib.bak
 
-view:
+view: book # create the latest version
 	./view.sh $(BOOK).pdf
 
 
