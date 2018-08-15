@@ -1,3 +1,10 @@
+
+\section{Determine the Value of $k$}
+
+One major question of using the {\it k-mean} clustering method is to
+determine the value of $k$.
+
+
 \section{Application K-Mean}
 
 The {\it k-mean} algorithm seems relatively simple. Is it actually useful?
@@ -20,14 +27,25 @@ It is common that the data needs to be ``cleaned'' before sending to a
 clustering program.  For example, if you want to decide the locations
 of pizza stores, you may want to exclude the customers that are too
 far away from the other customers. Maybe you want to exclude the
-locations that are, say, more than 20 km away from all the other
+locations that are, say, more than 10 km away from all the other
 customers.  Maybe you also want to consider how often customers order
 deliveries and give frequent customers larger weights so that the
 stores are closer to these customers.  The same thinking can be
 applied to selecting ATM locations: maybe you want to give the
-customers that have high account balances. 
+customers that have high account balances.
 
 
+Such ``data cleaning'' usually requires human judgement. In the
+example of deciding pizza stores' locations, should the customers be
+excluded if they are at least 10km away from all the other customers?
+Why should it be 10km? Why not 5, or 8, or 15km?  If you want to
+include the customers that order deliveries often even though they
+live more than 10km away, how do you define ``often''?  Is more than
+once per week considered often? Or more than twice per week?  Is one
+week too short? Instead, you prefer to consider ordering more than
+five times per month?  Using the {\it k-mean} method, or any machine
+learning method, is not as simple as throwing data into a program and
+get meaningful results effortlessly.
 
 
 % Chapter~\ref{ch:clusterlimit} will explain some other factors for consideration.
