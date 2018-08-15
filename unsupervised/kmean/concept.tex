@@ -35,7 +35,7 @@ coupons and programming the checkout machines to recognize these many
 types of coupons.  Instead, the store wants to provide only a few (say
 10) types of coupons.  The store wants to group the customers based on
 what they bought together.  For example, if a customer has bought
-shirts, shoes, and a sweather together, this customer is given a
+shirts, shoes, and a sweater together, this customer is given a
 coupon for clothes.  If another customer has bought a desk, a dining
 table, and four chairs, this customer is given a coupon for furniture.
 If a third customer has bought a tie and shoes, this customer also
@@ -66,7 +66,7 @@ other pieces of data.  \index{unsupervised learning}
 
 Consider the department store coupon problem again. Suppose the store
 decides to issue exactly ten types of coupons.  The problem becomes
-dividing the customers into ten groups based on their puchase history.
+dividing the customers into ten groups based on their purchase history.
 This section describes the {\it k-mean clustering algorithm}; here,
 $k$\marginnote{An obvious question is how to decide the value of
   $k$. This book will discuss that later.}  is a number assigned to
@@ -77,14 +77,14 @@ understand what this method wants to accomplish.
 Suppose there are $n$ data points: $x_1$, $x_2$, ..., $x_n$. Each data
 point is a high-dimensional vector.  For example, $x_1 = <1, 0, 0, 3,
 5, 0, 0, 2>$ means that in the past twelve months the first customer
-has bought one refrigerator, no waser, no dryer, three jackets, five
+has bought one refrigerator, no washer, no dryer, three jackets, five
 shirts, no shoes, no pants, and 2 sweaters.  If $x_2 = <0, 1, 1, 0, 0,
 1, 0, 0>$ means the second customer has bought no refrigerator, one
-waser, one dryer, no jackets, no shirts, one pair of shoes, no pants,
+washer, one dryer, no jackets, no shirts, one pair of shoes, no pants,
 and no sweater.  We want to group these $n$ data points into $k$
 non-overlapping clusters: $C_1$, $C_2$, ..., $C_k$. Obviously $k$ must
 not exceed $n$. In reality, $k$ is usually must smaller than $n$,
-i.e., $k \ll n$.  Each cluser is a set.  \marginnote{In this book, a
+i.e., $k \ll n$.  Each cluster is a set.  \marginnote{In this book, a
   vector uses a lower case letter such as $x$. A set uses an upper
   case letter such as $C$.} The following properties must be
 satisfied:
@@ -139,7 +139,7 @@ large as possible.
 \index{optimization problem}
 
 How is $\mathds{D}$ defined?  It can be defined in many ways. One commonly
-used definition is the sum of pairwise Euclidean disance:
+used definition is the sum of pairwise Euclidean distance:
 \index{Euclidean distance}
 
 
@@ -194,7 +194,7 @@ options is
 k^n - (k-1)^n - (k -2) ^ n ... - 1^n = k^n - \underset{i = 1}{\overset{k-1} \sum} (k-i)^n.
 \end{equation}  
 
-Another way to calculte the number of possible solution is as follows.
+Another way to calculate the number of possible solution is as follows.
 We first select $k$ out of the $n$ data points to as the first data
 point in each cluster of the $k$ clusters. There are $\binom{n}{k}$
 ways to do that.  For the remaining $n-k$ data points, each can be
@@ -249,6 +249,7 @@ step of the k-mean algorithm:
       \EndFor
       \Until No data point changes clusters
     \end{algorithmic}
+    \label{algorithm:kmean}
 \end{algorithm}
 
 A cluster's centroid is  the center of the data points assigned to this cluster.

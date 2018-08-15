@@ -74,3 +74,12 @@ def kmean(filename, kval):
     # print ('+++++++++++++++++++++++++++++++')
     for dpindex in range(0, numdp):
         dataArray[dpindex].printData()
+    '''
+    # calculate the number of data points in each cluster
+    clustersize = [0] * kval
+    for dpindex in range(0, numdp):
+        clu = dataArray[dpindex].getCluster()
+        clustersize[clu] = clustersize[clu] + 1
+    for clu in range (kval):
+        print ('clustersize[', clu, '] = ', clustersize[clu])
+    '''

@@ -12,7 +12,8 @@ def testgen(t, d, m, q, r, s, output1, output2):
     span = 500
     center = -s
     if (t == True):
-        span = 2000
+        # span = 1000
+        span = s
     cl = 1
     for cl in range (0, m):
         n = random.randint(q, r)
@@ -26,7 +27,7 @@ def testgen(t, d, m, q, r, s, output1, output2):
                 line = line + str(x) + ' '
             fout1.write(line + '\n')
             fout2.write(line + ' ' + str(cl) + '\n')
-        center = center + 2000
+        # center = center + 2000
     fout1.close()
     fout2.close()
 
