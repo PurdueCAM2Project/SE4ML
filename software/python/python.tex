@@ -144,18 +144,25 @@ SayHi in the current directory, containing:
 Then set SayHi's execute permissions and execute it:
 
 \begin{verbatim}
-chmod a+x SayHi
+chmod a+x SayHi.py
 \end{verbatim}
 
 \begin{verbatim}
-./SayHi.py
+$ ./SayHi.py
+Hello
+\end{verbatim}
+
+You can also run the script \emph{explicitly} with Python:
+
+\begin{verbatim}
+$ python3 SayHi.py
 Hello
 \end{verbatim}
 
  is a
 comment to the shell, the command interpreter on Linux. It tells the
 shell that the way to execute this file is to execute the program in
-file \emph{/usr/bin/python} , and pass it the rest of the file as its
+file \texttt{/usr/bin/python} , and pass it the rest of the file as its
 input. The print statement tells Python to write out the string Hello on
 the standard output, which will write it to you. The \emph{print} is
 required when Python is executing a script in a file. When you are
