@@ -13,8 +13,7 @@ Here is a high-level look at the
 features of Python, for those with a background in programming
 languages.
 
-Scripting
-
+\paragraph{Scripting} 
 Python is a scripting language.
 This loosely means that you do not have to compile Python programs;
 Python can execute them directly. In fact, you can type lines directly
@@ -22,8 +21,7 @@ into the Python interpreter and have it execute them interactively.
 Python does compile programs into code it interprets, but it will handle
 the compilation itself, without troubling you.
 
-Nondeclarative
-
+\paragraph{Nondeclarative}
 Python programs consist of
 executable statements. They don't have declarations. In most languages,
 you declare a function; in Python, you execute a statement that creates
@@ -32,15 +30,11 @@ call a function by giving its name and an argument list. The Python call
 looks exactly the same, but instead of the name of the function, you
 specify the name of the variable containing the function as its value.
 
-Typeless
-
- or
-\emph{dynamically typed} language. That means that variables do not have
-types; values have types. Variables are not declared. A value of any
+\paragraph{Typeless or dynamically typed language} That means that variables do not have
+static (declared)types; values have types. Variables are not declared. A value of any
 type may be assigned to any variable.
 
-High-Level
-
+\paragraph{High-Level}
 Python is a high-level language. It
 has high-level data structures built into the language, such as
 dictionaries that allow you to associate values with objects. As of
@@ -52,8 +46,7 @@ Older versions of Python also deallocate objects automatically with a
 reference count scheme, which will not reclaim storage of circularly
 linked, inaccessible structures.
 
-Modular
-
+\paragraph{Modular}
 Python programs are organized as
 collections of modules kept in libraries. Each module is kept in a
 separate file, and the libraries in directories. A good programming
@@ -62,8 +55,7 @@ modules as possible and to divide the code you do write into
 general-purpose modules. These modules can be debugged individually and
 can be reused in other programs.
 
-Object-Oriented
-
+\paragraph{Object-Oriented}
 Python has facilities that allow
 object-oriented programming. It has classes and inheritance, as any
 proper object-oriented programming language should. But Python is not
@@ -71,8 +63,7 @@ perfectly object oriented. Python does not provide private or otherwise
 restricted scopes for names. The information-hiding aspects of
 object-oriented programming are on the honor system.
 
-With Operator Declarations
-
+\paragraph{With Operator Declarations}
 Python allows you to create
 functions for the built-in operators, to be used when the operators are
 applied to instances of certain classes. This allows you to implement
@@ -80,8 +71,7 @@ abstract data types, new types of objects with their own set of
 operators. The operators include subscripting operators, so you can
 implement new types of objects that behave like arrays.
 
-With Metaprogramming Facilities
-
+\paragraph{With Metaprogramming Facilities}
 What Python calls metaprogramming,
 other languages refer to as introspection or reflection. The program
 itself can examine and modify its interpreter's own state and components
@@ -93,30 +83,30 @@ running program under program control.
 
 \paragraph{Interactive Use}
 \label{interactive-use}
-
 You can execute Python from the
 command line in a command window. It will come up with a greeting and a
-command prompt ( \emph{\textgreater{}\textgreater{}\textgreater{}} ):
+command prompt (\verb">>>").~\footnote{Python is easy to run on Linux, OS X, and Windows. For Windows, we recommend installing Windows Subsystem for Linux to get a complete Linux shell environment. To be covered in preliminaries section.}
 
 %\paragraph[{[}user@hostname
 %user{]}python]{}user@hostname
 %user{]}python}{{[}user@hostname tc{]}python}}\label{tctclinux-tcpython}
 
-Python 1.5.2 (\#0, Apr 13 1999,
-10:51:12) {[}MSC 32 bit (Intel){]} on win32
-
-Copyright 1991-1995 Stichting
-Mathematisch Centrum, Amsterdam
-
+\begin{verbatim}
+$ python
+Python 3.6.5 (default, Apr  1 2018, 05:46:30) 
+[GCC 7.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+\end{verbatim}
 
 You type Python statements at the
 command prompt, and Python executes them immediately. If you type an
 expression, Python will evaluate it and type out the value.
 
-
-12+14+20
-
+\begin{verbatim}
+>>> 12+14+20
 46
+\end{verbatim}
 
 We will use the command interpreter
 to try out Python features to show how they work.
@@ -125,12 +115,11 @@ Python statements can extend beyond
 the end of a line, in which case the interpreter will give a different
 prompt (. . .) for the continuation:
 
-
-(1+2
-
- )*3
-
+\begin{verbatim}
+>>> (1+2
+...   )*3
 9
+\end{verbatim}
 
 Python can't always figure out
 that you wish to continue a statement to another line. The way you force
