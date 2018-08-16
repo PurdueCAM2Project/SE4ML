@@ -1,30 +1,3928 @@
 \chapter{Introduction to Python}
 
+\def\tightlist{}
 
-In this chapter, we will examine the basic facilities of the Python programming language, and go on to the more advanced features in the next.~\footnote{This material has been adapted from Web Programming in Python by Thiruvathukal, Christopher, and Shafaee, for which Thiruvathukal was able to revert rights to himself and his original co-authors. Hereafter it will be released under the open source licensing terms of this book in progress.}
+In this chapter, we will
+examine the basic facilities of the Python programming language, and go
+on to the more advanced features in the next.
 
-\section{Characteristics of Python}
+\subsection{Characteristics of Python}
+\label{characteristics-of-python}
 
-Here is a high-level look at the features of Python, for those some previous background in programming.
+Here is a high-level look at the
+features of Python, for those with a background in programming
+languages.
 
-\paragraph{Scripting}
-Python is a scripting language. This loosely means that you
-do not have to compile Python programs; Python can execute them
-directly. In fact, you can type lines directly into the Python interpreter~\footnote{also known as a REPL, for read, evaluate, and print loop}
-and have it execute them interactively. Python does compile programs
-into code it interprets, but it will handle the compilation itself, without
-troubling you.
+Scripting
 
-\paragraph{Nondeclarative}
-Python programs consist of executable statements.
-Python doesn't have declarations. In most languages, you declare a function;
-in Python, you execute a statement that creates a function object
-and assigns it to a variable. In other languages, you call a function by
-giving its name and an argument list. The Python call looks exactly the
-same, but instead of the name of the function, you specify the name of
-the variable containing the function as its value.
+Python is a scripting language.
+This loosely means that you do not have to compile Python programs;
+Python can execute them directly. In fact, you can type lines directly
+into the Python interpreter and have it execute them interactively.
+Python does compile programs into code it interprets, but it will handle
+the compilation itself, without troubling you.
 
-\section{Stay Tuned}
+Nondeclarative
 
-More to come. I am converting this text from FrameMaker. This was done via Google Keep and its OCR to grab text from any image.
+Python programs consist of
+executable statements. They don't have declarations. In most languages,
+you declare a function; in Python, you execute a statement that creates
+a function object and assigns it to a variable. In other languages, you
+call a function by giving its name and an argument list. The Python call
+looks exactly the same, but instead of the name of the function, you
+specify the name of the variable containing the function as its value.
 
+Typeless
+
+ or
+\emph{dynamically typed} language. That means that variables do not have
+types; values have types. Variables are not declared. A value of any
+type may be assigned to any variable.
+
+High-Level
+
+Python is a high-level language. It
+has high-level data structures built into the language, such as
+dictionaries that allow you to associate values with objects. As of
+Python2, Python has had a garbage collector. You allocate objects
+whenever you need them, but you don't have to delete them. When there is
+no way left for the program to access the object, when there are no
+pointers left that point to it, Python automatically frees its storage.
+Older versions of Python also deallocate objects automatically with a
+reference count scheme, which will not reclaim storage of circularly
+linked, inaccessible structures.
+
+Modular
+
+Python programs are organized as
+collections of modules kept in libraries. Each module is kept in a
+separate file, and the libraries in directories. A good programming
+practice, when writing larger programs, is to use as many preexisting
+modules as possible and to divide the code you do write into
+general-purpose modules. These modules can be debugged individually and
+can be reused in other programs.
+
+Object-Oriented
+
+Python has facilities that allow
+object-oriented programming. It has classes and inheritance, as any
+proper object-oriented programming language should. But Python is not
+perfectly object oriented. Python does not provide private or otherwise
+restricted scopes for names. The information-hiding aspects of
+object-oriented programming are on the honor system.
+
+With Operator Declarations
+
+Python allows you to create
+functions for the built-in operators, to be used when the operators are
+applied to instances of certain classes. This allows you to implement
+abstract data types, new types of objects with their own set of
+operators. The operators include subscripting operators, so you can
+implement new types of objects that behave like arrays.
+
+With Metaprogramming Facilities
+
+What Python calls metaprogramming,
+other languages refer to as introspection or reflection. The program
+itself can examine and modify its interpreter's own state and components
+while it is running. This is useful for debugging and for changing the
+running program under program control.
+
+\subsection{Executing Programs}
+\label{executing-programs}
+
+\paragraph{Interactive Use}
+\label{interactive-use}
+
+You can execute Python from the
+command line in a command window. It will come up with a greeting and a
+command prompt ( \emph{\textgreater{}\textgreater{}\textgreater{}} ):
+
+%\paragraph[{[}user@hostname
+%user{]}python]{}user@hostname
+%user{]}python}{{[}user@hostname tc{]}python}}\label{tctclinux-tcpython}
+
+Python 1.5.2 (\#0, Apr 13 1999,
+10:51:12) {[}MSC 32 bit (Intel){]} on win32
+
+Copyright 1991-1995 Stichting
+Mathematisch Centrum, Amsterdam
+
+
+You type Python statements at the
+command prompt, and Python executes them immediately. If you type an
+expression, Python will evaluate it and type out the value.
+
+
+12+14+20
+
+46
+
+We will use the command interpreter
+to try out Python features to show how they work.
+
+Python statements can extend beyond
+the end of a line, in which case the interpreter will give a different
+prompt (. . .) for the continuation:
+
+
+(1+2
+
+ )*3
+
+9
+
+Python can't always figure out
+that you wish to continue a statement to another line. The way you force
+it to continue to the next line is to put a backslash, \textbackslash{},
+as the last character on a line. This is customary in Unix-like systems.
+It incorporates the following character, the newline, into the current
+line as white space.
+
+\paragraph{Scripts in Files}
+
+You can also place programs in
+files and execute them from there. For example, you can edit a file
+SayHi in the current directory, containing:
+
+\#!/usr/bin/env python
+
+print `Hello'
+
+Then set SayHi's execute
+permissions and execute it:
+
+chmod a+x SayHi
+
+./SayHi
+
+Hello
+
+ is a
+comment to the shell, the command interpreter on Linux. It tells the
+shell that the way to execute this file is to execute the program in
+file \emph{/usr/bin/python} , and pass it the rest of the file as its
+input. The print statement tells Python to write out the string Hello on
+the standard output, which will write it to you. The \emph{print} is
+required when Python is executing a script in a file. When you are
+typing directly to it, Python knows to write out the values of
+expressions, but when it is executing scripts, it assumes you do not
+want the value of every expression you execute cluttering up your
+output, so it will not write out the values of expressions.
+
+\subsection{Arithmetic Expressions}
+
+\paragraph{Arithmetic Types}
+
+Python has four built-in arithmetic
+data types:
+
+\begin{enumerate}
+\tightlist
+\item
+   --fixed sized (at
+  least 32-bit) signed integers
+\item
+   --variably
+  sized, unbounded precision signed integers
+\item
+   --floating point
+  approximations to real numbers
+\item
+   --complex numbers
+  (with real and imaginary parts) for engineering calculations. We will
+  not consider complex numbers further, since they are not typically
+  relevant to Web enterprise applications.
+\end{enumerate}
+
+Integer literals can be written in
+decimal, octal, or hexadecimal (base 16) format using the same syntax as
+in C or C++:
+
+\begin{itemize}
+\tightlist
+\item
+  Octal integers begin with 0 and
+  contain only octal digits (0-7). Strangely, that means zero is written
+  in octal.
+\item
+  Decimal integers begin with a
+  decimal digit other than zero and contain only decimal digits.
+\item
+  Hexadecimal integers begin with
+  0x or 0X. The prefix is followed by a string of hexadecimal digits,
+  0-9, a-f, A-F. The letters A, B, . . . F, of course, represent the
+  values, 10, 11, . . . 15.
+\end{itemize}
+
+
+20
+
+20
+
+
+020
+
+16
+
+
+0x20
+
+32
+
+Long integers are written as an
+integer followed with an L (in upper- or lowercase, but lowercase is too
+hard to distinguish from the digit one). The difference between integer
+and long integer is that integers are fixed sized. Integer arithmetic
+will overflow if the results get too large. Long integers occupy as much
+storage as they need. Long integer arithmetic does not overflow. For
+example, 2 \emph{32} cannot be represented in 32 bits. So here is what
+happens when we try to take two to the 32nd power, written \emph{2**32}
+in Python:
+
+
+2**32
+
+Traceback (innermost last):
+
+ File
+``\textless{}stdin\textgreater{}'', line 1, in ?
+
+OverflowError: integer pow()
+
+
+2L**32
+
+4294967296L
+
+(This example also shows Python's
+response to an error.)
+
+Since integers occupy single
+machine words, computers perform integer arithmetic very fast. Long
+integer arithmetic typically requires much more time.
+
+Floating point numbers are written
+with a decimal point or an exponent, or both. For example: \emph{.2,
+2.0, 20., 2000e-1, 2E3} .
+
+Python allows mixed-mode
+arithmetic, as we saw above with \emph{2L**32} . If the two operands of
+an arithmetic operator have different types, Python will convert them to
+a common type. Python converts the operand whose type has the smaller
+range of values to the type of the operand with the wider range of
+values. (This is called a widening coercion: The ``narrower'' operand is
+forced to be the type of the wider.) So, if they are mixed in
+expressions, integers will be converted to long integers or floats, and
+long integers will be converted to floats. The conversions to float may
+lose some low-order digits.
+
+
+Table 2-1 is a complete list of
+Python operators and their precedence levels. Some of the operators
+won't be discussed until later sections; we'll refer to the table then.
+The operators with higher precedence levels are performed before those
+with lower precedence.
+
+The arithmetic operators in Python
+are much the same as those in C or C++. They are at precedence levels 9
+through 12. The bit-wise operators (ANDs, ORs, shifts) are mostly at
+levels 5 through 8. Since they are not used much in Web enterprise
+applications, we won't discuss them further.
+
+We will discuss the logical and
+comparison operators later when we discuss \emph{while} loops.
+
+\begin{enumerate}
+\tightlist
+\item Operators and Precedence Levels
+\end{enumerate}
+
+Precedence
+
+Operators
+
+Comments
+
+1
+
+
+
+This is the logical OR operation.
+It will return true if either \emph{x} or \emph{y} is true, i.e.
+non-zero. Like the \emph{\textbar{}\textbar{}} operator in C, it is
+short-circuited: It will not evaluate \emph{y} if \emph{x} determines
+the value of the expression. It first evaluates \emph{x} and returns the
+value of \emph{x} if \emph{x} is not zero. If \emph{x} is zero, it
+evaluates and returns the value of \emph{y} . By ``x is zero'' we mean
+that it would be considered zero in an \emph{if} or \emph{while}
+expression. Other values than a number zero also count as zero.
+
+2
+
+
+
+This is the logical AND operation.
+It will return true if both \emph{x} and \emph{y} are true, i.e.
+non-zero. Like the \emph{\&\&} operator in C, it is short-circuited: It
+will not evaluate \emph{y} if \emph{x} determines the value of the
+expression. It first evaluates x and returns \emph{x} if \emph{x} is
+zero. If \emph{x} is not zero, it evaluates and returns the value of
+\emph{y} . By ``x is zero'' we mean that it would be considered zero in
+an \emph{if} or \emph{while} expression. Other values than a number zero
+also count as zero.
+
+3
+
+
+
+This is the logical NOT operator.
+It returns 1 if \emph{x} is zero; it returns 0 if \emph{x} is anything
+else.
+
+4
+
+
+
+
+
+
+
+
+
+
+
+ \emph{x != y x
+\textless{}\textgreater{} y}
+
+
+
+
+
+
+
+
+
+The relational operators are much
+like they are in other languages. Operators \emph{!=} and
+\emph{\textless{}\textgreater{}} both mean not equal.
+
+
+and \emph{!=} , can be applied to structured objects, as we will discuss
+later. They attempt to find out if the structured objects have equal
+components.
+
+Operators x is y and x is not y
+test whether two names reference the same object, so they will be much
+faster than == and != for structured objects, but they don't perform the
+same test.
+
+We will discuss x in y and x not
+in y later, when we discuss sequence types.
+
+5
+
+
+
+This is the bitwise OR operation,
+ORing the corresponding bits in two integers.
+
+6
+
+
+
+This is the bitwise EXCLUSIVE-OR
+(XOR) operation, XORing the corresponding bits in two integers.
+
+7
+
+
+
+This is the bitwise AND operation,
+ANDing the corresponding bits in two integers.
+
+8
+
+
+
+ \emph{x
+\textgreater{}\textgreater{} y}
+
+These are the shift operators.
+They apply to integers or long integers. The bits in \emph{x} are
+shifted left ( \emph{\textless{}\textless{}} ) or right (
+\emph{\textgreater{}\textgreater{}} ) the number of positions indicated
+by \emph{y} . The right shifts are arithmetic: The sign bit will be
+shifted in at the top, preserving the sign of the \emph{x} operand.
+
+9
+
+
+
+
+
+Addition and subtraction. Operator
+\emph{+} also performs concatenation on sequences, as we will see later.
+
+10
+
+
+
+
+
+
+
+Multiplication, division, and
+modulus (or remainder). Operator \emph{\%} will also work with floating
+point numbers. Operator \emph{*} also applies to sequence types, and
+operator \emph{\%} has a special function for strings. We will look at
+these other uses later.
+
+11
+
+
+
+
+
+
+
+Negation, bitwise complement, and
+unary plus (no operation for numbers).
+
+12
+
+
+
+ .
+
+13
+
+
+
+
+
+
+
+
+
+Function call, attribute access,
+subscription, and slicing. We will discuss these later.
+
+14
+
+
+
+
+
+
+
+
+
+These are used to construct
+built-in structured objects: tuples, lists, directories, and strings. We
+will discuss them later.
+
+\subsection{Built-In Arithmetic Functions}
+\label{built-in-arithmetic-functions}
+
+Python has a number of built-in
+functions you can call. Arithmetic functions include those shown in
+\href{chap2.html\#32777}{See Built-In Arithmetic Functions.}. Other
+mathematical functions can be found in module \emph{math} . Complex
+arithmetic functions are in module \emph{cmath} .
+
+\begin{enumerate}
+\tightlist
+\item
+  Built-In Arithmetic Functions (Continued)
+\end{enumerate}
+
+Function call
+
+Explanation
+
+
+
+ the absolute
+value of \emph{x}
+
+
+
+ and
+assigns \emph{v} a negative value if \emph{x\textless{}y} , zero if
+\emph{x==y} , and positive if \emph{x\textgreater{}y}
+
+
+
+Determines the common type for
+\emph{x} and \emph{y} required for arithmetic operators then assigns
+\emph{x} converted to that type to \emph{u} and \emph{y} converted to
+that type to \emph{v}
+
+
+
+ are
+integers or long integers, it assigns \emph{u=x/y} and \emph{v=x\%y} .
+If \emph{x} and \emph{y} are floating point numbers, it assigns
+%\includegraphics{chap2-2.gif}
+, the largest integer less than or equal
+to \emph{x/y,} and
+%\includegraphics{chap2-3.gif} .
+
+
+
+ the value of
+\emph{x} converted to a floating point value
+
+
+
+ the value of
+\emph{x} converted to an integer value
+
+
+
+ the value of
+\emph{x} converted to a long integer value
+
+ \emph{v=complex(x)\\
+v=complex(x,y)}
+
+ to a complex
+number, or \emph{x} to the real part and \emph{y} to the imaginary part
+of a complex number
+
+
+
+ with
+the largest value
+
+
+
+ with
+the smallest value
+
+
+
+ the value of
+\emph{x} raised to the \emph{y} power, \emph{x**y}
+
+
+
+ the value of
+\emph{x} raised to the \emph{y} power modulus \emph{z} , i.e.,
+\emph{x**y\%z}
+
+
+
+ the floating
+point number \emph{x} rounded to have \emph{n} digits after the decimal
+point. If you omit \emph{y} , it defaults to zero.
+
+\subsection{Assignments and Variables}
+\label{assignments-and-variables}
+
+Variables are not declared. You
+create a variable simply by assigning a value to it. The simplest form
+of an assignment is:
+
+variable = expression
+
+For example
+
+
+a=10
+
+
+a
+
+10
+
+
+b=a+2
+
+
+b
+
+12
+
+Variable names and other
+identifiers in Python are composed of letters, digits, and underscore
+characters. The first character of the identifier must not be a digit.
+The letters are the ISO-Latin characters A-Z and a-z; Python has not yet
+been fully internationalized.\protect\hyperlink{pgfId-115789}{1} Any of
+these is okay: \emph{\_1} , \emph{a} , \emph{a\_} , \emph{pi3\_14159} .
+
+You can also do several assignments
+on the same line; for example let's swap the values of \emph{a} and
+\emph{b} :
+
+
+a,b
+
+(10, 12)
+
+
+a,b=b,a
+
+
+a,b
+
+(12, 10)
+
+We will look at this again later.
+Note also that we can list more than one expression on a line in
+interactive mode and Python will write out all their values. Both the
+multiple assignments and the multiple values on a line use tuples, a
+kind of sequence which we will discuss in
+\href{chap2.html\#92836}{Tuples}.
+
+\subsection{Creating Functions}
+\label{creating-functions}
+
+You may create a function and
+assign it to a variable with the \emph{def} statement, for example:
+
+
+def diff(x,y):
+
+ return abs(x-y)
+
+
+
+
+diff(-10,5)
+
+15
+
+ that
+returns the absolute difference between values \emph{x} and \emph{y} .
+There are several things to note about this function creation:
+
+\begin{enumerate}
+\tightlist
+\item
+   line introduces
+  the code for the function. It gives the name we will call the
+  function, \emph{diff} , and the argument list. The function will be
+  called with two arguments, \emph{x} and \emph{y} . The \emph{def} line
+  is terminated with a colon.
+\item
+   , is not
+  exactly the name of the function. It is a variable that is assigned
+  the function as a value. It is an assignment as much as assigning
+  \emph{diff=value} would be, and indeed, \emph{diff} can be reassigned.
+\item
+  The body of the function is
+  indented. All statements in the same group of statements must be
+  indented the same amount. Soon we'll look at \emph{while} statements,
+  whose bodies must be indented beneath the \emph{while} .
+\item
+  The function returns a value with
+  a \emph{return} statement.
+\item
+  
+  statement, the function does not return a value, and the call of the
+  function should be used only as a statement, not within an expression.
+\item
+  A function is called by the form
+  \emph{f(args)} where \emph{f} is a variable containing the function
+  and \emph{args} are the arguments being passed in.
+\end{enumerate}
+
+When you use a variable name in a
+function, Python will look in three places to try to find what it means:
+
+\begin{enumerate}
+\tightlist
+\item
+  The function's local variables.
+  The arguments are already placed there; other variables assigned
+  values in the function are also placed there.
+\item
+  The module variables. These are
+  the variables assigned values in the interactive session or in the
+  file that Python is executing.
+\item
+  The built-in names in the Python
+  system. For example, the function \emph{abs()} is a built-in name in
+  Python.
+\end{enumerate}
+
+The scopes are pictured in
+\href{chap2.html\#83458}{See Scopes for Names Known in a Function.}. The
+search for a name starts in the innermost scope and proceeds outward
+until the name is found or until there are no more scopes. To find the
+name referenced in a function, at most three scopes will be searched.
+When a variable is assigned a value in a function, its name will be
+placed in the local scope if it is not already there. For example, in
+\href{chap2.html\#83458}{See Scopes for Names Known in a Function.}, if
+the function looks up the value of \emph{x} , it will get 1, the value
+of variable \emph{x} in the function itself. The variable \emph{x} with
+a value 2 is in the global scope and is hidden by the local \emph{x} .
+If the function tries to look up \emph{y} , it won't find it in the
+local scope, but will find it in the module scope with a value 3.
+
+%\includegraphics{chap2-4.gif}
+
+\subsection{Modules}
+
+As we discussed in
+\href{chap2.html\#30113}{Scripts in Files}, you can put Python programs
+in files and execute them. However, the primary reason to put Python
+programs in files is to allow other Python programs to import and use
+the functions. A Python program that is used by other Python programs is
+called a \emph{module} .
+
+The way you access a module is by
+the \emph{import} statement:
+
+import moduleName
+
+ statement sees if
+the module has already been imported. If it hasn't been imported yet,
+Python finds the file that contains the module. It will have the name
+moduleName.py, and will be found in one directory in a list of
+directories (path). Python's built-in library of modules is on the path,
+so you can use all the modules in Python's library without difficulty.
+
+Whether or not the module gets
+loaded, the \emph{import} statement assigns a module object to a
+variable in the local scope that has the same name as the module, i.e.,
+it behaves the same way as an assignment statement. So
+
+import moduleName
+
+behaves like
+
+moduleName = moduleObject
+
+When Python loads a module, Python
+reads in the module's file executing the commands. The commands assign
+values to variables within the module's namespace that it puts the names
+in. These are available in the module object, so you can access the
+names defined in the module by the expression
+
+moduleName.variable
+
+For example, the module
+\emph{string} has a built-in function \emph{atof()} to convert strings
+to floating point numbers. It also has a string variable
+\emph{hexdigits} that contains all the hexadecimal digits. So,
+
+
+import string
+
+
+string.atof
+
+built-in function
+atof\textgreater{}
+
+
+string.atof(``314e-2'')
+
+3.14
+
+
+string.hexdigits
+
+`0123456789abcdefABCDEF'
+
+If you wanted to refer to the
+function by its own name directly, rather than prefixed by the module
+name, you could assign it to a local variable with the same name
+
+
+atof=string.atof
+
+
+atof(``314e-2'')
+
+3.14
+
+or you could just import the names
+you want from the module:
+
+
+from string import atof, hexdigits
+
+
+hexdigits
+
+`0123456789abcdefABCDEF'
+
+If you are using an interactive
+session to debug modules, you will have to reload the module after every
+change. You reload a module using the built-in \emph{reload()} function:
+
+reload(moduleObject)
+
+This will look up, load, and
+initialize the module. The new definitions of variables within the
+module will override the previous definitions. The module object will be
+changed in place, so all parts of the program that have variables
+pointing to that module (i.e., all that have imported it) will see the
+new definitions when referencing its attributes through the module name,
+moduleName . variable.
+
+However, there are problems that
+may force you to start a new interactive session. If you use the
+\emph{from-import} statement,
+
+from moduleName import name
+
+
+will have been done when the \emph{from-import} statement was executed
+and \emph{name} will have the value of \emph{moduleName.name} at that
+time. It won't automatically be updated. After reloading
+\emph{moduleName} , you will have to execute the \emph{from-import}
+again to have the new value of the attribute assigned to \emph{name} .
+If names from module \emph{A} are imported into module \emph{B} and you
+change module \emph{A} , you will need to reload module \emph{A} to get
+the new definitions and then reload module \emph{B} to assign the new
+definitions to local names. This can quickly get confusing.
+
+Python2 provides the ability to
+import modules and assign them to variables with different names (i.e.,
+not the name of the module), or import functions, classes, and variables
+from modules assigning them to local variables with different names. The
+syntax is
+
+import module as name
+
+from module import name1 as name2
+
+\subsection{Files}
+
+As with all programming languages,
+Python allows you to read and write files. Python uses file objects for
+the operations. You create a file object by calling the built-in
+function \emph{open()}
+
+f=open(name, mode)
+
+ string gives
+a path to the file and the \emph{mode} string indicates whether the file
+is to be read from or to be written. The \emph{mode} is a string. Here's
+a list of the modes:
+
+\begin{itemize}
+\tightlist
+\item
+   Open for reading.
+  This is the default.
+\item
+   Open for writing.
+  This will replace a current file with the same name.
+\item
+   Open for appending.
+  Data will be added to the end of a currently existing file.
+\item
+   Open for both
+  reading and writing.
+\end{itemize}
+
+
+parameter if you are opening the file for reading.
+
+File objects have methods for
+reading and writing and other operations. A method is a function
+attached to the object. The method has a syntax that differs a bit from
+regular functions. The object the method operates on precedes the
+function call, separated by a dot:
+
+object.function(args)
+
+This syntax has a couple of
+virtues:
+
+\begin{itemize}
+\tightlist
+\item
+  It makes clear which object the
+  method is operating on. Otherwise, the object would have to be one of
+  the arguments, and you couldn't be sure which.
+\item
+  It allows different kinds of
+  objects to have methods with the same name; the system can find the
+  correct one for the object. Many objects have similar operations. It
+  would be a pain to have to invent different names for those
+  operations, or to have to keep changing a single function to test what
+  kind of object it has been given and execute some specific code for
+  it.
+\end{itemize}
+
+There are three methods you
+especially need to know for files:
+
+\begin{enumerate}
+\tightlist
+\item
+   --Reads the
+  next line from a text file and returns it in a string. The string ends
+  with the line termination character or characters, on Linux the
+  newline character \emph{`\textbackslash{}n'} . Empty lines thus
+  consist of a single newline character. On end of file,
+  \emph{readline()} returns an empty string, \emph{''} .
+\item
+   --Writes
+  a string to the file. The \emph{string} is not made into a line, i.e.,
+  the newline character is not appended. If you want it, you will have
+  to write it yourself.
+\item
+   --Finishes
+  processing the file, either reading or writing it. All system
+  resources the file was using are freed up. No further methods can be
+  called for the file.
+\end{enumerate}
+
+We will present a complete list of
+the file operations in \href{chap4.html\#22958}{} of Chapter 4.
+
+\subsection{print Statement}
+\label{print-statement}
+
+ statement writes
+to the standard output. You can find the standard output file object in
+the \emph{sys} module, \emph{sys.stdout} . The form of the print
+statement is
+
+
+
+ ,
+
+The expressions are evaluated and
+converted into strings and written out with a blank between each pair.
+If the print statement does not end with a comma, the output line is
+terminated after the last expression is written (a newline character is
+written). If it does end in a comma, the line is not terminated, so the
+next print will continue to fill in the line.
+
+The expressions are optional. You
+use a print with no expressions to write out a newline.
+
+Python 2 allows you to specify a
+different file to write on. It begins \emph{print
+\textgreater{}\textgreater{} file} , thus:
+
+
+file, e1, \ldots{}.
+
+\subsection{while loops}
+\label{while-loops}
+
+\paragraph{while}
+\label{while-statement}
+
+ loop is
+
+while expression :
+
+ indented body
+
+ is evaluated
+to get a truth value. Python considers zero to be false and any non-zero
+value to be true. It considers empty strings (and other sequences) to be
+false, nonempty ones, true. If the expression evaluates to true, the
+body of the loop is executed once and the loop is restarted. As soon as
+the expression evaluates false, Python stops evaluating the loop and
+goes on to the statement following it.
+
+The statements in the body of the
+loop must be indented a uniform amount of space beneath the \emph{while}
+statement proper. Of course, if any of the contained statements are
+\emph{while} statements, their bodies must be indented further.
+
+\paragraph{Example: listfile}
+\label{example-listfile}
+
+Here is an example of the use of a
+\emph{while} statement in listing a text file. If you want to follow
+along, you will need the Python interpreter to be executing in the same
+directory as your code files. You can get Python to your directory by
+
+\endinput
+
+\emph{import os}
+
+
+\emph{os.chdir(``directory'')}
+
+ in
+module \emph{os} changes the current working directory. Now, suppose the
+following code is in a file \emph{listfile.py} :
+
+def listfile(name):
+
+ f=open(name)
+
+ L=f.readline()
+
+ while L :
+
+ print L,
+
+ L=f.readline()
+
+ f.close()
+
+We can import it and use it to list
+itself:
+
+
+\emph{from listfile import listfile}
+
+
+\emph{listfile(``listfile.py'')}
+
+def listfile(name):
+
+ f=open(name)
+
+ L=f.readline()
+
+ while L :
+
+ print L,
+
+ L=f.readline()
+
+ f.close()
+
+The code should be pretty obvious
+except for two points.
+
+\begin{enumerate}
+\tightlist
+\item
+   : Python
+  considers an empty string to be false and a nonempty string to be
+  true. That makes this loop easy, since end-of-file results in
+  \emph{readline()} returning an empty string. In general, structured
+  objects can sometimes be considered equivalent to zero for logical
+  tests. We'll try to point out these cases as we discuss them. Here,
+  while we are discussing logical operators, we will just say zero and
+  non-zero, or false and true, and not keep repeating that some things
+  other than the number zero are also considered to be false.
+\item
+   , The final comma
+  prevents Python from inserting a newline following the string that has
+  been written. Since the lines returned by \emph{readline()} all are
+  terminated by newlines anyway, they come out single-spaced. If the
+  comma weren't there, the lines would come out double-spaced.
+\end{enumerate}
+
+\paragraph[Relational
+Expressions]{}Relational
+Expressions}{Relational Expressions}}\label{relational-expressions}
+
+
+statements most commonly use relational operators to compare operands.
+Since there is no logical or Boolean data type in Python, and Python is
+like C in using zero for false and non-zero for true, relational
+operators return numeric values 0 and 1. For example,
+
+
+\emph{1\textless{}2}
+
+1
+
+
+\emph{1\textgreater{}2}
+
+0
+
+Unlike most other languages, Python
+allows relational operators to be cascaded:
+
+
+\emph{-2 \textless{} -1 \textless{} 0}
+
+1
+
+
+\emph{(-2 \textless{} -1) \textless{} 0}
+
+0
+
+The first of the two expressions is
+equivalent to \emph{-2 \textless{} -1 and -1 \textless{} 0} . Python
+duplicates the value between the two operators and does both comparisons
+separately. In the second expression, \emph{(-2 \textless{} -1)} yields
+\emph{1} , then \emph{1\textless{}0} yields \emph{0} .
+
+\paragraph[Logical
+Expressions]{}Logical
+Expressions}{Logical Expressions}}\label{logical-expressions}
+
+Python provides the usual three
+logical operators, \emph{or} , \emph{and} , and \emph{not} , at the low
+precedence levels, 1, 2, and 3. See \href{chap2.html\#29797}{See
+Operators and Precedence Levels.}.
+
+\begin{enumerate}
+\tightlist
+\item
+  
+  --The lowest precedence Python operator is \emph{or} . The expression
+  \emph{x or y} is short-circuited: It will not evaluate \emph{y} if
+  \emph{x} determines the value of the expression. It first evaluates
+  \emph{x} and returns the value of \emph{x} if \emph{x} is not
+  considered false. If \emph{x} counts as
+  false,\protect\hyperlink{pgfId-123468}{2} it evaluates and returns the
+  value of \emph{y} . So the true value it may return is either the
+  value of \emph{x} or the value of \emph{y} .
+\item
+  
+  --The \emph{and} operator, like \emph{or} , is short-circuited: It
+  will not evaluate \emph{y} if \emph{x} determines the value of the
+  expression. It first evaluates \emph{x} and returns \emph{x} if
+  \emph{x} counts as false. If \emph{x} is true, it evaluates and
+  returns the value of \emph{y} . That has the effect of returning zero
+  if either \emph{x} or \emph{y} is zero. If neither \emph{x} nor
+  \emph{y} is zero, it returns the value of \emph{y} to represent true.
+\item
+   --The
+  \emph{not} operator, at precedence level 3, although a unary operator,
+  has a much lower precedence than the other unary operators at
+  precedence 12. In fact, it is a lot more useful at a low precedence
+  level. If it had a high precedence level, we would usually have to put
+  parentheses around its operand. It returns 1 if \emph{x} is zero; it
+  returns 0 if \emph{x} is anything else.
+\end{enumerate}
+
+\subsection[Lists]{}
+
+Lists in Python are like arrays in
+other languages. Actually, they are flex arrays, arrays whose size can
+change during program execution.
+
+Lists can be created with a
+display. Just list the values between opening and closing brackets:
+
+ ,
+\ldots{}, e \emph{n-1} {]}
+
+ is
+created. The expressions e \emph{0} , e \emph{1} , etc., are evaluated
+and their values placed in the list.
+
+In addition, Python 2 has a more
+sophisticated form of display, the list comprehension. We will discuss
+it later, after we've discussed the \emph{for-} and \emph{if-}
+statements it is based on.
+
+Like arrays, lists can be
+subscripted by following the list's name with the index of the item in
+brackets, thus
+
+
+\emph{L={[}``a'',``b'',``c''{]}}
+
+
+\emph{L{[}1{]}}
+
+`b'
+
+
+\emph{L{[}0{]}}
+
+`a'
+
+
+\emph{L{[}2{]}}
+
+`c'
+
+
+\emph{L{[}3{]}}
+
+Traceback (innermost last):
+
+ File
+``\textless{}stdin\textgreater{}'', line 1, in ?
+
+IndexError: list index out of range
+
+The positions in the list are
+numbered from zero, left to right. You can also assign to positions in a
+list
+
+
+\emph{L{[}1{]}=1}
+
+
+\emph{L}
+
+
+
+Notice that the items in a list do
+not need to be of the same data type. Python lists, like variables, are
+typeless. Also notice that Python is able to write out an entire list
+when you ask for it, certainly more convenient than the arrays in some
+languages that you have to write out in a loop.
+
+You can check the length of a list
+with the \emph{len()} function:
+
+
+\emph{len(L)}
+
+3
+
+Often you will need a list with
+successive integers in it. Python has a built-in function,
+\emph{range()} , to give that to you.
+
+
+\emph{range(10)}
+
+
+
+
+\emph{range(-10,0)}
+
+-10, -9, -8, -7, -6, -5, -4, -3,
+-2, -1{]}
+
+ gives you a
+list of the \emph{j-i} integers from \emph{i} up to, but not including,
+\emph{j} . Call \emph{range(n)} is the same as \emph{range(0,n)} . Why
+``up to, but not including''? It is compatible with the indexing of
+lists, where a list of length n has indices 0 through n-1.
+
+You can also create a list of
+values some step size apart, not just sequential, by specifying the step
+size as the third argument to \emph{range()} :
+
+
+\emph{range(0,10,2)}
+
+
+
+If you are using lists as arrays,
+you obviously have to be able to create a list of some length. The
+length you need may be computed as the program runs, so you obviously
+can't always use a list display. How do you create a list of length n?
+
+You use the replication operator,
+\emph{*} . Of course, this is the same as the multiplication operator.
+If one operand of the \emph{*} operator is a list, L, and the other is a
+number, \emph{n} , then \emph{L*n} concatenates \emph{n} copies of
+\emph{L} together.
+
+
+\emph{L}
+
+
+
+
+\emph{L*3}
+
+'a', 1, `c', `a', 1, `c', `a',
+1, `c'{]}
+
+
+\emph{2*L}
+
+
+
+A way to allocate an array of
+length 10 is
+
+
+\emph{ary={[}0{]}*10}
+
+
+\emph{ary}
+
+
+
+You can concatenate two lists by
+using the \emph{+} operator:
+
+
+\emph{L+{[}``d'',``e''{]}}
+
+
+
+You can compare two lists for
+identity or for equality. The \emph{is} operator compares two objects to
+see if they are identical, i.e., really the same object. The \emph{==}
+operator compares objects for equality. Two lists are considered equal
+if their contents are equal. The equality test can be a lot slower than
+the identity test.
+
+
+\emph{{[}1,2{]} is {[}1,2{]}}
+
+0
+
+These two displays create separate
+lists, so \emph{is} returns false, but the two lists are equal:
+
+
+\emph{{[}1,2{]} == {[}1,2{]}}
+
+1
+
+ test in
+Python1 uses a simple recursive search to test for equality. If you have
+a circularly linked structure, e.g. a list embedded within itself, the
+\emph{==} operator may crash your program. Python2 uses a more
+sophisticated algorithm, so it shouldn't be a problem.
+
+Other relational operators work on
+lists as well. They operate lexicographically. The comparison works left
+to right through the lists, comparing the elements at the same
+positions, until it finds elements that are unequal, whereupon it uses
+the relationship of those elements as the relationship of the lists, for
+example
+
+
+\emph{{[}1,2,3{]}\textless{}{[}1,4,3{]}}
+
+1
+
+
+\emph{{[}1,2,3{]}\textless{}{[}1,0,3{]}}
+
+0
+
+There are two special operators to
+test for list membership: \emph{x in y} reports true if \emph{x} is in
+the list \emph{y} and false otherwise; \emph{x not in y} reports just
+the opposite.
+
+
+\emph{2 in {[}1,2,3{]}}
+
+1
+
+
+\emph{2 not in {[}1,2,3{]}}
+
+0
+
+You can get a copy of a part of a
+list using slicing. Slicing is like subscripting, but it specifies a
+range of indices.
+
+
+\emph{r=range(10)}
+
+
+\emph{r}
+
+
+
+
+\emph{r{[}3{]}}
+
+3
+
+
+\emph{r{[}3:4{]}}
+
+
+
+
+\emph{r{[}3:6{]}}
+
+
+
+
+\emph{r{[}3:1{]}}
+
+
+
+Notice a few things:
+
+\begin{itemize}
+\tightlist
+\item
+   ,
+  returns the object that is at that position.
+\item
+  ,
+  returns a list.
+\item
+  The slice extends from the
+  starting index up to, but not including, the ending index.
+\item
+  If the ending index of a slice is
+  less than or equal to the starting index, slicing returns the empty
+  list.
+\end{itemize}
+
+You can use negative indices to
+indicate positions from the end of the list:
+
+
+\emph{r=range(10)}
+
+
+\emph{r{[}-1{]}}
+
+9
+
+
+\emph{r{[}-10{]}}
+
+0
+
+
+\emph{r{[}-3:-1{]}}
+
+
+
+If you leave out the start or the
+end positions when specifying a slice, they default to the beginning or
+the end of the list:
+
+
+\emph{r=range(10)}
+
+
+\emph{r{[}:5{]}}
+
+
+
+
+\emph{r{[}5:{]}}
+
+
+
+
+\emph{r{[}:{]}}
+
+
+
+ may seem
+pointless, but it is a way to make a copy of a list.
+
+You can assign to a slice of a list
+by specifying the slice on the left- hand side of an assignment and a
+list on the right-hand side.
+
+
+\emph{L}
+
+
+
+
+\emph{L{[}1:1{]}={[}'b'{]}}
+
+
+\emph{L}
+
+
+
+
+\emph{L{[}0:2{]}=L{[}1:3{]}}
+
+
+\emph{L}
+
+
+
+Assigning to a slice gives you a
+way of deleting elements:
+
+
+\emph{r=range(10)}
+
+
+\emph{r{[}3:5{]}={[}{]}}
+
+
+\emph{r}
+
+
+
+You can also delete an item from a
+list using the \emph{del} statement:
+
+
+\emph{r=range(10)}
+
+
+\emph{del r{[}3{]}}
+
+
+\emph{r}
+
+
+
+
+\emph{r=range(10)}
+
+
+\emph{del r{[}3:5{]}}
+
+
+\emph{r}
+
+
+
+List objects have a number of
+methods you can call, as shown in \href{chap2.html\#20881}{See List
+Methods.}. They fall into several groups. Two of the methods add
+elements to the list. Method call \emph{L.append(x)} adds an element
+\emph{x} to the end of the list \emph{L} (the new highest position).
+Method call \emph{L.insert(i,x)} inserts an element \emph{x} at any
+position \emph{i} in the list \emph{L} . All elements previously at that
+position or beyond are moved up one position. The index \emph{i} can be
+at the end of the list, whereupon \emph{insert()} behaves like
+\emph{append()} .
+
+\begin{enumerate}
+\tightlist
+\item
+  \\
+  List Methods
+\end{enumerate}
+
+Method
+
+Description
+
+
+
+ at the end of the
+list \emph{L} , increasing the length of \emph{L} by one.
+
+
+
+Places the list of elements
+\emph{x} at the end of the list \emph{L} , increasing the length of
+\emph{L} by the length of \emph{x} . \emph{L.extend(x)} is equivalent to
+\emph{L{[}len(L):{]}=x} .
+
+
+
+ at position
+\emph{i} in list \emph{L} . All items in \emph{L} at positions \emph{i}
+and above are moved to the right, i.e., their indices increase by one.
+\emph{L.insert(len(L),x)} is equivalent to \emph{L.append(x)} .
+
+
+
+
+
+Removes and returns an item from
+the list. If an index, \emph{i} , is provided, \emph{pop()} removes and
+returns the item at that position. If no index is provided, it removes
+and returns the last item--the index defaults to -1.
+
+
+
+
+that is equal to \emph{x} . It is an error if \emph{x} doesn't occur in
+\emph{L} .
+
+
+
+Counts the number of items in
+\emph{L} that are equal to \emph{x} .
+
+
+
+Returns the index of the first item
+in \emph{L} that is equal to \emph{x} . It is an error if \emph{x}
+doesn't occur in \emph{L} .
+
+
+
+Reverses the order of the elements
+of the list \emph{L} in place.
+
+
+
+
+
+Sorts the elements of the list
+\emph{L} in place into non- decreasing order. Function \emph{cmpfn(x,y)}
+is called to compare \emph{x} and \emph{y} and return a negative integer
+if \emph{x} precedes \emph{y} in the desired ordering, 0 if they are to
+be considered equal, and a positive integer if \emph{x} follows \emph{y}
+. To sort into descending order, you could use:
+
+ \emph{def cmpfn(x, y): return
+-cmp(x,y)}
+
+
+finds the first (lowest indexed) occurrence of \emph{x} in list \emph{L}
+and removes it. All elements with higher indices are moved down one. If
+you know the position, \emph{i} , of the element you wish to remove, use
+\emph{del L{[}i{]}} . If you want to examine the item at a particular
+position and remove it, use \emph{L.pop(i)} . If you want to examine the
+last item and remove it, use \emph{L.pop()} .
+
+ as a stack, use
+\emph{L.append(x)} to push \emph{x} on the stack, and \emph{x=L.pop()}
+to pop it off. To use \emph{L} as a queue, use \emph{L.append(x)} to
+enqueue \emph{x} and \emph{x=L.pop(0)} to dequeue it.
+
+Two methods examine the list for
+elements equal to a particular value. Call \emph{L.count(x)} returns a
+count of the number of occurrences of value \emph{x} in list \emph{L} .
+Call \emph{L.index(x)} returns the position of the first occurrence of
+\emph{x} in \emph{L} . Remember, the expressions \emph{x} \emph{in L}
+and \emph{x not in L} test to see if the list \emph{L} contains element
+\emph{x} .
+
+Two methods permute the order of
+the elements of the list, in place. \emph{L.reverse()} reverses the
+order of the elements of the list \emph{L} . \emph{L.sort()} sorts the
+elements of \emph{L} into nondecreasing order.
+
+Example: Self-Organizing List
+
+In a self-organizing list, you move
+items that are accessed to the front so you can find them more quickly
+in subsequent searches. Here's how you could implement self-organizing
+lists using list methods:
+
+
+\emph{def reorder(L,x):}
+
+
+
+
+
+
+
+
+\emph{r=range(10)}
+
+
+\emph{r}
+
+
+
+
+\emph{reorder(r,5)}
+
+
+\emph{r}
+
+
+
+Example: Median Value of a List of
+Numbers
+
+The median number in a list is the
+middle number in the sorted list, if there is an odd number of items. If
+there is an even number, the median is the average of the two middle
+numbers. Here is a function to compute the median:
+
+
+\emph{def median(L):}
+
+
+
+
+
+
+
+ \emph{return
+(s{[}n/2{]}+s{[}(n-1)/2{]})/2.0}
+
+
+
+
+\emph{median(range(5))}
+
+2.0
+
+
+\emph{median(range(6))}
+
+2.5
+
+There are a couple of things to
+note about this code:
+
+\begin{itemize}
+\tightlist
+\item
+  Rather than modify the array,
+  \emph{L} , we make a copy before sorting it.
+\item
+   , of
+  elements is even or odd, we compute the median by averaging the
+  elements at positions \emph{n/2} and \emph{(n-1)/2} . This gives the
+  correct answer in either case.
+\end{itemize}
+
+\subsection[ \emph{for}
+loops]{}
+loops}{ for loops}}\label{for-loops}
+
+ loops exist
+to allow an index variable to take on each element in a list, or other
+sequence object. (We'll discuss other sequences below.) The form of a
+\emph{for} loop is:
+
+for var in sequence :
+
+ indented body of loop
+
+Probably the most common form of
+\emph{for} loop is
+
+
+\emph{for i in range(len(L)):}
+
+
+
+ takes on the index
+of each item in the list, \emph{L} . If you only need to examine the
+items in the list but do not need to know their positions, you can use
+the loop
+
+
+\emph{for x in L:}
+
+
+
+\subsection[
+\emph{continue}]{}
+\emph{continue}}{ continue}}\label{continue}
+
+If you decide that you are finished
+with the current iteration of a loop, you can execute the continue
+statement. It consists of the single word
+
+continue
+
+It will immediately end the current
+iteration and jump back to the top of the loop and start the next
+iteration. If there are no more iterations to do, of course, it falls
+out of the loop.
+
+One major use for the
+\emph{continue} statement is to filter the items in the loop. Suppose we
+wish to print only those strings in a list that are at least five
+letters long; we might do it as follows:
+
+
+\emph{x={[}``book'',``placid'',``right'',``table'',``mother'',``gone''{]}}
+
+
+\emph{for s in x:}
+
+ \emph{if
+len(s)\textless{}=5:}
+
+
+
+
+
+
+
+placid mother
+
+\subsection[ \emph{break} and \emph{else} in
+Loops]{}
+\emph{break} and \emph{else} in
+Loops}{ break and else in Loops}}\label{break-and-else-in-loops}
+
+Often you will use a loop to search
+for something. Once you've found it, you want to escape from the loop.
+If you don't find it, you often need to take some default action. Python
+makes it easy to do both of these.
+
+If in the midst of a loop you wish
+to stop iterating, you can execute the \emph{break} statement. It
+consists of the keyword \emph{break} :
+
+break
+
+If you want to execute some code if
+the loop terminated normally, i.e., if it didn't exit by a \emph{break}
+, you can attach an \emph{else} clause on the end of the loop. Loops
+with \emph{else} clauses have the form:
+
+while expr :
+
+ indented loop body containing
+break
+
+else :
+
+ indented code to execute
+
+ if the loop exits normally
+
+or
+
+for var in sequence:
+
+ indented loop body containing
+break
+
+else :
+
+ indented code to execute
+
+ if the loop exits normally
+
+
+is usually used in \emph{if} statements. It is in Python too. It is
+perhaps not the best word to express the concept of ``on normal
+termination,'' but it is what Python uses.
+
+\subsection[ \emph{if}
+\emph{Statements}]{}
+\emph{if} \emph{Statements}}{ if Statements}}\label{if-statements}
+
+\paragraph[ \emph{if
+else}]{} \emph{if
+else}}{ if else}}\label{if-else}
+
+ statement will execute
+code based on whether an expression is true. The form of an \emph{if}
+statement is
+
+if expr:
+
+ indented code to be executed if
+expr is true
+
+If you want to execute other code
+if the expression is false, use the \emph{else} clause:
+
+if expr:
+
+ indented code to be executed if
+expr is true
+
+else:
+
+ indented code to be executed if
+expr is false
+
+\paragraph[
+\emph{elif}]{}
+\emph{elif}}{ elif}}\label{elif}
+
+Of course, you often want to test a
+sequence of conditions and execute code for the first one that's true.
+Because of indentation, it would be annoying if you had to put another
+\emph{if} within the \emph{else} and indent further. Python avoids this
+problem with the \emph{elif} clause, equaling an \emph{else} plus an
+\emph{if} . The general syntax of an \emph{if} statement is:
+
+if expr1:
+
+ indented code to be executed if
+expr1 is true
+
+elif expr2:
+
+ indented code to be executed if
+expr1 is false\\
+and expr2 is true
+
+
+
+else:
+
+ indented code to be executed if
+all exprs are false
+
+Here would be an appropriate place
+to mention that Python does not have a switch statement. Switch
+statements choose one out of several blocks of statements to execute
+based on the value of a single expression. You will probably use an
+\emph{if} statement with a sequence of \emph{elif} clauses for that
+purpose. (What else could you use? Well, you could put functions into a
+list, index into the list, and execute one of them, but that's a lot of
+trouble.)
+
+\paragraph[ \emph{pass} and One-Line Code
+Blocks]{}
+\emph{pass} and One-Line Code
+Blocks}{ pass and One-Line Code Blocks}}\label{pass-and-one-line-code-blocks}
+
+
+and \emph{elif} clauses are executed in order until one evaluates true;
+the block of code associated with that expression is executed and then
+control passes to the statement following the \emph{if} statement. This
+means that the earlier expressions must test for more specific cases; if
+you test for the more general case first, you will never get to the code
+for the subcase.
+
+But what if the desired behavior
+for the more specific case is to do nothing? You need a statement that
+doesn't do anything. In Python this is the \emph{pass} statement, which
+consists wholly of the keyword \emph{pass} :
+
+pass
+
+ statement is only
+useful as a complete code block, and it is short. Giving it an entire
+indented line to itself makes programs longer. That may force related
+code to extend beyond a page or a computer screen. So Python allows one
+statement block of code to be placed on the same line as the statement
+that selects it. Just write the statement following the colon of the
+\emph{if} , \emph{elif} , \emph{else} , \emph{while} , \emph{for} ,
+\emph{def} (or of any other statement that ends in a colon introducing a
+block of code).
+
+Indeed, you can put several simple
+statements following a colon just by placing semicolons between them.
+
+\subsection[Tuples]{}
+
+A tuple is an immutable list: It is
+just like a list except that you can't change the contents. You create a
+tuple by a display consisting of expressions in parentheses separated by
+commas, for example:
+
+
+\emph{(1,2)}
+
+(1, 2)
+
+Notice that Python writes out a
+tuple in the parenthesized notation.
+
+The one place where parentheses
+become ambiguous is in constructing a tuple of length one. In that case,
+if you want a tuple of length one, put a comma following the expression,
+just before the final parenthesis. If you only intend a parenthesized
+expression, do not put in a comma.
+
+
+\emph{(1,)}
+
+(1,)
+
+
+\emph{(1)}
+
+1
+
+You can have tuples with no
+components. Just use parentheses without anything between them:
+
+
+\emph{()}
+
+()
+
+You can subscript and slice tuples
+just like lists, pulling out elements or creating a copy of a section of
+a tuple. You cannot, however, assign to an element or a slice of a
+tuple; you can't use the subscript or the slice operator on the
+left-hand side of an assignment. You can't use the delete statement on a
+part of a tuple.
+
+
+\emph{q=(1,2)}
+
+
+\emph{q}
+
+(1, 2)
+
+
+\emph{del q{[}0{]}}
+
+Traceback (innermost last):
+
+ File
+``\textless{}stdin\textgreater{}'', line 1, in ?
+
+TypeError: object doesn't support
+item deletion
+
+
+\emph{del q{[}0:1{]}}
+
+Traceback (innermost last):
+
+ File
+``\textless{}stdin\textgreater{}'', line 1, in ?
+
+TypeError: object doesn't support
+slice deletion
+
+
+\emph{q{[}1{]}=3}
+
+Traceback (innermost last):
+
+ File
+``\textless{}stdin\textgreater{}'', line 1, in ?
+
+TypeError: object doesn't support
+item assignment
+
+
+\emph{q{[}0:1{]}=()}
+
+Traceback (innermost last):
+
+ File
+``\textless{}stdin\textgreater{}'', line 1, in ?
+
+TypeError: object doesn't support
+slice assignment
+
+You can concatenate tuples and
+replicate them, just like lists, using the \emph{+} and \emph{*}
+operators. These operators produce new tuples; they don't modify an
+already existing tuple.
+
+
+\emph{(1,2)+(3,4)}
+
+(1, 2, 3, 4)
+
+
+\emph{(1,2)*2}
+
+(1, 2, 1, 2)
+
+You can convert a tuple to a list
+using the \emph{list()} built-in function and a list to a tuple using
+the \emph{tuple()} built-in function:
+
+
+\emph{list( (1,2,3) )}
+
+
+
+
+\emph{tuple(range(3))}
+
+(0, 1, 2)
+
+If you are constructing a tuple of
+at least one element on the right- hand side of an assignment statement,
+you don't have to surround the expressions in parentheses. If it is to
+be of length one, you do have to be sure to put in a trailing comma:
+
+
+\emph{x=1,2,3}
+
+
+\emph{x}
+
+(1, 2, 3)
+
+
+\emph{x=1,}
+
+
+\emph{x}
+
+(1,)
+
+
+statements. You can return a tuple from a function, and you can
+construct the tuple in the \emph{return} statement without enclosing it
+in parentheses, unless of course it is length zero.
+
+You can compare two tuples for
+identity or for equality. The \emph{is} operator compares two objects to
+see if they are identical. The \emph{==} operator compares objects for
+equality. Two tuples are considered equal if their contents are equal.
+
+
+\emph{(1,2) is (1,2)}
+
+0
+
+
+\emph{(1,2) == (1,2)}
+
+1
+
+These two displays create separate
+tuples, so \emph{is} returns false, but they have the same contents, so
+\emph{==} returns true.
+
+ test in
+Python1 uses a simple recursive search to test for equality. If you have
+a circularly linked structure, e.g., a tuple containing a list that is
+embedded within itself, the \emph{==} operator may crash your program.
+You cannot, however, embed a tuple within itself directly, since it
+cannot be modified once it is created. It would already have to exist
+before it is created to be made a component of itself.
+
+The relational operators that
+compare lists compare tuples the same way:
+
+
+\emph{(1,2,3) \textless{} (1,0,3)}
+
+0
+
+
+\emph{(1,2,3) \textless{} (1,4,3)}
+
+1
+
+
+\emph{2 not in (1,2,3)}
+
+0
+
+
+\emph{2 in (1,2,3)}
+
+1
+
+\subsection[List
+Comprehensions]{}List
+Comprehensions}{List Comprehensions}}\label{list-comprehensions}
+
+A list comprehension, present in
+Python2 but not Python1, has the form
+
+ index in
+range optional-for-and-if-clauses{]}
+
+For example,
+
+(x,y,x+y) for x in range(5) if
+x\%2!=0 for y in range(5) if y!=x{]}
+
+yields
+
+(1, 0, 1), (1, 2, 3), (1, 3,
+4), (1, 4, 5), (3, 0, 3), (3, 1, 4), (3, 2, 5), (3, 4, 7){]}
+
+The behavior is as if you
+initialized an empty list and then appended the expression to it in
+nested \emph{for} and \emph{if} statements. For example:
+
+ (x,y,x*y) for x in range(10)
+if x\%2!=0 for y in range(10) if y!=x{]}
+
+is equivalent to
+
+
+
+for x in range(10):
+
+ for y in range(10):
+
+ if x\%2!=0 and y!=x:
+
+ L.append((x,y,x*y))
+
+ is now the list to
+use.
+
+If you use a tuple as the
+expression in the list comprehension, you must put parentheses around
+it.
+
+\subsection[
+\emph{None}]{}
+\emph{None}}{ None}}\label{none}
+
+Lists and tuples, because they can
+contain references to other objects, allow you to build linked list data
+structures. For example, some languages (starting with Lisp) have built
+lists out of ``cons cells'' containing two references to other objects.
+These two references are sometimes called the head and tail of the list:
+The head is the first item, the tail is the rest of the list. (In Lisp
+they're called the CAR and the CDR.)
+
+You could have much the same effect
+by using two element tuples with the head being at index zero and the
+tail being at index one. The problem, though, is that you need some way
+to indicate the end of a list. Lisp uses \emph{NIL} . In C it's usually
+called \emph{NULL} ; in Java, \emph{null} . Python provides the value
+\emph{None} . You might create a linked list \emph{(1 2 3)} as follows:
+
+
+\emph{x=(1,(2,(3,None)))}
+
+
+\emph{x}
+
+(1, (2, (3, None)))
+
+ is as a
+placeholder. If you assign a variable the value \emph{None} , the
+variable will exist, but the value \emph{None} can indicate that it
+hasn't had its value computed yet. The program can test to see if it has
+a value without having to test first whether it exists. Trying to access
+it if it doesn't exist causes a runtime error, as shown here:
+
+
+\emph{x=None}
+
+
+\emph{x==None}
+
+1
+
+
+\emph{del x}
+
+
+\emph{x}
+
+Traceback (innermost last):
+
+ File
+``\textless{}stdin\textgreater{}'', line 1, in ?
+
+NameError: x
+
+ is considered to be
+false in logical expressions.
+
+\subsection[More on
+Assignment]{}More on
+Assignment}{More on Assignment}}\label{more-on-assignment}
+
+Now we will consider assignment
+statements more closely. There are five things that need to be
+considered:
+
+\begin{enumerate}
+\tightlist
+\item
+  Multiple assignments of the same
+  value
+\item
+  Unpacking sequences, assigning
+  components of sequences to different variables at the same time
+\item
+  Operate-and-becomes assignments
+  in Python2, e.g. +=
+\item
+  The order of evaluation in
+  assignment statements
+\item
+  Where variables are bound
+\end{enumerate}
+
+We will consider these in order.
+
+\paragraph[Multiple
+Assignments]{}Multiple
+Assignments}{Multiple Assignments}}\label{multiple-assignments}
+
+First, you can include several
+assignments in the same statement. The form is
+
+ =
+expressions
+
+This will assign the variables in
+the targets the value(s) of the expressions. For example:
+
+i=j=0
+
+ and
+\emph{j} zero.
+
+\paragraph[Unpacking
+Sequences]{}Unpacking
+Sequences}{Unpacking Sequences}}\label{unpacking-sequences}
+
+Second, as we have already seen,
+more than one value may be assigned at the same time by separating the
+values with commas, for example:
+
+j,m=0,1
+
+This can be used to swap values
+
+a,b=b,a
+
+And multiple assignment and
+unpacking sequences can be used together, albeit somewhat confusingly:
+
+
+\emph{i,m=j,n=0,1}
+
+
+\emph{i,j,m,n}
+
+(0, 0, 1, 1)
+
+You can assign from any sequence
+type, as long as the length of the variable list is the same as the
+length of the sequence. Lists, tuples, and strings are sequences, so
+
+
+\emph{i,j=(3,4)}
+
+
+\emph{i,j}
+
+(3, 4)
+
+
+\emph{i,j={[}5,6{]}}
+
+
+\emph{i,j}
+
+(5, 6)
+
+
+\emph{i,j=``ab''}
+
+
+\emph{i,j}
+
+('a', `b')
+
+Moreover, you can include
+subsequences on the left-hand side of the assignment, enclosing the list
+of variables in parentheses or brackets, thus:
+
+
+\emph{i,(j,{[}m,n{]})=x={[}1,{[}2,(3,4){]}{]}}
+
+
+\emph{i,j,m,n,x}
+
+2, (3,
+4){]}{]})
+
+Notice that if there are several
+assignments in the statement, each one is matched separately to the
+value of the right-hand side. The different targets don't have to look
+alike. Notice also that the parentheses and brackets on the left-hand
+side of the assignments do not have to correspond to tuples and lists
+respectively on the right-hand side.
+
+As with tuples, a parenthesized
+variable is treated as a simple variable, but including a comma after it
+causes it to be matched to the contents of a single element sequence, as
+shown in the following:
+
+
+\emph{(x)={[}9{]}}
+
+
+\emph{x}
+
+
+
+
+\emph{(x,)={[}9{]}}
+
+
+\emph{x}
+
+9
+
+\paragraph[Operate and
+Becomes]{}Operate
+and Becomes}{Operate and Becomes}}\label{operate-and-becomes}
+
+Python2 allows certain binary
+operators to be combined with the assignment operator. The general rule
+is that \emph{x op= y} is equivalent to \emph{x = x op y} .
+
+So,
+
+x+=1
+
+ .
+
+The operators that you can combine
+with an assignment are:
+
+\begin{itemize}
+\tightlist
+\item
+  The arithmetic operators: +, -,
+  *, /, \%, **
+\item
+  The bitwise operators: \&,
+  \textbar{}, \^{}
+\item
+  The shift operators:
+  \textless{}\textless{}, \textgreater{}\textgreater{}
+\end{itemize}
+
+\paragraph[Evaluation
+Order]{}Evaluation
+Order}{Evaluation Order}}\label{evaluation-order}
+
+The evaluation of an assignment
+statement evaluates the expression(s) on the right-hand side first, then
+assigns the resulting value to each of the targets from left to right.
+Within the targets, it also goes left to right making assignments. This
+can produce some confusion. Consider the following code:
+
+
+\emph{r=range(10)}
+
+
+\emph{r.reverse()}
+
+
+\emph{r}
+
+
+
+
+\emph{i=2}
+
+
+\emph{i,r{[}i{]}=r{[}i{]},i}
+
+
+\emph{r}
+
+
+
+ has an initial value
+of two, you would expect that the assignment
+
+
+\emph{\ldots{},r{[}i{]}=\ldots{},i}
+
+ to
+\emph{r{[}2{]}} , replacing \emph{7} with \emph{2} in the sequence. But
+before that happens, we assign
+
+
+\emph{i,\ldots{}=r{[}i{]},\ldots{}}
+
+which is to say, we assign
+\emph{i=r{[}2{]}} , or seven. Then we assign \emph{r{[}7{]}} the value
+\emph{2} , which was already there.
+
+\paragraph[Assignment to Local
+Scope]{}Assignment
+to Local
+Scope}{Assignment to Local Scope}}\label{assignment-to-local-scope}
+
+When Python performs an assignment,
+it assigns to the variable in the innermost scope. If it is executing a
+function (within a \emph{def} ), the variable will only be seen by code
+in that function and will exist only as long as the function is
+executing. If the assignment is at the top level of a module, i.e., in a
+file but not inside a \emph{def} or \emph{class} statement (we'll talk
+about classes later), then the variable will be known in the module and
+will exist as long as the program is running--unless you explicitly
+delete it.
+
+\subparagraph[ \emph{global}
+Statement]{}
+\emph{global} Statement}{ global Statement}}\label{global-statement}
+
+So what if you want to assign a
+value to a module-scope variable in a function? You can't just assign a
+value to the variable name; that would create a local variable with the
+same name. What you can do is use the only declaration in the Python
+language, the \emph{global} statement. The global statement has the form
+
+
+
+It declares that the variable names
+\emph{id1} , \emph{id2} , etc. are variables of the surrounding module
+and are to be fetched and assigned there. The \emph{global} statement
+must appear before the variables are used.
+
+\subparagraph[Deleting
+Variables]{}Deleting
+Variables}{Deleting Variables}}\label{deleting-variables}
+
+You create a variable in a scope
+just by assigning to it. You can delete it from the scope using the
+\emph{del} statement.
+
+
+\emph{x=9}
+
+
+\emph{x}
+
+9
+
+
+\emph{del x}
+
+
+\emph{x}
+
+Traceback (innermost last):
+
+ File
+``\textless{}stdin\textgreater{}'', line 1, in ?
+
+NameError: x
+
+\subsection[Dictionaries]{}
+
+A dictionary is a mutable,
+associative structure. Considering these characteristics one at a time:
+
+\begin{itemize}
+\tightlist
+\item
+   --You can add
+  key-value pairs to a dictionary and remove them.
+\item
+  
+  --Dictionaries map keys into values. Given a key, you can look up its
+  value. It looks like indexing a list or tuple, but unlike lists and
+  tuples, the keys can be almost any immutable data type, not just
+  integers. (It is peferrable that keys be immutable because if you put
+  the key in the table and then changed its contents, you might not be
+  able to look it up again.)
+\end{itemize}
+
+Dictionaries are like small,
+in-memory databases. \href{chap2.html\#13000}{See Operations on
+Dictionaries.} shows the operators, functions, and methods available for
+dictionaries.
+
+\begin{enumerate}
+\tightlist
+\item
+  \\
+  Operations on Dictionaries
+\end{enumerate}
+
+Operator, Function, Method
+
+Explanation
+
+
+
+Creates a dictionary with the given
+key-value pairs.
+
+
+
+Returns the value associated with
+key \emph{k} in dictionary \emph{d} . It is an error if the key is not
+present in the dictionary. See methods \emph{has\_key()} and
+\emph{get()} .
+
+
+
+ with key
+\emph{k} in dictionary \emph{d} . The key must be ``hashable,'' that is,
+it should not be mutable. Python won't accept lists as keys.
+
+
+
+ and its
+associated value from dictionary \emph{d} . It is an error if the key
+doesn't exist.
+
+
+
+Removes all key-value pairs from
+dictionary \emph{d} .
+
+
+
+Creates a copy of dictionary
+\emph{d} . This is a shallow copy: The dictionary itself is copied, but
+none of the key or value objects it contains are copied.
+
+
+
+Returns the value associated with
+key \emph{k} in dictionary \emph{d} . If \emph{k} isn't present in the
+dictionary, it returns \emph{None} .
+
+
+
+Returns the value associated with
+key \emph{k} in dictionary \emph{d} . If \emph{k} isn't present in the
+dictionary, it returns \emph{v} .
+
+
+
+Returns true (1) if dictionary
+\emph{d} contains key \emph{k} and false (0) otherwise.
+
+
+
+
+\emph{{]}} , a list of all the key-value pairs currently in the
+dictionary \emph{d} . The key-value pairs are tuples of two elements
+\emph{(key,value)} .
+
+
+
+Returns a list of all the keys
+currently in\\
+dictionary \emph{d} .
+
+
+
+Adds all the key-value pairs from
+dictionary \emph{m} to dictionary \emph{d} . Any key in \emph{d} that is
+the same as a key in \emph{m} has its value reassigned.
+
+
+
+Returns a list of all the values
+currently in dictionary \emph{d} .
+
+ \emph{d.setdefault(k)\\
+d.setdefault(k,x)}
+
+
+with initialization. As if defined
+
+ \emph{def
+setdefault(self,k,x=None):}
+
+
+
+
+
+
+
+
+
+
+
+~
+
+You can create an empty dictionary
+by writing an open-close-brace pair:
+
+
+\emph{d=\{\}}
+
+
+\emph{d}
+
+
+
+You can create a dictionary with
+initial contents by placing one or more associations in the braces:
+
+
+\emph{d=\{``a'':1,1:(2,3),(2,3):``a''\}}
+
+
+\emph{d}
+
+
+
+In this example, we associate the
+string key \emph{``a''} with the value 1; key \emph{1} with the value
+tuple \emph{(2,3)} ; and the key tuple \emph{(2,3)} with the string
+value \emph{``a.''} (They don't have to form a cycle like this.)
+
+You can look up the value for a key
+by subscripting the dictionary with the value of the key.
+
+
+\emph{d{[}1{]}}
+
+(2, 3)
+
+
+\emph{d{[}(2,3){]}}
+
+`a'
+
+Since Python uses the equality
+operator, \emph{==} , to test the keys, equal numbers are considered to
+be the same key:
+
+
+\emph{d{[}1.0{]}}
+
+(2, 3)
+
+Be careful, though, with floating
+point numbers. They are not exact, and they may differ by a few bits in
+the low order positions even if they look equal.
+
+It is a runtime error to look up a
+nonexistent key in a dictionary.
+
+
+\emph{d{[}10{]}}
+
+Traceback (innermost last):
+
+ File
+``\textless{}stdin\textgreater{}'', line 1, in ?
+
+KeyError: 10
+
+If you don't want to worry about an
+error when looking up a value, you can use the \emph{get()} method. The
+call \emph{d.get(k)} will yield the value for key \emph{k} in dictionary
+\emph{d} , if it exists, or return the value \emph{None} if it doesn't.
+The call \emph{d.get(k,v)} is the same, except that it returns the value
+\emph{v} if the key isn't present.
+
+
+\emph{d}
+
+
+
+
+\emph{d.get(10)}
+
+
+\emph{d.get(10)==None}
+
+1
+
+
+\emph{d.get(10,``absent'')}
+
+`absent'
+
+Notice that the Python interpreter
+doesn't write out the value \emph{None} in interactive mode.
+
+Alternatively, you can ask whether
+the dictionary contains the key before subscripting with it. Method call
+\emph{d.has\_key(k)} will return true or false (1 or 0) depending on
+whether the dictionary \emph{d} contains the key \emph{k} or not.
+(Operator \emph{in} does not apply to dictionaries.)
+
+
+\emph{d.has\_key(1)}
+
+1
+
+
+\emph{d.has\_key(10)}
+
+0
+
+You can insert a new key-value pair
+into the dictionary by subscripting a dictionary on the left-hand side
+of an assignment operator with the key and assigning it the value. You
+can assign a new value to a key the same way:
+
+
+\emph{d{[}10{]}=10}
+
+
+\emph{d}
+
+\{(2, 3): `a', 10: 10, 1: (2, 3),
+`a': 1\}
+
+
+\emph{d{[}10{]}=``a''}
+
+
+\emph{d}
+
+\{(2, 3): `a', 10: `a', 1: (2, 3),
+`a': 1\}
+
+ function will tell
+you the number of associations the dictionary contains:
+
+
+\emph{d}
+
+\{(2, 3): `a', 10: `a', 1: (2, 3),
+`a': 1\}
+
+
+\emph{len(d)}
+
+4
+
+
+statement, \emph{del} \emph{dictionary} \emph{{[}} \emph{key} \emph{{]}}
+, to remove associations from the dictionary.
+
+
+\emph{del d{[}10{]}}
+
+
+\emph{len(d)}
+
+3
+
+
+\emph{d}
+
+
+
+There are three methods to examine
+the contents of a dictionary without knowing the keys:
+
+\begin{enumerate}
+\tightlist
+\item
+   to get a
+  list of all the keys currently in the dictionary.
+\item
+   to get a
+  list of all the values.
+\item
+   to get a
+  list of all the key-value pairs in \emph{d} .
+\end{enumerate}
+
+The key-value pairs are in
+\emph{(} \emph{key,value} \emph{)} tuples.
+
+
+\emph{d}
+
+
+
+
+\emph{d.keys()}
+
+
+
+
+\emph{d.values()}
+
+
+
+
+\emph{d.items()}
+
+((2, 3), `a'), (1, (2, 3)),
+('a', 1){]}
+
+To create a copy of a dictionary,
+you could create an empty dictionary and then update it from the one you
+want to copy, for example:
+
+
+\emph{e=\{\}}
+
+
+\emph{e.update(d)}
+
+
+\emph{e}
+
+
+
+
+behaves the same as:
+
+
+\emph{for k in d.keys(): e{[}k{]}=d{[}k{]}}
+
+But it is easier to use the
+\emph{copy()} method:
+
+e=d.copy()
+
+When you copy a dictionary, you
+get a shallow copy. The dictionary object is copied, but none of the
+keys or values it contains are. Consider the following example:
+
+
+\emph{x=\{``a'':{[}0{]}\}}
+
+
+\emph{y=x.copy()}
+
+
+\emph{x is y}
+
+0
+
+
+\emph{y{[}``a''{]}{[}0{]}=1}
+
+
+\emph{x}
+
+
+
+The value associated with key
+\emph{``a''} in dictionary \emph{x} is a list containing a single value,
+zero. When we copy \emph{x} , we get a new, different dictionary,
+\emph{y} . Dictionaries \emph{x} and \emph{y} are not the same, but the
+lists they contain are, so when we change the list associated with key
+\emph{``a''} in dictionary \emph{y} , that is the same list we see
+associated with " \emph{a} " in dictionary \emph{x} .
+
+Relational operators work on
+dictionaries the same way as sequences: They do a lexicographical
+compare. They compare the components in sorted order by key. Expect this
+to be slow.
+
+
+\emph{D1=\{``x'':1,``y'':2,``z'':3\}}
+
+
+\emph{D2=\{``x'':1,``y'':4,``z'':3\}}
+
+
+\emph{D1==D2}
+
+0
+
+
+\emph{D1\textless{}D2}
+
+1
+
+\subsection[Strings]{}
+
+Strings are a kind of immutable
+sequence, like tuples. Once the string has been created, you can't
+change its contents. Unlike tuples, where the elements of the sequence
+may be of any data type, the elements of a string are characters. You
+can subscript a string, but you don't get an individual character.
+Python has no character data type. You get a string of length one
+containing the character.
+
+The original strings in Python
+contained byte-sized, Latin character set/ASCII characters. Python2 also
+provides Unicode character strings. We will assume the original
+character set in our discussion except where we explicitly discuss
+Unicode.
+
+\paragraph[String
+Literals]{}String
+Literals}{String Literals}}\label{string-literals}
+
+There are several ways to write
+string literals. If you are going to write the string on a single line,
+you can enclose it in single quotes ( \emph{'} ), or double quotes (
+\emph{"} ). This easily allows you to enclose a string containing one
+kind of quote inside the other kind of quotes, for example:
+
+
+\emph{`He said, ``Hi.''\,'}
+
+`He said, ``Hi.''\,'
+
+If you need both kind of quotes,
+you can write more than one string in a row and let Python concatenate
+them for you. Here we use three strings in a row:
+
+
+\emph{`He said, ``She said,' '''Hi.'" `"'}
+
+`He said, ``She
+said,\textbackslash{}'Hi.\textbackslash{}'''\,'
+
+The output here shows Python's
+incorporation character, the backslash. The backslash tells Python that
+the following character is to have a special interpretation within the
+string. Python's incorporation sequences are shown in
+\href{chap2.html\#44479}{See Incorporation Character Sequences in String
+Literals.}.
+
+\begin{enumerate}
+\tightlist
+\item
+  \\
+  Incorporation Character Sequences in
+  String Literals
+\end{enumerate}
+
+Sequence
+
+Meaning
+
+
+end-of-line
+
+Continues the string literal to the
+next line, without including a newline character
+
+
+\emph{\textbackslash{}\textbackslash{}}
+
+Includes a backslash character
+
+
+
+Includes a single quote
+
+
+
+Includes a double quote
+
+
+
+Includes an attention signal (beep)
+character
+
+
+
+Includes a backspace character
+
+
+
+Includes an escape character
+
+
+
+Includes a form feed character
+
+
+
+Includes a line feed (newline)
+character
+
+
+
+Includes a tab character
+
+
+
+Includes a carriage return
+character
+
+
+
+Includes a vertical tab character
+
+
+
+Includes a null character. (Unlike
+C, Python allows null characters in strings.)
+
+
+
+Includes the character whose octal
+code is oo.
+
+
+
+Includes the character whose
+hexadecimal code is hh.
+
+
+
+Only in Unicode strings,
+incorporates the character whose hexadecimal number in the Unicode
+character set is hhhh.
+
+Suppose you need a string to extend
+beyond the end of a line. There several ways to do it. You can get
+Python to continue the statement on the next line and put quoted parts
+of the string on the separate lines. Since Python understands that
+unbalanced parentheses require continuing the statement to another line,
+this will work:
+
+
+\emph{(``a''}
+
+
+
+`aB'
+
+Python will also continue a
+statement if the last character on the line is a backslash.
+
+
+\emph{``a''\textbackslash{}}
+
+
+
+`aB'
+
+For that matter, a backslash also
+works within strings:
+
+
+\emph{"a\textbackslash{}}
+
+
+
+`aB'
+
+Python also allows strings to be
+enclosed in triple quotes, either \emph{``''"} or \emph{`''} . These
+strings may extend beyond the end of a line without special handling.
+However, they include a newline character (octal number 012) for each
+line boundary they cross:
+
+
+\emph{'''a}
+
+
+
+012B'
+
+If you do not want a newline
+character included for the end of a line, put a backslash character at
+the end of the line:
+
+
+\emph{'''a\textbackslash{}}
+
+
+
+`aB'
+
+Python also allows you to specify
+raw strings. In a raw string, you get the characters exactly as written.
+The incorporation character has no special meaning. This is more useful
+to people using Windows, since backslash is used to separate directories
+and files on paths, and it would be annoying to have to incorporate each
+one of them:
+
+
+\emph{r``D:\textbackslash{}Tests\textbackslash{}SayHi.py''}
+
+SayHi.py'
+
+One warning: A backslash may not
+be the last character of a raw string. Python tries to gobble up the
+following character as part of the string.
+
+You write Unicode string literals
+by preceding the string with \emph{u} , e.g.,
+\emph{u'ab\textbackslash{}u12adyz'} . If you concatenate two string
+literals, one of which is Unicode, the Python compiler merges them into
+a single Unicode string.
+
+\paragraph[String
+Operators]{}String
+Operators}{String Operators}}\label{string-operators}
+
+The string operators are the same
+as those that apply to tuples, with one extra operator for string
+formatting. The operators are shown in \href{chap2.html\#53096}{See
+String Operators.}.
+
+\begin{enumerate}
+\tightlist
+\item
+  \\
+  String Operators
+\end{enumerate}
+
+Operator
+
+Meaning
+
+
+
+Produces a new string which is the
+concatenation of strings \emph{s} and \emph{u} . An ordinary string
+concatenated with a Unicode string gives a Unicode string result.
+
+
+
+
+
+Creates a new string composed of
+\emph{n} copies of string \emph{s} , where \emph{n} is an integer.
+
+
+
+String formatting--Creates a new
+string by formatting values in tuple \emph{t} and inserting them into
+specified places in string \emph{s} . We discuss this later in the text.
+
+
+
+String formatting--Creates a new
+string by formatting values in dictionary \emph{d} and inserting them
+into specified places in string \emph{s} . We discuss this later in the
+text.
+
+
+
+Yields a one-character string
+composed of the character at position \emph{i} in string \emph{s} .
+
+
+
+Yields a string composed of the
+characters from position \emph{i} up to but not including position
+\emph{j} in\\
+string \emph{s} .
+
+
+
+Converts the value of expression
+\emph{e} into a string. Note: These are back-quotes. Regular quotes are
+used for string literals.
+
+
+\emph{1} \emph{, x} \emph{2} \emph{, \ldots{}, x} \emph{n-1} \emph{=s}
+
+ one-character
+substrings of string \emph{s} from left to right to variables \emph{x}
+\emph{0} , \emph{x} \emph{1} , \emph{x} \emph{2} ,\ldots{} \emph{x}
+\emph{n-1} .This is just a multiple assignment statement.
+
+String Displays
+
+The equivalent of
+\emph{{[}\ldots{}{]}} for lists and \emph{(\ldots{})} for tuples is
+\emph{`\ldots{}`} for strings. The form \emph{`x`} evaluates expression
+\emph{x} and converts its value to a string, for example:
+
+
+\emph{a=1;b=2}
+
+
+\emph{`a+b'}
+
+`3'
+
+
+\emph{`(a,b)'}
+
+`(1, 2)'
+
+Sequence Operators
+
+Strings are a kind of sequence, so
+the sequence operators apply to strings. Expression \emph{u+v} will
+concatenate strings \emph{u} and \emph{v} . Expression \emph{s*n} will
+concatenate \emph{n} copies of string \emph{s} .
+
+Slicing will deliver a substring.
+Expression \emph{s{[}i:j{]}} yields a string composed of the characters
+from position \emph{i} up to but not including position \emph{j} in
+string \emph{s} .
+
+Unlike lists and tuples,
+subscripting, \emph{s{[}i{]}} , cannot deliver an individual character.
+Python does not have characters. Instead, it returns a string consisting
+of the one character at position \emph{i} . Expression \emph{s{[}i{]}}
+is equivalent to \emph{s{[}i:i+1{]}} .
+
+String Formatting
+
+String formatting behaves like the
+formatting strings used in the \emph{printf()} function in C. String
+formatting is specified by the \emph{s\%t} operator in Python. The
+string \emph{s} to the left of the \emph{\%} is the format. The tuple or
+dictionary to the right of the \emph{\%} supplies the values to be
+formatted. Generally, characters in the format string are just copied as
+is into the result string, but certain special character sequences are
+replaced with values from the tuple or dictionary. Since tuples and
+dictionaries behave differently, we will discuss the tuples first and
+then explain the differences with dictionaries.
+
+ The formatting
+sequences are matched left to right with the values in the tuple. Each
+formatting sequence specifies how to convert the value to a string. The
+converted value is then inserted into the resulting string, replacing
+its formatting sequence. For example, the following produces a string
+with the number 65 translated into octal, decimal, and hexadecimal, the
+translations separated by colons:
+
+
+\emph{``\%o:\%d:\%x'' \% (65,65,65)}
+
+`101:65:41'
+
+If there is only one value to be
+formatted, you needn't include it in a tuple, for example:
+
+
+\emph{``\textbar{}\%d\textbar{}'' \% 5}
+
+'
+
+The formatting sequences have the
+form:
+
+\% m f
+
+ , are
+optional. The formatting character, \emph{f} , tells Python (internally,
+the C library) what conversion to perform. The formatting characters are
+
+\begin{itemize}
+\tightlist
+\item
+   --Decimal integer. The
+  corresponding element of the tuple is converted to an integer and the
+  integer is converted to a string in decimal format.
+\item
+   --Decimal integer. The
+  same as \emph{\%d} .
+\item
+   --Unsigned integer. The
+  same as \emph{\%d} , but the integer is interpreted as unsigned. The
+  sign bit is interpreted as adding a large positive amount to the
+  number, rather than a large negative amount.
+\item
+   --Octal integer. The
+  corresponding element of the tuple is converted to an integer and the
+  integer is converted to a string in octal format.
+\item
+   --Hexadecimal integer.
+  The corresponding element of the tuple is converted to an integer and
+  the integer is converted to a string in hexadecimal format. Lowercase
+  \emph{x} uses lowercase letters for the digits 10 through 15.
+\end{itemize}
+
+
+\emph{``\%x'' \% (-2)}
+
+`fffffffe'
+
+\begin{itemize}
+\tightlist
+\item
+   --Hexadecimal integer.
+  The corresponding element of the tuple is converted to an integer and
+  the integer is converted to a string in hexadecimal format. Uppercase
+  \emph{X} uses uppercase letters for the digits 10 through 15.
+\end{itemize}
+
+
+\emph{``\%X'' \% (-2)}
+
+`FFFFFFFE'
+
+\begin{itemize}
+\tightlist
+\item
+   --Floating point
+  format, with decimal point but without an exponent.
+\end{itemize}
+
+
+\emph{``\%f'' \% (0.5e-100)}
+
+`0.000000'
+
+\begin{itemize}
+\tightlist
+\item
+   --Floating point
+  format, with decimal point and an exponent (with a lowercase \emph{e}
+  ).
+\end{itemize}
+
+
+\emph{``\%e'' \% (0.5e-100)}
+
+`5.000000e-101'
+
+\begin{itemize}
+\tightlist
+\item
+   --Floating point
+  format, with decimal point and an exponent (with an uppercase \emph{E}
+  ).
+\end{itemize}
+
+
+\emph{``\%E'' \% (0.5e-100)}
+
+`5.000000E-101'
+
+\begin{itemize}
+\tightlist
+\item
+   --Choose either
+  \emph{f} or \emph{e,} depending on the size of the exponent.
+\item
+   --Choose either
+  \emph{f} or \emph{E,} depending on the size of the exponent.
+\item
+   --String, or any object
+  being converted to a string.
+\end{itemize}
+
+
+\emph{``\%s'' \% ({[}1,2{]})}
+
+'
+
+\begin{itemize}
+\tightlist
+\item
+   --Like s, but uses
+  \emph{repr()} rather than \emph{str()} to convert the argument (in
+  Python2).
+\item
+   --A single character.
+  The value to be converted can either be an integer that is the
+  internal code for a character or a string of length one.
+\end{itemize}
+
+
+\emph{``\%c'' \% (88)}
+
+`X'
+
+
+\emph{``\%c'' \% (``Y'')}
+
+`Y'
+
+\begin{itemize}
+\tightlist
+\item
+   --This does not match
+  an element from the tuple. It is the way to incorporate a percent sign
+  into the string.
+\end{itemize}
+
+The modifiers, if present, have the
+form
+
+a w .p
+
+each of which is optional. These
+parts are as follows:
+
+\begin{itemize}
+\tightlist
+\item
+   --The alignment; can be
+  a plus sign, a minus sign, or 0, or some combination of them. They
+  mean the following:
+\end{itemize}
+
+ : Align the characters at
+the left in the field
+
+ : Include a sign for
+numeric values, even if positive. (Normally only a negative sign would
+be included.)
+
+ : Zero-fill the number in
+the field.
+
+\begin{itemize}
+\tightlist
+\item
+   The width;
+  specifies the minimum field width the formatted value is to occupy.
+  This allows nicely aligned output, at least with fixed-width fonts, if
+  the values fit within the field width specified. If they don't fit,
+  they will use all the character positions required.
+\end{itemize}
+
+
+\emph{``\textbar{}\%4d\textbar{}'' \% 5}
+
+'
+
+
+\emph{``\textbar{}\%4d\textbar{}'' \% 500000}
+
+'
+
+\begin{itemize}
+\tightlist
+\item
+   The
+  precision; follows a decimal point. It has one of three meanings:
+\item
+  For strings, the precision
+  specifies the maximum number of characters that may be printed from
+  the string.
+\end{itemize}
+
+
+\emph{``\textbar{}\%.3s\textbar{}'' \% (``abcdef'')}
+
+'
+
+\begin{enumerate}
+\tightlist
+\item
+  For floating point numbers, it
+  specifies the maximum number of digits following the decimal point.
+\end{enumerate}
+
+
+\emph{``\textbar{}\%.4f\textbar{}'' \% (1.0/3.0)}
+
+'
+
+\begin{enumerate}
+\tightlist
+\item
+  For integers, the precision
+  specifies the minimum number of digits to represent.
+\end{enumerate}
+
+
+\emph{``\textbar{}\%4.2d\textbar{}'' \% 5}
+
+'
+
+If you want to compute the width or
+precision, you can use stars, \emph{*} s, in width or precision fields.
+The star tells Python to use the next item in the tuple, which must be
+an integer, as the value in the field, for example:
+
+
+\emph{``\textbar{}\%*.*d\textbar{}'' \% (4,2,5)}
+
+'
+
+ You can use a
+dictionary instead of a tuple. You instruct Python what value to format
+by putting the key string in parentheses just after the opening
+\emph{\%} , inside the formatting sequence:
+
+
+\emph{``\textbar{}\%(x)4.2d\textbar{}'' \% \{``x'':5\}}
+
+'
+
+However, this doesn't work for the
+formatting fields:
+
+
+\emph{``\textbar{}\%(x)4.(p)d\textbar{}'' \% \{``p'':2,``x'':5\}}
+
+Traceback (innermost last):
+
+ File
+``\textless{}stdin\textgreater{}'', line 1, in ?
+
+ValueError: unsupported format
+character `(' (0x28)
+
+\paragraph[The String Module and String
+Methods]{}The String
+Module and String
+Methods}{The String Module and String Methods}}\label{the-string-module-and-string-methods}
+
+The string module provides a
+number of useful functions and constants. In Python2, functions from the
+string module were made into methods of string objects.
+\href{chap2.html\#33427}{See Most Important String Functions and
+Methods.} shows the most useful of these functions and methods.
+
+\begin{enumerate}
+\tightlist
+\item
+  \\
+  Most Important String Functions and Methods
+\end{enumerate}
+
+String Module
+
+Method (Python2)
+
+Explanation
+
+
+
+
+
+
+
+
+
+
+
+
+
+Find the index of the first
+occurrence of \emph{sub} in string \emph{s} . If they are provided, find
+the first occurrence at or beyond \emph{start} and not extending beyond
+\emph{end} . Returns minus 1 if it is not found.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Find the index of the first
+occurrence of \emph{sub} in string \emph{s} . If they are provided, find
+the first occurrence at or beyond \emph{start} and not extending beyond
+\emph{end} . Raise a \emph{ValueError} exception if it is not found.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Find the index of the last
+occurrence of \emph{sub} in string \emph{s} . If they are provided, find
+the rightmost occurrence lying totally within the range beginning at
+\emph{start} and not extending beyond \emph{end} . Returns minus 1 if it
+is not found.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Find the index of the last
+occurrence of \emph{sub} in string \emph{s} . If they are provided, find
+the rightmost occurrence lying totally within the range beginning at
+\emph{start} and not extending beyond \emph{end} . Raise a
+\emph{ValueError} exception if it is not found.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Return a list of the substrings of
+\emph{s} separated by string \emph{sep} . If \emph{sep} is \emph{None} ,
+or omitted, return the substrings separated by white space. If
+\emph{maxtimes} is present, return no more than \emph{maxtimes}
+substrings followed by the remainder of \emph{s} , if any.
+
+
+
+
+
+
+
+Concatenate the strings in list or
+tuple \emph{seq} . Put \emph{sep} between each pair. Use a single blank
+if \emph{sep} is omitted.
+
+
+
+
+
+
+
+
+
+ with all
+letters converted to lower or uppercase.
+
+
+
+
+
+
+
+
+
+
+
+
+
+ with all
+white space removed from both ends, from the left, or from the right.
+
+
+
+
+
+
+
+
+
+
+
+
+
+ padded
+with blanks, left justified, right justified, or centered in a field of
+width \emph{w} . Return \emph{s} itself if it is as long as or longer
+than \emph{w} .
+
+
+
+
+
+
+
+
+
+ with
+tabs expanded into blanks. The tab stops occur each \emph{w} characters,
+eight characters if \emph{w} is omitted.
+
+~
+
+
+
+
+
+
+
+ ends with the
+\emph{suffix} , begins with the \emph{prefix} , or contains
+\emph{prefix} starting at position \emph{pos} .
+
+\paragraph[Built-In String
+Functions]{}Built-In
+String
+Functions}{Built-In String Functions}}\label{built-in-string-functions}
+
+\begin{itemize}
+\tightlist
+\item
+   --Returns the
+  character (in a one-character string), whose ASCII code is integer
+  \emph{i} . This is equivalent to \emph{(``\%c'' \% i)} .
+\item
+   --Evaluates the
+  string \emph{s} as if it were a Python expression.
+\end{itemize}
+
+
+\emph{eval(``{[}1,2{]}'')}
+
+
+
+
+dictionaries to look up variables in: \emph{eval(s,globals)} or
+\emph{eval(s, globals, locals)} :
+
+
+\emph{eval(``x+y'',\{``x'':1,``y'':2\},\{``x'':3\})}
+
+5
+
+\begin{itemize}
+\tightlist
+\item
+   --Returns a string
+  representation of integer \emph{i} converted to hexadecimal
+  representation.
+\end{itemize}
+
+
+\emph{hex(65)}
+
+`0x41'
+
+It is not equivalent to
+\emph{(``\%x'' \% i)} , which does not put \emph{``0x''} on the front.
+
+\begin{itemize}
+\tightlist
+\item
+   --Returns
+  string \emph{s} or a copy of the string \emph{s} . Each call to
+  \emph{intern()} with an equal string will return the identical string.
+  You use this to speed up compares and to save storage.
+\end{itemize}
+
+Equal strings may be different
+objects, i.e., both have the same characters, but they were created at
+different times. It is faster to compare strings for identity \emph{(x
+is y)} than for equality \emph{(x == y)} , since Python only has to
+compare the memory addresses for identity, but must compare the
+characters in them for equality. Therefore, if you are going to have a
+set of strings that you are comparing for equality frequently, you can
+speed up your program by interning them and just comparing their
+interned values.
+
+
+\emph{``ab''==``a''+``b''}
+
+1
+
+
+\emph{``ab'' is ``a''+``b''}
+
+0
+
+
+\emph{intern(``ab'') is intern(``a''+``b'')}
+
+1
+
+Moreover, by interning strings that
+are used throughout your data structures, all instances of the string
+will occupy the same block of storage, rather than many blocks. This may
+save considerable storage.
+
+\begin{itemize}
+\tightlist
+\item
+   --Converts a
+  string to an integer. (It will also convert long integers and floating
+  point numbers to integers.)
+\item
+   --Converts integer
+  \emph{i} to a string representation of it as an unsigned octal
+  integer.
+\end{itemize}
+
+
+\emph{oct(65)}
+
+`0101'
+
+
+\emph{oct(-1)}
+
+`037777777777'
+
+\begin{itemize}
+\tightlist
+\item
+   --Returns the
+  integer representing the single character in string \emph{c} .
+\item
+   --Returns a
+  string representation of object \emph{x} . It is the same as
+  \emph{`x`} .
+\item
+   --Returns a string
+  representation of object \emph{x} . Unlike \emph{repr()} ,
+  \emph{str()} does not attempt to be the inverse of \emph{eval()} . It
+  attempts to make the translated string legible.
+\end{itemize}
+
+\subsection[Summary]{}
+
+In this chapter we looked at
+elementary Python programming. We examined expressions and simple
+control statements like \emph{while} , \emph{for} , and \emph{if} . We
+looked at arithmetic data types, lists, tuples, strings, and
+dictionaries. We learned a little bit about modules and functions. And
+we used the interpreter to try out code to see what it would do.
+
+~
+
+\begin{enumerate}
+\tightlist
+\item
+  
+  that will write out the first \emph{n} Fibonacci numbers. Fibonacci
+  numbers form a sequence 1, 1, 2, 3, 5, 8, \ldots{} where each number
+  after the first two is the sum of the two numbers preceding it. Use a
+  loop. Use a single assignment statement in the loop. Make sure
+  \emph{fib(100)} works.
+\item
+  Put your solution to Problem 2.1
+  into a script. Have the script take the value of \emph{n} from its
+  command line and write out that many Fibonacci numbers. The command
+  line parameters are in variable \emph{argv} in module \emph{sys} . The
+  name of the program being executed is in \emph{argv{[}0{]}} . The
+  first parameter is in \emph{argv{[}1{]}} .
+\item
+  Write a script that takes a
+  string as its first command line parameter and file names as the
+  subsequent parameters. Have it write out the names of the files that
+  contain the string. See Problem 2.2 for how to find the command line
+  parameters.
+\item
+  Write a script that, given a
+  file name, will count the number of words in the file and write out
+  the total. For our purposes, a word is any sequence of non-white-space
+  characters at the beginning of a line, at the end of a line, or
+  surrounded by white space. See Problem 2.2 for how to find the command
+  line parameters.
+\item
+  Write a script that, given a
+  file name, will count the number of occurrences of each word in the
+  file and write out a sorted list of words with the number of
+  occurrences. For our purposes, a word is any sequence of
+  non-white-space characters at the beginning of a line, at the end of a
+  line, or surrounded by white space. See Problem 2.2 for how to find
+  the command line parameters.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+{ 1.} Although Python2 does have
+Unicode strings.
+
+{ 2.} We say ``x is considered
+false'' and ``x counts as false,'' because various values, like zero,
+None, and empty sequences, are treated as being false by \emph{and} and
+\emph{or} operators and \emph{while} and \emph{if} statements.
