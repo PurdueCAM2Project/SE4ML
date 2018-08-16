@@ -123,3 +123,6 @@ tmp.inputs
 settings.tex
 book.pdf
 
+# vim
+
+*.swp
