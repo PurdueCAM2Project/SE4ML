@@ -324,3 +324,20 @@ programs.  Using microseconds restrict the possible keys to only 0 and
 999999.  This small range of seeds weakens security because there are
 only one million possibilities.
 
+It is possible that the data points that should be in the cluster are
+put into different clusters. When this occurs, the results are not
+very useful. Fortunately, this does not happen very often.  The case
+in Figure~\ref{figure:kmean:1112} (a) occurs more often than
+Figure~\ref{figure:kmean:1112} (b) and (c).  Thus, one solution of
+avoiding situations like Figure~\ref{figure:kmean:1112} (b) and (c) is
+to run the program multiple times and see which result makes better
+sense.  One problem, however, is that when the data has high
+dimensions, visualization becomes difficult.  Since the {\it k-mean}
+algorithm does not guarantee finding the best clustering solution, it
+is advised running the program multiple times and find the result that
+has the smallest value of the cost function defined in
+(\ref{equation:kmean:cost}) on page~\pageref{equation:kmean:cost}.
+One remaining question is to determine the value of $k$.  This can
+also be answered by using different values and choose one that
+minimize the cost function.
+
