@@ -134,18 +134,23 @@ You can also place programs in
 files and execute them from there. For example, you can edit a file
 SayHi in the current directory, containing:
 
-\#!/usr/bin/env python
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\thischapterpath/hello/SayHi.py}
+\end{tt}
+\nolinenumbers
 
-print `Hello'
+Then set SayHi's execute permissions and execute it:
 
-Then set SayHi's execute
-permissions and execute it:
-
+\begin{verbatim}
 chmod a+x SayHi
+\end{verbatim}
 
-./SayHi
-
+\begin{verbatim}
+./SayHi.py
 Hello
+\end{verbatim}
 
  is a
 comment to the shell, the command interpreter on Linux. It tells the
