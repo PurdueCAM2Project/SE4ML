@@ -36,8 +36,8 @@ if __name__ == "__main__":
     t = False # truly random
     d = 2 # dimension
     m = 3 # number of clusters
-    q = 4 # at least q points per cluster
-    r = 5 # at most  r points per cluster
+    q = 20 # at least q points per cluster
+    r = 25 # at most  r points per cluster
     output1 = 'data.txt' 
     output2 = 'cluster.txt'
     # get the arguments, if given
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     # check whether the arguments are acceptable
     if ((d < 1) or (m < 2) or (q < 3) or (r < q)):
         sys.exit('invalid values for the arguments')
-    s = 1000 * m # the value in each dimension is between (-s, s)
+    s = 1000 # size of each cluster
     # set the names of the output files
     testgen.testgen(t, d, m, q, r, s, output1, output2)
 

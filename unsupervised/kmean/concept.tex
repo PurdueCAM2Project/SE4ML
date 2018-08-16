@@ -8,9 +8,10 @@
   
 \item Learn the k-mean algorithm
 
+\item Write a test generator for creating test cases
+
 \item Implement the algorithm in Python
 
-\item Write a test generator for creating test cases
   
 \end{itemize}
 
@@ -20,12 +21,7 @@ Consider the following scenario: A department store is planning the
 annual promotion. The store wants to give customers discount coupons
 based on their purchase history.  If a customer has purchased a desk
 at this store, the customer is given a coupon for a desk.
-\marginnote{In reality, stores would give customers coupons for what
-  they may buy later.  For example, if a customer has bought a desk,
-  the customer is unlikely to buy another desk soon.  Instead of
-  giving a coupon for another desk, the store may give a coupon for
-  buying a chair.  If a customer has bought a jacket, the store may
-  give a coupon for a sweater.  } If a customer has purchased shoes,
+If a customer has purchased shoes,
 the customer is given a coupon for shoes.  If a customer has purchased
 a jacket, the customer is given a coupon for a jacket.  The store
 sells thousands of products and it does not want to give one type of
@@ -34,60 +30,95 @@ types of coupons.  It would be too expensive making so many types of
 coupons and programming the checkout machines to recognize these many
 types of coupons.  Instead, the store wants to provide only a few (say
 10) types of coupons.  The store wants to group the customers based on
-what they bought together.  For example, if a customer has bought
-shirts, shoes, and a sweater together, this customer is given a
-coupon for clothes.  If another customer has bought a desk, a dining
-table, and four chairs, this customer is given a coupon for furniture.
-If a third customer has bought a tie and shoes, this customer also
-receives a coupon for clothes (not for furniture).  If the fourth
-customer has bought chair and a desk, this customer receives a coupon
-for furniture (not for clothes).  The problem is that the store does
+what they bought together.  For example
+\begin{itemize}
+
+\item If a customer has bought shirts, shoes, and a sweater together,
+  this customer is given a coupon for clothes.
+
+\item If another customer has bought a desk, a dining table, and four
+  chairs, this customer is given a coupon for furniture.
+
+\item If a third customer has bought a tie and shoes, this customer
+  also receives a coupon for clothes (not for furniture).
+
+\item If the fourth customer has bought chair and a desk, this
+  customer receives a coupon for furniture (not for clothes).
+
+\end{itemize}
+The problem is that the store does
 not know how to group the customers so that the same group of
 customers gets the same coupon.  In other words, the store wants to
 divide the customers into groups so that the customers in each group
-have bought similar items. 
+have bought similar items.
+\marginnote{In reality, stores would give customers coupons for what
+  they may buy later.  For example, if a customer has bought a desk,
+  the customer is unlikely to buy another desk soon.  Instead of
+  giving a coupon for another desk, the store may give a coupon for
+  buying a chair.  If a customer has bought a jacket, the store may
+  give a coupon for a sweater.  } 
 
 Consider another example: A research project wants to find the
 commonalities among lung cancer patients. They want to divide the
 patients into group based on personal information and behavior, such
 as age, location, occupation, education, marital status, diet, amounts
-of sleep, etc. They want to know whether one group has more patients
-than the other groups.
+of sleep, the food they eat, etc. They want to know whether one group
+has more patients than the other groups.
+
+\index{clustering problem}
 
 Both examples are {\it clustering} problems: these problems divide
-data into groups so that the data inside each group is similar and the
-data in different group is dissimilar.  This is unsupervised learning
-because there is no teacher telling computers whether two pieces of
-data belong to the same group.  The correct answer depends on the
-other pieces of data.  \index{unsupervised learning}
+data (people in both cases) into groups so that the data inside each
+group is similar and the data in different group is dissimilar.  This
+is unsupervised learning because there is no teacher telling computers
+whether two pieces of data belong to the same group.  The correct
+answer depends on the other pieces of data.
+
+\index{unsupervised  learning}
 
 \section{Clustering into $k$ Groups}
 \index{k-mean clustering algorithm}
 
 Consider the department store coupon problem again. Suppose the store
 decides to issue exactly ten types of coupons.  The problem becomes
-dividing the customers into ten groups based on their purchase history.
-This section describes the {\it k-mean clustering algorithm}; here,
-$k$\marginnote{An obvious question is how to decide the value of
-  $k$. This book will discuss that later.}  is a number assigned to
-the problem as the number of groups.  For the department store, $k$ is
-10.  Before explaining how this clustering method works, let us
-understand what this method wants to accomplish.
+dividing the customers into ten groups based on their purchase
+history.  This section describes the {\it k-mean clustering
+  algorithm}; here, $k$\marginnote{An obvious question is how to
+  decide the value of $k$. This book will discuss that later.}  is a
+number assigned to the problem as the number of groups.  For the
+department store, $k$ is 10.  Before explaining how this clustering
+method works, let us understand what this method wants to accomplish.
 
-Suppose there are $n$ data points: $x_1$, $x_2$, ..., $x_n$. Each data
-point is a high-dimensional vector.  For example, $x_1 = <1, 0, 0, 3,
-5, 0, 0, 2>$ means that in the past twelve months the first customer
-has bought one refrigerator, no washer, no dryer, three jackets, five
-shirts, no shoes, no pants, and 2 sweaters.  If $x_2 = <0, 1, 1, 0, 0,
-1, 0, 0>$ means the second customer has bought no refrigerator, one
-washer, one dryer, no jackets, no shirts, one pair of shoes, no pants,
-and no sweater.  We want to group these $n$ data points into $k$
-non-overlapping clusters: $C_1$, $C_2$, ..., $C_k$. Obviously $k$ must
-not exceed $n$. In reality, $k$ is usually must smaller than $n$,
-i.e., $k \ll n$.  Each cluster is a set.  \marginnote{In this book, a
-  vector uses a lower case letter such as $x$. A set uses an upper
-  case letter such as $C$.} The following properties must be
-satisfied:
+Suppose there are $n$ data points (each point is a person): $x_1$,
+$x_2$, ..., $x_n$. Each data point is a vector.
+The department store considers these products:
+
+\begin{enumerate}
+\item refrigerator
+\item washer
+\item  dryer
+\item  jackets
+\item  shirts
+\item  shoes
+\item  pants
+\item sweaters
+\end{enumerate}  
+
+For example, $x_1 = <1, 0, 0, 3, 5, 0, 0, 2>$ means that in the past
+twelve months the first customer has bought one refrigerator, no
+washer, no dryer, three jackets, five shirts, no shoes, no pants, and
+two sweaters.  If $x_2 = <0, 1, 1, 0, 0, 1, 0, 0>$ means the second
+customer has bought no refrigerator, one washer, one dryer, no
+jackets, no shirts, one pair of shoes, no pants, and no sweater.
+
+\section{Define K-Mean Clustering Problem}
+
+We want to group these $n$ data points into $k$ clusters: $C_1$,
+$C_2$, ..., $C_k$. Obviously $k$ must not exceed $n$. In reality, $k$
+is usually much smaller than $n$, i.e., $k \ll n$.  Each cluster
+contains a set of data points.  \marginnote{In this book, a vector
+  uses a lower case letter such as $x$. A set uses an upper case
+  letter such as $C$.} The following properties must be satisfied:
 
 \begin{itemize}
 \item A data point must belong to one cluster: $\forall i, 1 \le i \le
@@ -111,12 +142,11 @@ satisfied:
   
 \end{itemize}
 
-How is the problem defined? Suppose $\mathds{D}$ defines how
-dissimilar the data points of each cluster.  If the data points are
-quite similar, $\mathds{D}$ is small.  If the data points are quite
-dissimilar, $\mathds{D}$ is large.  The goal is to assign
-$x_1$, $x_2$, ..., $x_n$ to $C_1$, $C_2$, ..., $C_k$
-so that
+How is the problem defined? Suppose $\mathds{D}$ (as distance) defines
+how dissimilar the data points of each cluster.  If the data points
+are quite similar, $\mathds{D}$ is small.  If the data points are
+quite dissimilar, $\mathds{D}$ is large.  The goal is to assign $x_1$,
+$x_2$, ..., $x_n$ to $C_1$, $C_2$, ..., $C_k$ so that
 
 \begin{equation}
   \underset{j = 1}{\overset{k}{\sum}} \mathds{D}(C_j)
@@ -177,19 +207,14 @@ Equation (\ref{eqn:kmeancost1}) can be written as
 
 This is a difficult problem because there are many possible solutions
 when $n$ and $k$ are large. How many possible solutions are there?
-This is equivalent to the {\it set partition problem}.  The set
-partition problem divided a set of $n$ elements into $k$
-non-overlapping non-empty subsets.    Suppose the
-$n$ data points can be assigned to any of the $k$ clusters, there are
-$k^n$ possibilities.  This, however, allows empty clusters.
-Thus, we have to exclude the situation when one 
-cluster is empty. In this case, there are $(k-1)^n$ options.
-If two clusters are empty, there are $(k-2)^n$ options.
-Continue until all except one cluster is empty. The total number of
-options is
-\marginnote{One book says there
-  are $k^n$ ways to cluster the data points. The book is wrong because
-  $k^n$ includes the results that have empty clusters.}
+This is equivalent to the {\it set partition problem}: divided a set
+of $n$ elements into $k$ non-overlapping non-empty subsets.  Suppose
+the $n$ data points can be assigned to any of the $k$ clusters, there
+are $k^n$ possibilities.  This, however, allows empty clusters.  Thus,
+we have to exclude the situation when one cluster is empty. In this
+case, there are $(k-1)^n$ options.  If two clusters are empty, there
+are $(k-2)^n$ options.  Continue until all except one cluster is
+empty. The total number of options is 
 \begin{equation}
 k^n - (k-1)^n - (k -2) ^ n ... - 1^n = k^n - \underset{i = 1}{\overset{k-1} \sum} (k-i)^n.
 \end{equation}  
@@ -209,18 +234,10 @@ possible solutions.
 {\bf YHL: these two should give the same result, right? GKT, please check.}
 
 
-\marginnote{Heuristic solutions are frequently adopted in optimization
-  problems.  For many problems, finding the best solution (or
-  solutions) can be computationally difficult because there are too
-  many possibilities to check.  Instead of finding the best solution,
-  an algorithm is adopted to find ``good enough'' solutions fast. Such
-  an algorithm usually works well but may find really bad solutions
-  for some cases.  These solutions are usually called {\it heuristic}
-  solutions.  }
-
-\index{heuristic} 
 
 \section{K-Mean Algorithm}
+
+\index{heuristic} 
 
 When $n$ and $k$ are large, there are too many possible solutions and
 finding the best solution (or one of the best solutions, if several
@@ -260,6 +277,15 @@ For cluster $C_j$, its centroid is
 \end{equation}  
 
 Please remember that each data point is a $p$-dimensional vector.
+
+{\it Heuristic solutions} are frequently adopted in optimization
+  problems.  For many problems, finding the best solution (or
+  solutions) can be computationally difficult because there are too
+  many possibilities to check.  Instead of finding the best solution,
+  an algorithm is adopted to find ``good enough'' solutions fast. Such
+  an algorithm usually works well but may find really bad solutions
+  for some cases.  
+
 
 % applications
 % https://dzone.com/articles/10-interesting-use-cases-for-the-k-means-algorithm
