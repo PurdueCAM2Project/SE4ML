@@ -11,6 +11,7 @@ between 1 to 5).  You want to use the addresses of deliveries to
 determine the stores' locations as the centroids of the clusters based
 on customers' addresses.  This can be applied to many other scenarios:
 As another example, a bank wants to decide where to install four ATM
+(automatic teller machine)
 machines ($k$ is 4) based on customers' home and office addresses.
 Both of them can take advantage of the clustering method.
 
@@ -19,14 +20,13 @@ Both of them can take advantage of the clustering method.
 It is common that the data needs to be ``cleaned'' before sending to a
 clustering program.  For example, if you want to decide the locations
 of pizza stores, you may want to exclude the customers that are too
-far away from the other customers. Maybe you want to exclude the
-locations that are, say, more than 10 km away from all the other
-customers.  Maybe you also want to consider how often customers order
-deliveries and give frequent customers larger weights so that the
-stores are closer to these customers.  The same thinking can be
-applied to selecting ATM locations: maybe you want to give higher
-weights to the customers that have high account balances or use ATM
-more often.
+far away from the other customers, maybe more than 10 km away from all
+the other customers.  Maybe you also want to consider how often
+customers order deliveries and give frequent customers larger weights
+so that the stores are closer to these customers.  The same thinking
+can be applied to selecting ATM locations: maybe you want to give
+higher weights to the customers that have high account balances or use
+ATM more often.
 
 Such ``data cleaning'' usually requires human judgement. In the
 example of deciding pizza stores' locations, should the customers be

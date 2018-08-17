@@ -337,7 +337,32 @@ algorithm does not guarantee finding the best clustering solution, it
 is advised running the program multiple times and find the result that
 has the smallest value of the cost function defined in
 (\ref{equation:kmean:cost}) on page~\pageref{equation:kmean:cost}.
+
+\section{Determine $k$'s Value}
+
 One remaining question is to determine the value of $k$.  This can
 also be answered by using different values and choose one that
-minimize the cost function.
+minimize the cost function.  The following function considers
+different values of $k$ and runs the program multiple times for each
+value.
 
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/unsupervised/kmean/solution/iterate.py}
+\end{tt}
+\nolinenumbers
+
+Consider the data generated using {\tt -d 6 -c 10 -m 50 -M 60} as the
+input.  The figure shows the distances for different values of $k$.
+It is clear that when $k$ is too small (below 8), the distances
+are much larger
+
+\begin{figure}[h] \centering
+  \subfigure[]
+{\includegraphics[width=4in]{\kmeanpath/figures/iteratedistance.png}}
+  \subfigure[]
+{\includegraphics[width=4in]{\kmeanpath/figures/iteratemindistance.png}}
+\caption{Distances for different values of $k$. (a) Five times for each
+value. (b) Smallest distance for each value.}
+\end{figure}
