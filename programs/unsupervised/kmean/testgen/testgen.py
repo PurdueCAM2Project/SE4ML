@@ -10,7 +10,19 @@ s/3 (integer).
 
 import sys
 import random
-def testgen(t, d, m, q, r, s, output1, output2):
+def testgen(args):
+    t = args.overlap
+    d = args.dimension
+    m = args.cluster
+    q = args.minc
+    r = args.maxc
+    output1 = args.output
+    output2 = args.group
+    # check whether the arguments are acceptable
+    if ((d < 1) or (m < 2) or (q < 3) or (r < q)):
+        sys.exit('invalid values for the arguments')
+    # print (args)
+    s = 1000 # size of each cluster
     # print (t, d, m, q, r, s, output1, output2)
     try:
         fout1 = open(output1, 'w')
