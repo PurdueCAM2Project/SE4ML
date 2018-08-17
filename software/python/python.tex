@@ -87,10 +87,6 @@ You can execute Python from the
 command line in a command window. It will come up with a greeting and a
 command prompt (\verb">>>").~\footnote{Python is easy to run on Linux, OS X, and Windows. For Windows, we recommend installing Windows Subsystem for Linux to get a complete Linux shell environment. To be covered in preliminaries section.}
 
-%\paragraph[{[}user@hostname
-%user{]}python]{}user@hostname
-%user{]}python}{{[}user@hostname tc{]}python}}\label{tctclinux-tcpython}
-
 \begin{verbatim}
 $ python
 Python 3.6.5 (default, Apr  1 2018, 05:46:30) 
@@ -113,7 +109,7 @@ to try out Python features to show how they work.
 
 Python statements can extend beyond
 the end of a line, in which case the interpreter will give a different
-prompt (. . .) for the continuation:
+prompt (\verb"...") for the continuation:
 
 \begin{verbatim}
 >>> (1+2
@@ -159,8 +155,7 @@ $ python3 SayHi.py
 Hello
 \end{verbatim}
 
- is a
-comment to the shell, the command interpreter on Linux. It tells the
+is a comment to the shell, the command interpreter on Linux. It tells the
 shell that the way to execute this file is to execute the program in
 file \texttt{/usr/bin/python} , and pass it the rest of the file as its
 input. The print statement tells Python to write out the string Hello on
@@ -175,25 +170,13 @@ output, so it will not write out the values of expressions.
 
 \paragraph{Arithmetic Types}
 
-Python has four built-in arithmetic
-data types:
+Python has four built-in arithmetic data types:
 
 \begin{enumerate}
-\tightlist
-\item
-   --fixed sized (at
-  least 32-bit) signed integers
-\item
-   --variably
-  sized, unbounded precision signed integers
-\item
-   --floating point
-  approximations to real numbers
-\item
-   --complex numbers
-  (with real and imaginary parts) for engineering calculations. We will
-  not consider complex numbers further, since they are not typically
-  relevant to Web enterprise applications.
+\item fixed sized (at least 32-bit) signed integers
+\item variably sized, unbounded precision signed integers
+\item floating point approximations to real numbers
+\item complex numbers (with real and imaginary parts) for engineering calculations. We will not consider complex numbers further, since they are not typically relevant to Web enterprise applications.
 \end{enumerate}
 
 Integer literals can be written in
@@ -201,7 +184,7 @@ decimal, octal, or hexadecimal (base 16) format using the same syntax as
 in C or C++:
 
 \begin{itemize}
-\tightlist
+
 \item
   Octal integers begin with 0 and
   contain only octal digits (0-7). Strangely, that means zero is written
@@ -217,40 +200,30 @@ in C or C++:
 \end{itemize}
 
 
+\begin{verbatim}
+>>> 20
 20
-
-20
-
-
+>>> 020
 020
-
+>>> 0x20
 16
-
-
-0x20
-
-32
+\end{verbatim}
 
 Long integers are written as an
-integer followed with an L (in upper- or lowercase, but lowercase is too
+integer followed with an L (in uppercase or lowercase, but lowercase is too
 hard to distinguish from the digit one). The difference between integer
 and long integer is that integers are fixed sized. Integer arithmetic
 will overflow if the results get too large. Long integers occupy as much
-storage as they need. Long integer arithmetic does not overflow. For
+storage as they need. Long integer arithmetic does not overflow.~\footnote{GKT: Latest releases of Python 2 and 3 do not overflow. This needs to be revised.} For
 example, 2 \emph{32} cannot be represented in 32 bits. So here is what
 happens when we try to take two to the 32nd power, written \emph{2**32}
 in Python:
 
 
-2**32
-
-Traceback (innermost last):
-
- File
-``\textless{}stdin\textgreater{}'', line 1, in ?
-
-OverflowError: integer pow()
-
+\begin{verbatim}
+>>> 2**32
+4294967296
+\end{verbatim}
 
 2L**32
 
@@ -294,22 +267,37 @@ applications, we won't discuss them further.
 We will discuss the logical and
 comparison operators later when we discuss \emph{while} loops.
 
-\begin{enumerate}
-\tightlist
-\item Operators and Precedence Levels
-\end{enumerate}
+Table~\ref{tab:normaltab} shows table created with the 
+package.  Notice the lack of vertical rules---they serve only to clutter
+the table's data.
 
-Precedence
+\begin{table}[h]
+  \centering
+  \fontfamily{ppl}\selectfont
+  \begin{tabular}{ll}
+    \toprule
+    Margin & Length \\
+    \midrule
+    Paper width & Blah \\
+    Paper height & Blah \\
+    Textblock width & Blah \\
+    Textblock/sidenote gutter & Blah \\
+    Sidenote width & Blah \\
+    \bottomrule
+  \end{tabular}
+  \caption{Here are the dimensions of the various margins used in the Tufte-handout class.}
+  \label{tab:normaltab}
+  %\zsavepos{pos:normaltab}
+\end{table}
 
-Operators
-
-Comments
-
-1
-
-
-
-This is the logical OR operation.
+\begin{table}[h]
+%\centering
+%\fontfamily{ppl}\selectfont
+  \begin{tabular}{llp{5cm}}
+    \toprule
+    Precedence & Operators & Comments \\
+    \midrule
+    1 & x or y &  This is the logical OR operation.
 It will return true if either \emph{x} or \emph{y} is true, i.e.
 non-zero. Like the \emph{\textbar{}\textbar{}} operator in C, it is
 short-circuited: It will not evaluate \emph{y} if \emph{x} determines
@@ -317,13 +305,8 @@ the value of the expression. It first evaluates \emph{x} and returns the
 value of \emph{x} if \emph{x} is not zero. If \emph{x} is zero, it
 evaluates and returns the value of \emph{y} . By ``x is zero'' we mean
 that it would be considered zero in an \emph{if} or \emph{while}
-expression. Other values than a number zero also count as zero.
-
-2
-
-
-
-This is the logical AND operation.
+expression. Other values than a number zero also count as zero. \\
+    2 & x and y & This is the logical AND operation.
 It will return true if both \emph{x} and \emph{y} are true, i.e.
 non-zero. Like the \emph{\&\&} operator in C, it is short-circuited: It
 will not evaluate \emph{y} if \emph{x} determines the value of the
@@ -331,7 +314,14 @@ expression. It first evaluates x and returns \emph{x} if \emph{x} is
 zero. If \emph{x} is not zero, it evaluates and returns the value of
 \emph{y} . By ``x is zero'' we mean that it would be considered zero in
 an \emph{if} or \emph{while} expression. Other values than a number zero
-also count as zero.
+also count as zero. \\
+    \bottomrule
+  \end{tabular}
+  \caption{Operators and Precedence Levels}
+  \label{tab:operators-and-precedence-levels}
+\end{table}
+
+
 
 3
 
@@ -493,7 +483,7 @@ mathematical functions can be found in module \emph{math} . Complex
 arithmetic functions are in module \emph{cmath} .
 
 \begin{enumerate}
-\tightlist
+
 \item
   Built-In Arithmetic Functions (Continued)
 \end{enumerate}
@@ -660,7 +650,7 @@ returns the absolute difference between values \emph{x} and \emph{y} .
 There are several things to note about this function creation:
 
 \begin{enumerate}
-\tightlist
+
 \item
    line introduces
   the code for the function. It gives the name we will call the
@@ -694,7 +684,7 @@ When you use a variable name in a
 function, Python will look in three places to try to find what it means:
 
 \begin{enumerate}
-\tightlist
+
 \item
   The function's local variables.
   The arguments are already placed there; other variables assigned
@@ -868,7 +858,7 @@ is to be read from or to be written. The \emph{mode} is a string. Here's
 a list of the modes:
 
 \begin{itemize}
-\tightlist
+
 \item
    Open for reading.
   This is the default.
@@ -898,7 +888,7 @@ This syntax has a couple of
 virtues:
 
 \begin{itemize}
-\tightlist
+
 \item
   It makes clear which object the
   method is operating on. Otherwise, the object would have to be one of
@@ -917,7 +907,7 @@ There are three methods you
 especially need to know for files:
 
 \begin{enumerate}
-\tightlist
+
 \item
    --Reads the
   next line from a text file and returns it in a string. The string ends
@@ -1054,7 +1044,7 @@ The code should be pretty obvious
 except for two points.
 
 \begin{enumerate}
-\tightlist
+
 \item
    : Python
   considers an empty string to be false and a nonempty string to be
@@ -1122,7 +1112,7 @@ precedence levels, 1, 2, and 3. See \href{chap2.html\#29797}{See
 Operators and Precedence Levels.}.
 
 \begin{enumerate}
-\tightlist
+
 \item
   
   --The lowest precedence Python operator is \emph{or} . The expression
@@ -1400,7 +1390,7 @@ range of indices.
 Notice a few things:
 
 \begin{itemize}
-\tightlist
+
 \item
    ,
   returns the object that is at that position.
@@ -1538,7 +1528,7 @@ at the end of the list, whereupon \emph{insert()} behaves like
 \emph{append()} .
 
 \begin{enumerate}
-\tightlist
+
 \item
   \\
   List Methods
@@ -1706,7 +1696,7 @@ There are a couple of things to
 note about this code:
 
 \begin{itemize}
-\tightlist
+
 \item
   Rather than modify the array,
   \emph{L} , we make a copy before sorting it.
@@ -2252,7 +2242,7 @@ statements more closely. There are five things that need to be
 considered:
 
 \begin{enumerate}
-\tightlist
+
 \item
   Multiple assignments of the same
   value
@@ -2401,7 +2391,7 @@ The operators that you can combine
 with an assignment are:
 
 \begin{itemize}
-\tightlist
+
 \item
   The arithmetic operators: +, -,
   *, /, \%, **
@@ -2529,7 +2519,7 @@ A dictionary is a mutable,
 associative structure. Considering these characteristics one at a time:
 
 \begin{itemize}
-\tightlist
+
 \item
    --You can add
   key-value pairs to a dictionary and remove them.
@@ -2549,7 +2539,7 @@ Dictionaries.} shows the operators, functions, and methods available for
 dictionaries.
 
 \begin{enumerate}
-\tightlist
+
 \item
   \\
   Operations on Dictionaries
@@ -2824,7 +2814,7 @@ There are three methods to examine
 the contents of a dictionary without knowing the keys:
 
 \begin{enumerate}
-\tightlist
+
 \item
    to get a
   list of all the keys currently in the dictionary.
@@ -2987,7 +2977,7 @@ string. Python's incorporation sequences are shown in
 Literals.}.
 
 \begin{enumerate}
-\tightlist
+
 \item
   \\
   Incorporation Character Sequences in
@@ -3163,7 +3153,7 @@ formatting. The operators are shown in \href{chap2.html\#53096}{See
 String Operators.}.
 
 \begin{enumerate}
-\tightlist
+
 \item
   \\
   String Operators
@@ -3307,7 +3297,7 @@ optional. The formatting character, \emph{f} , tells Python (internally,
 the C library) what conversion to perform. The formatting characters are
 
 \begin{itemize}
-\tightlist
+
 \item
    --Decimal integer. The
   corresponding element of the tuple is converted to an integer and the
@@ -3337,7 +3327,7 @@ the C library) what conversion to perform. The formatting characters are
 `fffffffe'
 
 \begin{itemize}
-\tightlist
+
 \item
    --Hexadecimal integer.
   The corresponding element of the tuple is converted to an integer and
@@ -3351,7 +3341,7 @@ the C library) what conversion to perform. The formatting characters are
 `FFFFFFFE'
 
 \begin{itemize}
-\tightlist
+
 \item
    --Floating point
   format, with decimal point but without an exponent.
@@ -3363,7 +3353,7 @@ the C library) what conversion to perform. The formatting characters are
 `0.000000'
 
 \begin{itemize}
-\tightlist
+
 \item
    --Floating point
   format, with decimal point and an exponent (with a lowercase \emph{e}
@@ -3376,7 +3366,7 @@ the C library) what conversion to perform. The formatting characters are
 `5.000000e-101'
 
 \begin{itemize}
-\tightlist
+
 \item
    --Floating point
   format, with decimal point and an exponent (with an uppercase \emph{E}
@@ -3389,7 +3379,7 @@ the C library) what conversion to perform. The formatting characters are
 `5.000000E-101'
 
 \begin{itemize}
-\tightlist
+
 \item
    --Choose either
   \emph{f} or \emph{e,} depending on the size of the exponent.
@@ -3407,7 +3397,7 @@ the C library) what conversion to perform. The formatting characters are
 '
 
 \begin{itemize}
-\tightlist
+
 \item
    --Like s, but uses
   \emph{repr()} rather than \emph{str()} to convert the argument (in
@@ -3429,7 +3419,7 @@ the C library) what conversion to perform. The formatting characters are
 `Y'
 
 \begin{itemize}
-\tightlist
+
 \item
    --This does not match
   an element from the tuple. It is the way to incorporate a percent sign
@@ -3445,7 +3435,7 @@ each of which is optional. These
 parts are as follows:
 
 \begin{itemize}
-\tightlist
+
 \item
    --The alignment; can be
   a plus sign, a minus sign, or 0, or some combination of them. They
@@ -3463,7 +3453,7 @@ be included.)
 the field.
 
 \begin{itemize}
-\tightlist
+
 \item
    The width;
   specifies the minimum field width the formatted value is to occupy.
@@ -3483,7 +3473,7 @@ the field.
 '
 
 \begin{itemize}
-\tightlist
+
 \item
    The
   precision; follows a decimal point. It has one of three meanings:
@@ -3499,7 +3489,7 @@ the field.
 '
 
 \begin{enumerate}
-\tightlist
+
 \item
   For floating point numbers, it
   specifies the maximum number of digits following the decimal point.
@@ -3511,7 +3501,7 @@ the field.
 '
 
 \begin{enumerate}
-\tightlist
+
 \item
   For integers, the precision
   specifies the minimum number of digits to represent.
@@ -3568,7 +3558,7 @@ string module were made into methods of string objects.
 Methods.} shows the most useful of these functions and methods.
 
 \begin{enumerate}
-\tightlist
+
 \item
   \\
   Most Important String Functions and Methods
@@ -3751,7 +3741,7 @@ String
 Functions}{Built-In String Functions}}\label{built-in-string-functions}
 
 \begin{itemize}
-\tightlist
+
 \item
    --Returns the
   character (in a one-character string), whose ASCII code is integer
@@ -3776,7 +3766,7 @@ dictionaries to look up variables in: \emph{eval(s,globals)} or
 5
 
 \begin{itemize}
-\tightlist
+
 \item
    --Returns a string
   representation of integer \emph{i} converted to hexadecimal
@@ -3792,7 +3782,7 @@ It is not equivalent to
 \emph{(``\%x'' \% i)} , which does not put \emph{``0x''} on the front.
 
 \begin{itemize}
-\tightlist
+
 \item
    --Returns
   string \emph{s} or a copy of the string \emph{s} . Each call to
@@ -3831,7 +3821,7 @@ will occupy the same block of storage, rather than many blocks. This may
 save considerable storage.
 
 \begin{itemize}
-\tightlist
+
 \item
    --Converts a
   string to an integer. (It will also convert long integers and floating
@@ -3853,7 +3843,7 @@ save considerable storage.
 `037777777777'
 
 \begin{itemize}
-\tightlist
+
 \item
    --Returns the
   integer representing the single character in string \emph{c} .
@@ -3880,7 +3870,7 @@ we used the interpreter to try out code to see what it would do.
 ~
 
 \begin{enumerate}
-\tightlist
+
 \item
   
   that will write out the first \emph{n} Fibonacci numbers. Fibonacci
