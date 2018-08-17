@@ -58,8 +58,31 @@ def readfile(fhd, kval):
         dataArray.append(dp)
     return dataArray
 
-def kmean(filename, kval):
-    # print ('kmean', filename, kval)
+def printSummary(dataArray, centroidArray, kval):
+    # print in the format of a CSV file
+    # kval, distance (cost), sizes of clusters
+    # calculate the number of data points in each cluster
+    line = str(kval)
+    clustersize = [0] * kval
+    numdp = len(dataArray)    
+    # calculate the value of the cost function
+    dist = 0
+    for dpindex in range(0, numdp):
+        clu = dataArray[dpindex].getCluster()
+        dist = dist + distance(dataArray[dpindex], centroidArray[clu])
+    line = line + ',' + str(dist)
+    for dpindex in range(0, numdp):
+        clu = dataArray[dpindex].getCluster()
+        clustersize[clu] = clustersize[clu] + 1
+    for clu in range (kval):
+        line = line + ',' + str(clustersize[clu])
+    print (line)
+
+def kmean(args):
+    # print (args)
+    filename = args.filename
+    kval = args.kval
+    summary = args.summary
     try:
         fhd = open(filename)
     except:
@@ -72,14 +95,8 @@ def kmean(filename, kval):
     # print ('-------------------------------')
     centroidArray = cluster(dataArray, kval)
     # print ('+++++++++++++++++++++++++++++++')
-    for dpindex in range(0, numdp):
-        dataArray[dpindex].printData()
-    '''
-    # calculate the number of data points in each cluster
-    clustersize = [0] * kval
-    for dpindex in range(0, numdp):
-        clu = dataArray[dpindex].getCluster()
-        clustersize[clu] = clustersize[clu] + 1
-    for clu in range (kval):
-        print ('clustersize[', clu, '] = ', clustersize[clu])
-    '''
+    if (summary):
+        printSummary(dataArray, centroidArray, kval)
+    else:
+        for dpindex in range(0, numdp):
+            dataArray[dpindex].printData()
