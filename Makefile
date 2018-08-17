@@ -2,7 +2,7 @@ PDFLATEX=pdflatex # -interaction=batchmode
 PDFLATEX_EXTRA="-halt-on-error"
 BOOK=se4ml
 
-BOOK_SOURCES := $(wildcard *.tex frontmatter/*.tex software/*.tex unsupervised/*.tex)
+BOOK_SOURCES := $(shell find . -name "*.tex")
 
 
 all: $(BOOK).pdf
