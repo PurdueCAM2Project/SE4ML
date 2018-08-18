@@ -354,9 +354,9 @@ value.
 \nolinenumbers
 
 Consider the data generated using {\tt -d 6 -c 10 -m 50 -M 60} as the
-input.  The figure shows the distances for different values of $k$.
-It is clear that when $k$ is too small (below 8), the distances
-are much larger
+input.  Figure~\ref{figure:kmean:distances} shows the distances for
+different values of $k$.  It is clear that when $k$ is too small
+(below 8), the distances are much larger
 
 \begin{figure}[h] \centering
   \subfigure[]
@@ -364,5 +364,23 @@ are much larger
   \subfigure[]
 {\includegraphics[width=4in]{\kmeanpath/figures/iteratemindistance.png}}
 \caption{Distances for different values of $k$. (a) Five times for each
-value. (b) Smallest distance for each value.}
+  value. (b) Smallest distance for each value.}
+\label{figure:kmean:distances}
 \end{figure}
+
+Figure~\ref{figure:kmean:clustersizes} shows the sizes of clusters for
+different values of $k$. Each value runs five times and has five
+bars. The size of each cluster is shown as the height. Since the
+clusters together contain all data points, the sum of the cluters'
+sizes is always the same.  As expected, the number of clusters is the
+same as the value of $k$.  The sizes of the clusters can vary significantly.
+For example, when $k$ is 5, the smallest cluster has no data point and
+the largest cluster has more than one third of the data points.
+
+\begin{figure}[h] \centering
+{\includegraphics[width=4in]{\kmeanpath/figures/clustersizes.png}}
+\caption{Sizes of clusters for different values of $k$.}
+\label{figure:kmean:clustersizes}
+\end{figure}
+
+\clearpage
