@@ -17,7 +17,7 @@ addons:
     - texlive-science
     - latexmk
 script:
-- make book
+- make all
 deploy:
   provider: releases
   api_key:
