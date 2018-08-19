@@ -15,80 +15,110 @@
   
 \end{itemize}
 
-\section{}
+\section{Limitations of the {\it k-mean} Algorithm}
 
-The {\it k-mean} clustering algorithm has third major problems: First,
-there is no obvious reason to select a particular value of $k$.
-Second, the algorithm is non-deterministic and it is often necessary
-running the same program multiple times.  Third, it is possible to
-calculate the distances of centroids but this requires additional
-calculation; there is no easy way determining which two clusters are
-closer than the others.
-Figure~\ref{figure:kmean:distances} shows that the distances can vary
-significantly in different executions even for the same $k$.  {\it
-  Hierarchical clustering} is a method that does not require such a
-pre-selected parameter.
+The {\it k-mean} clustering algorithm has third major problems: (1)
+There is no obvious reason to select a particular value of $k$.
+Figure~\ref{figure:kmean:distances} shows the distances for different
+values of $k$. There are 10 clusters and the clusters do not overlap
+({\tt -t} not used) but the smallest distance occurs when $k$ is
+13. (2) The algorithm is non-deterministic and it is often necessary
+running the same program multiple times.
+Figure~\ref{figure:kmean:distances} (a) shows that the distances may
+vary substantially even for the same value of $k$.  (3) For a given
+cluster, there is immediately answer which cluster is closest.  It is
+possible to calculate the distances of centroids but this requires
+additional calculation.  (4) The {\it k-mean} algorithm assignments
+{\it all} data points to one of the $k$ clusters in the very first
+step.  Then the algorithm adjusts the clusters by finding closest
+centroid from each data point. Because the initial assignments have
+direct impacts on the final results, the program needs to run multiple
+times for getter better results.  {\it Hierarchical clustering} is a
+method that does not have these problems\footnote{Hierarchical
+  clustering has some other problems, to be discussed later.}.
 
-\begin{longtable}{|l|l|l|l|l|l|l|}
-0 & (1, 11, 13725) & (1, 12, 10980), (1, 13, 8235), (2, 2, 0), (3, 1, 0) \\
-2745 & (1, 12, 10980) & (1, 13, 8235), (2, 2, 0), (2, 3, 0), (3, 1, 0) \\
-5490 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-8235 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-10980 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-13725 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-16470 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-19215 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-21960 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-24705 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-27450 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-30195 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-32940 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-35685 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-38430 & (1, 13, 10980) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-41175 & (1, 12, 13725) & (1, 13, 10980), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-43920 & (1, 13, 10980) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-46665 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-49410 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-52155 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-54900 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-57645 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-60390 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-63135 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-65880 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-68625 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-71370 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-74115 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-76860 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-79605 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-82350 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-85095 & (1, 12, 13725) & (1, 13, 10980), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-87840 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-90585 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-93330 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-96075 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-98820 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-101565 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-104310 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-107055 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-109800 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-112545 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-115290 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-118035 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-120780 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-123525 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-126270 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-129015 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-131760 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-134505 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-137250 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-139995 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-142740 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-145485 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-148230 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-150975 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-153720 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-156465 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-159210 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-161955 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-164700 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-\end{longtable}  
+\index{binary tree}
+\index{binary tree!child}
+
+\section{Example of 
+Hierarchical clustering}
+
+Hierarchical clustering iteratively finds the closet pair of data
+points, clusters, or data point and cluster. The algorithm makes the
+pair two {\it children} by a {\it binary tree}.  The binary tree
+becomes a new cluster.  The algorithm continues until only one binary
+tree is left.  Hierarchical clustering calls it {\it dendrogram}, instead
+of {\it binary tree}.
+
+Before formally describing the algorithm, let us go through an example.
+
+\begin{figure}[h] \centering
+{\includegraphics[width=3in]{\hierpath/figures/example1.png}}
+\caption{Locations of nine data points. }
+\end{figure}
+
+These are the locations of the data points:
+
+\hspace{0.1in}
+\begin{tt}
+\begin{tabular}{|r|rr|} \hline
+{\bf index} &  {\bf x} & {\bf y} \\ \hline
+0 &  -66  &  45 \\
+1 & 95  &  -84 \\
+2 & -35  &  -70 \\
+3 & 26  &  94 \\
+4 & 15  &  20 \\
+5 & 66  &  -3 \\
+6 & -47  &  -76 \\
+7 & 24  &  -93 \\
+8 & -1  &  10 \\ \hline
+\end{tabular}
+\end{tt}
+\hspace{0.1in}
+
+The distance of $(x_1, y_1)$ and $(x_2, y_2)$ is $\sqrt{(x_1 - x_2)^2
+    + (y_1 - y_2)^2}$. Since we care about the order, it is not
+necessary to take the square root.  The table
+shows
+${(x_1 - x_2)^2
+    + (y_1 - y_2)^2}$:
+
+  \hspace{0.1in}
+  \begin{tt}
+\begin{tabular}{|r|rrrrrrrrr|}  \hline
+& 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\ \hline
+
+  0 &0 & 42562 & 14186 & 10865 & 7186 & 19728 & 15002 & 27144 & 5450\\
+
+1 &42562 & 0 & 17096 & 36445 & 17216 & 7402 & 20228 & 5122 & 18052\\
+
+2 &14186 & 17096 & 0 & 30617 & 10600 & 14690 & 180 & 4010 & 7556\\
+
+3 &10865 & 36445 & 30617 & 0 & 5597 & 11009 & 34229 & 34973 & 7785\\
+
+4 &7186 & 17216 & 10600 & 5597 & 0 & 3130 & 13060 & 12850 & 356\\
+
+5 &19728 & 7402 & 14690 & 11009 & 3130 & 0 & 18098 & 9864 & 4658\\
+
+6 &15002 & 20228 & 180 & 34229 & 13060 & 18098 & 0 & 5330 & 9512\\
+
+7 &27144 & 5122 & 4010 & 34973 & 12850 & 9864 & 5330 & 0 & 11234\\
+
+8 &5450 & 18052 & 7556 & 7785 & 356 & 4658 & 9512 & 11234 &
+0 \\ \hline
+\end{tabular}
+\end{tt}
+\hspace{0.1in}
+
+Obviously, this table is symmetric because the distance between $(x_1,
+y_1)$ and $(x_2, y_2)$ is the same as distance between $(x_2, y_2)$
+and $(x_1, y_1)$. The values along the diagnoal are always zero
+because the distance of each point and itself is zero.
+
+
+% a good example in
+% http://www.econ.upf.edu/~michael/stanford/maeb7.pdf
+
+
+% how to plot tree: https://plot.ly/python/tree-plots/
+% https://joernhees.de/blog/2015/08/26/scipy-hierarchical-clustering-and-dendrogram-tutorial/
