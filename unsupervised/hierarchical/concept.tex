@@ -69,6 +69,7 @@ They are the two children of a binary tree:
 \begin{figure}[h] \centering
 {\includegraphics[width=5in]{\hierpath/figures/cluster2.png}}
 \caption{Two data points are the two children of a binary tree. }
+\label{fig:hierarchical:cluster2}
 \end{figure}
 
 Next, we consider the case when there are four data points:
@@ -130,11 +131,12 @@ axis. Pay attention to the shape only.
 How do we represent the cluster that includes points 0 and 3?  There
 are several different commonly used representations.  This example
 uses the {\it centroid}: a cluster is represented by the centroid of
-the data points in the cluster.  The cluster that contains $(x_0,
-y_0)$ and $(x_3, y_3)$ is represented by $(\frac{-66+26}{2},
-\frac{45+94}{2}) = (-20, 69.5)$.  This cluster is marked as $(x_0,
-y_0)$ and $(x_3, y_3)$ no longer exists.  We can recompute the
-distances among the pairs of points:
+the data points in the cluster. It is possible to represent a cluster
+using other methods, to be discussed later in this chapter.  The
+cluster that contains $(x_0, y_0)$ and $(x_3, y_3)$ is represented by
+$(\frac{-66+26}{2}, \frac{45+94}{2}) = (-20, 69.5)$.  This cluster is
+marked as the new $(x_0, y_0)$ and $(x_3, y_3)$ no longer exists.  We
+can recompute the distances among the pairs of points:
 
 
 \begin{table}
@@ -157,73 +159,171 @@ At this moment, there are only two clusters and they are the children
 of a binary tree node.  The final result is shown in
 Figur~\ref{fig:hierarchical:cluster4}.
 
-\clearpage
+Let's add two more data points into consideration.
 
-% \begin{figure}[h] \centering
-% {\includegraphics[width=3in]{\hierpath/figures/example1.png}}
-% \caption{Locations of nine data points. }
-% \end{figure}
-
-These are the locations of the data points:
-
-\hspace{0.1in}
+\begin{table}[h]
 \begin{tt}
 \begin{tabular}{|r|rr|} \hline
 {\bf index} &  {\bf x} & {\bf y} \\ \hline
-0 &  -66  &  45 \\
+0 & -66 &  45 \\
 1 & 95  &  -84 \\
 2 & -35  &  -70 \\
 3 & 26  &  94 \\
-4 & 15  &  20 \\
-5 & 66  &  -3 \\
-6 & -47  &  -76 \\
-7 & 24  &  -93 \\
-8 & -1  &  10 \\ \hline
+4 & 15 & 20 \\
+5 & 66 & -3 \\ \hline
 \end{tabular}
 \end{tt}
-\hspace{0.1in}
+\end{table}
 
-  \hspace{0.1in}
+The pair-wise distances is shown in Table~\ref{table:hierarchical:distance6points}.
+
+\begin{table}
   \begin{tt}
-\begin{tabular}{|r|rrrrrrrrr|}  \hline
-& 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\ \hline
+\begin{tabular}{|r|rrrrrr|}  \hline
+& 0 & 1 & 2 & 3 & 4 & 5 \\ \hline
 
-  0 &0 & 42562 & 14186 & 10865 & 7186 & 19728 & 15002 & 27144 & 5450\\
-
-1 &42562 & 0 & 17096 & 36445 & 17216 & 7402 & 20228 & 5122 & 18052\\
-
-2 &14186 & 17096 & 0 & 30617 & 10600 & 14690 & 180 & 4010 & 7556\\
-
-3 &10865 & 36445 & 30617 & 0 & 5597 & 11009 & 34229 & 34973 & 7785\\
-
-4 &7186 & 17216 & 10600 & 5597 & 0 & 3130 & 13060 & 12850 & 356\\
-
-5 &19728 & 7402 & 14690 & 11009 & 3130 & 0 & 18098 & 9864 & 4658\\
-
-6 &15002 & 20228 & 180 & 34229 & 13060 & 18098 & 0 & 5330 & 9512\\
-
-7 &27144 & 5122 & 4010 & 34973 & 12850 & 9864 & 5330 & 0 & 11234\\
-
-8 &5450 & 18052 & 7556 & 7785 & 356 & 4658 & 9512 & 11234 &
-0 \\ \hline
+0 & 0& 42562& 14186& 10865 & 7186 & 19728\\
+1 & 42562& 0& 17096& 36445 & 17216 & 7402\\
+2 & 14186& 17096& 0& 30617 & 10600 & 14690\\
+  3 & 10865& 36445& 30617& 0 & 5597 & 11009 \\
+  4 & 7186 & 17216 & 10600 & 5597 & 0 & 3130 \\ 
+  5 & 19728 & 7402 & 14690 & 11009 & 3130 & 0   \\ \hline
 \end{tabular}
+  \end{tt}
+  \caption{Distances of pairs of six data points.}
+  \label{table:hierarchical:distance6points}
+\end{table}
+
+The shortest distance (3130) occurs between $(x_4, y_4)$ and
+$(x_5, y_5)$.  These two data points are the two children of a node.
+
+
+\begin{figure}[h] \centering
+{\includegraphics[width=5in]{\hierpath/figures/cluster6.png}}
+\caption{Clusters of six data points.}
+\label{fig:hierarchical:cluster6}
+\end{figure}
+
+This cluster is represented by the centroid $(\frac{15 + 66}{2},
+\frac{20 + (-3)}{2}) = (\frac{81}{2}, \frac{17}{2}) = (40.5, 8.5)$.
+The cluster is expressed as $(x_4, y_4)$ and $(x_5, y_5)$ is removed.
+Now there are four data points and one cluster. The distances
+are
+
+\begin{table}
+  \begin{tt}
+\begin{tabular}{|r|rrrrr|}  \hline
+& 0 & 1 & 2 & 3 & 4  \\ \hline
+
+0 & 0& 42562& 14186& 10865 & 12674.5\\
+1 & 42562& 0& 17096& 36445 & 11526.5 \\
+2 & 14186& 17096& 0& 30617 & 11862.5 \\
+3 & 10865& 36445& 30617& 0 & 7520.5 \\
+4 & 12674.5 & 11526.5 & 11862.5 & 7520.5 & 0 \\  \hline
+\end{tabular}
+  \end{tt}
+  \caption{Distances of pairs of six data points.}
+  \label{table:hierarchical:distance6points}
+\end{table}
+
+The smallest distance is 7520.5 and it is between $(x_3, y_3)$ and the
+cluster. Thus, $(x_3, y_3)$ and the cluster are put together by making
+them the two childrens of a binary tree node.
+
+\clearpage
+
+Figures~\ref{fig:hierarchical:cluster2}-\ref{fig:hierarchical:cluster6}
+are created using the following program.
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/unsupervised/hierarchical/examples/example1.py}
 \end{tt}
-\hspace{0.1in}
+\nolinenumbers
 
-Obviously, this table is symmetric because the distance between $(x_a,
-y_a)$ and $(x_b, y_b)$ is the same as distance between $(x_b, y_b)$
-and $(x_a, y_a)$. The values along the diagnoal are always zero
-because the distance of each point and itself is zero.
+\section{Hierarchical Clustering Algorithm}
 
-The shortest distance (180) occurs between $(x_2, y_2)$ and $(x_6,
-y_6)$.  They are the first pair to be put into the same cluster.
+The hierarchical clustering algorithm starts by treating each data
+point as a cluster. Then it repetively finds the closest two clusters.
+These two clusters are the two children of a binary tree node and form
+one cluster.  As a result, two clusters become one cluster.  This
+process continues until only one cluster is left.
+The algorithm is described below:
+
+\begin{algorithm}
+    \caption[]{Hierarchical Clustering Algorithm}
+    \begin{algorithmic}[1]
+      \ForAll  Make each data point a cluster of its own
+      \EndFor
+      \While {Number of Cluster Exceeds one}
+      \State Compute the distance of each pair of clusters
+      \State Find the two clusters whose distance is the smallest
+      \State Make these two clusters the children of a binary tree node
+      \State Make this tree node a new cluster 
+      \EndWhile
+    \end{algorithmic}
+    \label{algorithm:hierarchicalclustering}
+\end{algorithm}
+
+\section{Define Distance of Two Clusters}
+
+\index{Cluster!Distance}
+
+The earlier examples use the centroid to express each cluster.  Other
+definitions of clusters' distances are also used.  There are four
+commonly adopted definitions for the distance of two clusters: {\it
+  complete}, {\it single}, {\it average}, and {\it centroid}.  They
+are described below.
+
+Suppose $\mathds{A} = \{a_1, a_2, ..., a_n\}$ is a cluster
+and $a_1$, $a_2$, ..., $a_n$ are the $n$ data points in this cluster.
+Suppose $\mathds{B} = \{b_1, b_2, ..., b_m\}$ is another cluster
+and $b_1$, $b_2$, ..., $b_m$ are the $m$ data points in this cluster.
 
 
+\begin{itemize}
+\item Complete: Compute the pairwise distances of every point in
+  $\mathds{A}$ and every point in $\mathds{B}$, then select the
+  largest distance.  Mathematically, it is
 
-The second
-shortest distance (356) occurs between $(x_4, y_4)$ and
-$(x_8, y_8)$.
+  \begin{equation}
+    \underset{a_i \in \mathds{A}, b_j \in \mathds{B}}{\max}
+         {|a_i - b_j|}.
+  \end{equation}
 
+  Here, $|a_i - b_j|$ means the distance of the two points.
+
+\item Single. This definition considers the smallest distance
+  among all pairs of points in $\mathds{A}$ and $\mathds{B}$.
+  
+  \begin{equation}
+    \underset{a_i \in \mathds{A}, b_j \in \mathds{B}}{\min}
+         {|a_i - b_j|}.
+  \end{equation}
+
+\item Average. This definition computes the average of the pairwise
+  distances.
+
+  \begin{equation}
+\frac{1}{n \times m}    \underset{a_i \in \mathds{A}, b_j \in \mathds{B}}{\Sigma}
+         {|a_i - b_j|}.
+  \end{equation}
+
+\item Centroid. Find the centroid $c_{\mathds{A}}$ of $\mathds{A}$ and
+  the centroid of $c_{\mathds{B}}$ $\mathds{B}$ using the definition
+  of (\ref{equ:kmean:centroid}) in Chapter~\ref{chapter:kmean}.
+  The distance of the two clusters is the distance of the two
+  centroid:
+
+  \begin{equation}
+| c_{\mathds{A}} - c_{\mathds{B}} |.
+    \end{equation}
+
+  
+\end{itemize}
+
+\clearpage
 
 % a good example in
 % http://www.econ.upf.edu/~michael/stanford/maeb7.pdf
