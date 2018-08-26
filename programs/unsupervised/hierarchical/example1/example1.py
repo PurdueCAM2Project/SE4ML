@@ -34,20 +34,3 @@ if __name__ == "__main__":
             d = distance(x[i1][0], x[i1][1], x[i2][0], x[i2][1])
             pairdist[i1][i2] = d
         print ('pairdist', pairdist[i1])
-
-    y = x[0:numdp-2]
-    y.append([(x[numdp-2][0] + x[numdp-1][0])/2,
-              (x[numdp-2][1] + x[numdp-1][1])/2,])
-    
-    print (y)
-    print ('-----------------------------')
-    numdp = numdp -1
-    pairdist = []
-    for i1 in range(numdp):
-        row = [0] * numdp
-        pairdist.append(row)
-    for i1 in range(numdp):
-        for i2 in range(numdp):
-            d = distance(y[i1][0], y[i1][1], y[i2][0], y[i2][1])
-            pairdist[i1][i2] = d
-        print ('pairdist', pairdist[i1])
