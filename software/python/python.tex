@@ -269,7 +269,7 @@ applications, we won't discuss them further.
 We will discuss the logical and
 comparison operators later when we discuss \emph{while} loops.
 
-\begin{longtable}{|l|l|p{7cm}|}
+\begin{longtable}{l|p{3cm}|p{7cm}}
 \toprule
 Precedence & Operators & Comments \\
 \midrule
@@ -300,33 +300,33 @@ It returns 1 if \emph{x} is zero; it returns 0 if \emph{x} is anything
 else. \\
 %
 \midrule
-  4 & \verb"!=", \verb"<>"  & The relational operators are much
+  4 & \verb"<", \verb">", \verb"<=", \verb">="  & The relational operators are much
 like they are in other languages. Operators \verb"!=" and \verb"<>" both mean not equal. \\
 %
-   & \verb"==" and \verb"!=" & Testing for equality, \verb"==" and \verb"!=", can be applied to structured objects as discussed later.
+   & \verb"==", \verb"!=", \verb"<>"  & Testing for equality, \verb"==" and \verb"!=", can be applied to structured objects as discussed later.
 They attempt to find out if the structured objects have equal
 components. \\
 %
-   & \verb"x is y" and \verb"x is not y"  & Operators \verb"x is y" and \verb"x is not y"
+   & \verb"x is y", \verb"x is not y", \verb"x in y", \verb"x not in y"  & Operators \verb"x is y" and \verb"x is not y"
 test whether two names reference the same object, so they will be much
 faster than \verb"==" and \verb"!=" for structured objects, but they don't perform the
 same test.  We will discuss \verb"x in y" and \verb"x not in y" later, when we discuss sequence types.\\
 %
 \midrule
-  5 & ADD HERE &  This is the bitwise OR operation,
+  5 & \verb"x | y" &  This is the bitwise OR operation,
 ORing the corresponding bits in two integers. \\
 %
 \midrule
-  6  & ADD HERE & This is the bitwise EXCLUSIVE-OR (XOR) operation, XORing the corresponding bits in two integers. \\
+  6  & \verb"x ^ y" & This is the bitwise EXCLUSIVE-OR (XOR) operation, XORing the corresponding bits in two integers. \\
 %
 \midrule
 
-  7 & ADD HERE & This is the bitwise AND operation,
+  7 & \verb"x & y" & This is the bitwise AND operation,
 ANDing the corresponding bits in two integers. \\
 %
 \midrule
 
-8 & ADD HERE & These are the shift operators.
+8 & \verb"x << y", \verb"x >> y" & These are the shift operators.
 They apply to integers or long integers. The bits in \emph{x} are
 shifted left ( \emph{\textless{}\textless{}} ) or right (
 \emph{\textgreater{}\textgreater{}} ) the number of positions indicated
@@ -334,11 +334,11 @@ by \emph{y} . The right shifts are arithmetic: The sign bit will be
 shifted in at the top, preserving the sign of the \emph{x} operand. \\
 %
 \midrule
-9 & ADD HERE & Addition and subtraction. Operator
+9 & \verb"x + y", \verb"x - y" & Addition and subtraction. Operator
 \emph{+} also performs concatenation on sequences, as we will see later.\\
 %
 \midrule
-10 & ADD HERE & Multiplication, division, and
+10 & \verb"x * y", \verb"x / y", \verb"x % y" & Multiplication, division, and
 modulus (or remainder). Operator \emph{\%} will also work with floating
 point numbers. Operator \emph{*} also applies to sequence types, and
 operator \emph{\%} has a special function for strings. We will look at
