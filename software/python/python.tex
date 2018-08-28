@@ -225,23 +225,25 @@ in Python:
 4294967296
 \end{verbatim}
 
-2L**32
 
+\begin{verbatim}
+>>> 2L**32
 4294967296L
+\end{verbatim}
 
-(This example also shows Python's
-response to an error.)
+%(This example also shows Python's
+%response to an error.)
 
 Since integers occupy single
 machine words, computers perform integer arithmetic very fast. Long
 integer arithmetic typically requires much more time.
 
 Floating point numbers are written
-with a decimal point or an exponent, or both. For example: \emph{.2,
-2.0, 20., 2000e-1, 2E3} .
+with a decimal point or an exponent, or both. For example: \texttt{.2},
+\texttt{2.0}, \texttt{20.}, \texttt{2000e-1}, \texttt{2E3}.
 
 Python allows mixed-mode
-arithmetic, as we saw above with \emph{2L**32} . If the two operands of
+arithmetic, as we saw above with \texttt{2L**32} . If the two operands of
 an arithmetic operator have different types, Python will convert them to
 a common type. Python converts the operand whose type has the smaller
 range of values to the type of the operand with the wider range of
@@ -267,37 +269,11 @@ applications, we won't discuss them further.
 We will discuss the logical and
 comparison operators later when we discuss \emph{while} loops.
 
-Table~\ref{tab:normaltab} shows table created with the 
-package.  Notice the lack of vertical rules---they serve only to clutter
-the table's data.
-
-\begin{table}[h]
-  \centering
-  \fontfamily{ppl}\selectfont
-  \begin{tabular}{ll}
-    \toprule
-    Margin & Length \\
-    \midrule
-    Paper width & Blah \\
-    Paper height & Blah \\
-    Textblock width & Blah \\
-    Textblock/sidenote gutter & Blah \\
-    Sidenote width & Blah \\
-    \bottomrule
-  \end{tabular}
-  \caption{Here are the dimensions of the various margins used in the Tufte-handout class.}
-  \label{tab:normaltab}
-  %\zsavepos{pos:normaltab}
-\end{table}
-
-\begin{table}[h]
-%\centering
-%\fontfamily{ppl}\selectfont
-  \begin{tabular}{llp{5cm}}
-    \toprule
-    Precedence & Operators & Comments \\
-    \midrule
-    1 & x or y &  This is the logical OR operation.
+\begin{longtable}{|l|l|p{7cm}|}
+\toprule
+Precedence & Operators & Comments \\
+\midrule
+  1 & \texttt{x or y} &  This is the logical OR operation.
 It will return true if either \emph{x} or \emph{y} is true, i.e.
 non-zero. Like the \emph{\textbar{}\textbar{}} operator in C, it is
 short-circuited: It will not evaluate \emph{y} if \emph{x} determines
@@ -306,7 +282,9 @@ value of \emph{x} if \emph{x} is not zero. If \emph{x} is zero, it
 evaluates and returns the value of \emph{y} . By ``x is zero'' we mean
 that it would be considered zero in an \emph{if} or \emph{while}
 expression. Other values than a number zero also count as zero. \\
-    2 & x and y & This is the logical AND operation.
+%
+\midrule
+  2 & \texttt{x and y} & This is the logical AND operation.
 It will return true if both \emph{x} and \emph{y} are true, i.e.
 non-zero. Like the \emph{\&\&} operator in C, it is short-circuited: It
 will not evaluate \emph{y} if \emph{x} determines the value of the
@@ -315,163 +293,80 @@ zero. If \emph{x} is not zero, it evaluates and returns the value of
 \emph{y} . By ``x is zero'' we mean that it would be considered zero in
 an \emph{if} or \emph{while} expression. Other values than a number zero
 also count as zero. \\
-    \bottomrule
-  \end{tabular}
-  \caption{Operators and Precedence Levels}
-  \label{tab:operators-and-precedence-levels}
-\end{table}
-
-
-
-3
-
-
-
-This is the logical NOT operator.
+%
+\midrule
+  3 & \texttt{not x} & This is the logical NOT operator. 
 It returns 1 if \emph{x} is zero; it returns 0 if \emph{x} is anything
-else.
-
-4
-
-
-
-
-
-
-
-
-
-
-
- \emph{x != y x
-\textless{}\textgreater{} y}
-
-
-
-
-
-
-
-
-
-The relational operators are much
-like they are in other languages. Operators \emph{!=} and
-\emph{\textless{}\textgreater{}} both mean not equal.
-
-
-and \emph{!=} , can be applied to structured objects, as we will discuss
-later. They attempt to find out if the structured objects have equal
-components.
-
-Operators x is y and x is not y
+else. \\
+%
+\midrule
+  4 & \verb"!=", \verb"<>"  & The relational operators are much
+like they are in other languages. Operators \verb"!=" and \verb"<>" both mean not equal. \\
+%
+   & \verb"==" and \verb"!=" & Testing for equality, \verb"==" and \verb"!=", can be applied to structured objects as discussed later.
+They attempt to find out if the structured objects have equal
+components. \\
+%
+   & \verb"x is y" and \verb"x is not y"  & Operators \verb"x is y" and \verb"x is not y"
 test whether two names reference the same object, so they will be much
-faster than == and != for structured objects, but they don't perform the
-same test.
+faster than \verb"==" and \verb"!=" for structured objects, but they don't perform the
+same test.  We will discuss \verb"x in y" and \verb"x not in y" later, when we discuss sequence types.\\
+%
+\midrule
+  5 & ADD HERE &  This is the bitwise OR operation,
+ORing the corresponding bits in two integers. \\
+%
+\midrule
+  6  & ADD HERE & This is the bitwise EXCLUSIVE-OR (XOR) operation, XORing the corresponding bits in two integers. \\
+%
+\midrule
 
-We will discuss x in y and x not
-in y later, when we discuss sequence types.
+  7 & ADD HERE & This is the bitwise AND operation,
+ANDing the corresponding bits in two integers. \\
+%
+\midrule
 
-5
-
-
-
-This is the bitwise OR operation,
-ORing the corresponding bits in two integers.
-
-6
-
-
-
-This is the bitwise EXCLUSIVE-OR
-(XOR) operation, XORing the corresponding bits in two integers.
-
-7
-
-
-
-This is the bitwise AND operation,
-ANDing the corresponding bits in two integers.
-
-8
-
-
-
- \emph{x
-\textgreater{}\textgreater{} y}
-
-These are the shift operators.
+8 & ADD HERE & These are the shift operators.
 They apply to integers or long integers. The bits in \emph{x} are
 shifted left ( \emph{\textless{}\textless{}} ) or right (
 \emph{\textgreater{}\textgreater{}} ) the number of positions indicated
 by \emph{y} . The right shifts are arithmetic: The sign bit will be
-shifted in at the top, preserving the sign of the \emph{x} operand.
-
-9
-
-
-
-
-
-Addition and subtraction. Operator
-\emph{+} also performs concatenation on sequences, as we will see later.
-
-10
-
-
-
-
-
-
-
-Multiplication, division, and
+shifted in at the top, preserving the sign of the \emph{x} operand. \\
+%
+\midrule
+9 & ADD HERE & Addition and subtraction. Operator
+\emph{+} also performs concatenation on sequences, as we will see later.\\
+%
+\midrule
+10 & ADD HERE & Multiplication, division, and
 modulus (or remainder). Operator \emph{\%} will also work with floating
 point numbers. Operator \emph{*} also applies to sequence types, and
 operator \emph{\%} has a special function for strings. We will look at
-these other uses later.
-
-11
-
-
-
-
-
-
-
-Negation, bitwise complement, and
-unary plus (no operation for numbers).
-
-12
-
-
-
- .
-
-13
-
-
-
-
-
-
-
-
-
-Function call, attribute access,
-subscription, and slicing. We will discuss these later.
-
-14
-
-
-
-
-
-
-
-
-
-These are used to construct
+these other uses later.\\
+%
+\midrule
+11 & -y, ~y, +y & Negation, bitwise complement, and
+unary plus (no operation for numbers).\\
+%
+\midrule
+12 & ADD HERE & Exponentiation, $x^y$ \\
+%
+\midrule
+13 & ADD HERE & Function call, attribute access,
+subscription, and slicing. We will discuss these later. \\
+%
+\midrule
+14 & ADD HERE & These are used to construct
 built-in structured objects: tuples, lists, directories, and strings. We
-will discuss them later.
+will discuss them later. \\
+%
+\bottomrule
+\end{longtable}
+
+
+
+
+
 
 \subsection{Built-In Arithmetic Functions}
 \label{built-in-arithmetic-functions}
