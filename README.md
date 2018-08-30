@@ -6,6 +6,14 @@ Software Engineering for Machine Learning
 
 [![Build Status](https://travis-ci.com/PurdueCAM2Project/SE4ML.svg?branch=master)](https://travis-ci.com/PurdueCAM2Project/SE4ML)
 
+# Downloading
+
+We are working to set up a nicer web page (for students and other users).
+
+In the meantime, you can download the latest prerelease by visiting [Releases](https://github.com/PurdueCAM2Project/SE4ML/releases).
+
+Profs. Lu and Thiruvathukal do point releases as new material appears. We are not even close to 1.0 yet, but hope to do a major release sometime this semester.
+
 # Synopsis
 
 This is a work in progress by Profs. Yung-Hsiang Lu (Purdue) and George K. Thiruvathukal (Loyola University Chicago).
