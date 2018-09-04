@@ -17,38 +17,48 @@
 
 \section{Limitations of the {\it k-mean} Algorithm}
 
-The {\it k-mean} clustering algorithm has third major problems: (1)
+The {\it k-mean} clustering algorithm has several major problems:
+\begin{enumerate}
+  \item 
 There is no obvious reason to select a particular value of $k$.
 Figure~\ref{figure:kmean:distances} shows the distances for different
 values of $k$. There are 10 clusters and the clusters do not overlap
-({\tt -t} not used) but the smallest distance occurs when $k$ is
-13. (2) The algorithm is non-deterministic and it is often necessary
-running the same program multiple times.
-Figure~\ref{figure:kmean:distances} (a) shows that the distances may
-vary substantially even for the same value of $k$.  (3) For a given
-cluster, there is immediately answer which cluster is closest.  It is
-possible to calculate the distances of centroids but this requires
-additional calculation.  (4) The {\it k-mean} algorithm assignments
-{\it all} data points to one of the $k$ clusters in the very first
-step.  Then the algorithm adjusts the clusters by finding closest
-centroid from each data point. Because the initial assignments have
-direct impacts on the final results, the program needs to run multiple
-times for getter better results.  {\it Hierarchical clustering} is a
-method that does not have these problems\footnote{Hierarchical
-  clustering has some other problems, to be discussed later.}.
+({\tt -t} not used) but the smallest distance occurs when $k$ is 13.
+
+\item The algorithm is non-deterministic and it is often necessary
+  running the same program multiple times.
+  Figure~\ref{figure:kmean:distances} (a) shows that the distances may
+  vary substantially even for the same value of $k$.
+
+\item For a given cluster, there is no easy answer which cluster is
+  closer.  It is possible to calculate the distances of centroids but
+  this requires additional work.
+
+\item The {\it k-mean} algorithm assigns {\it all} data points to one
+  of the $k$ clusters in the very first step.  Then the algorithm
+  adjusts the clusters by the finding closest centroid from each data
+  point. Because the initial assignments have direct impacts on the
+  final results, the program needs to run multiple times for getter
+  better results.  
+\end{enumerate}
 
 \index{binary tree}
 \index{binary tree!child}
 
+{\it Hierarchical clustering} is a method that does
+  not have these problems\footnote{Hierarchical clustering has some
+    other problems, to be discussed later.}.
+
 \section{Example of 
 Hierarchical clustering}
 
-Hierarchical clustering iteratively finds the closet pair of data
+Hierarchical clustering iteratively finds the closest pair of data
 points, clusters, or data point and cluster. The algorithm makes the
-pair two {\it children} by a {\it binary tree}.  The binary tree
-becomes a new cluster.  The algorithm continues until only one binary
-tree is left.  Hierarchical clustering calls it {\it dendrogram}, instead
-of {\it binary tree}.
+pair two {\it children} of a {\it binary tree}
+node\marginnote{Hierarchical clustering calls it {\it dendrogram},
+  instead of {\it binary tree}. This book uses both terms
+  interchangably.}.  The tree node becomes a new cluster.  The
+algorithm continues until only one tree node is left.
 
 Before formally describing the algorithm, let us go through several
 examples.  The simplest case is when there is only one data point but
@@ -115,9 +125,9 @@ because the distance of each point and itself is zero.
 
 The shortest distance (10865) occurs between $(x_0, y_0)$ and $(x_3,
 y_3)$.  They are the first pair to be put into the same cluster.
-Figure~\ref{fig:hierarchical:cluster4} shows 
-the cluster of the four data points. Points 0 and 3 are the two
-children of the same parent node. 
+Figure~\ref{fig:hierarchical:cluster4} shows the cluster of the four
+data points. Points 0 and 3 are the two children of the same parent
+node.
 
 \begin{figure}[h] \centering
 {\includegraphics[width=5in]{\hierpath/figures/cluster4.png}}
@@ -154,9 +164,9 @@ can recompute the distances among the pairs of points:
 \end{table}
 
 Now, the shortest distance (17096) occurs between $(x_1, y_1)$ and
-$(x_2, y_2)$.  These two data points are the two children of a node.
-At this moment, there are only two clusters and they are the children
-of a binary tree node.  The final result is shown in
+$(x_2, y_2)$.  These two data points are the two children of a tree
+node.  At this moment, there are only two clusters and they are the
+children of a binary tree node.  The final result is shown in
 Figur~\ref{fig:hierarchical:cluster4}.
 
 Let's add two more data points into consideration.
@@ -175,7 +185,8 @@ Let's add two more data points into consideration.
 \end{tt}
 \end{table}
 
-The pair-wise distances is shown in Table~\ref{table:hierarchical:distance6points}.
+The pair-wise distances is shown in
+Table~\ref{table:hierarchical:distance6points}.
 
 \begin{table}
   \begin{tt}
@@ -208,7 +219,7 @@ This cluster is represented by the centroid $(\frac{15 + 66}{2},
 \frac{20 + (-3)}{2}) = (\frac{81}{2}, \frac{17}{2}) = (40.5, 8.5)$.
 The cluster is expressed as $(x_4, y_4)$ and $(x_5, y_5)$ is removed.
 Now there are four data points and one cluster. The distances
-are
+are shown in Table~\ref{table:hierarchical:distance6points}.
 
 \begin{table}
   \begin{tt}
@@ -229,6 +240,11 @@ are
 The smallest distance is 7520.5 and it is between $(x_3, y_3)$ and the
 cluster. Thus, $(x_3, y_3)$ and the cluster are put together by making
 them the two childrens of a binary tree node.
+
+To summarize, hierarchical cluster finds the closest pair of data
+points, clusters, or one data point and one clusters and make them the
+two children of a binary tree node.  The tree node because a new
+cluster. This process continues until there is only cluster left.
 
 \clearpage
 
@@ -254,7 +270,7 @@ The algorithm is described below:
 \begin{algorithm}
     \caption[]{Hierarchical Clustering Algorithm}
     \begin{algorithmic}[1]
-      \ForAll  Make each data point a cluster of its own
+      \ForAll  {data point}  make a cluster of its own
       \EndFor
       \While {Number of Cluster Exceeds one}
       \State Compute the distance of each pair of clusters
@@ -272,15 +288,16 @@ The algorithm is described below:
 
 The earlier examples use the centroid to express each cluster.  Other
 definitions of clusters' distances are also used.  There are four
-commonly adopted definitions for the distance of two clusters: {\it
-  complete}, {\it single}, {\it average}, and {\it centroid}.  They
-are described below.
+commonly adopted definitions for the distance of two
+clusters~\cite{James2013IntroductiontoStatistical}: {\it complete},
+{\it single}, {\it average}, and {\it centroid}.  They are described
+below.
 
 Suppose $\mathds{A} = \{a_1, a_2, ..., a_n\}$ is a cluster
 and $a_1$, $a_2$, ..., $a_n$ are the $n$ data points in this cluster.
 Suppose $\mathds{B} = \{b_1, b_2, ..., b_m\}$ is another cluster
 and $b_1$, $b_2$, ..., $b_m$ are the $m$ data points in this cluster.
-
+The distance between these two clusters can be defined as
 
 \begin{itemize}
 \item Complete: Compute the pairwise distances of every point in
@@ -314,7 +331,7 @@ and $b_1$, $b_2$, ..., $b_m$ are the $m$ data points in this cluster.
   the centroid of $c_{\mathds{B}}$ $\mathds{B}$ using the definition
   of (\ref{equ:kmean:centroid}) in Chapter~\ref{chapter:kmean}.
   The distance of the two clusters is the distance of the two
-  centroid:
+  centroids:
 
   \begin{equation}
 | c_{\mathds{A}} - c_{\mathds{B}} |.
