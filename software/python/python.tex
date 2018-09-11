@@ -812,13 +812,14 @@ Python 2 allowed printing to a file. This has been subsumed by writing to a file
 \paragraph{while}
 \label{while-statement}
 
- loop is
+The form of the \texttt{while} loop is
 
+\begin{verbatim}
 while expression :
-
  indented body
+\end{verbatim}
 
- is evaluated
+The \texttt{expression} is evaluated
 to get a truth value. Python considers zero to be false and any non-zero
 value to be true. It considers empty strings (and other sequences) to be
 false, nonempty ones, true. If the expression evaluates to true, the
@@ -839,53 +840,42 @@ Here is an example of the use of a
 along, you will need the Python interpreter to be executing in the same
 directory as your code files. You can get Python to your directory by
 
-\endinput
-
-\emph{import os}
-
-
-\emph{os.chdir(``directory'')}
+\begin{verbatim}
+>>> import os
+>>> os.chdir("directory")
+\end{verbatim}
 
  in
 module \emph{os} changes the current working directory. Now, suppose the
 following code is in a file \emph{listfile.py} :
 
+\begin{verbatim}
 def listfile(name):
-
- f=open(name)
-
- L=f.readline()
-
- while L :
-
- print L,
-
- L=f.readline()
-
- f.close()
+  f=open(name)
+  L=f.readline()
+  while L:
+    print(L,)
+    L=f.readline()
+  f.close()
+\end{verbatim}
 
 We can import it and use it to list
 itself:
 
 
-\emph{from listfile import listfile}
+\begin{verbatim}
 
-
-\emph{listfile(``listfile.py'')}
 
 def listfile(name):
-
- f=open(name)
-
- L=f.readline()
-
- while L :
-
- print L,
-
- L=f.readline()
-
- f.close()
+  from listfile import listfile
+  listfile("listfile.py")
+  f=open(name)
+  L=f.readline()
+  while L :
+    print(L,)
+  L=f.readline()
+  f.close()
+\end{verbatim}
 
 The code should be pretty obvious
 except for two points.
@@ -893,8 +883,7 @@ except for two points.
 \begin{enumerate}
 
 \item
-   : Python
-  considers an empty string to be false and a nonempty string to be
+  \texttt{while L:} Python considers an empty string to be false and a nonempty string to be
   true. That makes this loop easy, since end-of-file results in
   \emph{readline()} returning an empty string. In general, structured
   objects can sometimes be considered equivalent to zero for logical
@@ -903,15 +892,15 @@ except for two points.
   non-zero, or false and true, and not keep repeating that some things
   other than the number zero are also considered to be false.
 \item
-   , The final comma
+  \texttt{print(L,)} The final comma
   prevents Python from inserting a newline following the string that has
   been written. Since the lines returned by \emph{readline()} all are
   terminated by newlines anyway, they come out single-spaced. If the
   comma weren't there, the lines would come out double-spaced.
 \end{enumerate}
 
-\paragraph[Relational
-Expressions]{}Relational
+\endinput
+\paragraph[Relational Expressions]{}Relational
 Expressions}{Relational Expressions}}\label{relational-expressions}
 
 
@@ -1773,7 +1762,9 @@ block of code).
 Indeed, you can put several simple
 statements following a colon just by placing semicolons between them.
 
+\endinput
 \subsection[Tuples]{}
+
 
 A tuple is an immutable list: It is
 just like a list except that you can't change the contents. You create a
