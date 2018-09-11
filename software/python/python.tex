@@ -899,48 +899,54 @@ except for two points.
   comma weren't there, the lines would come out double-spaced.
 \end{enumerate}
 
-\endinput
-\paragraph[Relational Expressions]{}Relational
-Expressions}{Relational Expressions}}\label{relational-expressions}
+\paragraph{Relational Expressions}\label{relational-expressions}
 
+Theh expressions in \texttt{while} statements most commonly use relational operators to compare operands.
+The result of a relational operation is Boolean: True or False.
 
-statements most commonly use relational operators to compare operands.
-Since there is no logical or Boolean data type in Python, and Python is
-like C in using zero for false and non-zero for true, relational
-operators return numeric values 0 and 1. For example,
-
-
-\emph{1\textless{}2}
-
-1
-
-
-\emph{1\textgreater{}2}
-
-0
+\begin{verbatim}
+>>> 1 < 2
+True
+>>> 1 > 2
+False
+\end{verbatim}
 
 Unlike most other languages, Python
 allows relational operators to be cascaded:
 
-
-\emph{-2 \textless{} -1 \textless{} 0}
-
-1
-
-
-\emph{(-2 \textless{} -1) \textless{} 0}
-
-0
+\begin{verbatim}
+>>> -2 < -1 < 0
+True
+>>> (-2 < -1) < 0
+False
+\end{verbatim}
 
 The first of the two expressions is
 equivalent to \emph{-2 \textless{} -1 and -1 \textless{} 0} . Python
 duplicates the value between the two operators and does both comparisons
 separately. In the second expression, \emph{(-2 \textless{} -1)} yields
-\emph{1} , then \emph{1\textless{}0} yields \emph{0} .
+\emph{True} , then \emph{True\textless{}0} yields \emph{False}.
 
-\paragraph[Logical
-Expressions]{}Logical
-Expressions}{Logical Expressions}}\label{logical-expressions}
+If you find any of this confusing, just remember that True and False can
+be converted as neeeded to 1 and 0, respectively. You can use these values
+almost anywhere an integer is expected. Try this:
+
+\begin{verbatim}
+>>> False + False
+0
+>>> False + True
+1
+>>> True + True
+2
+>>> True - False
+1
+>>> True - True
+0
+
+\end{verbatim}
+
+\endinput
+\paragraph{Logical Expressions}\label{logical-expressions}
 
 Python provides the usual three
 logical operators, \emph{or} , \emph{and} , and \emph{not} , at the low
