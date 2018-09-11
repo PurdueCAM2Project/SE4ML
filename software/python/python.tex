@@ -267,43 +267,43 @@ levels 5 through 8. Since they are not used much in Web enterprise
 applications, we won't discuss them further.
 
 We will discuss the logical and
-comparison operators later when we discuss \emph{while} loops.
+comparison operators later when we discuss \texttt{while} loops.
 
 \begin{longtable}{l|p{3cm}|p{7cm}}
 \toprule
 Precedence & Operators & Comments \\
 \midrule
   1 & \texttt{x or y} &  This is the logical OR operation.
-It will return true if either \emph{x} or \emph{y} is true, i.e.
-non-zero. Like the \emph{\textbar{}\textbar{}} operator in C, it is
-short-circuited: It will not evaluate \emph{y} if \emph{x} determines
-the value of the expression. It first evaluates \emph{x} and returns the
-value of \emph{x} if \emph{x} is not zero. If \emph{x} is zero, it
-evaluates and returns the value of \emph{y} . By ``x is zero'' we mean
-that it would be considered zero in an \emph{if} or \emph{while}
+It will return true if either \texttt{x} or \texttt{y} is true, i.e.
+non-zero. Like the \texttt{\textbar{}\textbar{}} operator in C, it is
+short-circuited: It will not evaluate \texttt{y} if \texttt{x} determines
+the value of the expression. It first evaluates \texttt{x} and returns the
+value of \texttt{x} if \texttt{x} is not zero. If \texttt{x} is zero, it
+evaluates and returns the value of \texttt{y} . By ``x is zero'' we mean
+that it would be considered zero in an \texttt{if} or \texttt{while}
 expression. Other values than a number zero also count as zero. \\
 %
 \midrule
   2 & \texttt{x and y} & This is the logical AND operation.
-It will return true if both \emph{x} and \emph{y} are true, i.e.
-non-zero. Like the \emph{\&\&} operator in C, it is short-circuited: It
-will not evaluate \emph{y} if \emph{x} determines the value of the
-expression. It first evaluates x and returns \emph{x} if \emph{x} is
-zero. If \emph{x} is not zero, it evaluates and returns the value of
-\emph{y} . By ``x is zero'' we mean that it would be considered zero in
-an \emph{if} or \emph{while} expression. Other values than a number zero
+It will return true if both \texttt{x} and \texttt{y} are true, i.e.
+non-zero. Like the \texttt{\&\&} operator in C, it is short-circuited: It
+will not evaluate \texttt{y} if \texttt{x} determines the value of the
+expression. It first evaluates x and returns \texttt{x} if \texttt{x} is
+zero. If \texttt{x} is not zero, it evaluates and returns the value of
+\texttt{y} . By ``x is zero'' we mean that it would be considered zero in
+an \texttt{if} or \texttt{while} expression. Other values than a number zero
 also count as zero. \\
 %
 \midrule
   3 & \texttt{not x} & This is the logical NOT operator. 
-It returns 1 if \emph{x} is zero; it returns 0 if \emph{x} is anything
+It returns 1 if \texttt{x} is zero; it returns 0 if \texttt{x} is anything
 else. \\
 %
 \midrule
-  4 & \verb"<", \verb">", \verb"<=", \verb">="  & The relational operators are much
+  4 & \verb"x < y", \verb"x > y", \verb"x <= y", and \verb"x >= y"  & The relational operators are much
 like they are in other languages. Operators \verb"!=" and \verb"<>" both mean not equal. \\
 %
-   & \verb"==", \verb"!=", \verb"<>"  & Testing for equality, \verb"==" and \verb"!=", can be applied to structured objects as discussed later.
+   & \verb"x == y", \verb"x != y", \verb"x <> y"  & Testing for equality, \verb"==" and \verb"!=", can be applied to structured objects as discussed later.
 They attempt to find out if the structured objects have equal
 components. \\
 %
@@ -327,21 +327,21 @@ ANDing the corresponding bits in two integers. \\
 \midrule
 
 8 & \verb"x << y", \verb"x >> y" & These are the shift operators.
-They apply to integers or long integers. The bits in \emph{x} are
-shifted left ( \emph{\textless{}\textless{}} ) or right (
-\emph{\textgreater{}\textgreater{}} ) the number of positions indicated
-by \emph{y} . The right shifts are arithmetic: The sign bit will be
-shifted in at the top, preserving the sign of the \emph{x} operand. \\
+They apply to integers or long integers. The bits in \texttt{x} are
+shifted left ( \texttt{\textless{}\textless{}} ) or right (
+\texttt{\textgreater{}\textgreater{}} ) the number of positions indicated
+by \texttt{y} . The right shifts are arithmetic: The sign bit will be
+shifted in at the top, preserving the sign of the \texttt{x} operand. \\
 %
 \midrule
 9 & \verb"x + y", \verb"x - y" & Addition and subtraction. Operator
-\emph{+} also performs concatenation on sequences, as we will see later.\\
+\texttt{+} also performs concatenation on sequences, as we will see later.\\
 %
 \midrule
 10 & \verb"x * y", \verb"x / y", \verb"x % y" & Multiplication, division, and
-modulus (or remainder). Operator \emph{\%} will also work with floating
-point numbers. Operator \emph{*} also applies to sequence types, and
-operator \emph{\%} has a special function for strings. We will look at
+modulus (or remainder). Operator \texttt{\%} will also work with floating
+point numbers. Operator \texttt{*} also applies to sequence types, and
+operator \texttt{\%} has a special function for strings. We will look at
 these other uses later.\\
 %
 \midrule
@@ -349,171 +349,128 @@ these other uses later.\\
 unary plus (no operation for numbers).\\
 %
 \midrule
-12 & ADD HERE & Exponentiation, $x^y$ \\
+12 & \verb"x ** y" & Exponentiation, $x^y$ \\
 %
 \midrule
-13 & ADD HERE & Function call, attribute access,
-subscription, and slicing. We will discuss these later. \\
+13 & \verb"f(...)" & Function call \\
+%
+ & \verb"x.attr" & attribute access \\
+%
+ & \verb"x[i]" & subscripting \\
+%
+ & \verb"x[i:j]" & slicing \\
 %
 \midrule
-14 & ADD HERE & These are used to construct
-built-in structured objects: tuples, lists, directories, and strings. We
-will discuss them later. \\
+14 & \verb"(...)" & construct tuple \\
+%
+ & \verb"[...]" & construct list \\
+%
+ & \verb"{...}" & construct dictionary \\
+%
+ & \verb"`...`" & construct string \\
 %
 \bottomrule
 \end{longtable}
 
 
-
-
-
-
-\subsection{Built-In Arithmetic Functions}
+\subsection{Built-in Arithmetic Functions}
 \label{built-in-arithmetic-functions}
 
-Python has a number of built-in
-functions you can call. Arithmetic functions include those shown in
-\href{chap2.html\#32777}{See Built-In Arithmetic Functions.}. Other
-mathematical functions can be found in module \emph{math} . Complex
-arithmetic functions are in module \emph{cmath} .
-
-\begin{enumerate}
-
-\item
-  Built-In Arithmetic Functions (Continued)
-\end{enumerate}
-
-Function call
-
-Explanation
+Python has a number of built-in functions you can call.
+Other mathematical functions can be found in module \texttt{math}.
+Complex arithmetic functions are in module \texttt{cmath}.
 
 
-
- the absolute
-value of \emph{x}
-
-
-
- and
-assigns \emph{v} a negative value if \emph{x\textless{}y} , zero if
-\emph{x==y} , and positive if \emph{x\textgreater{}y}
-
-
-
-Determines the common type for
-\emph{x} and \emph{y} required for arithmetic operators then assigns
-\emph{x} converted to that type to \emph{u} and \emph{y} converted to
-that type to \emph{v}
-
-
-
- are
-integers or long integers, it assigns \emph{u=x/y} and \emph{v=x\%y} .
-If \emph{x} and \emph{y} are floating point numbers, it assigns
-%\includegraphics{chap2-2.gif}
-, the largest integer less than or equal
-to \emph{x/y,} and
-%\includegraphics{chap2-3.gif} .
-
-
-
- the value of
-\emph{x} converted to a floating point value
-
-
-
- the value of
-\emph{x} converted to an integer value
-
-
-
- the value of
-\emph{x} converted to a long integer value
-
- \emph{v=complex(x)\\
-v=complex(x,y)}
-
- to a complex
-number, or \emph{x} to the real part and \emph{y} to the imaginary part
-of a complex number
-
-
-
- with
-the largest value
-
-
-
- with
-the smallest value
-
-
-
- the value of
-\emph{x} raised to the \emph{y} power, \emph{x**y}
-
-
-
- the value of
-\emph{x} raised to the \emph{y} power modulus \emph{z} , i.e.,
-\emph{x**y\%z}
-
-
-
- the floating
-point number \emph{x} rounded to have \emph{n} digits after the decimal
-point. If you omit \emph{y} , it defaults to zero.
+\begin{longtable}{l|p{7cm}}
+\toprule
+Function call & Explanation \\
+%
+\midrule
+\verb"v = abs(x)" & the absolute value of \texttt{x} \\
+%
+\midrule
+\verb"v = cmp(x, y)" & Compares \texttt{x} and \texttt{y} and
+assigns \texttt{v} a negative value if \texttt{x\textless{}y} , zero if
+\texttt{x==y} , and positive if \texttt{x\textgreater{}y} \\
+%
+\midrule
+\verb"u,v = coerce(x, y)" & Determines the common type for
+\texttt{x} and \texttt{y} required for arithmetic operators then assigns
+\texttt{x} converted to that type to \texttt{u} and \texttt{y} converted to
+that type to \texttt{v} \\
+%
+\midrule
+\verb"u,v = divmod(x,y)" & are integers or long integers, it assigns \texttt{u=x/y} and \texttt{v=x\%y} .
+If \texttt{x} and \texttt{y} are floating point numbers, it assigns
+, the largest integer less than or equal to \texttt{x/y,} and \\
+%
+\midrule
+\verb"v=float(x)" & the value of \texttt{x} converted to a floating point value \\
+%
+\midrule
+\verb"v=int(x)" & the value of \texttt{x} converted to an integer value \\
+%
+\midrule
+\verb"v=long(x)" & the value of \texttt{x} converted to a long integer value \\
+%
+\midrule
+\verb"v=complex(x)" and \verb"v=complex(x,y)" & Converts \texttt{x} to a complex
+number, or \texttt{x} to the real part and \texttt{y} to the imaginary part of a complex number \\
+%
+\midrule
+\verb"v=max(x1, x2, ...)"  &  Assigns \texttt{v}  with the largest value of x1, x2, ... \\
+%
+\midrule
+\verb"v=min(x1, x2, ...)"  &  Assigns \texttt{v}  with the smallest value of x1, x2, ... \\
+%
+\midrule
+\verb"v=pow(x,y)"  & Assigns v the value of \texttt{x} raised to the \texttt{y} power, \texttt{x**y} \\
+%
+\midrule
+\verb"v=pow(x, y, z)" & Assigns v  the value of \texttt{x} raised to the \texttt{y} power modulus \texttt{z} , i.e., \texttt{x**y\%z} \\
+%
+\midrule
+\verb"v=round(x)" &  Assigns v the the floating point number \texttt{x} rounded to have \texttt{n} digits after the decimal
+point. If you omit \texttt{y}, it defaults to zero. \\
+%
+\bottomrule
+\end{longtable}
 
 \subsection{Assignments and Variables}
 \label{assignments-and-variables}
 
-Variables are not declared. You
-create a variable simply by assigning a value to it. The simplest form
-of an assignment is:
+Variables are not declared. You create a variable simply by assigning a value to it. The simplest form of an assignment is:
 
+\begin{verbatim}
 variable = expression
+\end{verbatim
 
 For example
 
-
-a=10
-
-
-a
-
+\begin{verbatim}
+>>> a=10
+>>> a
 10
-
-
-b=a+2
-
-
-b
-
+>>> b=a+2
+>>> b
 12
+\end{verbatim}
 
-Variable names and other
-identifiers in Python are composed of letters, digits, and underscore
-characters. The first character of the identifier must not be a digit.
-The letters are the ISO-Latin characters A-Z and a-z; Python has not yet
-been fully internationalized.\protect\hyperlink{pgfId-115789}{1} Any of
-these is okay: \emph{\_1} , \emph{a} , \emph{a\_} , \emph{pi3\_14159} .
+Variable names and other identifiers in Python are composed of letters, digits, and underscore
+characters. The first character of the identifier must not be a digit.  The letters are the ISO-Latin characters A-Z and a-z.
+\footnote{Python also provides full UNICODE support.}
 
-You can also do several assignments
-on the same line; for example let's swap the values of \emph{a} and
+You can also do several assignments on the same line; for example let's swap the values of \emph{a} and
 \emph{b} :
 
 
-a,b
-
+\begin{verbatim}
+>>> a,b
 (10, 12)
-
-
-a,b=b,a
-
-
-a,b
-
+>>> a,b = b,a
+>>> a,b
 (12, 10)
+\end{verbatim}
 
 We will look at this again later.
 Note also that we can list more than one expression on a line in
@@ -525,35 +482,31 @@ kind of sequence which we will discuss in
 \subsection{Creating Functions}
 \label{creating-functions}
 
-You may create a function and
-assign it to a variable with the \emph{def} statement, for example:
+You may create a function and assign it to a variable with the \emph{def} statement, for example:
 
 
-def diff(x,y):
-
- return abs(x-y)
-
-
-
-
-diff(-10,5)
-
+\begin{verbatim}
+>>> def diff(x,y):
+...    return abs(x-y)
+...
+>>> diff(-10.5)
 15
+\end{verbatim}
 
- that
-returns the absolute difference between values \emph{x} and \emph{y} .
+
+creates a function \texttt{diff} that returns the absolute difference between values \emph{x} and \emph{y}.
 There are several things to note about this function creation:
 
 \begin{enumerate}
 
 \item
-   line introduces
+  The \texttt{def} line introduces
   the code for the function. It gives the name we will call the
   function, \emph{diff} , and the argument list. The function will be
   called with two arguments, \emph{x} and \emph{y} . The \emph{def} line
   is terminated with a colon.
 \item
-   , is not
+  The name \texttt{diff} is not
   exactly the name of the function. It is a variable that is assigned
   the function as a value. It is an assignment as much as assigning
   \emph{diff=value} would be, and indeed, \emph{diff} can be reassigned.
@@ -563,11 +516,9 @@ There are several things to note about this function creation:
   indented the same amount. Soon we'll look at \emph{while} statements,
   whose bodies must be indented beneath the \emph{while} .
 \item
-  The function returns a value with
-  a \emph{return} statement.
+  The function returns a value with a \emph{return} statement.
 \item
-  
-  statement, the function does not return a value, and the call of the
+  If there is no \texttt{return} statement, the function does not return a value, and the call of the
   function should be used only as a statement, not within an expression.
 \item
   A function is called by the form
