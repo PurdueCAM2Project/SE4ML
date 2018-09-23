@@ -267,43 +267,43 @@ levels 5 through 8. Since they are not used much in Web enterprise
 applications, we won't discuss them further.
 
 We will discuss the logical and
-comparison operators later when we discuss \emph{while} loops.
+comparison operators later when we discuss \texttt{while} loops.
 
 \begin{longtable}{l|p{3cm}|p{7cm}}
 \toprule
 Precedence & Operators & Comments \\
 \midrule
   1 & \texttt{x or y} &  This is the logical OR operation.
-It will return true if either \emph{x} or \emph{y} is true, i.e.
-non-zero. Like the \emph{\textbar{}\textbar{}} operator in C, it is
-short-circuited: It will not evaluate \emph{y} if \emph{x} determines
-the value of the expression. It first evaluates \emph{x} and returns the
-value of \emph{x} if \emph{x} is not zero. If \emph{x} is zero, it
-evaluates and returns the value of \emph{y} . By ``x is zero'' we mean
-that it would be considered zero in an \emph{if} or \emph{while}
+It will return true if either \texttt{x} or \texttt{y} is true, i.e.
+non-zero. Like the \texttt{\textbar{}\textbar{}} operator in C, it is
+short-circuited: It will not evaluate \texttt{y} if \texttt{x} determines
+the value of the expression. It first evaluates \texttt{x} and returns the
+value of \texttt{x} if \texttt{x} is not zero. If \texttt{x} is zero, it
+evaluates and returns the value of \texttt{y} . By ``x is zero'' we mean
+that it would be considered zero in an \texttt{if} or \texttt{while}
 expression. Other values than a number zero also count as zero. \\
 %
 \midrule
   2 & \texttt{x and y} & This is the logical AND operation.
-It will return true if both \emph{x} and \emph{y} are true, i.e.
-non-zero. Like the \emph{\&\&} operator in C, it is short-circuited: It
-will not evaluate \emph{y} if \emph{x} determines the value of the
-expression. It first evaluates x and returns \emph{x} if \emph{x} is
-zero. If \emph{x} is not zero, it evaluates and returns the value of
-\emph{y} . By ``x is zero'' we mean that it would be considered zero in
-an \emph{if} or \emph{while} expression. Other values than a number zero
+It will return true if both \texttt{x} and \texttt{y} are true, i.e.
+non-zero. Like the \texttt{\&\&} operator in C, it is short-circuited: It
+will not evaluate \texttt{y} if \texttt{x} determines the value of the
+expression. It first evaluates x and returns \texttt{x} if \texttt{x} is
+zero. If \texttt{x} is not zero, it evaluates and returns the value of
+\texttt{y} . By ``x is zero'' we mean that it would be considered zero in
+an \texttt{if} or \texttt{while} expression. Other values than a number zero
 also count as zero. \\
 %
 \midrule
   3 & \texttt{not x} & This is the logical NOT operator. 
-It returns 1 if \emph{x} is zero; it returns 0 if \emph{x} is anything
+It returns 1 if \texttt{x} is zero; it returns 0 if \texttt{x} is anything
 else. \\
 %
 \midrule
-  4 & \verb"<", \verb">", \verb"<=", \verb">="  & The relational operators are much
+  4 & \verb"x < y", \verb"x > y", \verb"x <= y", and \verb"x >= y"  & The relational operators are much
 like they are in other languages. Operators \verb"!=" and \verb"<>" both mean not equal. \\
 %
-   & \verb"==", \verb"!=", \verb"<>"  & Testing for equality, \verb"==" and \verb"!=", can be applied to structured objects as discussed later.
+   & \verb"x == y", \verb"x != y", \verb"x <> y"  & Testing for equality, \verb"==" and \verb"!=", can be applied to structured objects as discussed later.
 They attempt to find out if the structured objects have equal
 components. \\
 %
@@ -327,21 +327,21 @@ ANDing the corresponding bits in two integers. \\
 \midrule
 
 8 & \verb"x << y", \verb"x >> y" & These are the shift operators.
-They apply to integers or long integers. The bits in \emph{x} are
-shifted left ( \emph{\textless{}\textless{}} ) or right (
-\emph{\textgreater{}\textgreater{}} ) the number of positions indicated
-by \emph{y} . The right shifts are arithmetic: The sign bit will be
-shifted in at the top, preserving the sign of the \emph{x} operand. \\
+They apply to integers or long integers. The bits in \texttt{x} are
+shifted left ( \texttt{\textless{}\textless{}} ) or right (
+\texttt{\textgreater{}\textgreater{}} ) the number of positions indicated
+by \texttt{y} . The right shifts are arithmetic: The sign bit will be
+shifted in at the top, preserving the sign of the \texttt{x} operand. \\
 %
 \midrule
 9 & \verb"x + y", \verb"x - y" & Addition and subtraction. Operator
-\emph{+} also performs concatenation on sequences, as we will see later.\\
+\texttt{+} also performs concatenation on sequences, as we will see later.\\
 %
 \midrule
 10 & \verb"x * y", \verb"x / y", \verb"x % y" & Multiplication, division, and
-modulus (or remainder). Operator \emph{\%} will also work with floating
-point numbers. Operator \emph{*} also applies to sequence types, and
-operator \emph{\%} has a special function for strings. We will look at
+modulus (or remainder). Operator \texttt{\%} will also work with floating
+point numbers. Operator \texttt{*} also applies to sequence types, and
+operator \texttt{\%} has a special function for strings. We will look at
 these other uses later.\\
 %
 \midrule
@@ -349,171 +349,128 @@ these other uses later.\\
 unary plus (no operation for numbers).\\
 %
 \midrule
-12 & ADD HERE & Exponentiation, $x^y$ \\
+12 & \verb"x ** y" & Exponentiation, $x^y$ \\
 %
 \midrule
-13 & ADD HERE & Function call, attribute access,
-subscription, and slicing. We will discuss these later. \\
+13 & \verb"f(...)" & Function call \\
+%
+ & \verb"x.attr" & attribute access \\
+%
+ & \verb"x[i]" & subscripting \\
+%
+ & \verb"x[i:j]" & slicing \\
 %
 \midrule
-14 & ADD HERE & These are used to construct
-built-in structured objects: tuples, lists, directories, and strings. We
-will discuss them later. \\
+14 & \verb"(...)" & construct tuple \\
+%
+ & \verb"[...]" & construct list \\
+%
+ & \verb"{...}" & construct dictionary \\
+%
+ & \verb"`...`" & construct string \\
 %
 \bottomrule
 \end{longtable}
 
 
-
-
-
-
-\subsection{Built-In Arithmetic Functions}
+\subsection{Built-in Arithmetic Functions}
 \label{built-in-arithmetic-functions}
 
-Python has a number of built-in
-functions you can call. Arithmetic functions include those shown in
-\href{chap2.html\#32777}{See Built-In Arithmetic Functions.}. Other
-mathematical functions can be found in module \emph{math} . Complex
-arithmetic functions are in module \emph{cmath} .
-
-\begin{enumerate}
-
-\item
-  Built-In Arithmetic Functions (Continued)
-\end{enumerate}
-
-Function call
-
-Explanation
+Python has a number of built-in functions you can call.
+Other mathematical functions can be found in module \texttt{math}.
+Complex arithmetic functions are in module \texttt{cmath}.
 
 
-
- the absolute
-value of \emph{x}
-
-
-
- and
-assigns \emph{v} a negative value if \emph{x\textless{}y} , zero if
-\emph{x==y} , and positive if \emph{x\textgreater{}y}
-
-
-
-Determines the common type for
-\emph{x} and \emph{y} required for arithmetic operators then assigns
-\emph{x} converted to that type to \emph{u} and \emph{y} converted to
-that type to \emph{v}
-
-
-
- are
-integers or long integers, it assigns \emph{u=x/y} and \emph{v=x\%y} .
-If \emph{x} and \emph{y} are floating point numbers, it assigns
-%\includegraphics{chap2-2.gif}
-, the largest integer less than or equal
-to \emph{x/y,} and
-%\includegraphics{chap2-3.gif} .
-
-
-
- the value of
-\emph{x} converted to a floating point value
-
-
-
- the value of
-\emph{x} converted to an integer value
-
-
-
- the value of
-\emph{x} converted to a long integer value
-
- \emph{v=complex(x)\\
-v=complex(x,y)}
-
- to a complex
-number, or \emph{x} to the real part and \emph{y} to the imaginary part
-of a complex number
-
-
-
- with
-the largest value
-
-
-
- with
-the smallest value
-
-
-
- the value of
-\emph{x} raised to the \emph{y} power, \emph{x**y}
-
-
-
- the value of
-\emph{x} raised to the \emph{y} power modulus \emph{z} , i.e.,
-\emph{x**y\%z}
-
-
-
- the floating
-point number \emph{x} rounded to have \emph{n} digits after the decimal
-point. If you omit \emph{y} , it defaults to zero.
+\begin{longtable}{l|p{7cm}}
+\toprule
+Function call & Explanation \\
+%
+\midrule
+\verb"v = abs(x)" & the absolute value of \texttt{x} \\
+%
+\midrule
+\verb"v = cmp(x, y)" & Compares \texttt{x} and \texttt{y} and
+assigns \texttt{v} a negative value if \texttt{x\textless{}y} , zero if
+\texttt{x==y} , and positive if \texttt{x\textgreater{}y} \\
+%
+\midrule
+\verb"u,v = coerce(x, y)" & Determines the common type for
+\texttt{x} and \texttt{y} required for arithmetic operators then assigns
+\texttt{x} converted to that type to \texttt{u} and \texttt{y} converted to
+that type to \texttt{v} \\
+%
+\midrule
+\verb"u,v = divmod(x,y)" & are integers or long integers, it assigns \texttt{u=x/y} and \texttt{v=x\%y} .
+If \texttt{x} and \texttt{y} are floating point numbers, it assigns
+, the largest integer less than or equal to \texttt{x/y,} and \\
+%
+\midrule
+\verb"v=float(x)" & the value of \texttt{x} converted to a floating point value \\
+%
+\midrule
+\verb"v=int(x)" & the value of \texttt{x} converted to an integer value \\
+%
+\midrule
+\verb"v=long(x)" & the value of \texttt{x} converted to a long integer value \\
+%
+\midrule
+\verb"v=complex(x)" and \verb"v=complex(x,y)" & Converts \texttt{x} to a complex
+number, or \texttt{x} to the real part and \texttt{y} to the imaginary part of a complex number \\
+%
+\midrule
+\verb"v=max(x1, x2, ...)"  &  Assigns \texttt{v}  with the largest value of x1, x2, ... \\
+%
+\midrule
+\verb"v=min(x1, x2, ...)"  &  Assigns \texttt{v}  with the smallest value of x1, x2, ... \\
+%
+\midrule
+\verb"v=pow(x,y)"  & Assigns v the value of \texttt{x} raised to the \texttt{y} power, \texttt{x**y} \\
+%
+\midrule
+\verb"v=pow(x, y, z)" & Assigns v  the value of \texttt{x} raised to the \texttt{y} power modulus \texttt{z} , i.e., \texttt{x**y\%z} \\
+%
+\midrule
+\verb"v=round(x)" &  Assigns v the the floating point number \texttt{x} rounded to have \texttt{n} digits after the decimal
+point. If you omit \texttt{y}, it defaults to zero. \\
+%
+\bottomrule
+\end{longtable}
 
 \subsection{Assignments and Variables}
 \label{assignments-and-variables}
 
-Variables are not declared. You
-create a variable simply by assigning a value to it. The simplest form
-of an assignment is:
+Variables are not declared. You create a variable simply by assigning a value to it. The simplest form of an assignment is:
 
+\begin{verbatim}
 variable = expression
+\end{verbatim
 
 For example
 
-
-a=10
-
-
-a
-
+\begin{verbatim}
+>>> a=10
+>>> a
 10
-
-
-b=a+2
-
-
-b
-
+>>> b=a+2
+>>> b
 12
+\end{verbatim}
 
-Variable names and other
-identifiers in Python are composed of letters, digits, and underscore
-characters. The first character of the identifier must not be a digit.
-The letters are the ISO-Latin characters A-Z and a-z; Python has not yet
-been fully internationalized.\protect\hyperlink{pgfId-115789}{1} Any of
-these is okay: \emph{\_1} , \emph{a} , \emph{a\_} , \emph{pi3\_14159} .
+Variable names and other identifiers in Python are composed of letters, digits, and underscore
+characters. The first character of the identifier must not be a digit.  The letters are the ISO-Latin characters A-Z and a-z.
+\footnote{Python also provides full UNICODE support.}
 
-You can also do several assignments
-on the same line; for example let's swap the values of \emph{a} and
+You can also do several assignments on the same line; for example let's swap the values of \emph{a} and
 \emph{b} :
 
 
-a,b
-
+\begin{verbatim}
+>>> a,b
 (10, 12)
-
-
-a,b=b,a
-
-
-a,b
-
+>>> a,b = b,a
+>>> a,b
 (12, 10)
+\end{verbatim}
 
 We will look at this again later.
 Note also that we can list more than one expression on a line in
@@ -525,35 +482,31 @@ kind of sequence which we will discuss in
 \subsection{Creating Functions}
 \label{creating-functions}
 
-You may create a function and
-assign it to a variable with the \emph{def} statement, for example:
+You may create a function and assign it to a variable with the \emph{def} statement, for example:
 
 
-def diff(x,y):
-
- return abs(x-y)
-
-
-
-
-diff(-10,5)
-
+\begin{verbatim}
+>>> def diff(x,y):
+...    return abs(x-y)
+...
+>>> diff(-10.5)
 15
+\end{verbatim}
 
- that
-returns the absolute difference between values \emph{x} and \emph{y} .
+
+creates a function \texttt{diff} that returns the absolute difference between values \emph{x} and \emph{y}.
 There are several things to note about this function creation:
 
 \begin{enumerate}
 
 \item
-   line introduces
+  The \texttt{def} line introduces
   the code for the function. It gives the name we will call the
   function, \emph{diff} , and the argument list. The function will be
   called with two arguments, \emph{x} and \emph{y} . The \emph{def} line
   is terminated with a colon.
 \item
-   , is not
+  The name \texttt{diff} is not
   exactly the name of the function. It is a variable that is assigned
   the function as a value. It is an assignment as much as assigning
   \emph{diff=value} would be, and indeed, \emph{diff} can be reassigned.
@@ -563,11 +516,9 @@ There are several things to note about this function creation:
   indented the same amount. Soon we'll look at \emph{while} statements,
   whose bodies must be indented beneath the \emph{while} .
 \item
-  The function returns a value with
-  a \emph{return} statement.
+  The function returns a value with a \emph{return} statement.
 \item
-  
-  statement, the function does not return a value, and the call of the
+  If there is no \texttt{return} statement, the function does not return a value, and the call of the
   function should be used only as a statement, not within an expression.
 \item
   A function is called by the form
@@ -594,7 +545,7 @@ function, Python will look in three places to try to find what it means:
   Python.
 \end{enumerate}
 
-The scopes are pictured in
+The scopes~\footnote{Need to add figure 2-1 from original book by redrawing it.}  are pictured in
 \href{chap2.html\#83458}{See Scopes for Names Known in a Function.}. The
 search for a name starts in the innermost scope and proceeds outward
 until the name is found or until there are no more scopes. To find the
@@ -608,6 +559,7 @@ a value 2 is in the global scope and is hidden by the local \emph{x} .
 If the function tries to look up \emph{y} , it won't find it in the
 local scope, but will find it in the module scope with a value 3.
 
+
 %\includegraphics{chap2-4.gif}
 
 \subsection{Modules}
@@ -617,17 +569,18 @@ As we discussed in
 in files and execute them. However, the primary reason to put Python
 programs in files is to allow other Python programs to import and use
 the functions. A Python program that is used by other Python programs is
-called a \emph{module} .
+called a \emph{module}.
 
-The way you access a module is by
-the \emph{import} statement:
+The way you access a module is by the \emph{import} statement:
 
+\begin{verbatim}
 import moduleName
+\end{verbatim}
 
- statement sees if
+The \texttt{import} statement sees if
 the module has already been imported. If it hasn't been imported yet,
 Python finds the file that contains the module. It will have the name
-moduleName.py, and will be found in one directory in a list of
+\emph{moduleName.py}, and will be found in one directory in a list of
 directories (path). Python's built-in library of modules is on the path,
 so you can use all the modules in Python's library without difficulty.
 
@@ -636,11 +589,15 @@ loaded, the \emph{import} statement assigns a module object to a
 variable in the local scope that has the same name as the module, i.e.,
 it behaves the same way as an assignment statement. So
 
+\begin{verbatim}
 import moduleName
+\end{verbatim}
 
 behaves like
 
+\begin{verbatim}
 moduleName = moduleObject
+\end{verbatim}
 
 When Python loads a module, Python
 reads in the module's file executing the commands. The commands assign
@@ -648,7 +605,9 @@ values to variables within the module's namespace that it puts the names
 in. These are available in the module object, so you can access the
 names defined in the module by the expression
 
+\begin{verbatim}
 moduleName.variable
+\end{verbatim}
 
 For example, the module
 \emph{string} has a built-in function \emph{atof()} to convert strings
@@ -656,52 +615,43 @@ to floating point numbers. It also has a string variable
 \emph{hexdigits} that contains all the hexadecimal digits. So,
 
 
-import string
-
-
-string.atof
-
+\begin{verbatim}
+>>> import string
+>>> string.atof
 built-in function
-atof\textgreater{}
-
-
-string.atof(``314e-2'')
-
+>>> string.atof("314e-2")
 3.14
-
-
-string.hexdigits
-
-`0123456789abcdefABCDEF'
+>>> string.hexdigits
+'0123456789abcdefABCDEF'
+\end{verbatim}
 
 If you wanted to refer to the
 function by its own name directly, rather than prefixed by the module
 name, you could assign it to a local variable with the same name
 
 
-atof=string.atof
-
-
-atof(``314e-2'')
-
+\begin{verbatim}
+>>> atof=string.atof
+>>> atof(``314e-2'')
 3.14
+\end{verbatim}
 
 or you could just import the names
 you want from the module:
 
-
-from string import atof, hexdigits
-
-
-hexdigits
-
+\begin{verbatim}
+>>> from string import atof, hexdigits
+>>> hexdigits
 `0123456789abcdefABCDEF'
+\end{verbatim}
 
 If you are using an interactive
 session to debug modules, you will have to reload the module after every
 change. You reload a module using the built-in \emph{reload()} function:
 
-reload(moduleObject)
+\begin{verbatim}
+>>> reload(moduleObject)
+\end{verbatim}
 
 This will look up, load, and
 initialize the module. The new definitions of variables within the
@@ -715,7 +665,9 @@ However, there are problems that
 may force you to start a new interactive session. If you use the
 \emph{from-import} statement,
 
+\begin{verbatim}
 from moduleName import name
+\end{verbatim}
 
 
 will have been done when the \emph{from-import} statement was executed
@@ -734,9 +686,10 @@ not the name of the module), or import functions, classes, and variables
 from modules assigning them to local variables with different names. The
 syntax is
 
+\begin{verbatim}
 import module as name
-
 from module import name1 as name2
+\end{verbatim}
 
 \subsection{Files}
 
@@ -745,9 +698,11 @@ Python allows you to read and write files. Python uses file objects for
 the operations. You create a file object by calling the built-in
 function \emph{open()}
 
-f=open(name, mode)
+\begin{verbatim}
+f = open(name, mode)
+\end{verbatim}
 
- string gives
+where the \emph{name} string gives
 a path to the file and the \emph{mode} string indicates whether the file
 is to be read from or to be written. The \emph{mode} is a string. Here's
 a list of the modes:
@@ -755,21 +710,19 @@ a list of the modes:
 \begin{itemize}
 
 \item
-   Open for reading.
-  This is the default.
+  \verb"'r'": Open for reading.  This is the default.
 \item
-   Open for writing.
+  \verb"'w'": Open for writing.
   This will replace a current file with the same name.
 \item
-   Open for appending.
+  \verb"'a'": Open for appending.
   Data will be added to the end of a currently existing file.
 \item
-   Open for both
-  reading and writing.
+  \verb"'r+'": Open for both reading and writing.
 \end{itemize}
 
 
-parameter if you are opening the file for reading.
+You may omit the \emph{mode} parameter if you are opening the file for reading.
 
 File objects have methods for
 reading and writing and other operations. A method is a function
@@ -777,7 +730,9 @@ attached to the object. The method has a syntax that differs a bit from
 regular functions. The object the method operates on precedes the
 function call, separated by a dot:
 
+\begin{verbatim}
 object.function(args)
+\end{verbatim}
 
 This syntax has a couple of
 virtues:
@@ -804,19 +759,19 @@ especially need to know for files:
 \begin{enumerate}
 
 \item
-   --Reads the
+  Reads the
   next line from a text file and returns it in a string. The string ends
   with the line termination character or characters, on Linux the
   newline character \emph{`\textbackslash{}n'} . Empty lines thus
   consist of a single newline character. On end of file,
   \emph{readline()} returns an empty string, \emph{''} .
 \item
-   --Writes
+  Writes
   a string to the file. The \emph{string} is not made into a line, i.e.,
   the newline character is not appended. If you want it, you will have
   to write it yourself.
 \item
-   --Finishes
+  Finishes
   processing the file, either reading or writing it. All system
   resources the file was using are freed up. No further methods can be
   called for the file.
@@ -828,14 +783,15 @@ the file operations in \href{chap4.html\#22958}{} of Chapter 4.
 \subsection{print Statement}
 \label{print-statement}
 
- statement writes
+The print statement~\footnote{Now entirely a function in Python 3. Also need to include info about key useful options, e.g. the separator.} writes
 to the standard output. You can find the standard output file object in
-the \emph{sys} module, \emph{sys.stdout} . The form of the print
-statement is
+the \emph{sys} module, \emph{sys.stdout}
 
-
-
- ,
+\begin{verbatim}
+print(e1, e2, ...)
+print(e1, e2, ...,)
+print(e1, e2, ..., sep=separator_text)
+\end{verbatim}
 
 The expressions are evaluated and
 converted into strings and written out with a blank between each pair.
@@ -847,12 +803,8 @@ next print will continue to fill in the line.
 The expressions are optional. You
 use a print with no expressions to write out a newline.
 
-Python 2 allows you to specify a
-different file to write on. It begins \emph{print
-\textgreater{}\textgreater{} file} , thus:
+Python 2 allowed printing to a file. This has been subsumed by writing to a file. We recommend using the \texttt{write()} method on file objects to achive this.
 
-
-file, e1, \ldots{}.
 
 \subsection{while loops}
 \label{while-loops}
@@ -860,13 +812,14 @@ file, e1, \ldots{}.
 \paragraph{while}
 \label{while-statement}
 
- loop is
+The form of the \texttt{while} loop is
 
+\begin{verbatim}
 while expression :
-
  indented body
+\end{verbatim}
 
- is evaluated
+The \texttt{expression} is evaluated
 to get a truth value. Python considers zero to be false and any non-zero
 value to be true. It considers empty strings (and other sequences) to be
 false, nonempty ones, true. If the expression evaluates to true, the
@@ -887,53 +840,42 @@ Here is an example of the use of a
 along, you will need the Python interpreter to be executing in the same
 directory as your code files. You can get Python to your directory by
 
-\endinput
-
-\emph{import os}
-
-
-\emph{os.chdir(``directory'')}
+\begin{verbatim}
+>>> import os
+>>> os.chdir("directory")
+\end{verbatim}
 
  in
 module \emph{os} changes the current working directory. Now, suppose the
 following code is in a file \emph{listfile.py} :
 
+\begin{verbatim}
 def listfile(name):
-
- f=open(name)
-
- L=f.readline()
-
- while L :
-
- print L,
-
- L=f.readline()
-
- f.close()
+  f=open(name)
+  L=f.readline()
+  while L:
+    print(L,)
+    L=f.readline()
+  f.close()
+\end{verbatim}
 
 We can import it and use it to list
 itself:
 
 
-\emph{from listfile import listfile}
+\begin{verbatim}
 
-
-\emph{listfile(``listfile.py'')}
 
 def listfile(name):
-
- f=open(name)
-
- L=f.readline()
-
- while L :
-
- print L,
-
- L=f.readline()
-
- f.close()
+  from listfile import listfile
+  listfile("listfile.py")
+  f=open(name)
+  L=f.readline()
+  while L :
+    print(L,)
+  L=f.readline()
+  f.close()
+\end{verbatim}
 
 The code should be pretty obvious
 except for two points.
@@ -941,8 +883,7 @@ except for two points.
 \begin{enumerate}
 
 \item
-   : Python
-  considers an empty string to be false and a nonempty string to be
+  \texttt{while L:} Python considers an empty string to be false and a nonempty string to be
   true. That makes this loop easy, since end-of-file results in
   \emph{readline()} returning an empty string. In general, structured
   objects can sometimes be considered equivalent to zero for logical
@@ -951,55 +892,61 @@ except for two points.
   non-zero, or false and true, and not keep repeating that some things
   other than the number zero are also considered to be false.
 \item
-   , The final comma
+  \texttt{print(L,)} The final comma
   prevents Python from inserting a newline following the string that has
   been written. Since the lines returned by \emph{readline()} all are
   terminated by newlines anyway, they come out single-spaced. If the
   comma weren't there, the lines would come out double-spaced.
 \end{enumerate}
 
-\paragraph[Relational
-Expressions]{}Relational
-Expressions}{Relational Expressions}}\label{relational-expressions}
+\paragraph{Relational Expressions}\label{relational-expressions}
 
+Theh expressions in \texttt{while} statements most commonly use relational operators to compare operands.
+The result of a relational operation is Boolean: True or False.
 
-statements most commonly use relational operators to compare operands.
-Since there is no logical or Boolean data type in Python, and Python is
-like C in using zero for false and non-zero for true, relational
-operators return numeric values 0 and 1. For example,
-
-
-\emph{1\textless{}2}
-
-1
-
-
-\emph{1\textgreater{}2}
-
-0
+\begin{verbatim}
+>>> 1 < 2
+True
+>>> 1 > 2
+False
+\end{verbatim}
 
 Unlike most other languages, Python
 allows relational operators to be cascaded:
 
-
-\emph{-2 \textless{} -1 \textless{} 0}
-
-1
-
-
-\emph{(-2 \textless{} -1) \textless{} 0}
-
-0
+\begin{verbatim}
+>>> -2 < -1 < 0
+True
+>>> (-2 < -1) < 0
+False
+\end{verbatim}
 
 The first of the two expressions is
 equivalent to \emph{-2 \textless{} -1 and -1 \textless{} 0} . Python
 duplicates the value between the two operators and does both comparisons
 separately. In the second expression, \emph{(-2 \textless{} -1)} yields
-\emph{1} , then \emph{1\textless{}0} yields \emph{0} .
+\emph{True} , then \emph{True\textless{}0} yields \emph{False}.
 
-\paragraph[Logical
-Expressions]{}Logical
-Expressions}{Logical Expressions}}\label{logical-expressions}
+If you find any of this confusing, just remember that True and False can
+be converted as neeeded to 1 and 0, respectively. You can use these values
+almost anywhere an integer is expected. Try this:
+
+\begin{verbatim}
+>>> False + False
+0
+>>> False + True
+1
+>>> True + True
+2
+>>> True - False
+1
+>>> True - True
+0
+
+\end{verbatim}
+
+\endinput
+\paragraph{Logical Expressions}\label{logical-expressions}
 
 Python provides the usual three
 logical operators, \emph{or} , \emph{and} , and \emph{not} , at the low
@@ -1821,7 +1768,9 @@ block of code).
 Indeed, you can put several simple
 statements following a colon just by placing semicolons between them.
 
+\endinput
 \subsection[Tuples]{}
+
 
 A tuple is an immutable list: It is
 just like a list except that you can't change the contents. You create a
