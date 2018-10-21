@@ -5,4 +5,10 @@
 layout: home
 ---
 
-This is the beginning of se4ml.org.
+This site is just being constructed now.
+
+If you are looking for the book source, see [PurdueCAM2Project/SE4ML](https://github.com/PurdueCAM2Project/SE4ML).
+
+If you are looking for the PDF snapshots, see [PurdueCAM2Project/SE4ML/releases](https://github.com/PurdueCAM2Project/SE4ML/releases).
+
+Stay tuned for details.
