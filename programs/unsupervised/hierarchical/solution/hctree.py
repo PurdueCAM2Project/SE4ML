@@ -27,7 +27,14 @@ class TreeNode:
         return self.right
 
     def distanceComplete(self, trnd):
-        return 0
+        dist1 = self._distanceCompleteNode(trnd)
+        dist2 = dist1
+        dist3 = dist1
+        if (self.left != None):
+            dist2 = self._distanceCompleteNode(self.left, trnd)
+        if (self.right != None):
+            dist3 = self._distanceCompleteNode(self.right, trnd)
+        return max(dist1, dist2, dist3)
 
     def distanceSingle(self, trnd):
         return 0
@@ -38,5 +45,21 @@ class TreeNode:
     def distanceCentroid(self, trnd):
         return 0
     
+    def _distance(self, sndnode):
+        sum = 0
+        for ind in range(len(self.value)):
+            dist = self.value[ind] - sndnode.value[ind]
+            sum = dist * dist
+        return sum
     
+    def _distanceCompleteNode(self, trnd):
+        # find the maximum distance of one node with all nodes in trnd
+        dist1 = self._distance(trnd)
+        dist2 = dist1
+        dist3 = dist1
+        if (trnd.left != None):
+            dist2 = self._distanceCompleteNode(self, trnd.left)
+        if (trnd.right != None):
+            dist3 = self._distanceCompleteNode(self, trnd.right)
+        return max(dist1, dist2, dist3)
     
