@@ -113,3 +113,186 @@ created.  As can be seen on the website, there are many options
 changing this repository.  For example, it is possible adding new
 files or uploading files. It is also possible editing an file by
 clicking the pen icon.
+
+\section{Clone a Repository}
+
+A more common way of using a repository, however, is to {\it clone} the
+repository on another computer, as illustrated in Figure~\ref{fig:gitclone}.
+
+\begin{figure}[h] \centering
+{\includegraphics[width=3in]{\thischapterpath/figures/gitclone.png}}
+\caption{Using {\tt git clone} command creates a repository on another computer.}
+\label{fig:gitclone}
+\end{figure}
+
+To clone a repository, it is necessary knowing the {\it path} in {\tt
+  github}.  Figure~\ref{fig:github7} shows the path of the repository.
+
+\begin{figure}[h] \centering
+{\includegraphics[width=3in]{\thischapterpath/figures/github7.png}}
+\caption{Cloning a repository may use HTTPS or SSH.}
+\label{fig:github7}
+\end{figure}
+
+
+\clearpage
+
+To clone the repository, starts a {\it Terminal} in Linux
+and type the {\tt git clone} command. In the following
+example, {\tt \$} is the {\it command prompt} for the Terminal.
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ git clone https://github.com/yhluprog/pythonexamples.git
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+The command clones the repository and the following message is shown:
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+Cloning into 'pythonexamples'...
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 5 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (5/5), done.
+Checking connectivity... done.
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+After cloning the repository, a directory (also called folder) with
+the name {\tt pythonexamples} is created.  This can be shown
+using the {\tt ls} command:
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ ls
+pythonexamples/
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+Inside this directory, there are already two files: {\tt
+  LICENSE} and {\tt README.md}. The is a hidden file {\tt .gitignore}.
+It is hidden because it starts with {\tt .} and is not shown by the
+{\tt ls} command. To show a hidden file, it is necessary using the
+{\tt ls -a} command. Additionally, a hidden directory (ending with
+{\tt /}) called {\tt .git} is also shown.
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ cd pythonexamples/
+$ ls -a
+./  ../  .git/	.gitignore  LICENSE  README.md
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+Enter the directory using the {\tt cd} command
+and use the {\tt ls} command to see the files and directories.
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ cd .git
+$ ls
+branches/  config  description	HEAD  hooks/  index  
+info/  logs/  objects/  packed-refs  refs/
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+
+Among them, {\tt config} stores the information about
+the remote repository.  The {\tt more} command can show
+the content of the file:
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ more config
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://github.com/yhluprog/pythonexamples.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+The line starting with {\tt url} is the path used in {\tt git clone}.
+The concept of {\it branch} will be explained later in this chapter.
+
+\section{Commit and Push}
+
+\marginnote{Modifying {\tt LICENSE} is not recommended.}
+
+There are many different methods modifying a repository.  The first
+method modifies an existing file.  Use a text editor and add the
+following line to {\tt README.md}:
+
+\begin{verbatim}
+This repository demonstrates how to use commit, push, and branch.
+\end{verbatim}
+
+After adding this line, use the {\tt git commit} command to show which file
+has been changed:
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ git commit
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+	modified:   README.md
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+What does this mean? It says a file {\tt README.md} has been changed
+but it has not been committed. The next question is the difference
+between changes and commit.  Modifications are often reviewed and
+revised multiple times; these changes are transient and do not need to
+be recorded in the repository.  When the modifications are
+satisfactory, the file is ready to ``take a snapshot'' by creating a
+new version.  The command to take a snapshot is {\tt git commit}.
+
+The earlier {\tt git commit} shows the candidate(s) for commit.  A
+candidate can be a files that has been modified ({\tt README.md} in
+this example).  This command has not committed any changes yet and has
+not created a new version.
