@@ -564,9 +564,11 @@ the way depicted in Figure~\ref{fig:githubcollaborate}.  In this
 figure, the numbers in black ovals indicate steps within individual's
 local repository.  The numbers in white ovals indicate steps involving
 the remote repository.
+Figure~\ref{fig:githubcollaborate} shows two people start from the
+same remote repository. This is not necessary.  It is possible
+to clone the remote repository after many modifications have already
+been made by another person.
 
-\marginnote{Always do {\tt git pull} before {\tt git push}, unless it is already
-  known that nobody has pushed since a repository is cloned.}
 
 Each person starts by cloning the same repository in {\tt
   github}. After cloning, each person can work independently without
@@ -581,6 +583,10 @@ by the new push.  Even though the erased changes can be recovered,
 pushing without pulling first creates unnecessary trouble and is
 impolite.
 
+\marginnote{Always do {\tt git pull} before {\tt git push}, unless it
+  is already known that nobody has pushed anything after a repository
+  is cloned.  }
+
 \index{git!pull}
 
 Now is a good time explaining the advantage of distributed version
@@ -593,13 +599,31 @@ versions before pushing any changes and make the changes visible to
 the other person.  An obvious question is when one should commit
 and when one should push.
 
-The answer to the first question is simple: commit anytime as one
-wishes.  Since commit does not affect the shared repository, it is
-acceptable committing changes that are incomplete or even contain
-errors (i.e., ``bugs''). Committing creates a new version with a
-message; this new version is searchable by the message.  When one
-decides the changes are ``good enough'' to stay for now, it is time to
-commit and create a new version.  
+The answer to the first question (when to commit) is simple: commit
+anytime as one wishes.  Since commit does not affect the shared
+repository, it is acceptable committing changes that are incomplete or
+even contain errors (i.e., ``bugs''). Committing creates a new version
+with a message; this new version is searchable by the message.  When
+one decides the changes are ``good enough'' to stay for now, it is
+time to commit and create a new version.  One may experiment different
+methods implementing a feature with different versions. As long as the
+versions are not pushed, the experiments do not cause any problem to
+the other people sharing the same {\tt github} repository.
+
+The answer to the second question (when to push) is a little more
+complex because the pushed changes are visible by the other people.
+The general rule about pushing is ``Do you want the other people to
+see your changes?''  If the answer is yes, then push the changes.  If
+the answer is no, then do not push yet.  Now, the question becomes
+``When would you like people to see the changes?''  Usually, the
+pushed changes should be functional and fully debugged.  Incomplete or
+buggy changes should not be pushed (unless they are needed by some
+other people to complete or to debug).  Sometimes, several people
+working on related things and the push by each individual is
+incomplete. Instead, they need to coordinate their pushes so that
+their work can be integrated.
+Page~\pageref{section:git:branches} will talk about branches as a way
+to push changes without directly affecting the other people.
 
 \begin{figure}[h] \centering
 {\includegraphics[width=4.5in]{\thischapterpath/figures/githubcollaborate.png}}
@@ -608,13 +632,19 @@ commit and create a new version.
 \end{figure}
 
 In most cases, no problem occurs when two or more people modify the
-same remote repository. If one person modifies a file another person
-modifies a different file, {\tt git} simply takes the changes by both
-people in the latest version.  Even if two people modify the same
-file, {\tt git} may still be able to add the changes from both people.
-In rare cases, however, {\it conflicts} may occur when two people
-modify the same file and the changes are too similar for {\tt git} to
-determine what to do.  Conflicts appear in th the following markers.
+same remote repository. If one person modifies a file and another
+person modifies a different file, {\tt git} simply takes the changes
+by both people in the latest versions (typically called ``merge'' the
+changes).  Even if two people modify the same file, {\tt git} may
+still be able to add the changes from both people.  In rare cases,
+however, {\it conflicts} may occur when two people modify the same
+file and the changes are too similar for {\tt git} to determine what
+to do.  Conflicts appear in the the following markers.
+
+\marginnote{The primary reason of conflicts is the lack of
+  communication and coordination. Thus, the best way to avoid
+  conflicts is to improve communication among the people modifying the
+  same {\tt github} repository.}
 
 \begin{verbatim}
 <<<<<<< 
@@ -624,10 +654,22 @@ content from the other version
 >>>>>>> 
 \end{verbatim}
 
-\marginnote{The primary reason of conflicts is the lack of
-  communication and coordination. Thus, the best way to avoid
-  conflicts is to improve communication among the people modifying the
-  same {\tt github} repository.}
+\index{git!push}
+\index{git!pull}
 
 Conventionally, the person that wants to push later is responsible
-discovering and resolving conflicts.
+discovering and resolving conflicts by doing {\tt git pull} before
+{\tt git push}.  To resolve conflicts, the person that discovers
+conflicts should examine the differences and determines which to keep
+and which to discard.
+
+A few general rules can reduce the chances of conflicts:
+\begin{itemize}
+\item Do {\tt git pull} often so that conflicts can be discovered
+  earlier when only a few lines of conflicts exist.
+\item 
+\end{itemize}  
+
+\section{Branches}
+\label{section:git:branches}
+
