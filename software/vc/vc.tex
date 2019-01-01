@@ -542,7 +542,6 @@ Date:   YYYY
 \end{tabular}
 \vspace{0.2in}
 
-
 \section{Collaboration using {\tt github}}
 
 Does does ``hub'' in {\tt github} mean? Think of it as an airline hub
@@ -551,7 +550,6 @@ order to change flights or bus lines.  Similarly, {\tt github} allows
 collaborate to share and exchange.  Adding collaborators would be
 easy, by clicking {\tt Settings} and {\tt Collaborators}, as shown
 in Figure~\ref{fig:github9}.
-
 
 \begin{figure}[h] \centering
 {\includegraphics[width=4.5in]{\thischapterpath/figures/github9.png}}
@@ -568,7 +566,6 @@ Figure~\ref{fig:githubcollaborate} shows two people start from the
 same remote repository. This is not necessary.  It is possible
 to clone the remote repository after many modifications have already
 been made by another person.
-
 
 Each person starts by cloning the same repository in {\tt
   github}. After cloning, each person can work independently without
@@ -608,7 +605,9 @@ one decides the changes are ``good enough'' to stay for now, it is
 time to commit and create a new version.  One may experiment different
 methods implementing a feature with different versions. As long as the
 versions are not pushed, the experiments do not cause any problem to
-the other people sharing the same {\tt github} repository.
+the other people sharing the same {\tt github} repository.  Version
+control cannot help if one does not commit. Thus, a good rule is
+``when in doubt, commit''.
 
 The answer to the second question (when to push) is a little more
 complex because the pushed changes are visible by the other people.
@@ -663,13 +662,39 @@ discovering and resolving conflicts by doing {\tt git pull} before
 conflicts should examine the differences and determines which to keep
 and which to discard.
 
+  \index{git!pull}
+  \index{git!push}
 A few general rules can reduce the chances of conflicts:
-\begin{itemize}
-\item Do {\tt git pull} often so that conflicts can be discovered
-  earlier when only a few lines of conflicts exist.
-\item 
-\end{itemize}  
+First,  communicate and coordinate with collaborators often.
+Do {\tt git pull} and {\tt git push} often so that conflicts can
+  be discovered earlier when only a few lines of conflicts exist.
+ In order to do {\tt git push} often, it is imperative to focus
+  on one specific problem (e.g., adding one feature, or fixing one
+  bug) at any moment, finish the work, and then push it.
 
+  \marginnote{How often should one do {\tt git pull} and {\tt git
+      push}?  The answer depends on the number of collaborators and
+    the activites. If there are many collaborators and they are very
+    active pushing changes, doing {\tt git pull} more than once a day
+    and {\tt git push} at least once a week would be reasonable. }
+
+  A common mistake among beginning {\tt git} users is to do several
+  things simultaneously and take too long to finish any of them.
+  During the time, these users cannot do {\tt git push} because the
+  incomplete work would break others' changes. When they do {\tt git
+    push} finally, many things have changed in the repositories by
+  other users and conflicts likely occur. Resolving these conflicts
+  takes a lot of efforts.  The situation can easily become worse and
+  worse: When these beginners discover that {\tt git push} creates
+  conflicts, they hesitate to do {\tt git push}. Consequently, they do
+  {\tt git push} less and less often and wherever they do, more and
+  more conflicts occur.  Eventually, they are so afraid that they stop
+  doing {\tt git push} completely. They no longer contribute and will
+  soon be released from the projects. 
+  
 \section{Branches}
 \label{section:git:branches}
+
+So far all changes occur on the {\it master} branch. This is evident
+because the output of every {\tt git commit} command shows ``master''.
 
