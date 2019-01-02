@@ -609,6 +609,7 @@ the other people sharing the same {\tt github} repository.  Version
 control cannot help if one does not commit. Thus, a good rule is
 ``when in doubt, commit''.
 
+\label{page:whengitpush}
 The answer to the second question (when to push) is a little more
 complex because the pushed changes are visible by the other people.
 The general rule about pushing is ``Do you want the other people to
@@ -690,11 +691,201 @@ Do {\tt git pull} and {\tt git push} often so that conflicts can
   {\tt git push} less and less often and wherever they do, more and
   more conflicts occur.  Eventually, they are so afraid that they stop
   doing {\tt git push} completely. They no longer contribute and will
-  soon be released from the projects. 
-  
+  soon be released from the projects.
+
 \section{Branches}
 \label{section:git:branches}
 
 So far all changes occur on the {\it master} branch. This is evident
 because the output of every {\tt git commit} command shows ``master''.
+There is only one branch, the master branch.  Modifying the master
+branch direclty is actually not recommended. Instead, the master
+branch should be reserved for the stable versions (also called the
+{\it release versions}) for people outside the development team.
 
+\index{integer partition} Page~\pageref{page:whengitpush} said one
+should not push buggy code. This is restricted to the master branch.
+If multiple branches are used, it is acceptable pushing buggy code to
+some branches for collaborators to inspect.  This section uses {\it
+  integer partition} as an example showing how branches may be
+used. Integer partition means breaking a positive integer into the sum
+of several positive integers. Usually, the original number itself is
+also an acceptable partition. More details about integer partition can
+be found in Chapter 14 of ``Intermediate C
+Programming''~\cite{Lu2015IntermediateCProgramming} and
+Below are some example integer partitions:
+
+\begin{verbatim}
+
+1 = 1    2 = 1 + 1    3 = 1 + 1 + 1      4 = 1 + 1 + 1 + 1
+           = 2          = 1 + 2            = 1 + 1 + 2
+                        = 2 + 1            = 1 + 2 + 1
+                        = 3                = 1 + 3
+                                           = 2 + 1 + 1
+                                           = 2 + 2
+                                           = 3 + 1
+                                           = 4
+\end{verbatim}
+
+\marginnote{Another common mistake among beginning {\tt git} users is
+  that they do not merge branches. They keep changing their own
+  branches.  They want to show to their collaborators that they are
+  contributing by frequently pushing improvements to the repositories.
+  However, if the improvements stay in the branches that are not merged,
+  these improvements are not actually useful.}
+
+\index{git!branch}
+
+Imagine that one wishes to write a program that receives a positive
+integer and prints all partitions.  The {\tt git branch} command shows
+the current branch. Since no new branch has been created yet, it shows
+the master branch
+
+\vspace{0.2in}
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ git branch
+* master
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+If a name is given after {\tt git branch}, a new branch is
+created. The following command creates a new branch called {\tt
+  partition}.
+
+\vspace{0.2in}
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ git branch partition
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+\index{git!checkout}
+To change to the newly created branch, use the {\tt git checkout} command:
+
+\vspace{0.2in}
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ git checkout partition
+Switched to branch 'partition'
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+The {\tt git branch} command shows two branches and
+the current working branch is called {\tt partition}.
+
+\vspace{0.2in}
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ git branch
+  master
+* partition
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+\index{git!add}
+\index{git!commit}
+\index{git!push}
+
+This is the first version of the program:
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\thischapterpath/code/partition1.py}
+\end{tt}
+\nolinenumbers
+
+This file is called {\tt partition.py} but the name is not restricted
+by the branch's name.  This file can be added to the local repository
+using the {\tt git add} and {\tt git commit} commands:
+
+\vspace{0.2in}
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ git add partition.py 
+$ git commit -m "add the program for integer partition" partition.py 
+[partition 810a670] add the program for integer partition
+ 1 file changed, 29 insertions(+)
+ create mode 100755 partition.py
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+Even though the {\tt partition} branch has already been created earlier,
+it is known only locally and it  does not exist in the remote repository.
+Thus, the {\tt git push} command has to specify the new name of the branch
+by adding {\tt origin}.
+The command is
+
+\index{git!push origin}
+
+\vspace{0.2in}
+\noindent
+\begin{tabular}{|p{5.5in}|}\hline
+\begin{verbatim}
+$  git push origin partition
+Username for 'https://github.com': yhluprog
+Password for 'https://yhluprog@github.com': 
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 584 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote: 
+remote: Create a pull request for 'partition' on GitHub by visiting:
+remote:      https://github.com/yhluprog/pythonexamples/pull/new/partition
+remote: 
+To https://github.com/yhluprog/pythonexamples.git
+ * [new branch]      partition -> partition
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+\clearpage
+
+On {\tt github} website, the new branch can be seen:
+
+\begin{figure}[h] \centering
+{\includegraphics[width=4.5in]{\thischapterpath/figures/github12.png}}
+\caption{A new branch has been added to {\tt github}.}
+\label{fig:github12}
+\end{figure}
+
+The file {\tt partition.py} is available only in the {\tt partition}
+branch, not in the {\tt master} branch.
+
+\begin{figure}[h] \centering
+   \subfigure[]
+{\includegraphics[width=4.5in]{\thischapterpath/figures/github13.png}}
+   \subfigure[]
+{\includegraphics[width=4.5in]{\thischapterpath/figures/github14.png}}
+\caption{(a) The file {\tt partition.py} is in the {\tt partition}
+  branch.  Also, {\tt github} says, ``This branch is 1 commit ahead of
+  master.''.  (b) The file {\tt partition.py} is not in the {\tt
+    master} branch.}
+\label{fig:github134}
+\end{figure}
+
+
+\section{Pull Requests}
+
+
+
+\section{Issues}
