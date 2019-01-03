@@ -712,7 +712,11 @@ used. Integer partition means breaking a positive integer into the sum
 of several positive integers. Usually, the original number itself is
 also an acceptable partition. More details about integer partition can
 be found in Chapter 14 of ``Intermediate C
-Programming''~\cite{Lu2015IntermediateCProgramming} and
+Programming''~\cite{Lu2015IntermediateCProgramming} and Section 9.3 of
+``Discrete and Combinatorial
+Mathematics''~\cite{Grimaldi2003DiscreteandCombinatorial}.
+
+
 Below are some example integer partitions:
 
 \begin{verbatim}
@@ -869,7 +873,8 @@ On {\tt github} website, the new branch can be seen:
 \end{figure}
 
 The file {\tt partition.py} is available only in the {\tt partition}
-branch, not in the {\tt master} branch.
+branch, not in the {\tt master} branch, as shown in
+Figure~\ref{fig:github134}.
 
 \begin{figure}[h] \centering
    \subfigure[]
@@ -883,6 +888,140 @@ branch, not in the {\tt master} branch.
 \label{fig:github134}
 \end{figure}
 
+\clearpage
+
+The Python file is called {\tt partition.py}; the local and the remote
+branches are called {\tt partition}.  There is no reason why they must
+have the same name.  The following steps show how to rename the file.
+by using the {\tt git mv} command ({\tt mv} means move). Of course,
+this has to be followed by the {\tt git commit} and the {\tt git push}
+commands.
+
+\index{git!commit}
+\index{git!push}
+\index{git!mv}
+
+\clearpage
+\vspace{0.2in}
+\noindent
+\begin{tabular}{|p{5.5in}|}\hline
+\begin{verbatim}
+$ git mv partition.py intpart.py
+$ git commit -m "rename the file" intpart.py 
+$ git commit -m "deleted" partition.py
+[partition 872d9c3] rename the file
+ 1 file changed, 30 insertions(+)
+ create mode 100755 intpart.py
+$ git push origin partition
+Username for 'https://github.com': yhluprog
+Password for 'https://yhluprog@github.com': 
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 574 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/yhluprog/pythonexamples.git
+   810a670..872d9c3  partition -> partition
+[partition 4b61bbf] deleted
+ 1 file changed, 29 deletions(-)
+ delete mode 100755 partition.py
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+
+It is possible to have different names for the local and the remote
+branches but there is no obvious advantages and can cause unnecessary
+confusion.  Thus, they will be kept the same.
+
+A branch can also have multiple commits and pushes. The {\tt
+  intpart.py} program uses both odd numbers and even numbers. It will
+give users the options to use only odd numbers or only even numbers by
+specifying {\tt -o} or {\tt -e} flag. Obviously, if {\tt -e} is used,
+only even numbers can be partitioned. The new program is listed below:
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\thischapterpath/code/partition2.py}
+\end{tt}
+\nolinenumbers
+
+When partitioning {\tt 4}, is {\tt 1 + 1 + 2} considered the same as
+{\tt 1 + 2 + 1}, as well as {\tt 2 + 1 + 1}? The program {\tt
+  intpart.py} treats them as different partitions.  The next change is
+to have the option whether orders matter. If the order does not matter
+(i.e., {\tt 1 + 1 + 2}, {\tt 1 + 2 + 1}, and {\tt 2 + 1 + 1} are
+considered as equivalent or duplicates), one simple way to eliminate
+duplicates is by restricting the latter numbers must not be smaller
+than earlier numbers.  This eliminates {\tt 1 + 2 + 1} and {\tt 2 + 1
+  + 1} because they do not meet the requirement.
+The new program is listed below:
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\thischapterpath/code/partition3.py}
+\end{tt}
+\nolinenumbers
+
+\index{git!checkout}
+\index{git!merge}
+\index{git!branch!-d}
+
+\marginnote{Most branches should have short lives: Each branch is
+  created for one specific purpose.  It is documented, developed,
+  tested, committed, merged, and then deleted.}
+  
+Now the program is ready to be moved to the stable {\tt master}
+branch.  This will be done in three steps: (1) go to the {\tt master}
+branch using the {\tt git checkout} command; (2) merge the {\tt
+  partition} branch to the {\tt master} branch using the {\tt git
+  merge} command; (3) delete the {\tt partition} branch using the {\tt
+  git branch -d} command.  The {\tt git branch} command is used to
+check which branch is used right now and whether any other branch
+exists.  At can be seen, the last {\tt git branch} shows only the {\tt
+  master} branch.  The last command deletes the branch at {\tt github}.
+
+\vspace{0.2in}
+\noindent
+\begin{tabular}{|p{5.5in}|}\hline
+\begin{verbatim}
+$ git checkout master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+$ git branch
+* master
+  partition
+$ git merge partition
+Updating 3357bae..d9ee8e1
+Fast-forward
+ intpart.py | 70 +++++++++++++++++++++++++++
+ 1 file changed, 70 insertions(+)
+ create mode 100755 intpart.py
+$ git branch -d partition
+Deleted branch partition (was d9ee8e1).
+$ git branch
+* master
+$ git push
+Username for 'https://github.com': yhluprog
+Password for 'https://yhluprog@github.com': 
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/yhluprog/pythonexamples.git
+   3357bae..d9ee8e1  master -> master
+$ git push origin --delete partition
+Username for 'https://github.com': yhluprog
+Password for 'https://yhluprog@github.com': 
+To https://github.com/yhluprog/pythonexamples.git
+ - [deleted]         partition
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+\clearpage
 
 \section{Pull Requests}
 
