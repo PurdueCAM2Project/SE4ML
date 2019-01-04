@@ -1,10 +1,5 @@
-#SE4ML
-Software Engineering for Machine Learning
+[![Build Status](https://travis-ci.com/PurdueCAM2Project/SE4ML.svg?branch=master)](https://travis-ci.com/PurdueCAM2Project/SE4ML) [![DOI](https://zenodo.org/badge/130437979.svg)](https://zenodo.org/badge/latestdoi/130437979)
 
-
-# Build Status
-
-[![Build Status](https://travis-ci.com/PurdueCAM2Project/SE4ML.svg?branch=master)](https://travis-ci.com/PurdueCAM2Project/SE4ML)
 
 # Downloading
 
