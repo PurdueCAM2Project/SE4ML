@@ -1024,7 +1024,52 @@ To https://github.com/yhluprog/pythonexamples.git
 \clearpage
 
 \section{Pull Requests}
+\index{github!pull request}
 
+Creating a branch does not inform collaborators. This is reasonable
+because a branch may have many versions that are not ready to be
+shared. When a version is ready, collaborators may be informed by
+using a {\it pull request}. A pull request should be initiated from a
+branch other than the {\tt master} branch because the {\tt master}
+should be the stable branch. A pull request may serve one or more
+purposes, including (1) The version in the branch is ready to be
+inspected by one or more collaborators before being merged to the {\tt
+  master} branch. (2) The version needs to be integrated with the work
+by collaborators. (3) The version has some problems and the person
+that creates this version does not know how to solve the
+problems. This person asks collaborators to help.
+
+Suppose one wants to add another option that excludes the number itself in
+integer partition. For example, to partition {\tt 5}, valid options include
+{\tt 4 + 1}, {\tt 2 + 3}, and {\tt 2 + 1 + 2}; however, {\tt 5} itself is not accepted.
+This person creates a new branch called {\tt partition\_not\_self}. 
+The following command, with {\tt -b}, can simultaneously create a branch and switch to the
+branch.
+
+\vspace{0.2in}
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ git checkout -b partition_not_self
+Switched to a new branch 'partition_not_self'
+$ git branch
+  master
+* partition_not_self
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+The following code is an attempt for this option. However,
+when {\tt -s} is added, no partition is printed at all.
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\thischapterpath/code/partition4.py}
+\end{tt}
+\nolinenumbers
 
 
 \section{Issues}
+\index{github!issue}
