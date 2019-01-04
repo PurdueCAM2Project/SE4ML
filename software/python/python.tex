@@ -945,19 +945,16 @@ almost anywhere an integer is expected. Try this:
 
 \end{verbatim}
 
-\endinput
-\paragraph{Logical Expressions}\label{logical-expressions}
+\paragraph{Logical Expressions}
+\label{logical-expressions}
 
-Python provides the usual three
-logical operators, \emph{or} , \emph{and} , and \emph{not} , at the low
-precedence levels, 1, 2, and 3. See \href{chap2.html\#29797}{See
-Operators and Precedence Levels.}.
+Python provides the usual three logical operators, \emph{or}, \emph{and}, and \emph{not}, at the low 
+precedence levels, 1, 2, and 3. See table{tab:logical-operators}.
 
 \begin{enumerate}
-
 \item
   
-  --The lowest precedence Python operator is \emph{or} . The expression
+  \verb"x or y"--The lowest precedence Python operator is \emph{or} . The expression
   \emph{x or y} is short-circuited: It will not evaluate \emph{y} if
   \emph{x} determines the value of the expression. It first evaluates
   \emph{x} and returns the value of \emph{x} if \emph{x} is not
@@ -967,7 +964,7 @@ Operators and Precedence Levels.}.
   value of \emph{x} or the value of \emph{y} .
 \item
   
-  --The \emph{and} operator, like \emph{or} , is short-circuited: It
+  \verb"x and y"--The \emph{and} operator, like \emph{or} , is short-circuited: It
   will not evaluate \emph{y} if \emph{x} determines the value of the
   expression. It first evaluates \emph{x} and returns \emph{x} if
   \emph{x} counts as false. If \emph{x} is true, it evaluates and
@@ -975,7 +972,7 @@ Operators and Precedence Levels.}.
   if either \emph{x} or \emph{y} is zero. If neither \emph{x} nor
   \emph{y} is zero, it returns the value of \emph{y} to represent true.
 \item
-   --The
+  \verb"not x"--The
   \emph{not} operator, at precedence level 3, although a unary operator,
   has a much lower precedence than the other unary operators at
   precedence 12. In fact, it is a lot more useful at a low precedence
@@ -984,7 +981,7 @@ Operators and Precedence Levels.}.
   returns 0 if \emph{x} is anything else.
 \end{enumerate}
 
-\subsection[Lists]{}
+\subsection{Lists}
 
 Lists in Python are like arrays in
 other languages. Actually, they are flex arrays, arrays whose size can
@@ -993,61 +990,46 @@ change during program execution.
 Lists can be created with a
 display. Just list the values between opening and closing brackets:
 
- ,
-\ldots{}, e \emph{n-1} {]}
+$\lbrack e_0, e_1, \ldots, e_{n-1} \rbrack$
 
- is
-created. The expressions e \emph{0} , e \emph{1} , etc., are evaluated
+A list of length \texttt{n} is
+created. The expressions $e_0$, $e_1$, \ldots $e_{n-1}$ are evaluated
 and their values placed in the list.
 
-In addition, Python 2 has a more
-sophisticated form of display, the list comprehension. We will discuss
-it later, after we've discussed the \emph{for-} and \emph{if-}
+In addition, Python (2 and beyond) has a moresophisticated form of display, the list comprehension. 
+We will discuss it later, after we've discussed the \texttt{for} and \texttt{if}
 statements it is based on.
 
-Like arrays, lists can be
-subscripted by following the list's name with the index of the item in
+Like arrays, lists can be subscripted by following the list's name with the index of the item in
 brackets, thus
 
-
-\emph{L={[}``a'',``b'',``c''{]}}
-
-
-\emph{L{[}1{]}}
-
-`b'
-
-
-\emph{L{[}0{]}}
-
-`a'
-
-
-\emph{L{[}2{]}}
-
-`c'
-
-
-\emph{L{[}3{]}}
-
-Traceback (innermost last):
-
- File
-``\textless{}stdin\textgreater{}'', line 1, in ?
-
+\begin{verbatim}
+python3
+Python 3.7.0 (default, Jun 28 2018, 13:15:42) 
+[GCC 7.2.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> L=["a", "b", "c"]
+>>> L[1]
+'b'
+>>> L[0]
+'a'
+>>> L[2]
+'c'
+>>> L[3]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
 IndexError: list index out of range
+>>> 
+\end{verbatim}
 
-The positions in the list are
-numbered from zero, left to right. You can also assign to positions in a
+The positions in the list are numbered from zero, left to right. You can also assign to positions in a
 list
 
-
-\emph{L{[}1{]}=1}
-
-
-\emph{L}
-
-
+\begin{verbatim}
+>>> L[1] = 1
+>>> L
+['a', 1, 'c']
+\end{verbatim}
 
 Notice that the items in a list do
 not need to be of the same data type. Python lists, like variables, are
@@ -1058,40 +1040,49 @@ languages that you have to write out in a loop.
 You can check the length of a list
 with the \emph{len()} function:
 
-
-\emph{len(L)}
-
+\begin{verbatim}
+>>> len(L)
 3
+\end{verbatim}
 
 Often you will need a list with
 successive integers in it. Python has a built-in function,
 \emph{range()} , to give that to you.
 
+\begin{verbatim}
+>>> range(10)
+range(0, 10)
+>>> list(range(10))
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> range(-10, 0)
+range(-10, 0)
+>>> list(range(-10,0))
+[-10, -9, -8, -7, -6, -5, -4, -3, -2, -1]
+\end{verbatim}
 
-\emph{range(10)}
 
-
-
-
-\emph{range(-10,0)}
-
--10, -9, -8, -7, -6, -5, -4, -3,
--2, -1{]}
-
- gives you a
-list of the \emph{j-i} integers from \emph{i} up to, but not including,
+Calling \emph{range(i, j)} gives you an iterator of integers 
+from \emph{i} up to, but not including,
 \emph{j} . Call \emph{range(n)} is the same as \emph{range(0,n)} . Why
 ``up to, but not including''? It is compatible with the indexing of
 lists, where a list of length n has indices 0 through n-1.
+
+Beginning with Python 3, \emph{range(i, j)} is not evaluated until necessary.
+To get a list of values, you need to use the \emph{list()} to demand
+the values from the iterator.
+
 
 You can also create a list of
 values some step size apart, not just sequential, by specifying the step
 size as the third argument to \emph{range()} :
 
+\begin{verbatim}
+>>> list(range(0, 10, 2))
+[0, 2, 4, 6, 8]
+\end{verbatim}
 
-\emph{range(0,10,2)}
-
-
+\endinput
+%GKT: Continue from here next time!
 
 If you are using lists as arrays,
 you obviously have to be able to create a list of some length. The
