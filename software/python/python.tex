@@ -1081,9 +1081,6 @@ size as the third argument to \emph{range()} :
 [0, 2, 4, 6, 8]
 \end{verbatim}
 
-\endinput
-%GKT: Continue from here next time!
-
 If you are using lists as arrays,
 you obviously have to be able to create a list of some length. The
 length you need may be computed as the program runs, so you obviously
@@ -1096,39 +1093,31 @@ number, \emph{n} , then \emph{L*n} concatenates \emph{n} copies of
 \emph{L} together.
 
 
-\emph{L}
+\begin{verbatim}
+>>> L
+['a', 1, 'c']
+>>> L*3
+['a', 1, 'c', 'a', 1, 'c', 'a', 1, 'c']
+>>> 2*L
+['a', 1, 'c', 'a', 1, 'c']
+\end{verbatim}
 
 
+A way to allocate an array of length 10 is
 
-
-\emph{L*3}
-
-'a', 1, `c', `a', 1, `c', `a',
-1, `c'{]}
-
-
-\emph{2*L}
-
-
-
-A way to allocate an array of
-length 10 is
-
-
-\emph{ary={[}0{]}*10}
-
-
-\emph{ary}
-
-
+\begin{verbatim}
+>>> ary=[0]*10
+>>> ary
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+\end{verbatim}
 
 You can concatenate two lists by
 using the \emph{+} operator:
 
-
-\emph{L+{[}``d'',``e''{]}}
-
-
+\begin{verbatim}
+>>> L+["d","e"]
+['a', 1, 'c', 'd', 'e']
+\end{verbatim}
 
 You can compare two lists for
 identity or for equality. The \emph{is} operator compares two objects to
@@ -1137,24 +1126,25 @@ operator compares objects for equality. Two lists are considered equal
 if their contents are equal. The equality test can be a lot slower than
 the identity test.
 
-
-\emph{{[}1,2{]} is {[}1,2{]}}
-
-0
+\begin{verbatim}
+>>> [1,2] is [1,2]
+False
+\end{verbatim}
 
 These two displays create separate
 lists, so \emph{is} returns false, but the two lists are equal:
 
+\begin{verbatim}
+>>> [1,2] == [1,2]
+True
+\end{verbatim}
 
-\emph{{[}1,2{]} == {[}1,2{]}}
 
-1
-
- test in
-Python1 uses a simple recursive search to test for equality. If you have
-a circularly linked structure, e.g. a list embedded within itself, the
-\emph{==} operator may crash your program. Python2 uses a more
-sophisticated algorithm, so it shouldn't be a problem.
+% test in
+%Python1 uses a simple recursive search to test for equality. If you have
+%a circularly linked structure, e.g. a list embedded within itself, the
+%\emph{==} operator may crash your program. Python2 uses a more
+%sophisticated algorithm, so it shouldn't be a problem.
 
 Other relational operators work on
 lists as well. They operate lexicographically. The comparison works left
@@ -1163,30 +1153,25 @@ positions, until it finds elements that are unequal, whereupon it uses
 the relationship of those elements as the relationship of the lists, for
 example
 
+\begin{verbatim}
+>>> [1,2,3] < [1,4,3]
+True
 
-\emph{{[}1,2,3{]}\textless{}{[}1,4,3{]}}
-
-1
-
-
-\emph{{[}1,2,3{]}\textless{}{[}1,0,3{]}}
-
-0
+>>> [1,2,3] < [1,0,3]
+False    
+\end{verbatim}
 
 There are two special operators to
 test for list membership: \emph{x in y} reports true if \emph{x} is in
 the list \emph{y} and false otherwise; \emph{x not in y} reports just
 the opposite.
 
-
-\emph{2 in {[}1,2,3{]}}
-
-1
-
-
-\emph{2 not in {[}1,2,3{]}}
-
-0
+\begin{verbatim}
+>>> 2 in [1,2,3]
+True
+>>> 2 not in [1,2,3]
+False  
+\end{verbatim}
 
 You can get a copy of a part of a
 list using slicing. Slicing is like subscripting, but it specifies a
@@ -1195,53 +1180,37 @@ range of indices.
 
 \emph{r=range(10)}
 
-
-\emph{r}
-
-
-
-
-\emph{r{[}3{]}}
-
+\begin{verbatim}
+>>> r = range(10)
+>>> list(r)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> r = list(r)
+>>> r[3]
 3
-
-
-\emph{r{[}3:4{]}}
-
-
-
-
-\emph{r{[}3:6{]}}
-
-
-
-
-\emph{r{[}3:1{]}}
-
-
+>>> r[3:4]
+[3]
+>>> r[3:6]
+[3, 4, 5]
+>>> r[3:1]
+[]
+\end{verbatim}
 
 Notice a few things:
 
 \begin{itemize}
-
 \item
-   ,
-  returns the object that is at that position.
+  Subscripting, \verb"r[3]", returns the object that is at that position.
 \item
-  ,
-  returns a list.
+  Slicing, e.g., \verb"r[3:4]", returns a list.
 \item
-  The slice extends from the
-  starting index up to, but not including, the ending index.
+  The slice extends from thestarting index up to, \emph{but not including}, the ending index.
 \item
-  If the ending index of a slice is
-  less than or equal to the starting index, slicing returns the empty
-  list.
+  If the ending index of a slice is less than or equal to the starting index, slicing returns the empty list.
 \end{itemize}
 
-You can use negative indices to
-indicate positions from the end of the list:
+You can use negative indices to indicate positions from the end of the list:
 
+\endinput
 
 \emph{r=range(10)}
 
@@ -1759,7 +1728,6 @@ block of code).
 Indeed, you can put several simple
 statements following a colon just by placing semicolons between them.
 
-\endinput
 \subsection[Tuples]{}
 
 
