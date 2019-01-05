@@ -1,5 +1,10 @@
 [![Build Status](https://travis-ci.com/PurdueCAM2Project/SE4ML.svg?branch=master)](https://travis-ci.com/PurdueCAM2Project/SE4ML) [![DOI](https://zenodo.org/badge/130437979.svg)](https://zenodo.org/badge/latestdoi/130437979)
 
+# How to Cite Us
+
+Yung-Hsiang Lu and George K. Thiruvathukal, *Software Engineering and Machine Learning*, PurdueCAM2Project/SE4ML, Zenodo, http://doi.org/10.5281/zenodo.2532051.
+
+Our work is under active development, so please make sure to use this DOI, which always points to the current tagged release (or pre-release) version.
 
 # Downloading
 
