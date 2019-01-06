@@ -586,6 +586,38 @@ impolite.
 
 \index{git!pull}
 
+This following is an example of running the {\tt git pull} command
+while writing this book. It says two files, {\tt README.md} and {\tt
+  python.tex}, have been modified by a collaborator (maybe several
+collaborators).
+
+\vspace{0.2in}
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ git pull
+remote: Enumerating objects: 16, done.
+remote: Counting objects: 100% (16/16), done.
+remote: Compressing objects: 100% (11/11), done.
+remote: Total 16 (delta 7), reused 14 (delta 5), pack-reused 0
+Unpacking objects: 100% (16/16), done.
+From https://github.com/PurdueCAM2Project/SE4ML
+   7e25147..5051695  master     -> origin/master
+ * [new tag]         v0.6       -> v0.6
+ * [new tag]         v0.7       -> v0.7
+ * [new tag]         v0.6.1     -> v0.6.1
+Updating 7e25147..5051695
+Fast-forward
+ README.md                  |   8 ++--
+ software/python/python.tex | 221 ++++++-----------
+ 2 files changed, 101 insertions(+), 128 deletions(-)
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+
+
 Now is a good time explaining the advantage of distributed version
 control systems like {\tt git}.  Figure~\ref{fig:githubcollaborate}
 shows three repositories: one remote and shared in {\tt github} and
@@ -1083,8 +1115,13 @@ a new version is ready, it is released.
 \noindent
 \begin{tabular}{|p{5.5in}|}\hline
 \begin{verbatim}
-$ git tag v0.4
+$ git tag v0.5
 $ git push --tags
+Username for 'https://github.com': yhluprog
+Password for 'https://yhluprog@github.com': 
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/PurdueCAM2Project/SE4ML.git
+ * [new tag]         0.5 -> 0.5
 \end{verbatim}
 \\ \hline
 \end{tabular}
