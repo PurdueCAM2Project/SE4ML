@@ -13,6 +13,7 @@ Here is a high-level look at the
 features of Python, for those with a background in programming
 languages.
 
+\index{language!scripting}
 \paragraph{Scripting} 
 Python is a scripting language.
 This loosely means that you do not have to compile Python programs;
@@ -21,6 +22,8 @@ into the Python interpreter and have it execute them interactively.
 Python does compile programs into code it interprets, but it will handle
 the compilation itself, without troubling you.
 
+\index{language!declarative}
+\index{language!nondeclarative}
 \paragraph{Nondeclarative}
 Python programs consist of
 executable statements. They don't have declarations. In most languages,
@@ -30,10 +33,14 @@ call a function by giving its name and an argument list. The Python call
 looks exactly the same, but instead of the name of the function, you
 specify the name of the variable containing the function as its value.
 
+\index{language!typeless}
+\index{language!dynamic}
+\index{language!dynamically typed}
 \paragraph{Typeless or dynamically typed language} That means that variables do not have
 static (declared)types; values have types. Variables are not declared. A value of any
 type may be assigned to any variable.
 
+\index{language!high-level}
 \paragraph{High-Level}
 Python is a high-level language. It
 has high-level data structures built into the language, such as
@@ -46,6 +53,8 @@ Older versions of Python also deallocate objects automatically with a
 reference count scheme, which will not reclaim storage of circularly
 linked, inaccessible structures.
 
+\index{language!modular}
+\index{software engineering!modularity}
 \paragraph{Modular}
 Python programs are organized as
 collections of modules kept in libraries. Each module is kept in a
@@ -55,6 +64,10 @@ modules as possible and to divide the code you do write into
 general-purpose modules. These modules can be debugged individually and
 can be reused in other programs.
 
+\index{language!object-oriented}
+\index{language!objects}
+\index{language!classes}
+
 \paragraph{Object-Oriented}
 Python has facilities that allow
 object-oriented programming. It has classes and inheritance, as any
@@ -63,6 +76,7 @@ perfectly object oriented. Python does not provide private or otherwise
 restricted scopes for names. The information-hiding aspects of
 object-oriented programming are on the honor system.
 
+\index{language!operators}
 \paragraph{With Operator Declarations}
 Python allows you to create
 functions for the built-in operators, to be used when the operators are
@@ -71,6 +85,7 @@ abstract data types, new types of objects with their own set of
 operators. The operators include subscripting operators, so you can
 implement new types of objects that behave like arrays.
 
+\index{language!metaprogramming}
 \paragraph{With Metaprogramming Facilities}
 What Python calls metaprogramming,
 other languages refer to as introspection or reflection. The program
@@ -83,6 +98,8 @@ running program under program control.
 
 \paragraph{Interactive Use}
 \label{interactive-use}
+\index{Python!interactive}
+\index{Python!REPL}
 You can execute Python from the
 command line in a command window. It will come up with a greeting and a
 command prompt (\verb">>>").~\footnote{Python is easy to run on Linux, OS X, and Windows. For Windows, we recommend installing Windows Subsystem for Linux to get a complete Linux shell environment. To be covered in preliminaries section.}
@@ -125,7 +142,7 @@ It incorporates the following character, the newline, into the current
 line as white space.
 
 \paragraph{Scripts in Files}
-
+\index{Python!scripts}
 You can also place programs in
 files and execute them from there. For example, you can edit a file
 SayHi in the current directory, containing:
@@ -139,6 +156,7 @@ SayHi in the current directory, containing:
 
 Then set SayHi's execute permissions and execute it:
 
+\index{Python!script permissions}
 \begin{verbatim}
 chmod a+x SayHi.py
 \end{verbatim}
@@ -167,10 +185,11 @@ want the value of every expression you execute cluttering up your
 output, so it will not write out the values of expressions.
 
 \subsection{Arithmetic Expressions}
-
+\index{Python!arithmetic}
 \paragraph{Arithmetic Types}
 
 Python has four built-in arithmetic data types:
+\index{Python!data types}
 
 \begin{enumerate}
 \item fixed sized (at least 32-bit) signed integers
@@ -183,8 +202,8 @@ Integer literals can be written in
 decimal, octal, or hexadecimal (base 16) format using the same syntax as
 in C or C++:
 
+\index{Python!literals}
 \begin{itemize}
-
 \item
   Octal integers begin with 0 and
   contain only octal digits (0-7). Strangely, that means zero is written
@@ -254,7 +273,7 @@ long integers will be converted to floats. The conversions to float may
 lose some low-order digits.
 
 
-Table 2-1 is a complete list of
+Table TODO is a complete list of
 Python operators and their precedence levels. Some of the operators
 won't be discussed until later sections; we'll refer to the table then.
 The operators with higher precedence levels are performed before those
@@ -270,6 +289,9 @@ We will discuss the logical and
 comparison operators later when we discuss \texttt{while} loops.
 
 \begin{longtable}{l|p{3cm}|p{7cm}}
+\caption{Logical Operators in Python}
+\label{table:logical-operators-python}\\
+%
 \toprule
 Precedence & Operators & Comments \\
 \midrule
@@ -382,6 +404,9 @@ Complex arithmetic functions are in module \texttt{cmath}.
 
 
 \begin{longtable}{l|p{7cm}}
+\caption{Built-in Functions in Python}
+\label{table:builtin-functions-python}\\
+%
 \toprule
 Function call & Explanation \\
 %
@@ -1310,6 +1335,9 @@ at the end of the list, whereupon \texttt{insert()} behaves like
 
 
 \begin{longtable}{l|p{7cm}}
+\caption{List Methods in Python}
+\label{table:list-methods-python}\\
+%
 \toprule
 Method & Description \\
 %
@@ -1337,50 +1365,33 @@ All items in \texttt{L} at positions \texttt{i} and above are moved to the right
     
 \endinput
 
-Method
-
-Description
-
-
-TABLE
- 
-
-
-
-
-
-
-
-
-
-
 
 END OF TABLE?
 
-finds the first (lowest indexed) occurrence of \emph{x} in list \emph{L}
+finds the first (lowest indexed) occurrence of \texttt{x} in list \texttt{L}
 and removes it. All elements with higher indices are moved down one. If
-you know the position, \emph{i} , of the element you wish to remove, use
-\emph{del L{[}i{]}}. If you want to examine the item at a particular
-position and remove it, use \emph{L.pop(i)}. If you want to examine the
-last item and remove it, use \emph{L.pop()}.
+you know the position, \texttt{i} , of the element you wish to remove, use
+\texttt{del L{[}i{]}}. If you want to examine the item at a particular
+position and remove it, use \texttt{L.pop(i)}. If you want to examine the
+last item and remove it, use \texttt{L.pop()}.
 
  as a stack, use
-\emph{L.append(x)} to push \emph{x} on the stack, and \emph{x=L.pop()}
-to pop it off. To use \emph{L} as a queue, use \emph{L.append(x)} to
-enqueue \emph{x} and \emph{x=L.pop(0)} to dequeue it.
+\texttt{L.append(x)} to push \texttt{x} on the stack, and \texttt{x=L.pop()}
+to pop it off. To use \texttt{L} as a queue, use \texttt{L.append(x)} to
+enqueue \texttt{x} and \texttt{x=L.pop(0)} to dequeue it.
 
 Two methods examine the list for
-elements equal to a particular value. Call \emph{L.count(x)} returns a
-count of the number of occurrences of value \emph{x} in list \emph{L}.
-Call \emph{L.index(x)} returns the position of the first occurrence of
-\emph{x} in \emph{L}. Remember, the expressions \emph{x} \emph{in L}
-and \emph{x not in L} test to see if the list \emph{L} contains element
-\emph{x}.
+elements equal to a particular value. Call \texttt{L.count(x)} returns a
+count of the number of occurrences of value \texttt{x} in list \texttt{L}.
+Call \texttt{L.index(x)} returns the position of the first occurrence of
+\texttt{x} in \texttt{L}. Remember, the expressions \texttt{x} \texttt{in L}
+and \texttt{x not in L} test to see if the list \texttt{L} contains element
+\texttt{x}.
 
 Two methods permute the order of
-the elements of the list, in place. \emph{L.reverse()} reverses the
-order of the elements of the list \emph{L}. \emph{L.sort()} sorts the
-elements of \emph{L} into nondecreasing order.
+the elements of the list, in place. \texttt{L.reverse()} reverses the
+order of the elements of the list \texttt{L}. \texttt{L.sort()} sorts the
+elements of \texttt{L} into nondecreasing order.
 
 Example: Self-Organizing List
 
@@ -1390,7 +1401,7 @@ in subsequent searches. Here's how you could implement self-organizing
 lists using list methods:
 
 
-\emph{def reorder(L,x):}
+\texttt{def reorder(L,x):}
 
 
 
@@ -1399,18 +1410,18 @@ lists using list methods:
 
 
 
-\emph{r=range(10)}
+\texttt{r=range(10)}
 
 
-\emph{r}
+\texttt{r}
 
 
 
 
-\emph{reorder(r,5)}
+\texttt{reorder(r,5)}
 
 
-\emph{r}
+\texttt{r}
 
 
 
@@ -1423,7 +1434,7 @@ there is an even number, the median is the average of the two middle
 numbers. Here is a function to compute the median:
 
 
-\emph{def median(L):}
+\texttt{def median(L):}
 
 
 
@@ -1431,18 +1442,18 @@ numbers. Here is a function to compute the median:
 
 
 
- \emph{return
+ \texttt{return
 (s{[}n/2{]}+s{[}(n-1)/2{]})/2.0}
 
 
 
 
-\emph{median(range(5))}
+\texttt{median(range(5))}
 
 2.0
 
 
-\emph{median(range(6))}
+\texttt{median(range(6))}
 
 2.5
 
@@ -1453,48 +1464,48 @@ note about this code:
 
 \item
   Rather than modify the array,
-  \emph{L} , we make a copy before sorting it.
+  \texttt{L} , we make a copy before sorting it.
 \item
    , of
   elements is even or odd, we compute the median by averaging the
-  elements at positions \emph{n/2} and \emph{(n-1)/2}. This gives the
+  elements at positions \texttt{n/2} and \texttt{(n-1)/2}. This gives the
   correct answer in either case.
 \end{itemize}
 
-\subsection[ \emph{for}
+\subsection[ \texttt{for}
 loops]{}
 loops}{ for loops}}\label{for-loops}
 
  loops exist
 to allow an index variable to take on each element in a list, or other
 sequence object. (We'll discuss other sequences below.) The form of a
-\emph{for} loop is:
+\texttt{for} loop is:
 
 for var in sequence :
 
  indented body of loop
 
 Probably the most common form of
-\emph{for} loop is
+\texttt{for} loop is
 
 
-\emph{for i in range(len(L)):}
+\texttt{for i in range(len(L)):}
 
 
 
  takes on the index
-of each item in the list, \emph{L}. If you only need to examine the
+of each item in the list, \texttt{L}. If you only need to examine the
 items in the list but do not need to know their positions, you can use
 the loop
 
 
-\emph{for x in L:}
+\texttt{for x in L:}
 
 
 
 \subsection[
-\emph{continue}]{}
-\emph{continue}}{ continue}}\label{continue}
+\texttt{continue}]{}
+\texttt{continue}}{ continue}}\label{continue}
 
 If you decide that you are finished
 with the current iteration of a loop, you can execute the continue
@@ -1508,17 +1519,17 @@ iteration. If there are no more iterations to do, of course, it falls
 out of the loop.
 
 One major use for the
-\emph{continue} statement is to filter the items in the loop. Suppose we
+\texttt{continue} statement is to filter the items in the loop. Suppose we
 wish to print only those strings in a list that are at least five
 letters long; we might do it as follows:
 
 
-\emph{x={[}``book'',``placid'',``right'',``table'',``mother'',``gone''{]}}
+\texttt{x={[}``book'',``placid'',``right'',``table'',``mother'',``gone''{]}}
 
 
-\emph{for s in x:}
+\texttt{for s in x:}
 
- \emph{if
+ \texttt{if
 len(s)\textless{}=5:}
 
 
@@ -1529,9 +1540,9 @@ len(s)\textless{}=5:}
 
 placid mother
 
-\subsection[ \emph{break} and \emph{else} in
+\subsection[ \texttt{break} and \texttt{else} in
 Loops]{}
-\emph{break} and \emph{else} in
+\texttt{break} and \texttt{else} in
 Loops}{ break and else in Loops}}\label{break-and-else-in-loops}
 
 Often you will use a loop to search
@@ -1540,15 +1551,15 @@ If you don't find it, you often need to take some default action. Python
 makes it easy to do both of these.
 
 If in the midst of a loop you wish
-to stop iterating, you can execute the \emph{break} statement. It
-consists of the keyword \emph{break} :
+to stop iterating, you can execute the \texttt{break} statement. It
+consists of the keyword \texttt{break} :
 
 break
 
 If you want to execute some code if
-the loop terminated normally, i.e., if it didn't exit by a \emph{break}
-, you can attach an \emph{else} clause on the end of the loop. Loops
-with \emph{else} clauses have the form:
+the loop terminated normally, i.e., if it didn't exit by a \texttt{break}
+, you can attach an \texttt{else} clause on the end of the loop. Loops
+with \texttt{else} clauses have the form:
 
 while expr :
 
@@ -1575,20 +1586,20 @@ else :
  if the loop exits normally
 
 
-is usually used in \emph{if} statements. It is in Python too. It is
+is usually used in \texttt{if} statements. It is in Python too. It is
 perhaps not the best word to express the concept of ``on normal
 termination,'' but it is what Python uses.
 
-\subsection[ \emph{if}
-\emph{Statements}]{}
-\emph{if} \emph{Statements}}{ if Statements}}\label{if-statements}
+\subsection[ \texttt{if}
+\texttt{Statements}]{}
+\texttt{if} \texttt{Statements}}{ if Statements}}\label{if-statements}
 
-\paragraph[ \emph{if
-else}]{} \emph{if
+\paragraph[ \texttt{if
+else}]{} \texttt{if
 else}}{ if else}}\label{if-else}
 
  statement will execute
-code based on whether an expression is true. The form of an \emph{if}
+code based on whether an expression is true. The form of an \texttt{if}
 statement is
 
 if expr:
@@ -1597,7 +1608,7 @@ if expr:
 expr is true
 
 If you want to execute other code
-if the expression is false, use the \emph{else} clause:
+if the expression is false, use the \texttt{else} clause:
 
 if expr:
 
@@ -1610,15 +1621,15 @@ else:
 expr is false
 
 \paragraph[
-\emph{elif}]{}
-\emph{elif}}{ elif}}\label{elif}
+\texttt{elif}]{}
+\texttt{elif}}{ elif}}\label{elif}
 
 Of course, you often want to test a
 sequence of conditions and execute code for the first one that's true.
 Because of indentation, it would be annoying if you had to put another
-\emph{if} within the \emph{else} and indent further. Python avoids this
-problem with the \emph{elif} clause, equaling an \emph{else} plus an
-\emph{if}. The general syntax of an \emph{if} statement is:
+\texttt{if} within the \texttt{else} and indent further. Python avoids this
+problem with the \texttt{elif} clause, equaling an \texttt{else} plus an
+\texttt{if}. The general syntax of an \texttt{if} statement is:
 
 if expr1:
 
@@ -1642,28 +1653,28 @@ Here would be an appropriate place
 to mention that Python does not have a switch statement. Switch
 statements choose one out of several blocks of statements to execute
 based on the value of a single expression. You will probably use an
-\emph{if} statement with a sequence of \emph{elif} clauses for that
+\texttt{if} statement with a sequence of \texttt{elif} clauses for that
 purpose. (What else could you use? Well, you could put functions into a
 list, index into the list, and execute one of them, but that's a lot of
 trouble.)
 
-\paragraph[ \emph{pass} and One-Line Code
+\paragraph[ \texttt{pass} and One-Line Code
 Blocks]{}
-\emph{pass} and One-Line Code
+\texttt{pass} and One-Line Code
 Blocks}{ pass and One-Line Code Blocks}}\label{pass-and-one-line-code-blocks}
 
 
-and \emph{elif} clauses are executed in order until one evaluates true;
+and \texttt{elif} clauses are executed in order until one evaluates true;
 the block of code associated with that expression is executed and then
-control passes to the statement following the \emph{if} statement. This
+control passes to the statement following the \texttt{if} statement. This
 means that the earlier expressions must test for more specific cases; if
 you test for the more general case first, you will never get to the code
 for the subcase.
 
 But what if the desired behavior
 for the more specific case is to do nothing? You need a statement that
-doesn't do anything. In Python this is the \emph{pass} statement, which
-consists wholly of the keyword \emph{pass} :
+doesn't do anything. In Python this is the \texttt{pass} statement, which
+consists wholly of the keyword \texttt{pass} :
 
 pass
 
@@ -1673,8 +1684,8 @@ indented line to itself makes programs longer. That may force related
 code to extend beyond a page or a computer screen. So Python allows one
 statement block of code to be placed on the same line as the statement
 that selects it. Just write the statement following the colon of the
-\emph{if} , \emph{elif} , \emph{else} , \emph{while} , \emph{for} ,
-\emph{def} (or of any other statement that ends in a colon introducing a
+\texttt{if} , \texttt{elif} , \texttt{else} , \texttt{while} , \texttt{for} ,
+\texttt{def} (or of any other statement that ends in a colon introducing a
 block of code).
 
 Indeed, you can put several simple
@@ -1689,7 +1700,7 @@ tuple by a display consisting of expressions in parentheses separated by
 commas, for example:
 
 
-\emph{(1,2)}
+\texttt{(1,2)}
 
 (1, 2)
 
@@ -1703,12 +1714,12 @@ just before the final parenthesis. If you only intend a parenthesized
 expression, do not put in a comma.
 
 
-\emph{(1,)}
+\texttt{(1,)}
 
 (1,)
 
 
-\emph{(1)}
+\texttt{(1)}
 
 1
 
@@ -1716,7 +1727,7 @@ You can have tuples with no
 components. Just use parentheses without anything between them:
 
 
-\emph{()}
+\texttt{()}
 
 ()
 
@@ -1728,15 +1739,15 @@ left-hand side of an assignment. You can't use the delete statement on a
 part of a tuple.
 
 
-\emph{q=(1,2)}
+\texttt{q=(1,2)}
 
 
-\emph{q}
+\texttt{q}
 
 (1, 2)
 
 
-\emph{del q{[}0{]}}
+\texttt{del q{[}0{]}}
 
 Traceback (innermost last):
 
@@ -1747,7 +1758,7 @@ TypeError: object doesn't support
 item deletion
 
 
-\emph{del q{[}0:1{]}}
+\texttt{del q{[}0:1{]}}
 
 Traceback (innermost last):
 
@@ -1758,7 +1769,7 @@ TypeError: object doesn't support
 slice deletion
 
 
-\emph{q{[}1{]}=3}
+\texttt{q{[}1{]}=3}
 
 Traceback (innermost last):
 
@@ -1769,7 +1780,7 @@ TypeError: object doesn't support
 item assignment
 
 
-\emph{q{[}0:1{]}=()}
+\texttt{q{[}0:1{]}=()}
 
 Traceback (innermost last):
 
@@ -1780,31 +1791,31 @@ TypeError: object doesn't support
 slice assignment
 
 You can concatenate tuples and
-replicate them, just like lists, using the \emph{+} and \emph{*}
+replicate them, just like lists, using the \texttt{+} and \texttt{*}
 operators. These operators produce new tuples; they don't modify an
 already existing tuple.
 
 
-\emph{(1,2)+(3,4)}
+\texttt{(1,2)+(3,4)}
 
 (1, 2, 3, 4)
 
 
-\emph{(1,2)*2}
+\texttt{(1,2)*2}
 
 (1, 2, 1, 2)
 
 You can convert a tuple to a list
-using the \emph{list()} built-in function and a list to a tuple using
-the \emph{tuple()} built-in function:
+using the \texttt{list()} built-in function and a list to a tuple using
+the \texttt{tuple()} built-in function:
 
 
-\emph{list( (1,2,3) )}
+\texttt{list( (1,2,3) )}
 
 
 
 
-\emph{tuple(range(3))}
+\texttt{tuple(range(3))}
 
 (0, 1, 2)
 
@@ -1814,49 +1825,49 @@ you don't have to surround the expressions in parentheses. If it is to
 be of length one, you do have to be sure to put in a trailing comma:
 
 
-\emph{x=1,2,3}
+\texttt{x=1,2,3}
 
 
-\emph{x}
+\texttt{x}
 
 (1, 2, 3)
 
 
-\emph{x=1,}
+\texttt{x=1,}
 
 
-\emph{x}
+\texttt{x}
 
 (1,)
 
 
 statements. You can return a tuple from a function, and you can
-construct the tuple in the \emph{return} statement without enclosing it
+construct the tuple in the \texttt{return} statement without enclosing it
 in parentheses, unless of course it is length zero.
 
 You can compare two tuples for
-identity or for equality. The \emph{is} operator compares two objects to
-see if they are identical. The \emph{==} operator compares objects for
+identity or for equality. The \texttt{is} operator compares two objects to
+see if they are identical. The \texttt{==} operator compares objects for
 equality. Two tuples are considered equal if their contents are equal.
 
 
-\emph{(1,2) is (1,2)}
+\texttt{(1,2) is (1,2)}
 
 0
 
 
-\emph{(1,2) == (1,2)}
+\texttt{(1,2) == (1,2)}
 
 1
 
 These two displays create separate
-tuples, so \emph{is} returns false, but they have the same contents, so
-\emph{==} returns true.
+tuples, so \texttt{is} returns false, but they have the same contents, so
+\texttt{==} returns true.
 
  test in
 Python1 uses a simple recursive search to test for equality. If you have
 a circularly linked structure, e.g., a tuple containing a list that is
-embedded within itself, the \emph{==} operator may crash your program.
+embedded within itself, the \texttt{==} operator may crash your program.
 You cannot, however, embed a tuple within itself directly, since it
 cannot be modified once it is created. It would already have to exist
 before it is created to be made a component of itself.
@@ -1865,22 +1876,22 @@ The relational operators that
 compare lists compare tuples the same way:
 
 
-\emph{(1,2,3) \textless{} (1,0,3)}
+\texttt{(1,2,3) \textless{} (1,0,3)}
 
 0
 
 
-\emph{(1,2,3) \textless{} (1,4,3)}
+\texttt{(1,2,3) \textless{} (1,4,3)}
 
 1
 
 
-\emph{2 not in (1,2,3)}
+\texttt{2 not in (1,2,3)}
 
 0
 
 
-\emph{2 in (1,2,3)}
+\texttt{2 in (1,2,3)}
 
 1
 
@@ -1906,7 +1917,7 @@ yields
 
 The behavior is as if you
 initialized an empty list and then appended the expression to it in
-nested \emph{for} and \emph{if} statements. For example:
+nested \texttt{for} and \texttt{if} statements. For example:
 
  (x,y,x*y) for x in range(10)
 if x\%2!=0 for y in range(10) if y!=x{]}
@@ -1931,8 +1942,8 @@ expression in the list comprehension, you must put parentheses around
 it.
 
 \subsection[
-\emph{None}]{}
-\emph{None}}{ None}}\label{none}
+\texttt{None}]{}
+\texttt{None}}{ None}}\label{none}
 
 Lists and tuples, because they can
 contain references to other objects, allow you to build linked list data
@@ -1945,38 +1956,38 @@ they're called the CAR and the CDR.)
 You could have much the same effect
 by using two element tuples with the head being at index zero and the
 tail being at index one. The problem, though, is that you need some way
-to indicate the end of a list. Lisp uses \emph{NIL}. In C it's usually
-called \emph{NULL} ; in Java, \emph{null}. Python provides the value
-\emph{None}. You might create a linked list \emph{(1 2 3)} as follows:
+to indicate the end of a list. Lisp uses \texttt{NIL}. In C it's usually
+called \texttt{NULL} ; in Java, \texttt{null}. Python provides the value
+\texttt{None}. You might create a linked list \texttt{(1 2 3)} as follows:
 
 
-\emph{x=(1,(2,(3,None)))}
+\texttt{x=(1,(2,(3,None)))}
 
 
-\emph{x}
+\texttt{x}
 
 (1, (2, (3, None)))
 
  is as a
-placeholder. If you assign a variable the value \emph{None} , the
-variable will exist, but the value \emph{None} can indicate that it
+placeholder. If you assign a variable the value \texttt{None} , the
+variable will exist, but the value \texttt{None} can indicate that it
 hasn't had its value computed yet. The program can test to see if it has
 a value without having to test first whether it exists. Trying to access
 it if it doesn't exist causes a runtime error, as shown here:
 
 
-\emph{x=None}
+\texttt{x=None}
 
 
-\emph{x==None}
+\texttt{x==None}
 
 1
 
 
-\emph{del x}
+\texttt{del x}
 
 
-\emph{x}
+\texttt{x}
 
 Traceback (innermost last):
 
@@ -2032,7 +2043,7 @@ the targets the value(s) of the expressions. For example:
 i=j=0
 
  and
-\emph{j} zero.
+\texttt{j} zero.
 
 \paragraph[Unpacking
 Sequences]{}Unpacking
@@ -2052,10 +2063,10 @@ And multiple assignment and
 unpacking sequences can be used together, albeit somewhat confusingly:
 
 
-\emph{i,m=j,n=0,1}
+\texttt{i,m=j,n=0,1}
 
 
-\emph{i,j,m,n}
+\texttt{i,j,m,n}
 
 (0, 0, 1, 1)
 
@@ -2064,26 +2075,26 @@ type, as long as the length of the variable list is the same as the
 length of the sequence. Lists, tuples, and strings are sequences, so
 
 
-\emph{i,j=(3,4)}
+\texttt{i,j=(3,4)}
 
 
-\emph{i,j}
+\texttt{i,j}
 
 (3, 4)
 
 
-\emph{i,j={[}5,6{]}}
+\texttt{i,j={[}5,6{]}}
 
 
-\emph{i,j}
+\texttt{i,j}
 
 (5, 6)
 
 
-\emph{i,j=``ab''}
+\texttt{i,j=``ab''}
 
 
-\emph{i,j}
+\texttt{i,j}
 
 ('a', `b')
 
@@ -2092,10 +2103,10 @@ subsequences on the left-hand side of the assignment, enclosing the list
 of variables in parentheses or brackets, thus:
 
 
-\emph{i,(j,{[}m,n{]})=x={[}1,{[}2,(3,4){]}{]}}
+\texttt{i,(j,{[}m,n{]})=x={[}1,{[}2,(3,4){]}{]}}
 
 
-\emph{i,j,m,n,x}
+\texttt{i,j,m,n,x}
 
 2, (3,
 4){]}{]})
@@ -2113,18 +2124,18 @@ causes it to be matched to the contents of a single element sequence, as
 shown in the following:
 
 
-\emph{(x)={[}9{]}}
+\texttt{(x)={[}9{]}}
 
 
-\emph{x}
+\texttt{x}
 
 
 
 
-\emph{(x,)={[}9{]}}
+\texttt{(x,)={[}9{]}}
 
 
-\emph{x}
+\texttt{x}
 
 9
 
@@ -2134,7 +2145,7 @@ and Becomes}{Operate and Becomes}}\label{operate-and-becomes}
 
 Python2 allows certain binary
 operators to be combined with the assignment operator. The general rule
-is that \emph{x op= y} is equivalent to \emph{x = x op y}.
+is that \texttt{x op= y} is equivalent to \texttt{x = x op y}.
 
 So,
 
@@ -2169,24 +2180,24 @@ Within the targets, it also goes left to right making assignments. This
 can produce some confusion. Consider the following code:
 
 
-\emph{r=range(10)}
+\texttt{r=range(10)}
 
 
-\emph{r.reverse()}
+\texttt{r.reverse()}
 
 
-\emph{r}
+\texttt{r}
 
 
 
 
-\emph{i=2}
+\texttt{i=2}
 
 
-\emph{i,r{[}i{]}=r{[}i{]},i}
+\texttt{i,r{[}i{]}=r{[}i{]},i}
 
 
-\emph{r}
+\texttt{r}
 
 
 
@@ -2194,18 +2205,18 @@ can produce some confusion. Consider the following code:
 of two, you would expect that the assignment
 
 
-\emph{\ldots{},r{[}i{]}=\ldots{},i}
+\texttt{\ldots{},r{[}i{]}=\ldots{},i}
 
  to
-\emph{r{[}2{]}} , replacing \emph{7} with \emph{2} in the sequence. But
+\texttt{r{[}2{]}} , replacing \texttt{7} with \texttt{2} in the sequence. But
 before that happens, we assign
 
 
-\emph{i,\ldots{}=r{[}i{]},\ldots{}}
+\texttt{i,\ldots{}=r{[}i{]},\ldots{}}
 
 which is to say, we assign
-\emph{i=r{[}2{]}} , or seven. Then we assign \emph{r{[}7{]}} the value
-\emph{2} , which was already there.
+\texttt{i=r{[}2{]}} , or seven. Then we assign \texttt{r{[}7{]}} the value
+\texttt{2} , which was already there.
 
 \paragraph[Assignment to Local
 Scope]{}Assignment
@@ -2214,29 +2225,29 @@ Scope}{Assignment to Local Scope}}\label{assignment-to-local-scope}
 
 When Python performs an assignment,
 it assigns to the variable in the innermost scope. If it is executing a
-function (within a \emph{def} ), the variable will only be seen by code
+function (within a \texttt{def} ), the variable will only be seen by code
 in that function and will exist only as long as the function is
 executing. If the assignment is at the top level of a module, i.e., in a
-file but not inside a \emph{def} or \emph{class} statement (we'll talk
+file but not inside a \texttt{def} or \texttt{class} statement (we'll talk
 about classes later), then the variable will be known in the module and
 will exist as long as the program is running--unless you explicitly
 delete it.
 
-\subparagraph[ \emph{global}
+\subparagraph[ \texttt{global}
 Statement]{}
-\emph{global} Statement}{ global Statement}}\label{global-statement}
+\texttt{global} Statement}{ global Statement}}\label{global-statement}
 
 So what if you want to assign a
 value to a module-scope variable in a function? You can't just assign a
 value to the variable name; that would create a local variable with the
 same name. What you can do is use the only declaration in the Python
-language, the \emph{global} statement. The global statement has the form
+language, the \texttt{global} statement. The global statement has the form
 
 
 
 It declares that the variable names
-\emph{id1} , \emph{id2} , etc. are variables of the surrounding module
-and are to be fetched and assigned there. The \emph{global} statement
+\texttt{id1} , \texttt{id2} , etc. are variables of the surrounding module
+and are to be fetched and assigned there. The \texttt{global} statement
 must appear before the variables are used.
 
 \subparagraph[Deleting
@@ -2245,21 +2256,21 @@ Variables}{Deleting Variables}}\label{deleting-variables}
 
 You create a variable in a scope
 just by assigning to it. You can delete it from the scope using the
-\emph{del} statement.
+\texttt{del} statement.
 
 
-\emph{x=9}
+\texttt{x=9}
 
 
-\emph{x}
+\texttt{x}
 
 9
 
 
-\emph{del x}
+\texttt{del x}
 
 
-\emph{x}
+\texttt{x}
 
 Traceback (innermost last):
 
@@ -2312,81 +2323,81 @@ key-value pairs.
 
 
 Returns the value associated with
-key \emph{k} in dictionary \emph{d}. It is an error if the key is not
-present in the dictionary. See methods \emph{has\_key()} and
-\emph{get()}.
+key \texttt{k} in dictionary \texttt{d}. It is an error if the key is not
+present in the dictionary. See methods \texttt{has\_key()} and
+\texttt{get()}.
 
 
 
  with key
-\emph{k} in dictionary \emph{d}. The key must be ``hashable,'' that is,
+\texttt{k} in dictionary \texttt{d}. The key must be ``hashable,'' that is,
 it should not be mutable. Python won't accept lists as keys.
 
 
 
  and its
-associated value from dictionary \emph{d}. It is an error if the key
+associated value from dictionary \texttt{d}. It is an error if the key
 doesn't exist.
 
 
 
 Removes all key-value pairs from
-dictionary \emph{d}.
+dictionary \texttt{d}.
 
 
 
 Creates a copy of dictionary
-\emph{d}. This is a shallow copy: The dictionary itself is copied, but
+\texttt{d}. This is a shallow copy: The dictionary itself is copied, but
 none of the key or value objects it contains are copied.
 
 
 
 Returns the value associated with
-key \emph{k} in dictionary \emph{d}. If \emph{k} isn't present in the
-dictionary, it returns \emph{None}.
+key \texttt{k} in dictionary \texttt{d}. If \texttt{k} isn't present in the
+dictionary, it returns \texttt{None}.
 
 
 
 Returns the value associated with
-key \emph{k} in dictionary \emph{d}. If \emph{k} isn't present in the
-dictionary, it returns \emph{v}.
+key \texttt{k} in dictionary \texttt{d}. If \texttt{k} isn't present in the
+dictionary, it returns \texttt{v}.
 
 
 
 Returns true (1) if dictionary
-\emph{d} contains key \emph{k} and false (0) otherwise.
+\texttt{d} contains key \texttt{k} and false (0) otherwise.
 
 
 
 
-\emph{{]}} , a list of all the key-value pairs currently in the
-dictionary \emph{d}. The key-value pairs are tuples of two elements
-\emph{(key,value)}.
+\texttt{{]}} , a list of all the key-value pairs currently in the
+dictionary \texttt{d}. The key-value pairs are tuples of two elements
+\texttt{(key,value)}.
 
 
 
 Returns a list of all the keys
 currently in\\
-dictionary \emph{d}.
+dictionary \texttt{d}.
 
 
 
 Adds all the key-value pairs from
-dictionary \emph{m} to dictionary \emph{d}. Any key in \emph{d} that is
-the same as a key in \emph{m} has its value reassigned.
+dictionary \texttt{m} to dictionary \texttt{d}. Any key in \texttt{d} that is
+the same as a key in \texttt{m} has its value reassigned.
 
 
 
 Returns a list of all the values
-currently in dictionary \emph{d}.
+currently in dictionary \texttt{d}.
 
- \emph{d.setdefault(k)\\
+ \texttt{d.setdefault(k)\\
 d.setdefault(k,x)}
 
 
 with initialization. As if defined
 
- \emph{def
+ \texttt{def
 setdefault(self,k,x=None):}
 
 
@@ -2405,10 +2416,10 @@ You can create an empty dictionary
 by writing an open-close-brace pair:
 
 
-\emph{d=\{\}}
+\texttt{d=\{\}}
 
 
-\emph{d}
+\texttt{d}
 
 
 
@@ -2416,37 +2427,37 @@ You can create a dictionary with
 initial contents by placing one or more associations in the braces:
 
 
-\emph{d=\{``a'':1,1:(2,3),(2,3):``a''\}}
+\texttt{d=\{``a'':1,1:(2,3),(2,3):``a''\}}
 
 
-\emph{d}
+\texttt{d}
 
 
 
 In this example, we associate the
-string key \emph{``a''} with the value 1; key \emph{1} with the value
-tuple \emph{(2,3)} ; and the key tuple \emph{(2,3)} with the string
-value \emph{``a.''} (They don't have to form a cycle like this.)
+string key \texttt{``a''} with the value 1; key \texttt{1} with the value
+tuple \texttt{(2,3)} ; and the key tuple \texttt{(2,3)} with the string
+value \texttt{``a.''} (They don't have to form a cycle like this.)
 
 You can look up the value for a key
 by subscripting the dictionary with the value of the key.
 
 
-\emph{d{[}1{]}}
+\texttt{d{[}1{]}}
 
 (2, 3)
 
 
-\emph{d{[}(2,3){]}}
+\texttt{d{[}(2,3){]}}
 
 `a'
 
 Since Python uses the equality
-operator, \emph{==} , to test the keys, equal numbers are considered to
+operator, \texttt{==} , to test the keys, equal numbers are considered to
 be the same key:
 
 
-\emph{d{[}1.0{]}}
+\texttt{d{[}1.0{]}}
 
 (2, 3)
 
@@ -2458,7 +2469,7 @@ It is a runtime error to look up a
 nonexistent key in a dictionary.
 
 
-\emph{d{[}10{]}}
+\texttt{d{[}10{]}}
 
 Traceback (innermost last):
 
@@ -2468,46 +2479,46 @@ Traceback (innermost last):
 KeyError: 10
 
 If you don't want to worry about an
-error when looking up a value, you can use the \emph{get()} method. The
-call \emph{d.get(k)} will yield the value for key \emph{k} in dictionary
-\emph{d} , if it exists, or return the value \emph{None} if it doesn't.
-The call \emph{d.get(k,v)} is the same, except that it returns the value
-\emph{v} if the key isn't present.
+error when looking up a value, you can use the \texttt{get()} method. The
+call \texttt{d.get(k)} will yield the value for key \texttt{k} in dictionary
+\texttt{d} , if it exists, or return the value \texttt{None} if it doesn't.
+The call \texttt{d.get(k,v)} is the same, except that it returns the value
+\texttt{v} if the key isn't present.
 
 
-\emph{d}
+\texttt{d}
 
 
 
 
-\emph{d.get(10)}
+\texttt{d.get(10)}
 
 
-\emph{d.get(10)==None}
+\texttt{d.get(10)==None}
 
 1
 
 
-\emph{d.get(10,``absent'')}
+\texttt{d.get(10,``absent'')}
 
 `absent'
 
 Notice that the Python interpreter
-doesn't write out the value \emph{None} in interactive mode.
+doesn't write out the value \texttt{None} in interactive mode.
 
 Alternatively, you can ask whether
 the dictionary contains the key before subscripting with it. Method call
-\emph{d.has\_key(k)} will return true or false (1 or 0) depending on
-whether the dictionary \emph{d} contains the key \emph{k} or not.
-(Operator \emph{in} does not apply to dictionaries.)
+\texttt{d.has\_key(k)} will return true or false (1 or 0) depending on
+whether the dictionary \texttt{d} contains the key \texttt{k} or not.
+(Operator \texttt{in} does not apply to dictionaries.)
 
 
-\emph{d.has\_key(1)}
+\texttt{d.has\_key(1)}
 
 1
 
 
-\emph{d.has\_key(10)}
+\texttt{d.has\_key(10)}
 
 0
 
@@ -2517,19 +2528,19 @@ of an assignment operator with the key and assigning it the value. You
 can assign a new value to a key the same way:
 
 
-\emph{d{[}10{]}=10}
+\texttt{d{[}10{]}=10}
 
 
-\emph{d}
+\texttt{d}
 
 \{(2, 3): `a', 10: 10, 1: (2, 3),
 `a': 1\}
 
 
-\emph{d{[}10{]}=``a''}
+\texttt{d{[}10{]}=``a''}
 
 
-\emph{d}
+\texttt{d}
 
 \{(2, 3): `a', 10: `a', 1: (2, 3),
 `a': 1\}
@@ -2538,30 +2549,30 @@ can assign a new value to a key the same way:
 you the number of associations the dictionary contains:
 
 
-\emph{d}
+\texttt{d}
 
 \{(2, 3): `a', 10: `a', 1: (2, 3),
 `a': 1\}
 
 
-\emph{len(d)}
+\texttt{len(d)}
 
 4
 
 
-statement, \emph{del} \emph{dictionary} \emph{{[}} \emph{key} \emph{{]}}
+statement, \texttt{del} \texttt{dictionary} \texttt{{[}} \texttt{key} \texttt{{]}}
 , to remove associations from the dictionary.
 
 
-\emph{del d{[}10{]}}
+\texttt{del d{[}10{]}}
 
 
-\emph{len(d)}
+\texttt{len(d)}
 
 3
 
 
-\emph{d}
+\texttt{d}
 
 
 
@@ -2578,29 +2589,29 @@ the contents of a dictionary without knowing the keys:
   list of all the values.
 \item
    to get a
-  list of all the key-value pairs in \emph{d}.
+  list of all the key-value pairs in \texttt{d}.
 \end{enumerate}
 
 The key-value pairs are in
-\emph{(} \emph{key,value} \emph{)} tuples.
+\texttt{(} \texttt{key,value} \texttt{)} tuples.
 
 
-\emph{d}
-
-
-
-
-\emph{d.keys()}
+\texttt{d}
 
 
 
 
-\emph{d.values()}
+\texttt{d.keys()}
 
 
 
 
-\emph{d.items()}
+\texttt{d.values()}
+
+
+
+
+\texttt{d.items()}
 
 ((2, 3), `a'), (1, (2, 3)),
 ('a', 1){]}
@@ -2610,13 +2621,13 @@ you could create an empty dictionary and then update it from the one you
 want to copy, for example:
 
 
-\emph{e=\{\}}
+\texttt{e=\{\}}
 
 
-\emph{e.update(d)}
+\texttt{e.update(d)}
 
 
-\emph{e}
+\texttt{e}
 
 
 
@@ -2624,10 +2635,10 @@ want to copy, for example:
 behaves the same as:
 
 
-\emph{for k in d.keys(): e{[}k{]}=d{[}k{]}}
+\texttt{for k in d.keys(): e{[}k{]}=d{[}k{]}}
 
 But it is easier to use the
-\emph{copy()} method:
+\texttt{copy()} method:
 
 e=d.copy()
 
@@ -2636,31 +2647,31 @@ get a shallow copy. The dictionary object is copied, but none of the
 keys or values it contains are. Consider the following example:
 
 
-\emph{x=\{``a'':{[}0{]}\}}
+\texttt{x=\{``a'':{[}0{]}\}}
 
 
-\emph{y=x.copy()}
+\texttt{y=x.copy()}
 
 
-\emph{x is y}
+\texttt{x is y}
 
 0
 
 
-\emph{y{[}``a''{]}{[}0{]}=1}
+\texttt{y{[}``a''{]}{[}0{]}=1}
 
 
-\emph{x}
+\texttt{x}
 
 
 
 The value associated with key
-\emph{``a''} in dictionary \emph{x} is a list containing a single value,
-zero. When we copy \emph{x} , we get a new, different dictionary,
-\emph{y}. Dictionaries \emph{x} and \emph{y} are not the same, but the
+\texttt{``a''} in dictionary \texttt{x} is a list containing a single value,
+zero. When we copy \texttt{x} , we get a new, different dictionary,
+\texttt{y}. Dictionaries \texttt{x} and \texttt{y} are not the same, but the
 lists they contain are, so when we change the list associated with key
-\emph{``a''} in dictionary \emph{y} , that is the same list we see
-associated with " \emph{a} " in dictionary \emph{x}.
+\texttt{``a''} in dictionary \texttt{y} , that is the same list we see
+associated with " \texttt{a} " in dictionary \texttt{x}.
 
 Relational operators work on
 dictionaries the same way as sequences: They do a lexicographical
@@ -2668,18 +2679,18 @@ compare. They compare the components in sorted order by key. Expect this
 to be slow.
 
 
-\emph{D1=\{``x'':1,``y'':2,``z'':3\}}
+\texttt{D1=\{``x'':1,``y'':2,``z'':3\}}
 
 
-\emph{D2=\{``x'':1,``y'':4,``z'':3\}}
+\texttt{D2=\{``x'':1,``y'':4,``z'':3\}}
 
 
-\emph{D1==D2}
+\texttt{D1==D2}
 
 0
 
 
-\emph{D1\textless{}D2}
+\texttt{D1\textless{}D2}
 
 1
 
@@ -2705,12 +2716,12 @@ Literals}{String Literals}}\label{string-literals}
 
 There are several ways to write
 string literals. If you are going to write the string on a single line,
-you can enclose it in single quotes ( \emph{'} ), or double quotes (
-\emph{"} ). This easily allows you to enclose a string containing one
+you can enclose it in single quotes ( \texttt{'} ), or double quotes (
+\texttt{"} ). This easily allows you to enclose a string containing one
 kind of quote inside the other kind of quotes, for example:
 
 
-\emph{`He said, ``Hi.''\,'}
+\texttt{`He said, ``Hi.''\,'}
 
 `He said, ``Hi.''\,'
 
@@ -2719,7 +2730,7 @@ you can write more than one string in a row and let Python concatenate
 them for you. Here we use three strings in a row:
 
 
-\emph{`He said, ``She said,' '''Hi.'" `"'}
+\texttt{`He said, ``She said,' '''Hi.'" `"'}
 
 `He said, ``She
 said,\textbackslash{}'Hi.\textbackslash{}'''\,'
@@ -2750,7 +2761,7 @@ Continues the string literal to the
 next line, without including a newline character
 
 
-\emph{\textbackslash{}\textbackslash{}}
+\texttt{\textbackslash{}\textbackslash{}}
 
 Includes a backslash character
 
@@ -2826,7 +2837,7 @@ unbalanced parentheses require continuing the statement to another line,
 this will work:
 
 
-\emph{(``a''}
+\texttt{(``a''}
 
 
 
@@ -2836,7 +2847,7 @@ Python will also continue a
 statement if the last character on the line is a backslash.
 
 
-\emph{``a''\textbackslash{}}
+\texttt{``a''\textbackslash{}}
 
 
 
@@ -2846,20 +2857,20 @@ For that matter, a backslash also
 works within strings:
 
 
-\emph{"a\textbackslash{}}
+\texttt{"a\textbackslash{}}
 
 
 
 `aB'
 
 Python also allows strings to be
-enclosed in triple quotes, either \emph{``''"} or \emph{`''}. These
+enclosed in triple quotes, either \texttt{``''"} or \texttt{`''}. These
 strings may extend beyond the end of a line without special handling.
 However, they include a newline character (octal number 012) for each
 line boundary they cross:
 
 
-\emph{'''a}
+\texttt{'''a}
 
 
 
@@ -2870,7 +2881,7 @@ character included for the end of a line, put a backslash character at
 the end of the line:
 
 
-\emph{'''a\textbackslash{}}
+\texttt{'''a\textbackslash{}}
 
 
 
@@ -2884,7 +2895,7 @@ and files on paths, and it would be annoying to have to incorporate each
 one of them:
 
 
-\emph{r``D:\textbackslash{}Tests\textbackslash{}SayHi.py''}
+\texttt{r``D:\textbackslash{}Tests\textbackslash{}SayHi.py''}
 
 SayHi.py'
 
@@ -2893,8 +2904,8 @@ be the last character of a raw string. Python tries to gobble up the
 following character as part of the string.
 
 You write Unicode string literals
-by preceding the string with \emph{u} , e.g.,
-\emph{u'ab\textbackslash{}u12adyz'}. If you concatenate two string
+by preceding the string with \texttt{u} , e.g.,
+\texttt{u'ab\textbackslash{}u12adyz'}. If you concatenate two string
 literals, one of which is Unicode, the Python compiler merges them into
 a single Unicode string.
 
@@ -2921,7 +2932,7 @@ Meaning
 
 
 Produces a new string which is the
-concatenation of strings \emph{s} and \emph{u}. An ordinary string
+concatenation of strings \texttt{s} and \texttt{u}. An ordinary string
 concatenated with a Unicode string gives a Unicode string result.
 
 
@@ -2929,92 +2940,92 @@ concatenated with a Unicode string gives a Unicode string result.
 
 
 Creates a new string composed of
-\emph{n} copies of string \emph{s} , where \emph{n} is an integer.
+\texttt{n} copies of string \texttt{s} , where \texttt{n} is an integer.
 
 
 
 String formatting--Creates a new
-string by formatting values in tuple \emph{t} and inserting them into
-specified places in string \emph{s}. We discuss this later in the text.
+string by formatting values in tuple \texttt{t} and inserting them into
+specified places in string \texttt{s}. We discuss this later in the text.
 
 
 
 String formatting--Creates a new
-string by formatting values in dictionary \emph{d} and inserting them
-into specified places in string \emph{s}. We discuss this later in the
+string by formatting values in dictionary \texttt{d} and inserting them
+into specified places in string \texttt{s}. We discuss this later in the
 text.
 
 
 
 Yields a one-character string
-composed of the character at position \emph{i} in string \emph{s}.
+composed of the character at position \texttt{i} in string \texttt{s}.
 
 
 
 Yields a string composed of the
-characters from position \emph{i} up to but not including position
-\emph{j} in\\
-string \emph{s}.
+characters from position \texttt{i} up to but not including position
+\texttt{j} in\\
+string \texttt{s}.
 
 
 
 Converts the value of expression
-\emph{e} into a string. Note: These are back-quotes. Regular quotes are
+\texttt{e} into a string. Note: These are back-quotes. Regular quotes are
 used for string literals.
 
 
-\emph{1} \emph{, x} \emph{2} \emph{, \ldots{}, x} \emph{n-1} \emph{=s}
+\texttt{1} \texttt{, x} \texttt{2} \texttt{, \ldots{}, x} \texttt{n-1} \texttt{=s}
 
  one-character
-substrings of string \emph{s} from left to right to variables \emph{x}
-\emph{0} , \emph{x} \emph{1} , \emph{x} \emph{2} ,\ldots{} \emph{x}
-\emph{n-1}.This is just a multiple assignment statement.
+substrings of string \texttt{s} from left to right to variables \texttt{x}
+\texttt{0} , \texttt{x} \texttt{1} , \texttt{x} \texttt{2} ,\ldots{} \texttt{x}
+\texttt{n-1}.This is just a multiple assignment statement.
 
 String Displays
 
 The equivalent of
-\emph{{[}\ldots{}{]}} for lists and \emph{(\ldots{})} for tuples is
-\emph{`\ldots{}`} for strings. The form \emph{`x`} evaluates expression
-\emph{x} and converts its value to a string, for example:
+\texttt{{[}\ldots{}{]}} for lists and \texttt{(\ldots{})} for tuples is
+\texttt{`\ldots{}`} for strings. The form \texttt{`x`} evaluates expression
+\texttt{x} and converts its value to a string, for example:
 
 
-\emph{a=1;b=2}
+\texttt{a=1;b=2}
 
 
-\emph{`a+b'}
+\texttt{`a+b'}
 
 `3'
 
 
-\emph{`(a,b)'}
+\texttt{`(a,b)'}
 
 `(1, 2)'
 
 Sequence Operators
 
 Strings are a kind of sequence, so
-the sequence operators apply to strings. Expression \emph{u+v} will
-concatenate strings \emph{u} and \emph{v}. Expression \emph{s*n} will
-concatenate \emph{n} copies of string \emph{s}.
+the sequence operators apply to strings. Expression \texttt{u+v} will
+concatenate strings \texttt{u} and \texttt{v}. Expression \texttt{s*n} will
+concatenate \texttt{n} copies of string \texttt{s}.
 
 Slicing will deliver a substring.
-Expression \emph{s{[}i:j{]}} yields a string composed of the characters
-from position \emph{i} up to but not including position \emph{j} in
-string \emph{s}.
+Expression \texttt{s{[}i:j{]}} yields a string composed of the characters
+from position \texttt{i} up to but not including position \texttt{j} in
+string \texttt{s}.
 
 Unlike lists and tuples,
-subscripting, \emph{s{[}i{]}} , cannot deliver an individual character.
+subscripting, \texttt{s{[}i{]}} , cannot deliver an individual character.
 Python does not have characters. Instead, it returns a string consisting
-of the one character at position \emph{i}. Expression \emph{s{[}i{]}}
-is equivalent to \emph{s{[}i:i+1{]}}.
+of the one character at position \texttt{i}. Expression \texttt{s{[}i{]}}
+is equivalent to \texttt{s{[}i:i+1{]}}.
 
 String Formatting
 
 String formatting behaves like the
-formatting strings used in the \emph{printf()} function in C. String
-formatting is specified by the \emph{s\%t} operator in Python. The
-string \emph{s} to the left of the \emph{\%} is the format. The tuple or
-dictionary to the right of the \emph{\%} supplies the values to be
+formatting strings used in the \texttt{printf()} function in C. String
+formatting is specified by the \texttt{s\%t} operator in Python. The
+string \texttt{s} to the left of the \texttt{\%} is the format. The tuple or
+dictionary to the right of the \texttt{\%} supplies the values to be
 formatted. Generally, characters in the format string are just copied as
 is into the result string, but certain special character sequences are
 replaced with values from the tuple or dictionary. Since tuples and
@@ -3030,7 +3041,7 @@ with the number 65 translated into octal, decimal, and hexadecimal, the
 translations separated by colons:
 
 
-\emph{``\%o:\%d:\%x'' \% (65,65,65)}
+\texttt{``\%o:\%d:\%x'' \% (65,65,65)}
 
 `101:65:41'
 
@@ -3038,7 +3049,7 @@ If there is only one value to be
 formatted, you needn't include it in a tuple, for example:
 
 
-\emph{``\textbar{}\%d\textbar{}'' \% 5}
+\texttt{``\textbar{}\%d\textbar{}'' \% 5}
 
 '
 
@@ -3048,7 +3059,7 @@ form:
 \% m f
 
  , are
-optional. The formatting character, \emph{f} , tells Python (internally,
+optional. The formatting character, \texttt{f} , tells Python (internally,
 the C library) what conversion to perform. The formatting characters are
 
 \begin{itemize}
@@ -3059,10 +3070,10 @@ the C library) what conversion to perform. The formatting characters are
   integer is converted to a string in decimal format.
 \item
    --Decimal integer. The
-  same as \emph{\%d}.
+  same as \texttt{\%d}.
 \item
    --Unsigned integer. The
-  same as \emph{\%d} , but the integer is interpreted as unsigned. The
+  same as \texttt{\%d} , but the integer is interpreted as unsigned. The
   sign bit is interpreted as adding a large positive amount to the
   number, rather than a large negative amount.
 \item
@@ -3073,11 +3084,11 @@ the C library) what conversion to perform. The formatting characters are
    --Hexadecimal integer.
   The corresponding element of the tuple is converted to an integer and
   the integer is converted to a string in hexadecimal format. Lowercase
-  \emph{x} uses lowercase letters for the digits 10 through 15.
+  \texttt{x} uses lowercase letters for the digits 10 through 15.
 \end{itemize}
 
 
-\emph{``\%x'' \% (-2)}
+\texttt{``\%x'' \% (-2)}
 
 `fffffffe'
 
@@ -3087,11 +3098,11 @@ the C library) what conversion to perform. The formatting characters are
    --Hexadecimal integer.
   The corresponding element of the tuple is converted to an integer and
   the integer is converted to a string in hexadecimal format. Uppercase
-  \emph{X} uses uppercase letters for the digits 10 through 15.
+  \texttt{X} uses uppercase letters for the digits 10 through 15.
 \end{itemize}
 
 
-\emph{``\%X'' \% (-2)}
+\texttt{``\%X'' \% (-2)}
 
 `FFFFFFFE'
 
@@ -3103,7 +3114,7 @@ the C library) what conversion to perform. The formatting characters are
 \end{itemize}
 
 
-\emph{``\%f'' \% (0.5e-100)}
+\texttt{``\%f'' \% (0.5e-100)}
 
 `0.000000'
 
@@ -3111,12 +3122,12 @@ the C library) what conversion to perform. The formatting characters are
 
 \item
    --Floating point
-  format, with decimal point and an exponent (with a lowercase \emph{e}
+  format, with decimal point and an exponent (with a lowercase \texttt{e}
   ).
 \end{itemize}
 
 
-\emph{``\%e'' \% (0.5e-100)}
+\texttt{``\%e'' \% (0.5e-100)}
 
 `5.000000e-101'
 
@@ -3124,12 +3135,12 @@ the C library) what conversion to perform. The formatting characters are
 
 \item
    --Floating point
-  format, with decimal point and an exponent (with an uppercase \emph{E}
+  format, with decimal point and an exponent (with an uppercase \texttt{E}
   ).
 \end{itemize}
 
 
-\emph{``\%E'' \% (0.5e-100)}
+\texttt{``\%E'' \% (0.5e-100)}
 
 `5.000000E-101'
 
@@ -3137,17 +3148,17 @@ the C library) what conversion to perform. The formatting characters are
 
 \item
    --Choose either
-  \emph{f} or \emph{e,} depending on the size of the exponent.
+  \texttt{f} or \texttt{e,} depending on the size of the exponent.
 \item
    --Choose either
-  \emph{f} or \emph{E,} depending on the size of the exponent.
+  \texttt{f} or \texttt{E,} depending on the size of the exponent.
 \item
    --String, or any object
   being converted to a string.
 \end{itemize}
 
 
-\emph{``\%s'' \% ({[}1,2{]})}
+\texttt{``\%s'' \% ({[}1,2{]})}
 
 '
 
@@ -3155,7 +3166,7 @@ the C library) what conversion to perform. The formatting characters are
 
 \item
    --Like s, but uses
-  \emph{repr()} rather than \emph{str()} to convert the argument (in
+  \texttt{repr()} rather than \texttt{str()} to convert the argument (in
   Python2).
 \item
    --A single character.
@@ -3164,12 +3175,12 @@ the C library) what conversion to perform. The formatting characters are
 \end{itemize}
 
 
-\emph{``\%c'' \% (88)}
+\texttt{``\%c'' \% (88)}
 
 `X'
 
 
-\emph{``\%c'' \% (``Y'')}
+\texttt{``\%c'' \% (``Y'')}
 
 `Y'
 
@@ -3218,12 +3229,12 @@ the field.
 \end{itemize}
 
 
-\emph{``\textbar{}\%4d\textbar{}'' \% 5}
+\texttt{``\textbar{}\%4d\textbar{}'' \% 5}
 
 '
 
 
-\emph{``\textbar{}\%4d\textbar{}'' \% 500000}
+\texttt{``\textbar{}\%4d\textbar{}'' \% 500000}
 
 '
 
@@ -3239,7 +3250,7 @@ the field.
 \end{itemize}
 
 
-\emph{``\textbar{}\%.3s\textbar{}'' \% (``abcdef'')}
+\texttt{``\textbar{}\%.3s\textbar{}'' \% (``abcdef'')}
 
 '
 
@@ -3251,7 +3262,7 @@ the field.
 \end{enumerate}
 
 
-\emph{``\textbar{}\%.4f\textbar{}'' \% (1.0/3.0)}
+\texttt{``\textbar{}\%.4f\textbar{}'' \% (1.0/3.0)}
 
 '
 
@@ -3263,27 +3274,27 @@ the field.
 \end{enumerate}
 
 
-\emph{``\textbar{}\%4.2d\textbar{}'' \% 5}
+\texttt{``\textbar{}\%4.2d\textbar{}'' \% 5}
 
 '
 
 If you want to compute the width or
-precision, you can use stars, \emph{*} s, in width or precision fields.
+precision, you can use stars, \texttt{*} s, in width or precision fields.
 The star tells Python to use the next item in the tuple, which must be
 an integer, as the value in the field, for example:
 
 
-\emph{``\textbar{}\%*.*d\textbar{}'' \% (4,2,5)}
+\texttt{``\textbar{}\%*.*d\textbar{}'' \% (4,2,5)}
 
 '
 
  You can use a
 dictionary instead of a tuple. You instruct Python what value to format
 by putting the key string in parentheses just after the opening
-\emph{\%} , inside the formatting sequence:
+\texttt{\%} , inside the formatting sequence:
 
 
-\emph{``\textbar{}\%(x)4.2d\textbar{}'' \% \{``x'':5\}}
+\texttt{``\textbar{}\%(x)4.2d\textbar{}'' \% \{``x'':5\}}
 
 '
 
@@ -3291,7 +3302,7 @@ However, this doesn't work for the
 formatting fields:
 
 
-\emph{``\textbar{}\%(x)4.(p)d\textbar{}'' \% \{``p'':2,``x'':5\}}
+\texttt{``\textbar{}\%(x)4.(p)d\textbar{}'' \% \{``p'':2,``x'':5\}}
 
 Traceback (innermost last):
 
@@ -3338,9 +3349,9 @@ Explanation
 
 
 Find the index of the first
-occurrence of \emph{sub} in string \emph{s}. If they are provided, find
-the first occurrence at or beyond \emph{start} and not extending beyond
-\emph{end}. Returns minus 1 if it is not found.
+occurrence of \texttt{sub} in string \texttt{s}. If they are provided, find
+the first occurrence at or beyond \texttt{start} and not extending beyond
+\texttt{end}. Returns minus 1 if it is not found.
 
 
 
@@ -3355,9 +3366,9 @@ the first occurrence at or beyond \emph{start} and not extending beyond
 
 
 Find the index of the first
-occurrence of \emph{sub} in string \emph{s}. If they are provided, find
-the first occurrence at or beyond \emph{start} and not extending beyond
-\emph{end}. Raise a \emph{ValueError} exception if it is not found.
+occurrence of \texttt{sub} in string \texttt{s}. If they are provided, find
+the first occurrence at or beyond \texttt{start} and not extending beyond
+\texttt{end}. Raise a \texttt{ValueError} exception if it is not found.
 
 
 
@@ -3372,9 +3383,9 @@ the first occurrence at or beyond \emph{start} and not extending beyond
 
 
 Find the index of the last
-occurrence of \emph{sub} in string \emph{s}. If they are provided, find
+occurrence of \texttt{sub} in string \texttt{s}. If they are provided, find
 the rightmost occurrence lying totally within the range beginning at
-\emph{start} and not extending beyond \emph{end}. Returns minus 1 if it
+\texttt{start} and not extending beyond \texttt{end}. Returns minus 1 if it
 is not found.
 
 
@@ -3390,10 +3401,10 @@ is not found.
 
 
 Find the index of the last
-occurrence of \emph{sub} in string \emph{s}. If they are provided, find
+occurrence of \texttt{sub} in string \texttt{s}. If they are provided, find
 the rightmost occurrence lying totally within the range beginning at
-\emph{start} and not extending beyond \emph{end}. Raise a
-\emph{ValueError} exception if it is not found.
+\texttt{start} and not extending beyond \texttt{end}. Raise a
+\texttt{ValueError} exception if it is not found.
 
 
 
@@ -3408,10 +3419,10 @@ the rightmost occurrence lying totally within the range beginning at
 
 
 Return a list of the substrings of
-\emph{s} separated by string \emph{sep}. If \emph{sep} is \emph{None} ,
+\texttt{s} separated by string \texttt{sep}. If \texttt{sep} is \texttt{None} ,
 or omitted, return the substrings separated by white space. If
-\emph{maxtimes} is present, return no more than \emph{maxtimes}
-substrings followed by the remainder of \emph{s} , if any.
+\texttt{maxtimes} is present, return no more than \texttt{maxtimes}
+substrings followed by the remainder of \texttt{s} , if any.
 
 
 
@@ -3420,8 +3431,8 @@ substrings followed by the remainder of \emph{s} , if any.
 
 
 Concatenate the strings in list or
-tuple \emph{seq}. Put \emph{sep} between each pair. Use a single blank
-if \emph{sep} is omitted.
+tuple \texttt{seq}. Put \texttt{sep} between each pair. Use a single blank
+if \texttt{sep} is omitted.
 
 
 
@@ -3463,8 +3474,8 @@ white space removed from both ends, from the left, or from the right.
 
  padded
 with blanks, left justified, right justified, or centered in a field of
-width \emph{w}. Return \emph{s} itself if it is as long as or longer
-than \emph{w}.
+width \texttt{w}. Return \texttt{s} itself if it is as long as or longer
+than \texttt{w}.
 
 
 
@@ -3475,8 +3486,8 @@ than \emph{w}.
 
 
  with
-tabs expanded into blanks. The tab stops occur each \emph{w} characters,
-eight characters if \emph{w} is omitted.
+tabs expanded into blanks. The tab stops occur each \texttt{w} characters,
+eight characters if \texttt{w} is omitted.
 
 ~
 
@@ -3487,8 +3498,8 @@ eight characters if \emph{w} is omitted.
 
 
  ends with the
-\emph{suffix} , begins with the \emph{prefix} , or contains
-\emph{prefix} starting at position \emph{pos}.
+\texttt{suffix} , begins with the \texttt{prefix} , or contains
+\texttt{prefix} starting at position \texttt{pos}.
 
 \paragraph[Built-In String
 Functions]{}Built-In
@@ -3500,23 +3511,23 @@ Functions}{Built-In String Functions}}\label{built-in-string-functions}
 \item
    --Returns the
   character (in a one-character string), whose ASCII code is integer
-  \emph{i}. This is equivalent to \emph{(``\%c'' \% i)}.
+  \texttt{i}. This is equivalent to \texttt{(``\%c'' \% i)}.
 \item
    --Evaluates the
-  string \emph{s} as if it were a Python expression.
+  string \texttt{s} as if it were a Python expression.
 \end{itemize}
 
 
-\emph{eval(``{[}1,2{]}'')}
+\texttt{eval(``{[}1,2{]}'')}
 
 
 
 
-dictionaries to look up variables in: \emph{eval(s,globals)} or
-\emph{eval(s, globals, locals)} :
+dictionaries to look up variables in: \texttt{eval(s,globals)} or
+\texttt{eval(s, globals, locals)} :
 
 
-\emph{eval(``x+y'',\{``x'':1,``y'':2\},\{``x'':3\})}
+\texttt{eval(``x+y'',\{``x'':1,``y'':2\},\{``x'':3\})}
 
 5
 
@@ -3524,31 +3535,31 @@ dictionaries to look up variables in: \emph{eval(s,globals)} or
 
 \item
    --Returns a string
-  representation of integer \emph{i} converted to hexadecimal
+  representation of integer \texttt{i} converted to hexadecimal
   representation.
 \end{itemize}
 
 
-\emph{hex(65)}
+\texttt{hex(65)}
 
 `0x41'
 
 It is not equivalent to
-\emph{(``\%x'' \% i)} , which does not put \emph{``0x''} on the front.
+\texttt{(``\%x'' \% i)} , which does not put \texttt{``0x''} on the front.
 
 \begin{itemize}
 
 \item
    --Returns
-  string \emph{s} or a copy of the string \emph{s}. Each call to
-  \emph{intern()} with an equal string will return the identical string.
+  string \texttt{s} or a copy of the string \texttt{s}. Each call to
+  \texttt{intern()} with an equal string will return the identical string.
   You use this to speed up compares and to save storage.
 \end{itemize}
 
 Equal strings may be different
 objects, i.e., both have the same characters, but they were created at
-different times. It is faster to compare strings for identity \emph{(x
-is y)} than for equality \emph{(x == y)} , since Python only has to
+different times. It is faster to compare strings for identity \texttt{(x
+is y)} than for equality \texttt{(x == y)} , since Python only has to
 compare the memory addresses for identity, but must compare the
 characters in them for equality. Therefore, if you are going to have a
 set of strings that you are comparing for equality frequently, you can
@@ -3556,17 +3567,17 @@ speed up your program by interning them and just comparing their
 interned values.
 
 
-\emph{``ab''==``a''+``b''}
+\texttt{``ab''==``a''+``b''}
 
 1
 
 
-\emph{``ab'' is ``a''+``b''}
+\texttt{``ab'' is ``a''+``b''}
 
 0
 
 
-\emph{intern(``ab'') is intern(``a''+``b'')}
+\texttt{intern(``ab'') is intern(``a''+``b'')}
 
 1
 
@@ -3583,17 +3594,17 @@ save considerable storage.
   point numbers to integers.)
 \item
    --Converts integer
-  \emph{i} to a string representation of it as an unsigned octal
+  \texttt{i} to a string representation of it as an unsigned octal
   integer.
 \end{itemize}
 
 
-\emph{oct(65)}
+\texttt{oct(65)}
 
 `0101'
 
 
-\emph{oct(-1)}
+\texttt{oct(-1)}
 
 `037777777777'
 
@@ -3601,15 +3612,15 @@ save considerable storage.
 
 \item
    --Returns the
-  integer representing the single character in string \emph{c}.
+  integer representing the single character in string \texttt{c}.
 \item
    --Returns a
-  string representation of object \emph{x}. It is the same as
-  \emph{`x`}.
+  string representation of object \texttt{x}. It is the same as
+  \texttt{`x`}.
 \item
    --Returns a string
-  representation of object \emph{x}. Unlike \emph{repr()} ,
-  \emph{str()} does not attempt to be the inverse of \emph{eval()}. It
+  representation of object \texttt{x}. Unlike \texttt{repr()} ,
+  \texttt{str()} does not attempt to be the inverse of \texttt{eval()}. It
   attempts to make the translated string legible.
 \end{itemize}
 
@@ -3617,7 +3628,7 @@ save considerable storage.
 
 In this chapter we looked at
 elementary Python programming. We examined expressions and simple
-control statements like \emph{while} , \emph{for} , and \emph{if}. We
+control statements like \texttt{while} , \texttt{for} , and \texttt{if}. We
 looked at arithmetic data types, lists, tuples, strings, and
 dictionaries. We learned a little bit about modules and functions. And
 we used the interpreter to try out code to see what it would do.
@@ -3628,18 +3639,18 @@ we used the interpreter to try out code to see what it would do.
 
 \item
   
-  that will write out the first \emph{n} Fibonacci numbers. Fibonacci
+  that will write out the first \texttt{n} Fibonacci numbers. Fibonacci
   numbers form a sequence 1, 1, 2, 3, 5, 8, \ldots{} where each number
   after the first two is the sum of the two numbers preceding it. Use a
   loop. Use a single assignment statement in the loop. Make sure
-  \emph{fib(100)} works.
+  \texttt{fib(100)} works.
 \item
   Put your solution to Problem 2.1
-  into a script. Have the script take the value of \emph{n} from its
+  into a script. Have the script take the value of \texttt{n} from its
   command line and write out that many Fibonacci numbers. The command
-  line parameters are in variable \emph{argv} in module \emph{sys}. The
-  name of the program being executed is in \emph{argv{[}0{]}}. The
-  first parameter is in \emph{argv{[}1{]}}.
+  line parameters are in variable \texttt{argv} in module \texttt{sys}. The
+  name of the program being executed is in \texttt{argv{[}0{]}}. The
+  first parameter is in \texttt{argv{[}1{]}}.
 \item
   Write a script that takes a
   string as its first command line parameter and file names as the
@@ -3670,5 +3681,5 @@ Unicode strings.
 
 { 2.} We say ``x is considered
 false'' and ``x counts as false,'' because various values, like zero,
-None, and empty sequences, are treated as being false by \emph{and} and
-\emph{or} operators and \emph{while} and \emph{if} statements.
+None, and empty sequences, are treated as being false by \texttt{and} and
+\texttt{or} operators and \texttt{while} and \texttt{if} statements.
