@@ -1363,19 +1363,15 @@ All items in \texttt{L} at positions \texttt{i} and above are moved to the right
 \bottomrule
 \end{longtable}
     
-\endinput
 
-
-END OF TABLE?
-
-finds the first (lowest indexed) occurrence of \texttt{x} in list \texttt{L}
+Method call \texttt{L.remove(x)} finds the first (lowest indexed) occurrence of \texttt{x} in list \texttt{L}
 and removes it. All elements with higher indices are moved down one. If
 you know the position, \texttt{i} , of the element you wish to remove, use
 \texttt{del L{[}i{]}}. If you want to examine the item at a particular
 position and remove it, use \texttt{L.pop(i)}. If you want to examine the
 last item and remove it, use \texttt{L.pop()}.
 
- as a stack, use
+To use \texttt{L} as a stack, use
 \texttt{L.append(x)} to push \texttt{x} on the stack, and \texttt{x=L.pop()}
 to pop it off. To use \texttt{L} as a queue, use \texttt{L.append(x)} to
 enqueue \texttt{x} and \texttt{x=L.pop(0)} to dequeue it.
@@ -1401,61 +1397,32 @@ in subsequent searches. Here's how you could implement self-organizing
 lists using list methods:
 
 
-\texttt{def reorder(L,x):}
-
-
-
-
-
-
-
-
-\texttt{r=range(10)}
-
-
-\texttt{r}
-
-
-
-
-\texttt{reorder(r,5)}
-
-
-\texttt{r}
-
-
+\begin{verbatim}
+>>> def reorder(L, x):
+...    L.remove(x)
+...    L.insert(0, x)
+...
+>>> r = list(range(10))
+>>> reorder(r, 5)
+>>> r
+[5, 0, 1, 2, 3, 4, 6, 7, 8, 9]
+\end{verbatim}
 
 Example: Median Value of a List of
 Numbers
 
-The median number in a list is the
-middle number in the sorted list, if there is an odd number of items. If
-there is an even number, the median is the average of the two middle
-numbers. Here is a function to compute the median:
 
+The median number in a list is the middle number in the sorted list, if there is an odd number of items. If
+there is an even number, the median is the average of the two middle numbers. Here is a function to compute the median:
 
-\texttt{def median(L):}
-
-
-
-
-
-
-
- \texttt{return
-(s{[}n/2{]}+s{[}(n-1)/2{]})/2.0}
-
-
-
-
-\texttt{median(range(5))}
-
-2.0
-
-
-\texttt{median(range(6))}
-
-2.5
+\begin{verbatim}
+  >>> def median(L):
+  ...   s = L[:]
+  ...   s.sort()
+  ...   n = len(s)
+  ...   return (s[n//2]+s[(n-1)//2])/2.0
+  \end{verbatim}
+  
 
 There are a couple of things to
 note about this code:
@@ -1463,49 +1430,48 @@ note about this code:
 \begin{itemize}
 
 \item
-  Rather than modify the array,
-  \texttt{L} , we make a copy before sorting it.
+  Rather than modify the array, \texttt{L} , we make a copy before sorting it.
 \item
-   , of
+  Whether the number, \texttt{n}, of
   elements is even or odd, we compute the median by averaging the
-  elements at positions \texttt{n/2} and \texttt{(n-1)/2}. This gives the
+  elements at positions \texttt{n//2} and \texttt{(n-1)//2}. This gives the
   correct answer in either case.
 \end{itemize}
 
-\subsection[ \texttt{for}
-loops]{}
-loops}{ for loops}}\label{for-loops}
+\subsection{\texttt{for} loops}
 
- loops exist
+In Python, loops exist
 to allow an index variable to take on each element in a list, or other
-sequence object. (We'll discuss other sequences below.) The form of a
+sequence (iterable) object. (We'll discuss other sequences below.) The form of a
 \texttt{for} loop is:
 
-for var in sequence :
+\begin{verbatim}
+for var in sequence:
+   body statement
+   ...
+   body statement  
+\end{verbatim}
 
- indented body of loop
+Probably the most common form of \texttt{for} loop is
 
-Probably the most common form of
-\texttt{for} loop is
+\begin{verbatim}
+for i in range(len(L)):
+   # do something with L[i]  
+\end{verbatim}
 
-
-\texttt{for i in range(len(L)):}
-
-
-
- takes on the index
+where \texttt{i} takes on the index
 of each item in the list, \texttt{L}. If you only need to examine the
 items in the list but do not need to know their positions, you can use
-the loop
+the loop:
 
+\begin{verbatim}
+for item in L:
+   # do something with each item in L
+\end{verbatim}
 
-\texttt{for x in L:}
+\subsection{continue}
 
-
-
-\subsection[
-\texttt{continue}]{}
-\texttt{continue}}{ continue}}\label{continue}
+\endinput
 
 If you decide that you are finished
 with the current iteration of a loop, you can execute the continue
