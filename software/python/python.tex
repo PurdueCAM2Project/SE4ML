@@ -1471,13 +1471,13 @@ for item in L:
 
 \subsection{continue}
 
-\endinput
-
 If you decide that you are finished
 with the current iteration of a loop, you can execute the continue
 statement. It consists of the single word
 
-continue
+\begin{verbatim}
+continue  
+\end{verbatim}
 
 It will immediately end the current
 iteration and jump back to the top of the loop and start the next
@@ -1490,26 +1490,30 @@ wish to print only those strings in a list that are at least five
 letters long; we might do it as follows:
 
 
-\texttt{x={[}``book'',``placid'',``right'',``table'',``mother'',``gone''{]}}
+\begin{verbatim}
+>>> x = ["book","placid","right","table","mother","gone"]
+>>> for s in x:
+...    if len(s) <= 5:
+...       continue
+...    print(s)
+...
+placid
+mother  
+\end{verbatim}
 
+We'll eventually see how many for loops can be replaced with \emph{filters} and \emph{lambda expressions}.
+For now, here is the equivalent formulation where we iterate over a filtered result:
 
-\texttt{for s in x:}
+\begin{verbatim}
+>>> for result in filter(lambda s: len(s) > 5, x):
+...     print(result)
+...
+placid
+mother  
+\end{verbatim}
 
- \texttt{if
-len(s)\textless{}=5:}
-
-
-
-
-
-
-
-placid mother
-
-\subsection[ \texttt{break} and \texttt{else} in
-Loops]{}
-\texttt{break} and \texttt{else} in
-Loops}{ break and else in Loops}}\label{break-and-else-in-loops}
+\subsection{break and else in loops}
+\label{break-and-else-in-loops}
 
 Often you will use a loop to search
 for something. Once you've found it, you want to escape from the loop.
@@ -1520,41 +1524,39 @@ If in the midst of a loop you wish
 to stop iterating, you can execute the \texttt{break} statement. It
 consists of the keyword \texttt{break} :
 
-break
+\begin{verbatim}
+break  
+\end{verbatim}
 
 If you want to execute some code if
 the loop terminated normally, i.e., if it didn't exit by a \texttt{break}
 , you can attach an \texttt{else} clause on the end of the loop. Loops
 with \texttt{else} clauses have the form:
 
+\begin{verbatim}
 while expr :
-
- indented loop body containing
-break
-
+   indented loop body containing break 
 else :
-
- indented code to execute
-
- if the loop exits normally
+   indented code to execute
+   if the loop exits normally
+\end{verbatim}
 
 or
 
+\begin{verbatim}
 for var in sequence:
-
- indented loop body containing
-break
-
-else :
-
- indented code to execute
-
- if the loop exits normally
+   indented loop body containing break
+else:
+   indented code to execute
+   if the loop exits normally
+\end{verbatim}
 
 
-is usually used in \texttt{if} statements. It is in Python too. It is
-perhaps not the best word to express the concept of ``on normal
-termination,'' but it is what Python uses.
+Of course the keyword \texttt{else} is usually used in \texttt{if} statements. It is in Python too. It is
+perhaps not the best word to express the concept of \emph{on normal termination}, but it is what Python uses.
+
+\endinput
+
 
 \subsection[ \texttt{if}
 \texttt{Statements}]{}
