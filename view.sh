@@ -1,16 +1,11 @@
 # Viewer for Linux
 
-if [ "$(which xdg-open)" != ""  ]; then
-     xdg-open "$@"
+if [ "$(which evince)" != ""  ]; then
+     evince --fullscreen "$@"
      exit 0
 fi
 
 # For ChromeOS, because xdg-open not available...
-
-if [ "$(which evince)" != ""  ]; then
-     evince "$@"
-     exit 0
-fi
 
 # Viewer for OS X
 if [ "$(which open)" != ""  ]; then
