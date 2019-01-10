@@ -1,6 +1,14 @@
 # Viewer for Linux
+
 if [ "$(which xdg-open)" != ""  ]; then
      xdg-open "$@"
+     exit 0
+fi
+
+# For ChromeOS, because xdg-open not available...
+
+if [ "$(which evince)" != ""  ]; then
+     evince "$@"
      exit 0
 fi
 
