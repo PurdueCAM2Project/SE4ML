@@ -20,10 +20,10 @@ is no specific definition what should be considered as a chapter in a
 book. One may consider each additional line as a new version while
 another may consider a completely implemented and fully tested feature
 as a version. Generally speaking, a version should be self-contained
-and complete unit, like a section or a chapter in a book.  The tools
+and a complete unit, like a section or a chapter in a book.  The tools
 that manage versions are called {\it version control}.  When multiple
-work together, version control becomes essential to ensure proper
-coordination.
+people work together, version control becomes essential to ensure
+proper coordination.
 
 There are many version control systems, such {\tt CVS} (concurrent
 version system) and {\tt SVN} (subversion).  This book uses {\tt git}
@@ -40,21 +40,17 @@ can use websites that offer version control functions; examples
 include {\tt github.com} and {\tt bitbucket.org}.  This book uses {\tt
   github} as an example.  You can find entire books talking about {\tt
   git} as well as thousands of web postings about how to use {\tt
-  github}. {\tt git} has many different functions and {\tt github}
+  github}. The toolset
+{\tt git} has many different functions and {\tt github}
 offers many different ways to accomplish the same goals.  This book
 does not intend to replace those materials.  Instead, this book
 provides enough details for common needs.  Readers interested knowing
 more can easily find additional documentations.
 \marginnote{The authors are users of  {\tt github.com}
-  and have no other connection with {\tt github.com}.}
+  and have no other connection with {\tt github.com}.
+The authors receive no compensation from {\tt github.com}.}
 
 \section{\tt github}
-
-This book chooses {\tt github} for three reasons: (1) It is widely
-used.  (2) It is free for education purposes. (3) It is supported by
-many tools other than the {\tt github} website.
-Figure~\ref{fig:github12} shows the website of {\tt github} and the
-portal for an education account.
 
 \begin{figure}[h] \centering
  \subfigure[]
@@ -65,15 +61,21 @@ portal for an education account.
 \label{fig:github12}
 \end{figure}
 
+This book chooses {\tt github} for three reasons: (1) It is widely
+used.  (2) It is free for education purposes. (3) It is supported by
+many tools other than the {\tt github} website.
+Figure~\ref{fig:github12} shows the website of {\tt github} and the
+portal for an education account.
 Signing up in {\tt github} is easy, as shown in
 Figure~\ref{fig:github34} (a).  After creating an account, a
 repository can be created as shown in Figure~\ref{fig:github34} (b).
 This website has many options: the name of the repository, whether it
 is public or private, whether to initialize the repository with {\tt
   README}, etc.
+Figure~\ref{fig:github56} (a) shows the options for creating a new repository:
 
 
-\begin{figure}[h] \centering
+\begin{figure}[t] \centering
  \subfigure[]
 {\includegraphics[width=4.5in]{\thischapterpath/figures/github3.png}}
   \subfigure[]
@@ -83,7 +85,7 @@ is public or private, whether to initialize the repository with {\tt
 \label{fig:github34}
 \end{figure}
 
-\begin{figure}[h] \centering
+\begin{figure}[t] \centering
    \subfigure[]
 {\includegraphics[width=4.5in]{\thischapterpath/figures/github5.png}}
    \subfigure[]
@@ -97,7 +99,6 @@ is public or private, whether to initialize the repository with {\tt
   should treat {\tt git} as case insensitive. Do not have two
 files whose names are different by cases only.}
 
-Figure~\ref{fig:github56} (a) shows the options for creating a new repository:
 
 
 \begin{itemize}
@@ -272,12 +273,6 @@ following line to {\tt README.md}:
 This repository demonstrates how to use commit, push, and branch.
 \end{verbatim}
 
-\index{git!commit}
-After adding this line, use the {\tt git commit} command to show which file
-has been changed:
-
-\vspace{0.2in}
-
 \noindent
 \begin{tabular}{|p{5in}|}\hline
 \begin{verbatim}
@@ -290,6 +285,13 @@ Changes not staged for commit:
 \\ \hline
 \end{tabular}
 \vspace{0.2in}
+
+\index{git!commit}
+After adding this line, use the {\tt git commit} command to show which file
+has been changed:
+
+\vspace{0.2in}
+
 
 What does this mean? It says a file {\tt README.md} has been changed
 but it has not been committed. The next question is the difference
@@ -323,22 +325,20 @@ $ git commit -m "add a line" README.md
   messages because these messages can be searched to
   find the right version.}
 
-In this command, {\tt -m} means the commit message and this commit
-message is ``add a line''.  The name of the file, {\tt README.md}, is
-included to indicate which file to take a snapshot and a new version
-is created.
-
 \index{git!commit}
 \begin{figure}[h] \centering
 {\includegraphics[width=2.5in]{\thischapterpath/figures/gitcommit.png}}
 \caption{After several changes, {\tt git commit} creates a new version
-  and store it in the local repository.}
+  and stores it in the local repository.}
 \label{fig:gitcommit}
 \end{figure}
 
-This new version is visible at only the local repository, not the remote
-repository (in {\tt github}).  To make the changes visible in {\tt github},
-another command {\tt git push} is needed.
+In this command, {\tt -m} means the commit message and this commit
+message is ``add a line''.  The name of the file, {\tt README.md}, is
+included to indicate which file to take a snapshot and a new version
+is created.  This new version is visible at only the local repository,
+not the remote repository (in {\tt github}).  To make the changes
+visible in {\tt github}, another command {\tt git push} is needed.
 \index{git!push}
 
 \vspace{0.2in}
@@ -376,7 +376,7 @@ to modify the remote repository after several {\tt git commit}
 commands creating new versions on the local repository.
 
 \begin{figure}[h] \centering
-{\includegraphics[width=2.5in]{\thischapterpath/figures/gitpush.png}}
+{\includegraphics[width=3.8in]{\thischapterpath/figures/gitpush.png}}
 \caption{Typical workflow of using {\tt github}}
 \label{fig:gitpush}
 \end{figure}
@@ -393,8 +393,6 @@ Figure~\ref{fig:github8} shows the {\tt github} website after {\tt git
 \caption{The website of {\tt github} shows the change.}
 \label{fig:github8}
 \end{figure}
-
-\section{Set Up SSH Key}
 
 
 \section{Add and Remove Files}
@@ -549,7 +547,7 @@ Date:   YYYY
 Does does ``hub'' in {\tt github} mean? Think of it as an airline hub
 or a bus hub, where travellers come from many different places in
 order to change flights or bus lines.  Similarly, {\tt github} allows
-collaborate to share and exchange.  Adding collaborators would be
+collaborators to share and exchange.  Adding collaborators would be
 easy, by clicking {\tt Settings} and {\tt Collaborators}, as shown
 in Figure~\ref{fig:github9}.
 
@@ -568,6 +566,13 @@ Figure~\ref{fig:githubcollaborate} shows two people start from the
 same remote repository. This is not necessary.  It is possible
 to clone the remote repository after many modifications have already
 been made by another person.
+
+\begin{figure}[h] \centering
+{\includegraphics[width=4.5in]{\thischapterpath/figures/githubcollaborate.png}}
+\caption{Workflow of two people upading the same repository in {\tt github}.}
+\label{fig:githubcollaborate}
+\end{figure}
+
 
 Each person starts by cloning the same repository in {\tt
   github}. After cloning, each person can work independently without
@@ -637,7 +642,8 @@ even contain errors (i.e., ``bugs''). Committing creates a new version
 with a message; this new version is searchable by the message.  When
 one decides the changes are ``good enough'' to stay for now, it is
 time to commit and create a new version.  One may experiment different
-methods implementing a feature with different versions. As long as the
+methods implementing a feature with different versions. Each method
+can be a new version or even several versions.  As long as the
 versions are not pushed, the experiments do not cause any problem to
 the other people sharing the same {\tt github} repository.  Version
 control cannot help if one does not commit. Thus, a good rule is
@@ -659,11 +665,10 @@ their work can be integrated.
 Page~\pageref{section:git:branches} will talk about branches as a way
 to push changes without directly affecting the other people.
 
-\begin{figure}[h] \centering
-{\includegraphics[width=4.5in]{\thischapterpath/figures/githubcollaborate.png}}
-\caption{Workflow of two people upading the same repository in {\tt github}.}
-\label{fig:githubcollaborate}
-\end{figure}
+\marginnote{The primary reason of conflicts is the lack of
+  communication and coordination. Thus, the best way to avoid
+  conflicts is to improve communication among the people modifying the
+  same {\tt github} repository.}
 
 In most cases, no problem occurs when two or more people modify the
 same remote repository. If one person modifies a file and another
@@ -674,11 +679,6 @@ still be able to add the changes from both people.  In rare cases,
 however, {\it conflicts} may occur when two people modify the same
 file and the changes are too similar for {\tt git} to determine what
 to do.  Conflicts appear in the the following markers.
-
-\marginnote{The primary reason of conflicts is the lack of
-  communication and coordination. Thus, the best way to avoid
-  conflicts is to improve communication among the people modifying the
-  same {\tt github} repository.}
 
 \begin{verbatim}
 <<<<<<< 
@@ -697,15 +697,14 @@ discovering and resolving conflicts by doing {\tt git pull} before
 conflicts should examine the differences and determines which to keep
 and which to discard.
 
-  \index{git!pull}
-  \index{git!push}
-A few general rules can reduce the chances of conflicts:
-First,  communicate and coordinate with collaborators often.
-Do {\tt git pull} and {\tt git push} often so that conflicts can
-  be discovered earlier when only a few lines of conflicts exist.
- In order to do {\tt git push} often, it is imperative to focus
-  on one specific problem (e.g., adding one feature, or fixing one
-  bug) at any moment, finish the work, and then push it.
+  \index{git!pull} \index{git!push} A few general rules can reduce the
+  chances of conflicts: First, communicate and coordinate with
+  collaborators often.  Second, do {\tt git pull} and {\tt git push}
+  often so that conflicts can be discovered earlier when only a few
+  lines of conflicts exist.  In order to do {\tt git push} often, it
+  is imperative to focus on one specific problem (e.g., adding one
+  feature, or fixing one bug) at any moment, finish the work, and then
+  push it.
 
   \marginnote{How often should one do {\tt git pull} and {\tt git
       push}?  The answer depends on the number of collaborators and
@@ -735,7 +734,9 @@ because the output of every {\tt git commit} command shows ``master''.
 There is only one branch, the master branch.  Modifying the master
 branch direclty is actually not recommended. Instead, the master
 branch should be reserved for the stable versions (also called the
-{\it release versions}) for people outside the development team.
+{\it release versions}).
+
+ \marginnote{It is common restricting the modification of the master branch to only the project leader. }
 
 \index{integer partition} Page~\pageref{page:whengitpush} said one
 should not push buggy code. This is restricted to the master branch.
@@ -766,12 +767,6 @@ Below are some example integer partitions:
                                            = 4
 \end{verbatim}
 
-\marginnote{Another common mistake among beginning {\tt git} users is
-  that they do not merge branches. They keep changing their own
-  branches.  They want to show to their collaborators that they are
-  contributing by frequently pushing improvements to the repositories.
-  However, if the improvements stay in the branches that are not merged,
-  these improvements are not actually useful.}
 
 \index{git!branch}
 
@@ -1006,10 +1001,7 @@ The new program is listed below:
 \index{git!merge}
 \index{git!branch!-d}
 
-\marginnote{Most branches should have short lives: Each branch is
-  created for one specific purpose.  It is documented, developed,
-  tested, committed, merged, and then deleted.}
-  
+
 Now the program is ready to be moved to the stable {\tt master}
 branch.  This will be done in three steps: (1) go to the {\tt master}
 branch using the {\tt git checkout} command; (2) merge the {\tt
@@ -1058,7 +1050,17 @@ To https://github.com/yhluprog/pythonexamples.git
 
 \clearpage
 
-\section{Pull Requests}
+A common mistake among beginning {\tt git} users is that they do not
+merge branches. They keep changing their own branches.  They want to
+show to their collaborators that they are contributing by frequently
+pushing improvements to the repositories.  However, if the
+improvements stay in the branches that are not merged, these
+improvements are not actually useful.  Most branches should have short
+lives: Each branch is created for one specific purpose.  It is
+documented, developed, tested, committed, merged, and then deleted.
+  
+
+  \section{Pull Requests}
 \index{github!pull request}
 
 Creating a branch does not inform collaborators. This is reasonable
@@ -1182,4 +1184,6 @@ To https://github.com/PurdueCAM2Project/SE4ML.git
 
 
 
+
+\section{Set Up SSH Key}
 
