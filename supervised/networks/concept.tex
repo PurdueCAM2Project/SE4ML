@@ -1,13 +1,6 @@
 \chapter{Neural Networks}
 \label{chapter:nn}
 
-
-
-\tableofcontents
-
-
-\section{Neural Networks}
-
 Neural networks use one particular architecture for computing.  This
 architecture is inspired by animal brains where billions of neurons are connected.
 This assignment does not intend to explain what neural networks are,
@@ -18,7 +11,7 @@ logic gates.
 
 \begin{figure}[h]
 \centering
-{\includegraphics[width=4in]{layers.png}}
+{\includegraphics[width=4in]{\thischapterpath/figures/layers.png}}
 \caption{Layers of a neural network.}
   \label{fig:layers}
 \end{figure}
@@ -32,10 +25,10 @@ layer has two neurons (neurons 0-1), the hidden layer has four neurons
 \begin{figure}[h]
 \centering
 \subfigure[]
-{\includegraphics[width=3in]{forward.png}}
+{\includegraphics[width=3in]{\thischapterpath/figures/forward.png}}
 \hspace{0.3in}
 \subfigure[]
-{\includegraphics[width=3in]{weights.png}}
+{\includegraphics[width=3in]{\thischapterpath/figures/weights.png}}
 \caption{(a) Information moves from left to right.
 (b) The definition of the indexes.}
   \label{fig:forward}
@@ -145,7 +138,7 @@ With this definition, it is time to give an example shown in
 Figure~\ref{fig:example1}.  
 \begin{figure}[h]
 \centering
-{\includegraphics[width=3in]{example1.png}}
+{\includegraphics[width=3in]{\thischapterpath/figures/example1.png}}
 \caption{Example caclulating a neuron's output.}
   \label{fig:example1}
 \end{figure}
@@ -166,7 +159,7 @@ Next, consider the  example in Figure~\ref{fig:example2}.
 
 \begin{figure}[h]
 \centering
-{\includegraphics[width=6in]{example2.png}}
+{\includegraphics[width=6in]{\thischapterpath/figures/example2.png}}
 \caption{A complete example.}
   \label{fig:example2}
 \end{figure}
@@ -177,7 +170,7 @@ The following program implements this neural network.
 \resetlinenumber[1]
 \linenumbers
 \begin{tt}
-  \lstinputlisting{example2.c}
+  \lstinputlisting{\progpath/supervised/networks/C/example2.c}
 \end{tt}
 \nolinenumbers
 
@@ -193,7 +186,7 @@ outputs[0] = 0.824528, outputs[1] = 0.852863
 
 \begin{figure}[h]
 \centering
-{\includegraphics[width=4in]{gate.png}}
+{\includegraphics[width=4in]{\thischapterpath/figures/gate.png}}
 \caption{A logic gate with two inputs and two outputs.}
   \label{fig:gate}
 \end{figure}
@@ -440,7 +433,7 @@ The definition of $x$ is the same as equation (\ref{eqn:definex}).
 
 \begin{figure}[h]
 \centering
-{\includegraphics[width=6in]{weightl2ks.png}}
+{\includegraphics[width=6in]{\thischapterpath/figures/weightl2ks.png}}
 \caption{Weight $w_{l-2, k,s}$'s effect.}
   \label{fig:weightl2ks}
 \end{figure}
