@@ -1,0 +1,256 @@
+\chapter{Testing}
+
+
+Have you ever had a situation when your software has a bug but it is
+not discovered for a long time?  The existence of the bug and its
+ability to escape detection may surprise your entire team. ``How did
+that happen?'', you may ask.  This may happen due to a wide variety of
+reasons. One of the possible reasons is that the software has not been
+well tested and as a result the bug is not detected. Testing is an
+important method detecting bugs.  However, testing can be tideous.  It
+is common that someone makes a ``small'' change and skips testing.
+The person believes the change is so small and cannot possibly have
+any bug.  If several people add a few small changes here and there,
+the software soon is full of ``small'' bugs.  Why do people not test
+their programs immediately after they have made changes?  One reason
+is that testing require additional work.
+
+Is it possible testing is fully automated without any additional
+effort? {\it Continuous Integration} (CI) does exactly that.
+
+You still need to write testers. There is no way avoiding that part.
+What continuous integration does is to automatically invole these
+testers whenver you push your program to the shared repository.
+This chapter uses {\tt Travis-CI} for continuous integration. Before explaining how
+to use Continuous Integration, it is necessary first explaining how Python
+testing works.
+
+\section{Limitations of Testing}
+
+It is important understanding that testing has limitations.  It is
+practically impossible testing every possible scenario.  Every {\tt
+  if} is a {\it condition}. A condition divides a program into two
+different paths depending whether the condition is true or not.  A
+non-trivial program can easily have hundreds of conditions.  As a
+simple explanation why it is not possible testing every possible
+scenario. Let's consider a program with 100 {\it independent}
+conditions, i.e., whether condition is true or false does not affect
+any other condition.  There are $2^{100}$ possible scenarios.  The
+fastest computer in the world can perform several hundred quadrillion
+($10^{15}$) calculations per second; this is a parallel computer but
+let's not worry about that detail.  Because $\log_2(10) \approx 3.3$,
+$10^{15} \approx 2 ^ {50}$. Thus, the fastest computer can check as
+many as $2 ^ {50}$ conditions per second. How many can this computer
+check per minute? $2 ^ {50} \times 60$. How about a day (86,400
+seconds)?  $2 ^ {50} \times 86400 \approx 2 ^ {66}$.  In order to test
+$2^{100}$ possible scenarios, this computer needs to work $2^{34}$
+days; this is very long time (much longer than the history of humans).
+In fact, the situation is even worse.  The estimation above considers
+only two possible cases for each condition: true or false. If the
+condition compares two numbers, then ``every possible scenario'' means
+every possible pairs of these two numbers.  What does this mean? It
+would be completely impossible testing every possible scenario of a
+program's execution paths controlled by the conditions.
+
+Does this mean there is no need to test because it is not possible
+testing all possible scenarios? No. What it means is that testing has to
+be done carefully so that testing can detect as many problems (i.e.,
+bugs) as possible.  Good tests should consider many different scenarios.
+
+\section{Structure of Tests}
+
+Many books talk about the importance of testing and how to write
+tests.  However, few books talk about how to structure tests. Before
+writing any test, you need to answer an important question: do you
+want the testing code to be sent to the users (or customers) In most
+cases, the answer is no. You The program used to generate the product
+sent to customers is often called the ``production code''.  You do not
+want to include test code inside production code for many reasons.
+First, including testing code may make your product bigger (in terms
+of storage) and slower (in terms of execution time). Worse, testing
+often needs specific inputs and the expected outputs for these test
+cases.  Will you also give these inputs and outputs to your customers?
+If you do not, why do you include testing code in the product?
+
+Mixing production code and testing code is a common mistake for
+beginning software developers. Worse, many of them have a lot of
+``debugging messages'' as develop their code. When the program is
+ready for production and release, what will they do with these
+debugging messages?  In almost all cases, your customers do not
+understand the debugging messages and you have to remove the code
+printing these messages.  Here is the problem. When you remove the
+code printing these messages, the risk is too high for one of two
+things to happen. First, you do not remove all the code printing the
+debugging messages.  Your customers are annoyed by the mysterious
+debugging messages. Your competitors know more than what you to reveal
+about your proudct.  The second scenario is worse.  you accidentally
+remove more code than you intend and you actually add bugs to your
+program.  Your program no longer works and your customers are very
+angry at your product.
+
+The correct way of creating tests is to separate testing code from the
+production code in different files (possibly in different
+directories).  The production code does what it needs to do. The
+testing code tests the production code.  When your product is ready,
+exclude the testing code, the inputs, and the expected outputs before
+releasing your product.  Figure~\ref{fig:teststructure01} illustrates
+this concept.
+
+\begin{figure}[h] \centering
+{\includegraphics[width=4.5in]{\thischapterpath/figures/teststructure01.png}}
+\caption{Production code and test code should be completely separated.}
+\label{fig:teststructure01}
+\end{figure}
+
+\section{Use {\tt Assert} Correctly}
+
+Another common mistake among beginning software developers is to use
+{\tt assert} incorrectly. This is what they often do.
+
+\marginnote{These problems about misuse {\tt assert} were observed
+  in the authors' classes.  They actually happened multiple times.}
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+  # This is production code
+  ....
+  assert(condition that should be true)
+  ....
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+This is one example how {\tt assert} may be used:
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+def func(x):
+    assert (x > 1)
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+There are three problems when you do this.  First, if the condition is
+not true, the program {\it immediately} stops.  There is no second
+chance.  Imagine that your program is a text editor. When a user wants
+to save the content to a file, your program does not want to erase an
+existing file.  You put {\tt assert} there claiming that the file must
+not exist. If a user accidentially uses a file whose name already
+exists, the program stops and everything typed by the user is lost.
+You will definietely have a user that will never buy any product from
+you.  Some people argue that ``I put {\tt assert} there because I know
+it must be true.'' That argument is self-contraditory.  If you know
+that the condition must be true, you will not put {\tt assert} there.
+Would you write
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+assert (1 > 0)
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+You don't.
+
+If you are abosolutly certain the condition must be true, you do not
+need to put {\tt assert} there.
+
+Some people say, ``I will remove all {\tt assert} before releasing the
+product.''  This can be done easily using the {\tt grep -v} command.
+This, however, brings the second problem.  What would happen if
+some of the {\tt assert} statements actually do something useful?
+Consider the following case:
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+assert (x = y)
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+This assigns {\tt y}'s value to {\tt x}.
+
+What you really want to do is probably to ensure that  {\tt x} and {\tt y}
+are the same:
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+assert (x == y)
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+The earlier {\tt assert} statement assigns {\tt y}'s value to {\tt
+  x}. Hence, their values are same and the intended {\tt assert} is
+actually true.  If you remove the {\tt assert} and no longer assign
+{\tt y}'s value to {\tt x}, the program may not work any more. Human
+eyes are not good detecting the differences between {\tt =} and {\tt
+  ==}. This is a difficult bug to fix because keeping {\tt assert}
+means the program is correct. Removing {\tt assert} means the program
+is wrong.
+
+
+\marginnote{Do not put {\tt assert} in your production code.}
+
+The third problem is, perhaps, somewhat philosophical.  It is the
+attitude of creating good software.  Software is deployed in many
+safety-critical systems. Mistakes in these systems may cause
+signficant amounts of financial losses, body injuries, or even deaths.
+Allowing a program to sudden stop is simply an unacceptable way of
+thinking.  Using {\tt assert} is an {\it irresponsible} way of writing
+software.  It expresses the attutide ``Something is not expected. My
+program commits suicide and the rest is not my problem any more.''  A
+more responsbile way of writing good software is to {\it handle the
+  problem and do not stop the program}.
+
+If {\tt assert} has these problems, does that mean {\tt assert}
+should not be used at all?
+You can use {\tt assert} in the testing code, as shown
+in Figure~\ref{fig:teststructure02}.
+
+
+\begin{figure}[h] \centering
+{\includegraphics[width=4.5in]{\thischapterpath/figures/teststructure02.png}}
+\caption{Use {\tt assert} in the testing code.}
+\label{fig:teststructure02}
+\end{figure}
+
+In this example, the testing code uses {\tt assert} to check whether
+the output from function 1 is correct.  This is particularly important
+before sending it to the input of function 2.  This further emphasizes
+the importance of separating production code from testing code.
+
+
+\section{Exception}
+
+\section{Pytest}
+
+
+
+\chapter{Continous Integration}
+
+\begin{figure}[h] \centering
+{\includegraphics[width=4.5in]{\thischapterpath/figures/travis01.png}}
+\caption{Travis-CI.com is a website supporting continuous integration.}
+\label{fig:travis01}
+\end{figure}
