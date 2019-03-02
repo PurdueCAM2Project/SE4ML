@@ -410,33 +410,87 @@ A test program calls {\tt funcs.f1(3)} and {\tt funcs.f2(5)}.
 \nolinenumbers
 
 Running {\tt pytest}, however, has no output. What is happening?
-
-When running {\tt pytest}, what is supposed to print to a computer
-screen (also called the {\it console}) is captured.  The reason is
-that {\tt pytest} does not want to print too many things.  If too many
+Instead of printing to a computer screen (also called the {\it
+  console}), {\tt pytest}, captures the output.  The reason is that
+{\tt pytest} does not want to print too many things.  If too many
 things are printed to the screen, it is likely that some important
-messages are ignored.  There are two solutions: The first is to tell
+messages are ignored. Another reason is that {\tt pytest} often runs
+automatically when no human is watching (more details about this
+later in the section on Continuous Integration).
+There are two solutions: The first is to tell
 {\tt pytest} to print to the screen by adding {\tt -s} after {\tt
   pytest}.  This defeats the purpose of {\tt pytest}'s intention not
 to print to the screen.
 
 \index{pytest|-s}
 
-The second is a better and more general solution. This solution has
-three steps:
+The second is a better and more general solution: it saves the
+captured output to a file. It is actually quite straightforward:
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/software/test/test_example5.py}
+\end{tt}
+\nolinenumbers
+
+\index{console}
+
+The function {\tt test\_f1f2) has an input for capturing the outputs.
+  This input will be provided automatically by {\tt pytest}.  To get
+  the captured output, it calls {\tt readouterr()}.  This function
+  returns the captured output to standard output (also called {\tt
+    stdout}) and the standard error (also called {\tt stderr}).
+  Separating {\tt stdout} from {\tt stderr} gives more flexibility:
+  the former is the normal output and the latter is the error
+  messages.  By default, both {\tt stdout} and {\tt stderr} are shown
+  on a computer screen but it is possible saving them to different
+  files.
+
+  The testing program {\tt test\_example5.py} saves the standard
+  output to a file called {\tt capturedstdout}. All outputs by the
+  {\tt print} statements in {\tt funcs} are saved in this file.
+  The content of the file is (as expected)
+
+ 
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+4
+6
+25
+15
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+When the outputs are saved to a file, testing can be done automatically
+without human watching by following these steps:
 
 \begin{enumerate}[noitemsep,nolistsep]
 \item write the expected output to a file
-\item explictly capturing the output from {\tt pytest}
-\item save the captured output to another file
-\item compare the captured output and the expected output
+\item capture the output from {\tt pytest} and save it to another file
+\item compare the two files
 \end{enumerate}
 
+The following program shows these steps
 
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/software/test/test_example6.py}
+\end{tt}
+\nolinenumbers
 
+The tests uses {\tt filecmp.cmp} to compare the context of two files.
+As explained, if a test cannot fail, it is useless. If {\tt
+  funcs.f2(5)} is replaced by {\tt funcs.f2(4)}, {\tt pytest} fails.
+This suggests that {\tt pytest} is actually testing {\tt funcs.f2}.
 
-
-\index{console}
+\section{Test Integer Partition}
 
 
 
