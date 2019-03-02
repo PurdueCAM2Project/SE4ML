@@ -62,8 +62,8 @@ bugs) as possible.  Good tests should consider many different scenarios.
 Many books talk about the importance of testing and how to write
 tests.  However, few books talk about how to structure tests. Before
 writing any test, you need to answer an important question: do you
-want the testing code to be sent to the users (or customers) In most
-cases, the answer is no. You The program used to generate the product
+want the testing code to be sent to the users (or customers)? In most
+cases, the answer is no.  The program used to generate the product
 sent to customers is often called the ``production code''.  You do not
 want to include test code inside production code for many reasons.
 First, including testing code may make your product bigger (in terms
@@ -74,7 +74,7 @@ If you do not, why do you include testing code in the product?
 
 Mixing production code and testing code is a common mistake for
 beginning software developers. Worse, many of them have a lot of
-``debugging messages'' as develop their code. When the program is
+``debugging messages'' as they test  code. When the program is
 ready for production and release, what will they do with these
 debugging messages?  In almost all cases, your customers do not
 understand the debugging messages and you have to remove the code
@@ -83,14 +83,15 @@ code printing these messages, the risk is too high for one of two
 things to happen. First, you do not remove all the code printing the
 debugging messages.  Your customers are annoyed by the mysterious
 debugging messages. Your competitors know more than what you to reveal
-about your proudct.  The second scenario is worse.  you accidentally
+about your proudct.  The second scenario is worse.  You accidentally
 remove more code than you intend and you actually add bugs to your
 program.  Your program no longer works and your customers are very
 angry at your product.
 
 The correct way of creating tests is to separate testing code from the
-production code in different files (possibly in different
-directories).  The production code does what it needs to do. The
+production code in different files (probably in different
+directories).  The production code does what it needs to do
+as the product. The
 testing code tests the production code.  When your product is ready,
 exclude the testing code, the inputs, and the expected outputs before
 releasing your product.  Figure~\ref{fig:teststructure01} illustrates
@@ -102,6 +103,7 @@ this concept.
 \label{fig:teststructure01}
 \end{figure}
 
+\index{assert|(}
 \section{Use {\tt Assert} Correctly}
 
 Another common mistake among beginning software developers is to use
@@ -173,6 +175,9 @@ This, however, brings the second problem.  What would happen if
 some of the {\tt assert} statements actually do something useful?
 Consider the following case:
 
+\index{grep}
+
+
 \vspace{0.2in}
 
 \noindent
@@ -218,15 +223,15 @@ safety-critical systems. Mistakes in these systems may cause
 signficant amounts of financial losses, body injuries, or even deaths.
 Allowing a program to sudden stop is simply an unacceptable way of
 thinking.  Using {\tt assert} is an {\it irresponsible} way of writing
-software.  It expresses the attutide ``Something is not expected. My
-program commits suicide and the rest is not my problem any more.''  A
-more responsbile way of writing good software is to {\it handle the
-  problem and do not stop the program}.
+production code.  It expresses the attutide ``Something is not
+expected. My program commits suicide and the rest is not my problem
+any more.''  A more responsbile way of writing good software is to
+{\it handle the problem and do not stop the program}.
 
-If {\tt assert} has these problems, does that mean {\tt assert}
-should not be used at all?
-You can use {\tt assert} in the testing code, as shown
-in Figure~\ref{fig:teststructure02}.
+If {\tt assert} has these problems, does that mean {\tt assert} should
+not be used at all?  You should not use {\tt assert} in production
+code.  You can use {\tt assert} in the testing code, as shown in
+Figure~\ref{fig:teststructure02}.
 
 
 \begin{figure}[h] \centering
@@ -240,17 +245,207 @@ the output from function 1 is correct.  This is particularly important
 before sending it to the input of function 2.  This further emphasizes
 the importance of separating production code from testing code.
 
+\index{assert|)}
 
 \section{Exception}
 
+\index{pytest|(}
 \section{Pytest}
 
+Python has a tool for testing calle {\tt pytest}. It automatically
+looks for the files starting with {\tt test\_} and ending with {\tt
+  .py} and executes the functions whose names start with {\tt test\_}.
+The following is a simple example.
 
 
-\chapter{Continous Integration}
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/software/test/test_example1.py}
+\end{tt}
+\nolinenumbers
+
+Running {\tt pytest} gets the following output:
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ pytest
+============ test session starts =============
+platform linux -- Python 3.5.2, pytest-4.3.0, py-1.8.0, pluggy-0.9.0
+rootdir: /..., inifile:
+collected 1 item
+
+test_example1.py .                                
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+Here, the {\tt rootdir} is the directory where you run {\tt pytest}.
+This output means the tests have passed.
+
+Change the program  as follows: {\tt returntrue} returns {\tt False}
+and {\tt returnfalse} returns {\tt True}:
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/software/test/test_example2.py}
+\end{tt}
+\nolinenumbers
+
+Running {\tt pytest} gets this result, showing the test has failed.
+
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+======================== FAILURES ========================
+____________________ test_truefalse ______________________
+
+    def test_truefalse():
+>       assert returntrue() == True
+E       assert False == True
+E        +  where False = returntrue()
+
+test_example2.py:11: AssertionError
+==================== 1 failed in 0.04 seconds ====================
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+\marginnote{A test is useless if it can never fail.}
+
+When you create tests, it is important that you check whether the
+tests may fail. Passing tests is not the purpose of testing.  The
+purpose of testing is to detect mistakes in production code and
+correct the code.  If a test can never fail, this test is useless.
+
+Next, considers a slightly more complex program for testing two
+functions: {\tt f1} and {\tt f2}:
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/software/test/test_example3.py}
+\end{tt}
+\nolinenumbers
+
+This is the output of {\tt pytest}:
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+======================== FAILURES ========================
+_______________________ test_f1f2 ________________________
+
+    def test_f1f2():
+        assert f1(3) == 4
+        assert f1(-3) == -2
+>       assert f2(3) == 4
+E       assert 2 == 4
+E        +  where 2 = f2(3)
+
+test_example3.py:13: AssertionError
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+The result says that calling {\tt f1(3)} and {\tt f1(-3)} have passed
+the tests. Calling {\tt f2(3)} has failed because {\tt f2(3)}
+return 2 but the test program expects 4.
+
+Earlier this chapter said testing code and production code should be
+separated. The examples for {\tt pytest} above violated this rule.
+The following examples will follow the rule separating the testing
+code from the tested code. Consider a file with two functions: {\tt
+  f1} and {\tt f2}:
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/software/test/funcs.py}
+\end{tt}
+\nolinenumbers
+
+This is the output when calling the functions interactively:
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ python3
+Python 3.5.2 (default, Nov 12 2018, 13:43:14) 
+[GCC 5.4.0 20160609] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import funcs
+>>> funcs.f1(3)
+4
+>>> funcs.f2(5)
+6
+25
+15
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+A test program calls {\tt funcs.f1(3)} and {\tt funcs.f2(5)}.
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/software/test/test_example4.py}
+\end{tt}
+\nolinenumbers
+
+Running {\tt pytest}, however, has no output. What is happening?
+
+When running {\tt pytest}, what is supposed to print to a computer
+screen (also called the {\it console}) is captured.  The reason is
+that {\tt pytest} does not want to print too many things.  If too many
+things are printed to the screen, it is likely that some important
+messages are ignored.  There are two solutions: The first is to tell
+{\tt pytest} to print to the screen by adding {\tt -s} after {\tt
+  pytest}.  This defeats the purpose of {\tt pytest}'s intention not
+to print to the screen.
+
+\index{pytest|-s}
+
+The second is a better and more general solution. This solution has
+three steps:
+
+\begin{enumerate}[noitemsep,nolistsep]
+\item write the expected output to a file
+\item explictly capturing the output from {\tt pytest}
+\item save the captured output to another file
+\item compare the captured output and the expected output
+\end{enumerate}
+
+
+
+
+
+\index{console}
+
+
+
+\section{Continous Integration}
 
 \begin{figure}[h] \centering
 {\includegraphics[width=4.5in]{\thischapterpath/figures/travis01.png}}
 \caption{Travis-CI.com is a website supporting continuous integration.}
 \label{fig:travis01}
 \end{figure}
+
+\index{pytest|)}
