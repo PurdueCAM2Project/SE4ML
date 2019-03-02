@@ -492,6 +492,20 @@ This suggests that {\tt pytest} is actually testing {\tt funcs.f2}.
 
 \section{Test Integer Partition}
 
+Only ``toy'' examples for {\tt pytest} are shown so far.  By capturing
+the outputs, {\tt pytest} can compare expected outputs with the actual
+outputs.  Thus, it becomes much easier testing many cases using a
+single test program. The following program tests integer partition
+using three different values: 3, 4, and 5. The expected outputs are
+stored in a separate directory called {\tt expected} and the files are
+called, not surprisingly, {\tt 3}, {\tt 4}, and {\tt 5}.
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/software/test/test_intpart1.py}
+\end{tt}
+\nolinenumbers
 
 
 \section{Continous Integration}
