@@ -21,7 +21,8 @@ script:
 - make all
 - cd sphinx-book && make html && make latexpdf
 - cd build && mkdir se4ml && mv html se4ml/. && zip -r se4ml.zip se4ml
-- cd
+before_deploy:
+- cd ~
 deploy:
   provider: releases
   api_key:
