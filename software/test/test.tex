@@ -507,6 +507,137 @@ called, not surprisingly, {\tt 3}, {\tt 4}, and {\tt 5}.
 \end{tt}
 \nolinenumbers
 
+\section{Test Coverage}
+
+\index{test coverage}
+\index{coverage}
+\index{coverage!run}
+\index{coverage!annotate}
+
+
+{\it Test coverage} means how much percentage of code that has been
+tested.  Getting test coverage is pretty easy: python has a program
+called {\tt coverage}. Simply adding {\tt coverage run} before the
+program to be tested (and the necessary arguments).
+
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ coverage run intpart.py -e -o 5
+-e and -o cannot be both set
+$ coverage report
+Name         Stmts   Miss  Cover
+--------------------------------
+intpart.py      50     26    48%
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+The first {\tt coverage run} command executes the Python program {\tt
+  intpart.py} with arguments {\tt -e -o 5}.  Since it is not possible
+partitioning any integer using only even numbers and using only odd
+numbers at the same time, the {\tt intpart.py} program stops without
+partitioning the input value 5. The coverage is 48\%.
+
+To see which line has been tested, add {\tt annotate}
+after {\tt coverage} and the file {\tt intpart.py,cover}
+is created, as shown below
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/software/test/intpart.py,cover1}
+\end{tt}
+\nolinenumbers
+
+If a line starts with {\tt >}, this line has been tested.
+If a line starts with {\tt !}, this line has not been tested.
+
+Next, run {\tt intpart.py} again without {\tt -e} or
+{\tt -o}.  This time {\tt coverage report}
+says 80\% code is covered and {\tt coverage annotate}
+generates the following file:
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/software/test/intpart.py,cover2}
+\end{tt}
+\nolinenumbers
+
+Many lines change from {\tt !} (not tested) to {\tt >} (tested).
+
+The second test has 80\% coverage, higher than the first test. Is a
+higher coverage always better? This a common misunderstanding.  The
+purpose of testing is to discover problems.  If a test can discover
+problems, it is a good test even if it covers only a small percentage
+of code.  The next common misunderstanding may surprise you: Even if
+your tests have 100\% coverage, the program may still have undiscoverd
+problems.  ``How can that be possible?'' ``100\% test coverage.''
+
+The misunderstanding occurs from the definition of coverage.  Test
+coverage is defined by whether each line has been tested; it is not
+defined by whether each scenario has been tested. What is the
+difference? Consider the following example:
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+
+if (condition1):
+    # A
+else:
+    # B
+...
+if (condition2):
+    # C
+else:
+    # D
+...
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+The flow can be expressed in Figure~\ref{fig:twoconditions}.
+
+\begin{figure}[h] \centering
+{\includegraphics[width=2in]{\thischapterpath/figures/twoconditions.png}}
+\caption{The flow of two conditions.}
+\label{fig:twoconditions}
+\end{figure}
+
+There are four possible scenarios of the two conditions:
+
+\begin{enumerate}[noitemsep,nolistsep]
+\item condition1: True, condition2: True
+\item condition1: True, condition2: False
+\item condition1: False, condition2: True
+\item condition1: False, condition2: False
+\end{enumerate}
+
+If a test has True for condition1 and False for condition2, then A and
+D have been tested. Another test has False for condition1 and True for
+condition2, then B and C have been tested.  These two test cases have
+tested A, B, C, and D. In other words, all code has been tested and
+the coverage is 100\%.
+
+``Wait'' ``How can it be possible to get 100\% coverage even with only
+two tests? There are four scenarios.'' You may ask.
+
+That is the problem.
+
+What does this mean? Does this mean coverage is not helpful? Test
+coverage is very helpful.  percentage. You should check whether the
+specific lines you want to test have been covered.  Do not focus on
+the coverage number only.
+
 
 \section{Continous Integration}
 
