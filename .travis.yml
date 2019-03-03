@@ -19,7 +19,7 @@ addons:
 script:
 - pip install -r requirements.txt
 - make all
-- cd book && make html
+- cd sphinx-book && make html
 deploy:
   provider: releases
   api_key:
