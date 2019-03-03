@@ -23,6 +23,8 @@ script:
 - cd build && mkdir se4ml && mv html se4ml/. && zip -r se4ml.zip se4ml
 before_deploy:
 - cd ~
+- pwd
+- ls
 deploy:
   provider: releases
   api_key:
