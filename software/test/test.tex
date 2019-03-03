@@ -570,8 +570,31 @@ generates the following file:
 \nolinenumbers
 
 Many lines change from {\tt !} (not tested) to {\tt >} (tested).
+The second test has 80\% coverage, higher than the first test.
+Here are the tests that can achieve 100\% coverage:
 
-The second test has 80\% coverage, higher than the first test. Is a
+
+ 
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+coverage run intpart.py -o 5
+coverage run intpart.py -e 6
+coverage run intpart.py -o 8
+coverage run intpart.py -r 5
+coverage run intpart.py -s 4
+coverage run intpart.py
+coverage run intpart.py -h
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
+
+
+
+Is a
 higher coverage always better? This a common misunderstanding.  The
 purpose of testing is to discover problems.  If a test can discover
 problems, it is a good test even if it covers only a small percentage
@@ -646,5 +669,18 @@ the coverage number only.
 \caption{Travis-CI.com is a website supporting continuous integration.}
 \label{fig:travis01}
 \end{figure}
+
+
+\vspace{0.2in}
+
+\noindent
+\begin{tabular}{|p{5in}|}\hline
+\begin{verbatim}
+$ python3 --version
+Python 3.5.2
+\end{verbatim}
+\\ \hline
+\end{tabular}
+\vspace{0.2in}
 
 \index{pytest|)}
