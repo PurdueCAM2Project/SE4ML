@@ -19,12 +19,12 @@ addons:
 script:
 - pip install -r requirements.txt
 - make all
-- cd sphinx-book && make html && make latexpdf
-- cd build && mkdir se4ml && mv html se4ml/. && zip -r se4ml.zip se4ml
+- pushd sphinx-book && travis-sphinx build && popd
+- pushd sphinx-book && make latexpdf && popd
+after_success:
+- travis-sphinx deploy
 before_deploy:
 - cd $TRAVIS_BUILD_DIR
-- pwd
-- ls
 deploy:
   provider: releases
   api_key:
@@ -33,7 +33,6 @@ deploy:
   file:
     - ./**/se4ml.pdf
     - ./**/SoftwareEngineeringforMachineLearning.pdf
-    - ./**/se4ml.zip
   skip_cleanup: true
   on:
     repo: PurdueCAM2Project/SE4ML
