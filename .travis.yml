@@ -19,7 +19,7 @@ addons:
 script:
 - pip install -r requirements.txt
 - make all
-- pushd sphinx-book && travis-sphinx build && popd
+- pushd sphinx-book && travis-sphinx build -s source && popd
 - pushd sphinx-book && make latexpdf && popd
 after_success:
 - travis-sphinx deploy
