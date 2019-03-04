@@ -22,7 +22,7 @@ script:
 - pushd sphinx-book && travis-sphinx build -s source && popd
 - pushd sphinx-book && make latexpdf && popd
 after_success:
-- travis-sphinx deploy
+- pushd sphinx-book && travis-sphinx deploy && popd
 before_deploy:
 - cd $TRAVIS_BUILD_DIR
 deploy:
