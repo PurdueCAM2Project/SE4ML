@@ -19,7 +19,10 @@ If you are looking for the PDF snapshots, see
    :maxdepth: 2
    :caption: Contents:
 
-   software/software
+   software/part_software
+   unsupervised/part_unsupervised
+   supervised/part_supervised
+   misc/part_misc
 
 
 Indices and tables
