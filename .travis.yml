@@ -22,7 +22,7 @@ script:
 - pushd sphinx-book && travis-sphinx build -s source && popd
 - pushd sphinx-book && make latexpdf && popd
 after_success:
-- pushd sphinx-book && travis-sphinx deploy && popd
+- pushd sphinx-book && travis-sphinx deploy --cname se4ml.org && popd
 before_deploy:
 - cd $TRAVIS_BUILD_DIR
 deploy:
