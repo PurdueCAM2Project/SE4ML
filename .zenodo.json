@@ -1,0 +1,26 @@
+{
+  "creators": [
+    {
+      "name": "Lu, Yung-Hsiang",
+      "affiliation": "Purdue University"
+    },
+    {
+      "name": "Thiruvathukal, George K.",
+      "affiliation": "Loyola University Chicago and Argonne National Laboratory",
+      "orcid": "0000-0002-0452-5571"
+    }
+  ],
+  "keywords": [
+    "software engineering",
+    "Python",
+    "version control",
+    "continuous integration",
+    "unsupervised learning",
+    "supervised learning",
+    "testing",
+    "test-driven development",
+    "agile methodology"
+  ],
+  "license": "GPL-3.0",
+  "upload_type": "software"
+}
