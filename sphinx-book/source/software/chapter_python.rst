@@ -36,7 +36,7 @@ you.
 Nondeclarative
 ''''''''''''''
 
-Python programs consist of executable statements. They don’t have
+Python programs consist of executable statements. They don't have
 declarations. In most languages, you declare a function; in Python, you
 execute a statement that creates a function object and assigns it to a
 variable. In other languages, you call a function by giving its name and
@@ -62,7 +62,7 @@ High-Level
 Python is a high-level language. It has high-level data structures built
 into the language, such as dictionaries that allow you to associate
 values with objects. As of Python2, Python has had a garbage collector.
-You allocate objects whenever you need them, but you don’t have to
+You allocate objects whenever you need them, but you don't have to
 delete them. When there is no way left for the program to access the
 object, when there are no pointers left that point to it, Python
 automatically frees its storage. Older versions of Python also
@@ -104,7 +104,7 @@ With Metaprogramming Facilities
 
 What Python calls metaprogramming, other languages refer to as
 introspection or reflection. The program itself can examine and modify
-its interpreter’s own state and components while it is running. This is
+its interpreter's own state and components while it is running. This is
 useful for debugging and for changing the running program under program
 control.
 
@@ -146,7 +146,7 @@ interpreter will give a different prompt (``...``) for the continuation:
    ...   )*3
    9
 
-Python can’t always figure out that you wish to continue a statement to
+Python can't always figure out that you wish to continue a statement to
 another line. The way you force it to continue to the next line is to
 put a backslash, \\, as the last character on a line. This is customary
 in Unix-like systems. It incorporates the following character, the
@@ -164,7 +164,7 @@ example, you can edit a file SayHi in the current directory, containing:
 
    print("Hello")
 
-Then set SayHi’s execute permissions and execute it:
+Then set SayHi's execute permissions and execute it:
 
 ::
 
@@ -264,20 +264,20 @@ the two operands of an arithmetic operator have different types, Python
 will convert them to a common type. Python converts the operand whose
 type has the smaller range of values to the type of the operand with the
 wider range of values. (This is called a widening coercion: The
-“narrower” operand is forced to be the type of the wider.) So, if they
+"narrower" operand is forced to be the type of the wider.) So, if they
 are mixed in expressions, integers will be converted to long integers or
 floats, and long integers will be converted to floats. The conversions
 to float may lose some low-order digits.
 
 Table TODO is a complete list of Python operators and their precedence
-levels. Some of the operators won’t be discussed until later sections;
-we’ll refer to the table then. The operators with higher precedence
+levels. Some of the operators won't be discussed until later sections;
+we'll refer to the table then. The operators with higher precedence
 levels are performed before those with lower precedence.
 
 The arithmetic operators in Python are much the same as those in C or
 C++. They are at precedence levels 9 through 12. The bit-wise operators
 (ANDs, ORs, shifts) are mostly at levels 5 through 8. Since they are not
-used much in Web enterprise applications, we won’t discuss them further.
+used much in Web enterprise applications, we won't discuss them further.
 
 We will discuss the logical and comparison operators later when we
 discuss ``while`` loops.
@@ -293,11 +293,11 @@ discuss ``while`` loops.
 
    * - 1
      - ``x or y``
-     - This is the logical OR operation. It will return true if either ``x`` or ``y`` is true, i.e. non-zero. Like the ``||`` operator in C, it is short-circuited: It will not evaluate ``y`` if ``x`` determines the value of the expression. It first evaluates ``x`` and returns the value of ``x`` if ``x`` is not zero. If ``x`` is zero, it evaluates and returns the value of ``y``. By “x is zero” we mean that it would be considered zero in an ``if`` or ``while`` expression.  Other values than a number zero also count as zero.
+     - This is the logical OR operation. It will return true if either ``x`` or ``y`` is true, i.e. non-zero. Like the ``||`` operator in C, it is short-circuited: It will not evaluate ``y`` if ``x`` determines the value of the expression. It first evaluates ``x`` and returns the value of ``x`` if ``x`` is not zero. If ``x`` is zero, it evaluates and returns the value of ``y``. By "x is zero" we mean that it would be considered zero in an ``if`` or ``while`` expression.  Other values than a number zero also count as zero.
 
    * - 2 
      - ``x and y``
-     - This is the logical AND operation. It will return true if both ``x`` and ``y`` are true, i.e. non-zero. Like the ``&&`` operator in C, it is short-circuited: It will not evaluate ``y`` if ``x`` determines the value of the expression. It first evaluates x and returns ``x`` if ``x`` is zero. If ``x`` is not zero, it evaluates and returns the value of ``y``. By “x is zero” we mean that it would be considered zero in an ``if`` or ``while`` expression. Other values than a number zero also count as zero.
+     - This is the logical AND operation. It will return true if both ``x`` and ``y`` are true, i.e. non-zero. Like the ``&&`` operator in C, it is short-circuited: It will not evaluate ``y`` if ``x`` determines the value of the expression. It first evaluates x and returns ``x`` if ``x`` is zero. If ``x`` is not zero, it evaluates and returns the value of ``y``. By "x is zero" we mean that it would be considered zero in an ``if`` or ``while`` expression. Other values than a number zero also count as zero.
 
    * - 3 
      - ``not x`` 
@@ -309,7 +309,7 @@ discuss ``while`` loops.
 
    * - 
      - ``x is y``, ``x is not y``, ``x in y``, ``x not in y`` 
-     -  Operators ``x is y`` and ``x is not y`` test whether two names reference the same object, so they will be much faster than ``==`` and ``!=`` for structured objects, but they don’t perform the same test. We will discuss ``x in y`` and ``x not in y`` later, when we discuss sequence types.
+     -  Operators ``x is y`` and ``x is not y`` test whether two names reference the same object, so they will be much faster than ``==`` and ``!=`` for structured objects, but they don't perform the same test. We will discuss ``x in y`` and ``x not in y`` later, when we discuss sequence types.
 
    * - 5 
      -  ``x | y`` 
@@ -446,7 +446,7 @@ digits, and underscore characters. The first character of the identifier
 must not be a digit. The letters are the ISO-Latin characters A-Z and
 a-z.  [4]_
 
-You can also do several assignments on the same line; for example let’s
+You can also do several assignments on the same line; for example let's
 swap the values of ``a`` and ``b`` :
 
 ::
@@ -492,7 +492,7 @@ function creation:
    ``diff`` can be reassigned.
 
 #. The body of the function is indented. All statements in the same
-   group of statements must be indented the same amount. Soon we’ll look
+   group of statements must be indented the same amount. Soon we'll look
    at ``while`` statements, whose bodies must be indented beneath the
    ``while``.
 
@@ -509,7 +509,7 @@ function creation:
 When you use a variable name in a function, Python will look in three
 places to try to find what it means:
 
-#. The function’s local variables. The arguments are already placed
+#. The function's local variables. The arguments are already placed
    there; other variables assigned values in the function are also
    placed there.
 
@@ -530,7 +530,7 @@ Function. <chap2.html#83458>`__, if the function looks up the value of
 ``x`` , it will get 1, the value of variable ``x`` in the function
 itself. The variable ``x`` with a value 2 is in the global scope and is
 hidden by the local ``x``. If the function tries to look up ``y`` , it
-won’t find it in the local scope, but will find it in the module scope
+won't find it in the local scope, but will find it in the module scope
 with a value 3.
 
 Modules
@@ -549,10 +549,10 @@ The way you access a module is by the ``import`` statement:
    import moduleName
 
 The ``import`` statement sees if the module has already been imported.
-If it hasn’t been imported yet, Python finds the file that contains the
+If it hasn't been imported yet, Python finds the file that contains the
 module. It will have the name ``moduleName.py``, and will be found in
-one directory in a list of directories (path). Python’s built-in library
-of modules is on the path, so you can use all the modules in Python’s
+one directory in a list of directories (path). Python's built-in library
+of modules is on the path, so you can use all the modules in Python's
 library without difficulty.
 
 Whether or not the module gets loaded, the ``import`` statement assigns
@@ -570,9 +570,9 @@ behaves like
 
    moduleName = moduleObject
 
-When Python loads a module, Python reads in the module’s file executing
+When Python loads a module, Python reads in the module's file executing
 the commands. The commands assign values to variables within the
-module’s namespace that it puts the names in. These are available in the
+module's namespace that it puts the names in. These are available in the
 module object, so you can access the names defined in the module by the
 expression
 
@@ -636,7 +636,7 @@ interactive session. If you use the ``from-import`` statement,
 
 will have been done when the ``from-import`` statement was executed and
 ``name`` will have the value of ``moduleName.name`` at that time. It
-won’t automatically be updated. After reloading ``moduleName`` , you
+won't automatically be updated. After reloading ``moduleName`` , you
 will have to execute the ``from-import`` again to have the new value of
 the attribute assigned to ``name``. If names from module ``A`` are
 imported into module ``B`` and you change module ``A`` , you will need
@@ -667,7 +667,7 @@ object by calling the built-in function ``open()``
 
 where the ``name`` string gives a path to the file and the ``mode``
 string indicates whether the file is to be read from or to be written.
-The ``mode`` is a string. Here’s a list of the modes:
+The ``mode`` is a string. Here's a list of the modes:
 
 -  ``'r'``: Open for reading. This is the default.
 
@@ -694,7 +694,7 @@ operates on precedes the function call, separated by a dot:
 This syntax has a couple of virtues:
 
 -  It makes clear which object the method is operating on. Otherwise,
-   the object would have to be one of the arguments, and you couldn’t be
+   the object would have to be one of the arguments, and you couldn't be
    sure which.
 
 -  It allows different kinds of objects to have methods with the same
@@ -708,9 +708,9 @@ There are three methods you especially need to know for files:
 
 #. Reads the next line from a text file and returns it in a string. The
    string ends with the line termination character or characters, on
-   Linux the newline character ``‘\n’``. Empty lines thus consist of a
+   Linux the newline character ``'\n'``. Empty lines thus consist of a
    single newline character. On end of file, ``readline()`` returns an
-   empty string, ``”``.
+   empty string, ``"``.
 
 #. Writes a string to the file. The ``string`` is not made into a line,
    i.e., the newline character is not appended. If you want it, you will
@@ -824,7 +824,7 @@ The code should be pretty obvious except for two points.
    nonempty string to be true. That makes this loop easy, since
    end-of-file results in ``readline()`` returning an empty string. In
    general, structured objects can sometimes be considered equivalent to
-   zero for logical tests. We’ll try to point out these cases as we
+   zero for logical tests. We'll try to point out these cases as we
    discuss them. Here, while we are discussing logical operators, we
    will just say zero and non-zero, or false and true, and not keep
    repeating that some things other than the number zero are also
@@ -833,7 +833,7 @@ The code should be pretty obvious except for two points.
 #. ``print(L,)`` The final comma prevents Python from inserting a
    newline following the string that has been written. Since the lines
    returned by ``readline()`` all are terminated by newlines anyway,
-   they come out single-spaced. If the comma weren’t there, the lines
+   they come out single-spaced. If the comma weren't there, the lines
    would come out double-spaced.
 
 Relational Expressions
@@ -929,10 +929,10 @@ A list of length ``n`` is created. The expressions :math:`e_0`,
 the list.
 
 In addition, Python (2 and beyond) has a moresophisticated form of
-display, the list comprehension. We will discuss it later, after we’ve
+display, the list comprehension. We will discuss it later, after we've
 discussed the ``for`` and ``if`` statements it is based on.
 
-Like arrays, lists can be subscripted by following the list’s name with
+Like arrays, lists can be subscripted by following the list's name with
 the index of the item in brackets, thus
 
 ::
@@ -992,7 +992,7 @@ built-in function, ``range()`` , to give that to you.
 
 Calling ``range(i, j)`` gives you an iterator of integers from ``i`` up
 to, but not including, ``j``. Call ``range(n)`` is the same as
-``range(0,n)``. Why “up to, but not including”? It is compatible with
+``range(0,n)``. Why "up to, but not including"? It is compatible with
 the indexing of lists, where a list of length n has indices 0 through
 n-1.
 
@@ -1011,7 +1011,7 @@ sequential, by specifying the step size as the third argument to
 
 If you are using lists as arrays, you obviously have to be able to
 create a list of some length. The length you need may be computed as the
-program runs, so you obviously can’t always use a list display. How do
+program runs, so you obviously can't always use a list display. How do
 you create a list of length n?
 
 You use the replication operator, ``*``. Of course, this is the same as
@@ -1231,13 +1231,13 @@ the end of the list, whereupon ``insert()`` behaves like ``append()``.
      - Removes and returns an item from the list. If an index, ``i`` , is provided, ``pop()`` removes and returns the item at that position. If no index is provided, it removes and returns the last item–the index defaults to -1.
 
    * - ``L.remove(x)``
-     - Removes the first item in ``L`` that is equal to ``x``. It is an error if ``x`` doesn’t occur in ``L``.
+     - Removes the first item in ``L`` that is equal to ``x``. It is an error if ``x`` doesn't occur in ``L``.
 
    * - ``L.count(x)``
      - Counts the number of items in ``L`` that are equal to ``x``.
  
    * - ``L.index(x)``
-     - Returns the index of the first item in ``L`` that is equal to ``x``. It is an error if ``x`` doesn’t occur in ``L``.
+     - Returns the index of the first item in ``L`` that is equal to ``x``. It is an error if ``x`` doesn't occur in ``L``.
 
    * - ``L.reverse()``
      - Reverses the order of the elements of the list ``L`` in place.
@@ -1271,7 +1271,7 @@ Two methods permute the order of the elements of the list, in place.
 Example: Self-Organizing List
 
 In a self-organizing list, you move items that are accessed to the front
-so you can find them more quickly in subsequent searches. Here’s how you
+so you can find them more quickly in subsequent searches. Here's how you
 could implement self-organizing lists using list methods:
 
 ::
@@ -1313,7 +1313,7 @@ There are a couple of things to note about this code:
 ~~~~~~~~~~~~~
 
 In Python, loops exist to allow an index variable to take on each
-element in a list, or other sequence (iterable) object. (We’ll discuss
+element in a list, or other sequence (iterable) object. (We'll discuss
 other sequences below.) The form of a ``for`` loop is:
 
 ::
@@ -1369,7 +1369,7 @@ at least five letters long; we might do it as follows:
    placid
    mother  
 
-We’ll eventually see how many for loops can be replaced with *filters*
+We'll eventually see how many for loops can be replaced with *filters*
 and *lambda expressions*. For now, here is the equivalent formulation
 where we iterate over a filtered result:
 
@@ -1384,8 +1384,8 @@ where we iterate over a filtered result:
 break and else in loops
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Often you will use a loop to search for something. Once you’ve found it,
-you want to escape from the loop. If you don’t find it, you often need
+Often you will use a loop to search for something. Once you've found it,
+you want to escape from the loop. If you don't find it, you often need
 to take some default action. Python makes it easy to do both of these.
 
 If in the midst of a loop you wish to stop iterating, you can execute
@@ -1396,7 +1396,7 @@ the ``break`` statement. It consists of the keyword ``break`` :
    break  
 
 If you want to execute some code if the loop terminated normally, i.e.,
-if it didn’t exit by a ``break`` , you can attach an ``else`` clause on
+if it didn't exit by a ``break`` , you can attach an ``else`` clause on
 the end of the loop. Loops with ``else`` clauses have the form:
 
 ::
@@ -1447,7 +1447,7 @@ elif
 ''''
 
 Of course, you often want to test a sequence of conditions and execute
-code for the first one that’s true. Because of indentation, it would be
+code for the first one that's true. Because of indentation, it would be
 annoying if you had to put another ``if`` within the ``else`` and indent
 further. Python avoids this problem with the ``elif`` clause, equaling
 an ``else`` plus an ``if``. The general syntax of an ``if`` statement
@@ -1469,7 +1469,7 @@ of statements to execute based on the value of a single expression. You
 will probably use an ``if`` statement with a sequence of ``elif``
 clauses for that purpose. (What else could you use? Well, you could put
 functions into a list, index into the list, and execute one of them, but
-that’s a lot of trouble.)
+that's a lot of trouble.)
 
 ``pass`` and One-Line Code Blocks
 '''''''''''''''''''''''''''''''''
@@ -1482,7 +1482,7 @@ you test for the more general case first, you will never get to the code
 for the subcase.
 
 But what if the desired behavior for the more specific case is to do
-nothing? You need a statement that doesn’t do anything. In Python this
+nothing? You need a statement that doesn't do anything. In Python this
 is the ``pass`` statement, which consists wholly of the keyword ``pass``
 :
 
@@ -1505,7 +1505,7 @@ placing semicolons between them.
 .. _section-1:
 
 A tuple is an immutable list: It is just like a list except that you
-can’t change the contents. You create a tuple by a display consisting of
+can't change the contents. You create a tuple by a display consisting of
 expressions in parentheses separated by commas, for example:
 
 ::
@@ -1540,8 +1540,8 @@ anything between them:
 
 You can subscript and slice tuples just like lists, pulling out elements
 or creating a copy of a section of a tuple. You cannot, however, assign
-to an element or a slice of a tuple; you can’t use the subscript or the
-slice operator on the left-hand side of an assignment. You can’t use the
+to an element or a slice of a tuple; you can't use the subscript or the
+slice operator on the left-hand side of an assignment. You can't use the
 delete statement on a part of a tuple.
 
 ::
@@ -1553,36 +1553,36 @@ delete statement on a part of a tuple.
    >>> del q[0]
    Traceback (innermost last):
 
-   File “<stdin>”, line 1, in ?
+   File "<stdin>", line 1, in ?
 
-   TypeError: object doesn’t support item deletion
+   TypeError: object doesn't support item deletion
 
    >>> del q[0:1]
    Traceback (innermost last):
 
-   File “<stdin>”, line 1, in ?
+   File "<stdin>", line 1, in ?
 
-   TypeError: object doesn’t support slice deletion
+   TypeError: object doesn't support slice deletion
 
    >>> q[1]=3
 
    Traceback (innermost last):
 
-   File “<stdin>”, line 1, in ?
+   File "<stdin>", line 1, in ?
 
-   TypeError: object doesn’t support item assignment
+   TypeError: object doesn't support item assignment
 
    >>> q[0:1]=()
 
    Traceback (innermost last):
 
-   File “<stdin>”, line 1, in ?
+   File "<stdin>", line 1, in ?
 
-   TypeError: object doesn’t support slice assignment
+   TypeError: object doesn't support slice assignment
 
 You can concatenate tuples and replicate them, just like lists, using
 the ``+`` and ``*`` operators. These operators produce new tuples; they
-don’t modify an already existing tuple.
+don't modify an already existing tuple.
 
 ::
 
@@ -1603,7 +1603,7 @@ and a list to a tuple using the ``tuple()`` built-in function:
    (0, 1, 2)
 
 If you are constructing a tuple of at least one element on the right-
-hand side of an assignment statement, you don’t have to surround the
+hand side of an assignment statement, you don't have to surround the
 expressions in parentheses. If it is to be of length one, you do have to
 be sure to put in a trailing comma:
 
@@ -1700,16 +1700,16 @@ None
 
 Lists and tuples, because they can contain references to other objects,
 allow you to build linked list data structures. For example, some
-languages (starting with Lisp) have built lists out of “cons cells”
+languages (starting with Lisp) have built lists out of "cons cells"
 containing two references to other objects. These two references are
 sometimes called the head and tail of the list: The head is the first
-item, the tail is the rest of the list. (In Lisp they’re called the CAR
+item, the tail is the rest of the list. (In Lisp they're called the CAR
 and the CDR.)
 
 You could have much the same effect by using two element tuples with the
 head being at index zero and the tail being at index one. The problem,
 though, is that you need some way to indicate the end of a list. Lisp
-uses ``NIL``. In C it’s usually called ``NULL`` ; in Java, ``null``.
+uses ``NIL``. In C it's usually called ``NULL`` ; in Java, ``null``.
 Python provides the value ``None``. You might create a linked list
 ``(1 2 3)`` as follows:
 
@@ -1720,10 +1720,10 @@ Python provides the value ``None``. You might create a linked list
    (1, (2, (3, None)))
 
 is as a placeholder. If you assign a variable the value ``None`` , the
-variable will exist, but the value ``None`` can indicate that it hasn’t
+variable will exist, but the value ``None`` can indicate that it hasn't
 had its value computed yet. The program can test to see if it has a
 value without having to test first whether it exists. Trying to access
-it if it doesn’t exist causes a runtime error, as shown here:
+it if it doesn't exist causes a runtime error, as shown here:
 
 ``x=None``
 
@@ -1737,7 +1737,7 @@ it if it doesn’t exist causes a runtime error, as shown here:
 
 Traceback (innermost last):
 
-File “<stdin>”, line 1, in ?
+File "<stdin>", line 1, in ?
 
 NameError: x
 
@@ -1811,11 +1811,11 @@ and strings are sequences, so
 
 (5, 6)
 
-``i,j=“ab”``
+``i,j="ab"``
 
 ``i,j``
 
-(’a’, ‘b’)
+('a', 'b')
 
 Moreover, you can include subsequences on the left-hand side of the
 assignment, enclosing the list of variables in parentheses or brackets,
@@ -1829,7 +1829,7 @@ thus:
 
 Notice that if there are several assignments in the statement, each one
 is matched separately to the value of the right-hand side. The different
-targets don’t have to look alike. Notice also that the parentheses and
+targets don't have to look alike. Notice also that the parentheses and
 brackets on the left-hand side of the assignments do not have to
 correspond to tuples and lists respectively on the right-hand side.
 
@@ -1909,7 +1909,7 @@ innermost scope. If it is executing a function (within a ``def`` ), the
 variable will only be seen by code in that function and will exist only
 as long as the function is executing. If the assignment is at the top
 level of a module, i.e., in a file but not inside a ``def`` or ``class``
-statement (we’ll talk about classes later), then the variable will be
+statement (we'll talk about classes later), then the variable will be
 known in the module and will exist as long as the program is
 running–unless you explicitly delete it.
 
@@ -1917,7 +1917,7 @@ running–unless you explicitly delete it.
                     
 
 So what if you want to assign a value to a module-scope variable in a
-function? You can’t just assign a value to the variable name; that would
+function? You can't just assign a value to the variable name; that would
 create a local variable with the same name. What you can do is use the
 only declaration in the Python language, the ``global`` statement. The
 global statement has the form
@@ -1945,7 +1945,7 @@ it from the scope using the ``del`` statement.
 
 Traceback (innermost last):
 
-File “<stdin>”, line 1, in ?
+File "<stdin>", line 1, in ?
 
 NameError: x
 
@@ -1980,11 +1980,11 @@ Returns the value associated with key ``k`` in dictionary ``d``. It is
 an error if the key is not present in the dictionary. See methods
 ``has_key()`` and ``get()``.
 
-with key ``k`` in dictionary ``d``. The key must be “hashable,” that is,
-it should not be mutable. Python won’t accept lists as keys.
+with key ``k`` in dictionary ``d``. The key must be "hashable," that is,
+it should not be mutable. Python won't accept lists as keys.
 
 and its associated value from dictionary ``d``. It is an error if the
-key doesn’t exist.
+key doesn't exist.
 
 Removes all key-value pairs from dictionary ``d``.
 
@@ -1993,10 +1993,10 @@ dictionary itself is copied, but none of the key or value objects it
 contains are copied.
 
 Returns the value associated with key ``k`` in dictionary ``d``. If
-``k`` isn’t present in the dictionary, it returns ``None``.
+``k`` isn't present in the dictionary, it returns ``None``.
 
 Returns the value associated with key ``k`` in dictionary ``d``. If
-``k`` isn’t present in the dictionary, it returns ``v``.
+``k`` isn't present in the dictionary, it returns ``v``.
 
 Returns true (1) if dictionary ``d`` contains key ``k`` and false (0)
 otherwise.
@@ -2030,13 +2030,13 @@ You can create an empty dictionary by writing an open-close-brace pair:
 You can create a dictionary with initial contents by placing one or more
 associations in the braces:
 
-``d={“a”:1,1:(2,3),(2,3):“a”}``
+``d={"a":1,1:(2,3),(2,3):"a"}``
 
 ``d``
 
-In this example, we associate the string key ``“a”`` with the value 1;
+In this example, we associate the string key ``"a"`` with the value 1;
 key ``1`` with the value tuple ``(2,3)`` ; and the key tuple ``(2,3)``
-with the string value ``“a.”`` (They don’t have to form a cycle like
+with the string value ``"a."`` (They don't have to form a cycle like
 this.)
 
 You can look up the value for a key by subscripting the dictionary with
@@ -2048,7 +2048,7 @@ the value of the key.
 
 ``d[(2,3)]``
 
-‘a’
+'a'
 
 Since Python uses the equality operator, ``==`` , to test the keys,
 equal numbers are considered to be the same key:
@@ -2067,15 +2067,15 @@ It is a runtime error to look up a nonexistent key in a dictionary.
 
 Traceback (innermost last):
 
-File “<stdin>”, line 1, in ?
+File "<stdin>", line 1, in ?
 
 KeyError: 10
 
-If you don’t want to worry about an error when looking up a value, you
+If you don't want to worry about an error when looking up a value, you
 can use the ``get()`` method. The call ``d.get(k)`` will yield the value
 for key ``k`` in dictionary ``d`` , if it exists, or return the value
-``None`` if it doesn’t. The call ``d.get(k,v)`` is the same, except that
-it returns the value ``v`` if the key isn’t present.
+``None`` if it doesn't. The call ``d.get(k,v)`` is the same, except that
+it returns the value ``v`` if the key isn't present.
 
 ``d``
 
@@ -2085,11 +2085,11 @@ it returns the value ``v`` if the key isn’t present.
 
 1
 
-``d.get(10,“absent”)``
+``d.get(10,"absent")``
 
-‘absent’
+'absent'
 
-Notice that the Python interpreter doesn’t write out the value ``None``
+Notice that the Python interpreter doesn't write out the value ``None``
 in interactive mode.
 
 Alternatively, you can ask whether the dictionary contains the key
@@ -2115,20 +2115,20 @@ same way:
 
 ``d``
 
-{(2, 3): ‘a’, 10: 10, 1: (2, 3), ‘a’: 1}
+{(2, 3): 'a', 10: 10, 1: (2, 3), 'a': 1}
 
-``d[10]=“a”``
+``d[10]="a"``
 
 ``d``
 
-{(2, 3): ‘a’, 10: ‘a’, 1: (2, 3), ‘a’: 1}
+{(2, 3): 'a', 10: 'a', 1: (2, 3), 'a': 1}
 
 function will tell you the number of associations the dictionary
 contains:
 
 ``d``
 
-{(2, 3): ‘a’, 10: ‘a’, 1: (2, 3), ‘a’: 1}
+{(2, 3): 'a', 10: 'a', 1: (2, 3), 'a': 1}
 
 ``len(d)``
 
@@ -2164,7 +2164,7 @@ The key-value pairs are in ``(`` ``key,value`` ``)`` tuples.
 
 ``d.items()``
 
-((2, 3), ‘a’), (1, (2, 3)), (’a’, 1)]
+((2, 3), 'a'), (1, (2, 3)), ('a', 1)]
 
 To create a copy of a dictionary, you could create an empty dictionary
 and then update it from the one you want to copy, for example:
@@ -2187,7 +2187,7 @@ When you copy a dictionary, you get a shallow copy. The dictionary
 object is copied, but none of the keys or values it contains are.
 Consider the following example:
 
-``x={“a”:[0]}``
+``x={"a":[0]}``
 
 ``y=x.copy()``
 
@@ -2195,24 +2195,24 @@ Consider the following example:
 
 0
 
-``y[“a”][0]=1``
+``y["a"][0]=1``
 
 ``x``
 
-The value associated with key ``“a”`` in dictionary ``x`` is a list
+The value associated with key ``"a"`` in dictionary ``x`` is a list
 containing a single value, zero. When we copy ``x`` , we get a new,
 different dictionary, ``y``. Dictionaries ``x`` and ``y`` are not the
 same, but the lists they contain are, so when we change the list
-associated with key ``“a”`` in dictionary ``y`` , that is the same list
+associated with key ``"a"`` in dictionary ``y`` , that is the same list
 we see associated with " ``a`` " in dictionary ``x``.
 
 Relational operators work on dictionaries the same way as sequences:
 They do a lexicographical compare. They compare the components in sorted
 order by key. Expect this to be slow.
 
-``D1={“x”:1,“y”:2,“z”:3}``
+``D1={"x":1,"y":2,"z":3}``
 
-``D2={“x”:1,“y”:4,“z”:3}``
+``D2={"x":1,"y":4,"z":3}``
 
 ``D1==D2``
 
@@ -2225,9 +2225,9 @@ order by key. Expect this to be slow.
 .. _section-3:
 
 Strings are a kind of immutable sequence, like tuples. Once the string
-has been created, you can’t change its contents. Unlike tuples, where
+has been created, you can't change its contents. Unlike tuples, where
 the elements of the sequence may be of any data type, the elements of a
-string are characters. You can subscript a string, but you don’t get an
+string are characters. You can subscript a string, but you don't get an
 individual character. Python has no character data type. You get a
 string of length one containing the character.
 
@@ -2241,25 +2241,23 @@ String Literals
 
 There are several ways to write string literals. If you are going to
 write the string on a single line, you can enclose it in single quotes (
-``’`` ), or double quotes ( ``"`` ). This easily allows you to enclose a
+``'`` ), or double quotes ( ``"`` ). This easily allows you to enclose a
 string containing one kind of quote inside the other kind of quotes, for
 example:
 
-``‘He said, “Hi.” ’``
 
-‘He said, “Hi.” ’
+.. todo:: Need to fix this example
+
 
 If you need both kind of quotes, you can write more than one string in a
 row and let Python concatenate them for you. Here we use three strings
 in a row:
 
-``‘He said, “She said,’ ”’Hi.’" ‘"’``
+.. todo:: Need to fix this example
 
-‘He said, “She said,\’Hi.\\”’ ’
-
-The output here shows Python’s incorporation character, the backslash.
+The output here shows Python's incorporation character, the backslash.
 The backslash tells Python that the following character is to have a
-special interpretation within the string. Python’s incorporation
+special interpretation within the string. Python's incorporation
 sequences are shown in `See Incorporation Character Sequences in String
 Literals. <chap2.html#44479>`__.
 
@@ -2315,38 +2313,38 @@ the next line and put quoted parts of the string on the separate lines.
 Since Python understands that unbalanced parentheses require continuing
 the statement to another line, this will work:
 
-``(“a”``
+``("a"``
 
-‘aB’
+'aB'
 
 Python will also continue a statement if the last character on the line
 is a backslash.
 
-``“a”\``
+``"a"\``
 
-‘aB’
+'aB'
 
 For that matter, a backslash also works within strings:
 
 ``"a\``
 
-‘aB’
+'aB'
 
 Python also allows strings to be enclosed in triple quotes, either
-``“”"`` or ``‘’’``. These strings may extend beyond the end of a line
+``"""`` or ``'''``. These strings may extend beyond the end of a line
 without special handling. However, they include a newline character
 (octal number 012) for each line boundary they cross:
 
-``”’a``
+``"'a``
 
-012B’
+012B'
 
 If you do not want a newline character included for the end of a line,
 put a backslash character at the end of the line:
 
-``”’a\``
+``"'a\``
 
-‘aB’
+'aB'
 
 Python also allows you to specify raw strings. In a raw string, you get
 the characters exactly as written. The incorporation character has no
@@ -2354,15 +2352,15 @@ special meaning. This is more useful to people using Windows, since
 backslash is used to separate directories and files on paths, and it
 would be annoying to have to incorporate each one of them:
 
-``r“D:\Tests\SayHi.py”``
+``r"D:\Tests\SayHi.py"``
 
-SayHi.py’
+SayHi.py'
 
 One warning: A backslash may not be the last character of a raw string.
 Python tries to gobble up the following character as part of the string.
 
 You write Unicode string literals by preceding the string with ``u`` ,
-e.g., ``u’ab\u12adyz’``. If you concatenate two string literals, one of
+e.g., ``u'ab\u12adyz'``. If you concatenate two string literals, one of
 which is Unicode, the Python compiler merges them into a single Unicode
 string.
 
@@ -2413,19 +2411,19 @@ multiple assignment statement.
 
 String Displays
 
-The equivalent of ``[…]`` for lists and ``(…)`` for tuples is ``‘…‘``
-for strings. The form ``‘x‘`` evaluates expression ``x`` and converts
+The equivalent of ``[…]`` for lists and ``(…)`` for tuples is ``'…'``
+for strings. The form ``'x'`` evaluates expression ``x`` and converts
 its value to a string, for example:
 
 ``a=1;b=2``
 
-``‘a+b’``
+``'a+b'``
 
-‘3’
+'3'
 
-``‘(a,b)’``
+``'(a,b)'``
 
-‘(1, 2)’
+'(1, 2)'
 
 Sequence Operators
 
@@ -2462,16 +2460,16 @@ string, replacing its formatting sequence. For example, the following
 produces a string with the number 65 translated into octal, decimal, and
 hexadecimal, the translations separated by colons:
 
-``“%o:%d:%x” % (65,65,65)``
+``"%o:%d:%x" % (65,65,65)``
 
-‘101:65:41’
+'101:65:41'
 
-If there is only one value to be formatted, you needn’t include it in a
+If there is only one value to be formatted, you needn't include it in a
 tuple, for example:
 
-``“%d” % 5``
+``"%d" % 5``
 
-’
+'
 
 The formatting sequences have the form:
 
@@ -2501,38 +2499,38 @@ characters are
    hexadecimal format. Lowercase ``x`` uses lowercase letters for the
    digits 10 through 15.
 
-``“%x” % (-2)``
+``"%x" % (-2)``
 
-‘fffffffe’
+'fffffffe'
 
 -  –Hexadecimal integer. The corresponding element of the tuple is
    converted to an integer and the integer is converted to a string in
    hexadecimal format. Uppercase ``X`` uses uppercase letters for the
    digits 10 through 15.
 
-``“%X” % (-2)``
+``"%X" % (-2)``
 
-‘FFFFFFFE’
+'FFFFFFFE'
 
 -  –Floating point format, with decimal point but without an exponent.
 
-``“%f” % (0.5e-100)``
+``"%f" % (0.5e-100)``
 
-‘0.000000’
+'0.000000'
 
 -  –Floating point format, with decimal point and an exponent (with a
    lowercase ``e`` ).
 
-``“%e” % (0.5e-100)``
+``"%e" % (0.5e-100)``
 
-‘5.000000e-101’
+'5.000000e-101'
 
 -  –Floating point format, with decimal point and an exponent (with an
    uppercase ``E`` ).
 
-``“%E” % (0.5e-100)``
+``"%E" % (0.5e-100)``
 
-‘5.000000E-101’
+'5.000000E-101'
 
 -  –Choose either ``f`` or ``e,`` depending on the size of the exponent.
 
@@ -2540,9 +2538,9 @@ characters are
 
 -  –String, or any object being converted to a string.
 
-``“%s” % ([1,2])``
+``"%s" % ([1,2])``
 
-’
+'
 
 -  –Like s, but uses ``repr()`` rather than ``str()`` to convert the
    argument (in Python2).
@@ -2551,13 +2549,13 @@ characters are
    integer that is the internal code for a character or a string of
    length one.
 
-``“%c” % (88)``
+``"%c" % (88)``
 
-‘X’
+'X'
 
-``“%c” % (“Y”)``
+``"%c" % ("Y")``
 
-‘Y’
+'Y'
 
 -  –This does not match an element from the tuple. It is the way to
    incorporate a percent sign into the string.
@@ -2581,66 +2579,66 @@ negative sign would be included.)
 -  The width; specifies the minimum field width the formatted value is
    to occupy. This allows nicely aligned output, at least with
    fixed-width fonts, if the values fit within the field width
-   specified. If they don’t fit, they will use all the character
+   specified. If they don't fit, they will use all the character
    positions required.
 
-``“%4d” % 5``
+``"%4d" % 5``
 
-’
+'
 
-``“%4d” % 500000``
+``"%4d" % 500000``
 
-’
+'
 
 -  The precision; follows a decimal point. It has one of three meanings:
 
 -  For strings, the precision specifies the maximum number of characters
    that may be printed from the string.
 
-``“%.3s” % (“abcdef”)``
+``"%.3s" % ("abcdef")``
 
-’
+'
 
 #. For floating point numbers, it specifies the maximum number of digits
    following the decimal point.
 
-``“%.4f” % (1.0/3.0)``
+``"%.4f" % (1.0/3.0)``
 
-’
+'
 
 #. For integers, the precision specifies the minimum number of digits to
    represent.
 
-``“%4.2d” % 5``
+``"%4.2d" % 5``
 
-’
+'
 
 If you want to compute the width or precision, you can use stars, ``*``
 s, in width or precision fields. The star tells Python to use the next
 item in the tuple, which must be an integer, as the value in the field,
 for example:
 
-``“%.*d” % (4,2,5)``
+``"%.*d" % (4,2,5)``
 
-’
+'
 
 You can use a dictionary instead of a tuple. You instruct Python what
 value to format by putting the key string in parentheses just after the
 opening ``%`` , inside the formatting sequence:
 
-``“%(x)4.2d” % {“x”:5}``
+``"%(x)4.2d" % {"x":5}``
 
-’
+'
 
-However, this doesn’t work for the formatting fields:
+However, this doesn't work for the formatting fields:
 
-``“%(x)4.(p)d” % {“p”:2,“x”:5}``
+``"%(x)4.(p)d" % {"p":2,"x":5}``
 
 Traceback (innermost last):
 
-File “<stdin>”, line 1, in ?
+File "<stdin>", line 1, in ?
 
-ValueError: unsupported format character ‘(’ (0x28)
+ValueError: unsupported format character '(' (0x28)
 
 The String Module and String Methods
 ''''''''''''''''''''''''''''''''''''
@@ -2708,16 +2706,16 @@ Built-In String Functions
 '''''''''''''''''''''''''
 
 -  –Returns the character (in a one-character string), whose ASCII code
-   is integer ``i``. This is equivalent to ``(“%c” % i)``.
+   is integer ``i``. This is equivalent to ``("%c" % i)``.
 
 -  –Evaluates the string ``s`` as if it were a Python expression.
 
-``eval(“[1,2]”)``
+``eval("[1,2]")``
 
 dictionaries to look up variables in: ``eval(s,globals)`` or
 ``eval(s, globals, locals)`` :
 
-``eval(“x+y”,{“x”:1,“y”:2},{“x”:3})``
+``eval("x+y",{"x":1,"y":2},{"x":3})``
 
 5
 
@@ -2726,9 +2724,9 @@ dictionaries to look up variables in: ``eval(s,globals)`` or
 
 ``hex(65)``
 
-‘0x41’
+'0x41'
 
-It is not equivalent to ``(“%x” % i)`` , which does not put ``“0x”`` on
+It is not equivalent to ``("%x" % i)`` , which does not put ``"0x"`` on
 the front.
 
 -  –Returns string ``s`` or a copy of the string ``s``. Each call to
@@ -2744,15 +2742,15 @@ are going to have a set of strings that you are comparing for equality
 frequently, you can speed up your program by interning them and just
 comparing their interned values.
 
-``“ab”==“a”+“b”``
+``"ab"=="a"+"b"``
 
 1
 
-``“ab” is “a”+“b”``
+``"ab" is "a"+"b"``
 
 0
 
-``intern(“ab”) is intern(“a”+“b”)``
+``intern("ab") is intern("a"+"b")``
 
 1
 
@@ -2768,17 +2766,17 @@ storage, rather than many blocks. This may save considerable storage.
 
 ``oct(65)``
 
-‘0101’
+'0101'
 
 ``oct(-1)``
 
-‘037777777777’
+'037777777777'
 
 -  –Returns the integer representing the single character in string
    ``c``.
 
 -  –Returns a string representation of object ``x``. It is the same as
-   ``‘x‘``.
+   ``'x'``.
 
 -  –Returns a string representation of object ``x``. Unlike ``repr()`` ,
    ``str()`` does not attempt to be the inverse of ``eval()``. It
@@ -2828,7 +2826,7 @@ we used the interpreter to try out code to see what it would do.
 
 1. Although Python2 does have Unicode strings.
 
-2. We say “x is considered false” and “x counts as false,” because
+2. We say "x is considered false" and "x counts as false," because
 various values, like zero, None, and empty sequences, are treated as
 being false by ``and`` and ``or`` operators and ``while`` and ``if``
 statements.
