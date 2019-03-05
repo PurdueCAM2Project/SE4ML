@@ -1428,20 +1428,20 @@ if-else
 statement will execute code based on whether an expression is true. The
 form of an ``if`` statement is
 
-if expr:
+::
 
-indented code to be executed if expr is true
+  if expr:
+    indented code to be executed if expr is true
 
 If you want to execute other code if the expression is false, use the
 ``else`` clause:
 
-if expr:
+::
 
-indented code to be executed if expr is true
-
-else:
-
-indented code to be executed if expr is false
+  if expr:
+    indented code to be executed if expr is true
+  else:
+    indented code to be executed if expr is false
 
 elif
 ''''
@@ -1453,21 +1453,18 @@ further. Python avoids this problem with the ``elif`` clause, equaling
 an ``else`` plus an ``if``. The general syntax of an ``if`` statement
 is:
 
-if expr1:
+::
 
-indented code to be executed if expr1 is true
-
-elif expr2:
-
-| indented code to be executed if expr1 is false
-| and expr2 is true
-
-else:
-
-indented code to be executed if all exprs are false
+  if expr1:
+    indented code to be executed if expr1 is true
+  elif expr2:
+    indented code to be executed if expr1 is false and expr2 is true
+  else:
+    indented code to be executed if all exprs are false
 
 Here would be an appropriate place to mention that Python does not have
-a switch statement. Switch statements choose one out of several blocks
+a switch statement (as found in C language).
+Switch statements choose one out of several blocks
 of statements to execute based on the value of a single expression. You
 will probably use an ``if`` statement with a sequence of ``elif``
 clauses for that purpose. (What else could you use? Well, you could put
@@ -1489,7 +1486,9 @@ nothing? You need a statement that doesn’t do anything. In Python this
 is the ``pass`` statement, which consists wholly of the keyword ``pass``
 :
 
-pass
+::
+
+   pass
 
 statement is only useful as a complete code block, and it is short.
 Giving it an entire indented line to itself makes programs longer. That
@@ -1509,9 +1508,10 @@ A tuple is an immutable list: It is just like a list except that you
 can’t change the contents. You create a tuple by a display consisting of
 expressions in parentheses separated by commas, for example:
 
-``(1,2)``
+::
 
-(1, 2)
+   >>> (1,2)
+   (1, 2)
 
 Notice that Python writes out a tuple in the parenthesized notation.
 
@@ -1520,20 +1520,23 @@ tuple of length one. In that case, if you want a tuple of length one,
 put a comma following the expression, just before the final parenthesis.
 If you only intend a parenthesized expression, do not put in a comma.
 
-``(1,)``
+::
 
-(1,)
+   >>> (1,)
+   (1,)
 
-``(1)``
+::
 
-1
+   >>> (1)
+   1
 
 You can have tuples with no components. Just use parentheses without
 anything between them:
 
-``()``
+::
 
-()
+   >>> ()
+   ()
 
 You can subscript and slice tuples just like lists, pulling out elements
 or creating a copy of a section of a tuple. You cannot, however, assign
@@ -1541,81 +1544,78 @@ to an element or a slice of a tuple; you can’t use the subscript or the
 slice operator on the left-hand side of an assignment. You can’t use the
 delete statement on a part of a tuple.
 
-``q=(1,2)``
+::
 
-``q``
+   >>> q=(1,2)
+   >>> q
+   (1, 2)
 
-(1, 2)
+   >>> del q[0]
+   Traceback (innermost last):
 
-``del q[0]``
+   File “<stdin>”, line 1, in ?
 
-Traceback (innermost last):
+   TypeError: object doesn’t support item deletion
 
-File “<stdin>”, line 1, in ?
+   >>> del q[0:1]
+   Traceback (innermost last):
 
-TypeError: object doesn’t support item deletion
+   File “<stdin>”, line 1, in ?
 
-``del q[0:1]``
+   TypeError: object doesn’t support slice deletion
 
-Traceback (innermost last):
+   >>> q[1]=3
 
-File “<stdin>”, line 1, in ?
+   Traceback (innermost last):
 
-TypeError: object doesn’t support slice deletion
+   File “<stdin>”, line 1, in ?
 
-``q[1]=3``
+   TypeError: object doesn’t support item assignment
 
-Traceback (innermost last):
+   >>> q[0:1]=()
 
-File “<stdin>”, line 1, in ?
+   Traceback (innermost last):
 
-TypeError: object doesn’t support item assignment
+   File “<stdin>”, line 1, in ?
 
-``q[0:1]=()``
-
-Traceback (innermost last):
-
-File “<stdin>”, line 1, in ?
-
-TypeError: object doesn’t support slice assignment
+   TypeError: object doesn’t support slice assignment
 
 You can concatenate tuples and replicate them, just like lists, using
 the ``+`` and ``*`` operators. These operators produce new tuples; they
 don’t modify an already existing tuple.
 
-``(1,2)+(3,4)``
+::
 
-(1, 2, 3, 4)
+   >>> (1,2)+(3,4)
+   (1, 2, 3, 4)
 
-``(1,2)*2``
-
-(1, 2, 1, 2)
+   >>> (1,2)*2
+   (1, 2, 1, 2)
 
 You can convert a tuple to a list using the ``list()`` built-in function
 and a list to a tuple using the ``tuple()`` built-in function:
 
-``list( (1,2,3) )``
+::
 
-``tuple(range(3))``
-
-(0, 1, 2)
+   >>> list( (1,2,3) )
+   [1, 2, 3]
+   >>> tuple(range(3))
+   (0, 1, 2)
 
 If you are constructing a tuple of at least one element on the right-
 hand side of an assignment statement, you don’t have to surround the
 expressions in parentheses. If it is to be of length one, you do have to
 be sure to put in a trailing comma:
 
-``x=1,2,3``
+::
 
-``x``
+   >>> x=1,2,3
+   >>> x
+   (1, 2, 3)
 
-(1, 2, 3)
-
-``x=1,``
-
-``x``
-
-(1,)
+   >>> x=1,
+   >>> x
+   (1,)
 
 statements. You can return a tuple from a function, and you can
 construct the tuple in the ``return`` statement without enclosing it in
@@ -1626,13 +1626,13 @@ operator compares two objects to see if they are identical. The ``==``
 operator compares objects for equality. Two tuples are considered equal
 if their contents are equal.
 
-``(1,2) is (1,2)``
+::
 
-0
+   >>> (1,2) is (1,2)
+   False
 
-``(1,2) == (1,2)``
-
-1
+   (1,2) == (1,2)
+   True
 
 These two displays create separate tuples, so ``is`` returns false, but
 they have the same contents, so ``==`` returns true.
@@ -1646,53 +1646,49 @@ exist before it is created to be made a component of itself.
 
 The relational operators that compare lists compare tuples the same way:
 
-``(1,2,3) < (1,0,3)``
+::
 
-0
+   >>> (1,2,3) < (1,0,3)
+   False
 
-``(1,2,3) < (1,4,3)``
+   >>> (1,2,3) < (1,4,3)
+   True
 
-1
+   >>> 2 not in (1,2,3)
+   False
 
-``2 not in (1,2,3)``
-
-0
-
-``2 in (1,2,3)``
-
-1
+   >>> 2 in (1,2,3)
+   True
 
 List Comprehensions
 ~~~~~~~~~~~~~~~~~~~
 
-A list comprehension, present in Python2 but not Python1, has the form
-
-index in range optional-for-and-if-clauses]
+A list comprehension has the form index in range optional-for-and-if-clauses]
 
 For example,
 
-(x,y,x+y) for x in range(5) if x%2!=0 for y in range(5) if y!=x]
+::
 
-yields
+   >>> (x,y,x+y) for x in range(5) if x%2!=0 for y in range(5) if y!=x]
 
-(1, 0, 1), (1, 2, 3), (1, 3, 4), (1, 4, 5), (3, 0, 3), (3, 1, 4), (3, 2,
-5), (3, 4, 7)]
+   (1, 0, 1), (1, 2, 3), (1, 3, 4), (1, 4, 5), (3, 0, 3), (3, 1, 4), (3, 2, 5), (3, 4, 7)]
 
 The behavior is as if you initialized an empty list and then appended
 the expression to it in nested ``for`` and ``if`` statements. For
 example:
 
-(x,y,x*y) for x in range(10) if x%2!=0 for y in range(10) if y!=x]
+::
 
-is equivalent to
+   (x,y,x*y) for x in range(10) if x%2!=0 for y in range(10) if y!=x]
 
-for x in range(10):
+is roughly equivalent to
 
-for y in range(10):
+::
 
-if x%2!=0 and y!=x:
-
-L.append((x,y,x*y))
+   for x in range(10):
+     for y in range(10):
+       if x%2!=0 and y!=x:
+         L.append((x,y,x*y))
 
 is now the list to use.
 
@@ -1717,11 +1713,11 @@ uses ``NIL``. In C it’s usually called ``NULL`` ; in Java, ``null``.
 Python provides the value ``None``. You might create a linked list
 ``(1 2 3)`` as follows:
 
-``x=(1,(2,(3,None)))``
+::
 
-``x``
-
-(1, (2, (3, None)))
+   >>> x=(1,(2,(3,None)))
+   >>> x
+   (1, (2, (3, None)))
 
 is as a placeholder. If you assign a variable the value ``None`` , the
 variable will exist, but the value ``None`` can indicate that it hasn’t
