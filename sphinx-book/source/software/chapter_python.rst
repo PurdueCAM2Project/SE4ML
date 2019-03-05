@@ -1421,6 +1421,1422 @@ Of course the keyword ``else`` is usually used in ``if`` statements. It
 is in Python too. It is perhaps not the best word to express the concept
 of *on normal termination*, but it is what Python uses.
 
+
+if-else
+'''''''
+
+statement will execute code based on whether an expression is true. The
+form of an ``if`` statement is
+
+if expr:
+
+indented code to be executed if expr is true
+
+If you want to execute other code if the expression is false, use the
+``else`` clause:
+
+if expr:
+
+indented code to be executed if expr is true
+
+else:
+
+indented code to be executed if expr is false
+
+elif
+''''
+
+Of course, you often want to test a sequence of conditions and execute
+code for the first one that’s true. Because of indentation, it would be
+annoying if you had to put another ``if`` within the ``else`` and indent
+further. Python avoids this problem with the ``elif`` clause, equaling
+an ``else`` plus an ``if``. The general syntax of an ``if`` statement
+is:
+
+if expr1:
+
+indented code to be executed if expr1 is true
+
+elif expr2:
+
+| indented code to be executed if expr1 is false
+| and expr2 is true
+
+else:
+
+indented code to be executed if all exprs are false
+
+Here would be an appropriate place to mention that Python does not have
+a switch statement. Switch statements choose one out of several blocks
+of statements to execute based on the value of a single expression. You
+will probably use an ``if`` statement with a sequence of ``elif``
+clauses for that purpose. (What else could you use? Well, you could put
+functions into a list, index into the list, and execute one of them, but
+that’s a lot of trouble.)
+
+``pass`` and One-Line Code Blocks
+'''''''''''''''''''''''''''''''''
+
+and ``elif`` clauses are executed in order until one evaluates true; the
+block of code associated with that expression is executed and then
+control passes to the statement following the ``if`` statement. This
+means that the earlier expressions must test for more specific cases; if
+you test for the more general case first, you will never get to the code
+for the subcase.
+
+But what if the desired behavior for the more specific case is to do
+nothing? You need a statement that doesn’t do anything. In Python this
+is the ``pass`` statement, which consists wholly of the keyword ``pass``
+:
+
+pass
+
+statement is only useful as a complete code block, and it is short.
+Giving it an entire indented line to itself makes programs longer. That
+may force related code to extend beyond a page or a computer screen. So
+Python allows one statement block of code to be placed on the same line
+as the statement that selects it. Just write the statement following the
+colon of the ``if`` , ``elif`` , ``else`` , ``while`` , ``for`` ,
+``def`` (or of any other statement that ends in a colon introducing a
+block of code).
+
+Indeed, you can put several simple statements following a colon just by
+placing semicolons between them.
+
+.. _section-1:
+
+A tuple is an immutable list: It is just like a list except that you
+can’t change the contents. You create a tuple by a display consisting of
+expressions in parentheses separated by commas, for example:
+
+``(1,2)``
+
+(1, 2)
+
+Notice that Python writes out a tuple in the parenthesized notation.
+
+The one place where parentheses become ambiguous is in constructing a
+tuple of length one. In that case, if you want a tuple of length one,
+put a comma following the expression, just before the final parenthesis.
+If you only intend a parenthesized expression, do not put in a comma.
+
+``(1,)``
+
+(1,)
+
+``(1)``
+
+1
+
+You can have tuples with no components. Just use parentheses without
+anything between them:
+
+``()``
+
+()
+
+You can subscript and slice tuples just like lists, pulling out elements
+or creating a copy of a section of a tuple. You cannot, however, assign
+to an element or a slice of a tuple; you can’t use the subscript or the
+slice operator on the left-hand side of an assignment. You can’t use the
+delete statement on a part of a tuple.
+
+``q=(1,2)``
+
+``q``
+
+(1, 2)
+
+``del q[0]``
+
+Traceback (innermost last):
+
+File “<stdin>”, line 1, in ?
+
+TypeError: object doesn’t support item deletion
+
+``del q[0:1]``
+
+Traceback (innermost last):
+
+File “<stdin>”, line 1, in ?
+
+TypeError: object doesn’t support slice deletion
+
+``q[1]=3``
+
+Traceback (innermost last):
+
+File “<stdin>”, line 1, in ?
+
+TypeError: object doesn’t support item assignment
+
+``q[0:1]=()``
+
+Traceback (innermost last):
+
+File “<stdin>”, line 1, in ?
+
+TypeError: object doesn’t support slice assignment
+
+You can concatenate tuples and replicate them, just like lists, using
+the ``+`` and ``*`` operators. These operators produce new tuples; they
+don’t modify an already existing tuple.
+
+``(1,2)+(3,4)``
+
+(1, 2, 3, 4)
+
+``(1,2)*2``
+
+(1, 2, 1, 2)
+
+You can convert a tuple to a list using the ``list()`` built-in function
+and a list to a tuple using the ``tuple()`` built-in function:
+
+``list( (1,2,3) )``
+
+``tuple(range(3))``
+
+(0, 1, 2)
+
+If you are constructing a tuple of at least one element on the right-
+hand side of an assignment statement, you don’t have to surround the
+expressions in parentheses. If it is to be of length one, you do have to
+be sure to put in a trailing comma:
+
+``x=1,2,3``
+
+``x``
+
+(1, 2, 3)
+
+``x=1,``
+
+``x``
+
+(1,)
+
+statements. You can return a tuple from a function, and you can
+construct the tuple in the ``return`` statement without enclosing it in
+parentheses, unless of course it is length zero.
+
+You can compare two tuples for identity or for equality. The ``is``
+operator compares two objects to see if they are identical. The ``==``
+operator compares objects for equality. Two tuples are considered equal
+if their contents are equal.
+
+``(1,2) is (1,2)``
+
+0
+
+``(1,2) == (1,2)``
+
+1
+
+These two displays create separate tuples, so ``is`` returns false, but
+they have the same contents, so ``==`` returns true.
+
+test in Python1 uses a simple recursive search to test for equality. If
+you have a circularly linked structure, e.g., a tuple containing a list
+that is embedded within itself, the ``==`` operator may crash your
+program. You cannot, however, embed a tuple within itself directly,
+since it cannot be modified once it is created. It would already have to
+exist before it is created to be made a component of itself.
+
+The relational operators that compare lists compare tuples the same way:
+
+``(1,2,3) < (1,0,3)``
+
+0
+
+``(1,2,3) < (1,4,3)``
+
+1
+
+``2 not in (1,2,3)``
+
+0
+
+``2 in (1,2,3)``
+
+1
+
+List Comprehensions
+~~~~~~~~~~~~~~~~~~~
+
+A list comprehension, present in Python2 but not Python1, has the form
+
+index in range optional-for-and-if-clauses]
+
+For example,
+
+(x,y,x+y) for x in range(5) if x%2!=0 for y in range(5) if y!=x]
+
+yields
+
+(1, 0, 1), (1, 2, 3), (1, 3, 4), (1, 4, 5), (3, 0, 3), (3, 1, 4), (3, 2,
+5), (3, 4, 7)]
+
+The behavior is as if you initialized an empty list and then appended
+the expression to it in nested ``for`` and ``if`` statements. For
+example:
+
+(x,y,x*y) for x in range(10) if x%2!=0 for y in range(10) if y!=x]
+
+is equivalent to
+
+for x in range(10):
+
+for y in range(10):
+
+if x%2!=0 and y!=x:
+
+L.append((x,y,x*y))
+
+is now the list to use.
+
+If you use a tuple as the expression in the list comprehension, you must
+put parentheses around it.
+
+None
+~~~~
+
+Lists and tuples, because they can contain references to other objects,
+allow you to build linked list data structures. For example, some
+languages (starting with Lisp) have built lists out of “cons cells”
+containing two references to other objects. These two references are
+sometimes called the head and tail of the list: The head is the first
+item, the tail is the rest of the list. (In Lisp they’re called the CAR
+and the CDR.)
+
+You could have much the same effect by using two element tuples with the
+head being at index zero and the tail being at index one. The problem,
+though, is that you need some way to indicate the end of a list. Lisp
+uses ``NIL``. In C it’s usually called ``NULL`` ; in Java, ``null``.
+Python provides the value ``None``. You might create a linked list
+``(1 2 3)`` as follows:
+
+``x=(1,(2,(3,None)))``
+
+``x``
+
+(1, (2, (3, None)))
+
+is as a placeholder. If you assign a variable the value ``None`` , the
+variable will exist, but the value ``None`` can indicate that it hasn’t
+had its value computed yet. The program can test to see if it has a
+value without having to test first whether it exists. Trying to access
+it if it doesn’t exist causes a runtime error, as shown here:
+
+``x=None``
+
+``x==None``
+
+1
+
+``del x``
+
+``x``
+
+Traceback (innermost last):
+
+File “<stdin>”, line 1, in ?
+
+NameError: x
+
+is considered to be false in logical expressions.
+
+More on Assignment
+~~~~~~~~~~~~~~~~~~
+
+Now we will consider assignment statements more closely. There are five
+things that need to be considered:
+
+#. Multiple assignments of the same value
+
+#. Unpacking sequences, assigning components of sequences to different
+   variables at the same time
+
+#. Operate-and-becomes assignments in Python2, e.g. +=
+
+#. The order of evaluation in assignment statements
+
+#. Where variables are bound
+
+We will consider these in order.
+
+Multiple Assignments
+''''''''''''''''''''
+
+First, you can include several assignments in the same statement. The
+form is
+
+= expressions
+
+This will assign the variables in the targets the value(s) of the
+expressions. For example:
+
+i=j=0
+
+and ``j`` zero.
+
+Second, as we have already seen, more than one value may be assigned at
+the same time by separating the values with commas, for example:
+
+j,m=0,1
+
+This can be used to swap values
+
+a,b=b,a
+
+And multiple assignment and unpacking sequences can be used together,
+albeit somewhat confusingly:
+
+``i,m=j,n=0,1``
+
+``i,j,m,n``
+
+(0, 0, 1, 1)
+
+You can assign from any sequence type, as long as the length of the
+variable list is the same as the length of the sequence. Lists, tuples,
+and strings are sequences, so
+
+``i,j=(3,4)``
+
+``i,j``
+
+(3, 4)
+
+``i,j=[5,6]``
+
+``i,j``
+
+(5, 6)
+
+``i,j=“ab”``
+
+``i,j``
+
+(’a’, ‘b’)
+
+Moreover, you can include subsequences on the left-hand side of the
+assignment, enclosing the list of variables in parentheses or brackets,
+thus:
+
+``i,(j,[m,n])=x=[1,[2,(3,4)]]``
+
+``i,j,m,n,x``
+
+2, (3, 4)]])
+
+Notice that if there are several assignments in the statement, each one
+is matched separately to the value of the right-hand side. The different
+targets don’t have to look alike. Notice also that the parentheses and
+brackets on the left-hand side of the assignments do not have to
+correspond to tuples and lists respectively on the right-hand side.
+
+As with tuples, a parenthesized variable is treated as a simple
+variable, but including a comma after it causes it to be matched to the
+contents of a single element sequence, as shown in the following:
+
+``(x)=[9]``
+
+``x``
+
+``(x,)=[9]``
+
+``x``
+
+9
+
+Operate and Becomes
+'''''''''''''''''''
+
+Python2 allows certain binary operators to be combined with the
+assignment operator. The general rule is that ``x op= y`` is equivalent
+to ``x = x op y``.
+
+So,
+
+x+=1
+
+.
+
+The operators that you can combine with an assignment are:
+
+-  The arithmetic operators: +, -, \*, /, %, \*\*
+
+-  The bitwise operators: &, , ^
+
+-  The shift operators: <<, >>
+
+Evaluation Order
+''''''''''''''''
+
+The evaluation of an assignment statement evaluates the expression(s) on
+the right-hand side first, then assigns the resulting value to each of
+the targets from left to right. Within the targets, it also goes left to
+right making assignments. This can produce some confusion. Consider the
+following code:
+
+``r=range(10)``
+
+``r.reverse()``
+
+``r``
+
+``i=2``
+
+``i,r[i]=r[i],i``
+
+``r``
+
+has an initial value of two, you would expect that the assignment
+
+``…,r[i]=…,i``
+
+to ``r[2]`` , replacing ``7`` with ``2`` in the sequence. But before
+that happens, we assign
+
+``i,…=r[i],…``
+
+which is to say, we assign ``i=r[2]`` , or seven. Then we assign
+``r[7]`` the value ``2`` , which was already there.
+
+Assignment to Local Scope
+'''''''''''''''''''''''''
+
+When Python performs an assignment, it assigns to the variable in the
+innermost scope. If it is executing a function (within a ``def`` ), the
+variable will only be seen by code in that function and will exist only
+as long as the function is executing. If the assignment is at the top
+level of a module, i.e., in a file but not inside a ``def`` or ``class``
+statement (we’ll talk about classes later), then the variable will be
+known in the module and will exist as long as the program is
+running–unless you explicitly delete it.
+
+``global`` Statement
+                    
+
+So what if you want to assign a value to a module-scope variable in a
+function? You can’t just assign a value to the variable name; that would
+create a local variable with the same name. What you can do is use the
+only declaration in the Python language, the ``global`` statement. The
+global statement has the form
+
+It declares that the variable names ``id1`` , ``id2`` , etc. are
+variables of the surrounding module and are to be fetched and assigned
+there. The ``global`` statement must appear before the variables are
+used.
+
+Deleting Variables
+                  
+
+You create a variable in a scope just by assigning to it. You can delete
+it from the scope using the ``del`` statement.
+
+``x=9``
+
+``x``
+
+9
+
+``del x``
+
+``x``
+
+Traceback (innermost last):
+
+File “<stdin>”, line 1, in ?
+
+NameError: x
+
+.. _section-2:
+
+A dictionary is a mutable, associative structure. Considering these
+characteristics one at a time:
+
+-  –You can add key-value pairs to a dictionary and remove them.
+
+-  –Dictionaries map keys into values. Given a key, you can look up its
+   value. It looks like indexing a list or tuple, but unlike lists and
+   tuples, the keys can be almost any immutable data type, not just
+   integers. (It is peferrable that keys be immutable because if you put
+   the key in the table and then changed its contents, you might not be
+   able to look it up again.)
+
+Dictionaries are like small, in-memory databases. `See Operations on
+Dictionaries. <chap2.html#13000>`__ shows the operators, functions, and
+methods available for dictionaries.
+
+#. | 
+   | Operations on Dictionaries
+
+Operator, Function, Method
+
+Explanation
+
+Creates a dictionary with the given key-value pairs.
+
+Returns the value associated with key ``k`` in dictionary ``d``. It is
+an error if the key is not present in the dictionary. See methods
+``has_key()`` and ``get()``.
+
+with key ``k`` in dictionary ``d``. The key must be “hashable,” that is,
+it should not be mutable. Python won’t accept lists as keys.
+
+and its associated value from dictionary ``d``. It is an error if the
+key doesn’t exist.
+
+Removes all key-value pairs from dictionary ``d``.
+
+Creates a copy of dictionary ``d``. This is a shallow copy: The
+dictionary itself is copied, but none of the key or value objects it
+contains are copied.
+
+Returns the value associated with key ``k`` in dictionary ``d``. If
+``k`` isn’t present in the dictionary, it returns ``None``.
+
+Returns the value associated with key ``k`` in dictionary ``d``. If
+``k`` isn’t present in the dictionary, it returns ``v``.
+
+Returns true (1) if dictionary ``d`` contains key ``k`` and false (0)
+otherwise.
+
+``]`` , a list of all the key-value pairs currently in the dictionary
+``d``. The key-value pairs are tuples of two elements ``(key,value)``.
+
+| Returns a list of all the keys currently in
+| dictionary ``d``.
+
+Adds all the key-value pairs from dictionary ``m`` to dictionary ``d``.
+Any key in ``d`` that is the same as a key in ``m`` has its value
+reassigned.
+
+Returns a list of all the values currently in dictionary ``d``.
+
+``d.setdefault(k) d.setdefault(k,x)``
+
+with initialization. As if defined
+
+``def setdefault(self,k,x=None):``
+
+ 
+
+You can create an empty dictionary by writing an open-close-brace pair:
+
+``d={}``
+
+``d``
+
+You can create a dictionary with initial contents by placing one or more
+associations in the braces:
+
+``d={“a”:1,1:(2,3),(2,3):“a”}``
+
+``d``
+
+In this example, we associate the string key ``“a”`` with the value 1;
+key ``1`` with the value tuple ``(2,3)`` ; and the key tuple ``(2,3)``
+with the string value ``“a.”`` (They don’t have to form a cycle like
+this.)
+
+You can look up the value for a key by subscripting the dictionary with
+the value of the key.
+
+``d[1]``
+
+(2, 3)
+
+``d[(2,3)]``
+
+‘a’
+
+Since Python uses the equality operator, ``==`` , to test the keys,
+equal numbers are considered to be the same key:
+
+``d[1.0]``
+
+(2, 3)
+
+Be careful, though, with floating point numbers. They are not exact, and
+they may differ by a few bits in the low order positions even if they
+look equal.
+
+It is a runtime error to look up a nonexistent key in a dictionary.
+
+``d[10]``
+
+Traceback (innermost last):
+
+File “<stdin>”, line 1, in ?
+
+KeyError: 10
+
+If you don’t want to worry about an error when looking up a value, you
+can use the ``get()`` method. The call ``d.get(k)`` will yield the value
+for key ``k`` in dictionary ``d`` , if it exists, or return the value
+``None`` if it doesn’t. The call ``d.get(k,v)`` is the same, except that
+it returns the value ``v`` if the key isn’t present.
+
+``d``
+
+``d.get(10)``
+
+``d.get(10)==None``
+
+1
+
+``d.get(10,“absent”)``
+
+‘absent’
+
+Notice that the Python interpreter doesn’t write out the value ``None``
+in interactive mode.
+
+Alternatively, you can ask whether the dictionary contains the key
+before subscripting with it. Method call ``d.has_key(k)`` will return
+true or false (1 or 0) depending on whether the dictionary ``d``
+contains the key ``k`` or not. (Operator ``in`` does not apply to
+dictionaries.)
+
+``d.has_key(1)``
+
+1
+
+``d.has_key(10)``
+
+0
+
+You can insert a new key-value pair into the dictionary by subscripting
+a dictionary on the left-hand side of an assignment operator with the
+key and assigning it the value. You can assign a new value to a key the
+same way:
+
+``d[10]=10``
+
+``d``
+
+{(2, 3): ‘a’, 10: 10, 1: (2, 3), ‘a’: 1}
+
+``d[10]=“a”``
+
+``d``
+
+{(2, 3): ‘a’, 10: ‘a’, 1: (2, 3), ‘a’: 1}
+
+function will tell you the number of associations the dictionary
+contains:
+
+``d``
+
+{(2, 3): ‘a’, 10: ‘a’, 1: (2, 3), ‘a’: 1}
+
+``len(d)``
+
+4
+
+statement, ``del`` ``dictionary`` ``[`` ``key`` ``]`` , to remove
+associations from the dictionary.
+
+``del d[10]``
+
+``len(d)``
+
+3
+
+``d``
+
+There are three methods to examine the contents of a dictionary without
+knowing the keys:
+
+#. to get a list of all the keys currently in the dictionary.
+
+#. to get a list of all the values.
+
+#. to get a list of all the key-value pairs in ``d``.
+
+The key-value pairs are in ``(`` ``key,value`` ``)`` tuples.
+
+``d``
+
+``d.keys()``
+
+``d.values()``
+
+``d.items()``
+
+((2, 3), ‘a’), (1, (2, 3)), (’a’, 1)]
+
+To create a copy of a dictionary, you could create an empty dictionary
+and then update it from the one you want to copy, for example:
+
+``e={}``
+
+``e.update(d)``
+
+``e``
+
+behaves the same as:
+
+``for k in d.keys(): e[k]=d[k]``
+
+But it is easier to use the ``copy()`` method:
+
+e=d.copy()
+
+When you copy a dictionary, you get a shallow copy. The dictionary
+object is copied, but none of the keys or values it contains are.
+Consider the following example:
+
+``x={“a”:[0]}``
+
+``y=x.copy()``
+
+``x is y``
+
+0
+
+``y[“a”][0]=1``
+
+``x``
+
+The value associated with key ``“a”`` in dictionary ``x`` is a list
+containing a single value, zero. When we copy ``x`` , we get a new,
+different dictionary, ``y``. Dictionaries ``x`` and ``y`` are not the
+same, but the lists they contain are, so when we change the list
+associated with key ``“a”`` in dictionary ``y`` , that is the same list
+we see associated with " ``a`` " in dictionary ``x``.
+
+Relational operators work on dictionaries the same way as sequences:
+They do a lexicographical compare. They compare the components in sorted
+order by key. Expect this to be slow.
+
+``D1={“x”:1,“y”:2,“z”:3}``
+
+``D2={“x”:1,“y”:4,“z”:3}``
+
+``D1==D2``
+
+0
+
+``D1<D2``
+
+1
+
+.. _section-3:
+
+Strings are a kind of immutable sequence, like tuples. Once the string
+has been created, you can’t change its contents. Unlike tuples, where
+the elements of the sequence may be of any data type, the elements of a
+string are characters. You can subscript a string, but you don’t get an
+individual character. Python has no character data type. You get a
+string of length one containing the character.
+
+The original strings in Python contained byte-sized, Latin character
+set/ASCII characters. Python2 also provides Unicode character strings.
+We will assume the original character set in our discussion except where
+we explicitly discuss Unicode.
+
+String Literals
+'''''''''''''''
+
+There are several ways to write string literals. If you are going to
+write the string on a single line, you can enclose it in single quotes (
+``’`` ), or double quotes ( ``"`` ). This easily allows you to enclose a
+string containing one kind of quote inside the other kind of quotes, for
+example:
+
+``‘He said, “Hi.” ’``
+
+‘He said, “Hi.” ’
+
+If you need both kind of quotes, you can write more than one string in a
+row and let Python concatenate them for you. Here we use three strings
+in a row:
+
+``‘He said, “She said,’ ”’Hi.’" ‘"’``
+
+‘He said, “She said,\’Hi.\\”’ ’
+
+The output here shows Python’s incorporation character, the backslash.
+The backslash tells Python that the following character is to have a
+special interpretation within the string. Python’s incorporation
+sequences are shown in `See Incorporation Character Sequences in String
+Literals. <chap2.html#44479>`__.
+
+#. | 
+   | Incorporation Character Sequences in String Literals
+
+Sequence
+
+Meaning
+
+end-of-line
+
+Continues the string literal to the next line, without including a
+newline character
+
+``\\``
+
+Includes a backslash character
+
+Includes a single quote
+
+Includes a double quote
+
+Includes an attention signal (beep) character
+
+Includes a backspace character
+
+Includes an escape character
+
+Includes a form feed character
+
+Includes a line feed (newline) character
+
+Includes a tab character
+
+Includes a carriage return character
+
+Includes a vertical tab character
+
+Includes a null character. (Unlike C, Python allows null characters in
+strings.)
+
+Includes the character whose octal code is oo.
+
+Includes the character whose hexadecimal code is hh.
+
+Only in Unicode strings, incorporates the character whose hexadecimal
+number in the Unicode character set is hhhh.
+
+Suppose you need a string to extend beyond the end of a line. There
+several ways to do it. You can get Python to continue the statement on
+the next line and put quoted parts of the string on the separate lines.
+Since Python understands that unbalanced parentheses require continuing
+the statement to another line, this will work:
+
+``(“a”``
+
+‘aB’
+
+Python will also continue a statement if the last character on the line
+is a backslash.
+
+``“a”\``
+
+‘aB’
+
+For that matter, a backslash also works within strings:
+
+``"a\``
+
+‘aB’
+
+Python also allows strings to be enclosed in triple quotes, either
+``“”"`` or ``‘’’``. These strings may extend beyond the end of a line
+without special handling. However, they include a newline character
+(octal number 012) for each line boundary they cross:
+
+``”’a``
+
+012B’
+
+If you do not want a newline character included for the end of a line,
+put a backslash character at the end of the line:
+
+``”’a\``
+
+‘aB’
+
+Python also allows you to specify raw strings. In a raw string, you get
+the characters exactly as written. The incorporation character has no
+special meaning. This is more useful to people using Windows, since
+backslash is used to separate directories and files on paths, and it
+would be annoying to have to incorporate each one of them:
+
+``r“D:\Tests\SayHi.py”``
+
+SayHi.py’
+
+One warning: A backslash may not be the last character of a raw string.
+Python tries to gobble up the following character as part of the string.
+
+You write Unicode string literals by preceding the string with ``u`` ,
+e.g., ``u’ab\u12adyz’``. If you concatenate two string literals, one of
+which is Unicode, the Python compiler merges them into a single Unicode
+string.
+
+String Operators
+''''''''''''''''
+
+The string operators are the same as those that apply to tuples, with
+one extra operator for string formatting. The operators are shown in
+`See String Operators. <chap2.html#53096>`__.
+
+#. | 
+   | String Operators
+
+Operator
+
+Meaning
+
+Produces a new string which is the concatenation of strings ``s`` and
+``u``. An ordinary string concatenated with a Unicode string gives a
+Unicode string result.
+
+Creates a new string composed of ``n`` copies of string ``s`` , where
+``n`` is an integer.
+
+String formatting–Creates a new string by formatting values in tuple
+``t`` and inserting them into specified places in string ``s``. We
+discuss this later in the text.
+
+String formatting–Creates a new string by formatting values in
+dictionary ``d`` and inserting them into specified places in string
+``s``. We discuss this later in the text.
+
+Yields a one-character string composed of the character at position
+``i`` in string ``s``.
+
+| Yields a string composed of the characters from position ``i`` up to
+  but not including position ``j`` in
+| string ``s``.
+
+Converts the value of expression ``e`` into a string. Note: These are
+back-quotes. Regular quotes are used for string literals.
+
+``1`` ``, x`` ``2`` ``, …, x`` ``n-1`` ``=s``
+
+one-character substrings of string ``s`` from left to right to variables
+``x`` ``0`` , ``x`` ``1`` , ``x`` ``2`` ,… ``x`` ``n-1``.This is just a
+multiple assignment statement.
+
+String Displays
+
+The equivalent of ``[…]`` for lists and ``(…)`` for tuples is ``‘…‘``
+for strings. The form ``‘x‘`` evaluates expression ``x`` and converts
+its value to a string, for example:
+
+``a=1;b=2``
+
+``‘a+b’``
+
+‘3’
+
+``‘(a,b)’``
+
+‘(1, 2)’
+
+Sequence Operators
+
+Strings are a kind of sequence, so the sequence operators apply to
+strings. Expression ``u+v`` will concatenate strings ``u`` and ``v``.
+Expression ``s*n`` will concatenate ``n`` copies of string ``s``.
+
+Slicing will deliver a substring. Expression ``s[i:j]`` yields a string
+composed of the characters from position ``i`` up to but not including
+position ``j`` in string ``s``.
+
+Unlike lists and tuples, subscripting, ``s[i]`` , cannot deliver an
+individual character. Python does not have characters. Instead, it
+returns a string consisting of the one character at position ``i``.
+Expression ``s[i]`` is equivalent to ``s[i:i+1]``.
+
+String Formatting
+
+String formatting behaves like the formatting strings used in the
+``printf()`` function in C. String formatting is specified by the
+``s%t`` operator in Python. The string ``s`` to the left of the ``%`` is
+the format. The tuple or dictionary to the right of the ``%`` supplies
+the values to be formatted. Generally, characters in the format string
+are just copied as is into the result string, but certain special
+character sequences are replaced with values from the tuple or
+dictionary. Since tuples and dictionaries behave differently, we will
+discuss the tuples first and then explain the differences with
+dictionaries.
+
+The formatting sequences are matched left to right with the values in
+the tuple. Each formatting sequence specifies how to convert the value
+to a string. The converted value is then inserted into the resulting
+string, replacing its formatting sequence. For example, the following
+produces a string with the number 65 translated into octal, decimal, and
+hexadecimal, the translations separated by colons:
+
+``“%o:%d:%x” % (65,65,65)``
+
+‘101:65:41’
+
+If there is only one value to be formatted, you needn’t include it in a
+tuple, for example:
+
+``“%d” % 5``
+
+’
+
+The formatting sequences have the form:
+
+% m f
+
+, are optional. The formatting character, ``f`` , tells Python
+(internally, the C library) what conversion to perform. The formatting
+characters are
+
+-  –Decimal integer. The corresponding element of the tuple is converted
+   to an integer and the integer is converted to a string in decimal
+   format.
+
+-  –Decimal integer. The same as ``%d``.
+
+-  –Unsigned integer. The same as ``%d`` , but the integer is
+   interpreted as unsigned. The sign bit is interpreted as adding a
+   large positive amount to the number, rather than a large negative
+   amount.
+
+-  –Octal integer. The corresponding element of the tuple is converted
+   to an integer and the integer is converted to a string in octal
+   format.
+
+-  –Hexadecimal integer. The corresponding element of the tuple is
+   converted to an integer and the integer is converted to a string in
+   hexadecimal format. Lowercase ``x`` uses lowercase letters for the
+   digits 10 through 15.
+
+``“%x” % (-2)``
+
+‘fffffffe’
+
+-  –Hexadecimal integer. The corresponding element of the tuple is
+   converted to an integer and the integer is converted to a string in
+   hexadecimal format. Uppercase ``X`` uses uppercase letters for the
+   digits 10 through 15.
+
+``“%X” % (-2)``
+
+‘FFFFFFFE’
+
+-  –Floating point format, with decimal point but without an exponent.
+
+``“%f” % (0.5e-100)``
+
+‘0.000000’
+
+-  –Floating point format, with decimal point and an exponent (with a
+   lowercase ``e`` ).
+
+``“%e” % (0.5e-100)``
+
+‘5.000000e-101’
+
+-  –Floating point format, with decimal point and an exponent (with an
+   uppercase ``E`` ).
+
+``“%E” % (0.5e-100)``
+
+‘5.000000E-101’
+
+-  –Choose either ``f`` or ``e,`` depending on the size of the exponent.
+
+-  –Choose either ``f`` or ``E,`` depending on the size of the exponent.
+
+-  –String, or any object being converted to a string.
+
+``“%s” % ([1,2])``
+
+’
+
+-  –Like s, but uses ``repr()`` rather than ``str()`` to convert the
+   argument (in Python2).
+
+-  –A single character. The value to be converted can either be an
+   integer that is the internal code for a character or a string of
+   length one.
+
+``“%c” % (88)``
+
+‘X’
+
+``“%c” % (“Y”)``
+
+‘Y’
+
+-  –This does not match an element from the tuple. It is the way to
+   incorporate a percent sign into the string.
+
+The modifiers, if present, have the form
+
+a w.p
+
+each of which is optional. These parts are as follows:
+
+-  –The alignment; can be a plus sign, a minus sign, or 0, or some
+   combination of them. They mean the following:
+
+: Align the characters at the left in the field
+
+: Include a sign for numeric values, even if positive. (Normally only a
+negative sign would be included.)
+
+: Zero-fill the number in the field.
+
+-  The width; specifies the minimum field width the formatted value is
+   to occupy. This allows nicely aligned output, at least with
+   fixed-width fonts, if the values fit within the field width
+   specified. If they don’t fit, they will use all the character
+   positions required.
+
+``“%4d” % 5``
+
+’
+
+``“%4d” % 500000``
+
+’
+
+-  The precision; follows a decimal point. It has one of three meanings:
+
+-  For strings, the precision specifies the maximum number of characters
+   that may be printed from the string.
+
+``“%.3s” % (“abcdef”)``
+
+’
+
+#. For floating point numbers, it specifies the maximum number of digits
+   following the decimal point.
+
+``“%.4f” % (1.0/3.0)``
+
+’
+
+#. For integers, the precision specifies the minimum number of digits to
+   represent.
+
+``“%4.2d” % 5``
+
+’
+
+If you want to compute the width or precision, you can use stars, ``*``
+s, in width or precision fields. The star tells Python to use the next
+item in the tuple, which must be an integer, as the value in the field,
+for example:
+
+``“%.*d” % (4,2,5)``
+
+’
+
+You can use a dictionary instead of a tuple. You instruct Python what
+value to format by putting the key string in parentheses just after the
+opening ``%`` , inside the formatting sequence:
+
+``“%(x)4.2d” % {“x”:5}``
+
+’
+
+However, this doesn’t work for the formatting fields:
+
+``“%(x)4.(p)d” % {“p”:2,“x”:5}``
+
+Traceback (innermost last):
+
+File “<stdin>”, line 1, in ?
+
+ValueError: unsupported format character ‘(’ (0x28)
+
+The String Module and String Methods
+''''''''''''''''''''''''''''''''''''
+
+The string module provides a number of useful functions and constants.
+In Python2, functions from the string module were made into methods of
+string objects. `See Most Important String Functions and
+Methods. <chap2.html#33427>`__ shows the most useful of these functions
+and methods.
+
+#. | 
+   | Most Important String Functions and Methods
+
+String Module
+
+Method (Python2)
+
+Explanation
+
+Find the index of the first occurrence of ``sub`` in string ``s``. If
+they are provided, find the first occurrence at or beyond ``start`` and
+not extending beyond ``end``. Returns minus 1 if it is not found.
+
+Find the index of the first occurrence of ``sub`` in string ``s``. If
+they are provided, find the first occurrence at or beyond ``start`` and
+not extending beyond ``end``. Raise a ``ValueError`` exception if it is
+not found.
+
+Find the index of the last occurrence of ``sub`` in string ``s``. If
+they are provided, find the rightmost occurrence lying totally within
+the range beginning at ``start`` and not extending beyond ``end``.
+Returns minus 1 if it is not found.
+
+Find the index of the last occurrence of ``sub`` in string ``s``. If
+they are provided, find the rightmost occurrence lying totally within
+the range beginning at ``start`` and not extending beyond ``end``. Raise
+a ``ValueError`` exception if it is not found.
+
+Return a list of the substrings of ``s`` separated by string ``sep``. If
+``sep`` is ``None`` , or omitted, return the substrings separated by
+white space. If ``maxtimes`` is present, return no more than
+``maxtimes`` substrings followed by the remainder of ``s`` , if any.
+
+Concatenate the strings in list or tuple ``seq``. Put ``sep`` between
+each pair. Use a single blank if ``sep`` is omitted.
+
+with all letters converted to lower or uppercase.
+
+with all white space removed from both ends, from the left, or from the
+right.
+
+padded with blanks, left justified, right justified, or centered in a
+field of width ``w``. Return ``s`` itself if it is as long as or longer
+than ``w``.
+
+with tabs expanded into blanks. The tab stops occur each ``w``
+characters, eight characters if ``w`` is omitted.
+
+ 
+
+ends with the ``suffix`` , begins with the ``prefix`` , or contains
+``prefix`` starting at position ``pos``.
+
+Built-In String Functions
+'''''''''''''''''''''''''
+
+-  –Returns the character (in a one-character string), whose ASCII code
+   is integer ``i``. This is equivalent to ``(“%c” % i)``.
+
+-  –Evaluates the string ``s`` as if it were a Python expression.
+
+``eval(“[1,2]”)``
+
+dictionaries to look up variables in: ``eval(s,globals)`` or
+``eval(s, globals, locals)`` :
+
+``eval(“x+y”,{“x”:1,“y”:2},{“x”:3})``
+
+5
+
+-  –Returns a string representation of integer ``i`` converted to
+   hexadecimal representation.
+
+``hex(65)``
+
+‘0x41’
+
+It is not equivalent to ``(“%x” % i)`` , which does not put ``“0x”`` on
+the front.
+
+-  –Returns string ``s`` or a copy of the string ``s``. Each call to
+   ``intern()`` with an equal string will return the identical string.
+   You use this to speed up compares and to save storage.
+
+Equal strings may be different objects, i.e., both have the same
+characters, but they were created at different times. It is faster to
+compare strings for identity ``(x is y)`` than for equality ``(x == y)``
+, since Python only has to compare the memory addresses for identity,
+but must compare the characters in them for equality. Therefore, if you
+are going to have a set of strings that you are comparing for equality
+frequently, you can speed up your program by interning them and just
+comparing their interned values.
+
+``“ab”==“a”+“b”``
+
+1
+
+``“ab” is “a”+“b”``
+
+0
+
+``intern(“ab”) is intern(“a”+“b”)``
+
+1
+
+Moreover, by interning strings that are used throughout your data
+structures, all instances of the string will occupy the same block of
+storage, rather than many blocks. This may save considerable storage.
+
+-  –Converts a string to an integer. (It will also convert long integers
+   and floating point numbers to integers.)
+
+-  –Converts integer ``i`` to a string representation of it as an
+   unsigned octal integer.
+
+``oct(65)``
+
+‘0101’
+
+``oct(-1)``
+
+‘037777777777’
+
+-  –Returns the integer representing the single character in string
+   ``c``.
+
+-  –Returns a string representation of object ``x``. It is the same as
+   ``‘x‘``.
+
+-  –Returns a string representation of object ``x``. Unlike ``repr()`` ,
+   ``str()`` does not attempt to be the inverse of ``eval()``. It
+   attempts to make the translated string legible.
+
+.. _section-4:
+
+In this chapter we looked at elementary Python programming. We examined
+expressions and simple control statements like ``while`` , ``for`` , and
+``if``. We looked at arithmetic data types, lists, tuples, strings, and
+dictionaries. We learned a little bit about modules and functions. And
+we used the interpreter to try out code to see what it would do.
+
+ 
+
+#. that will write out the first ``n`` Fibonacci numbers. Fibonacci
+   numbers form a sequence 1, 1, 2, 3, 5, 8, … where each number after
+   the first two is the sum of the two numbers preceding it. Use a loop.
+   Use a single assignment statement in the loop. Make sure ``fib(100)``
+   works.
+
+#. Put your solution to Problem 2.1 into a script. Have the script take
+   the value of ``n`` from its command line and write out that many
+   Fibonacci numbers. The command line parameters are in variable
+   ``argv`` in module ``sys``. The name of the program being executed is
+   in ``argv[0]``. The first parameter is in ``argv[1]``.
+
+#. Write a script that takes a string as its first command line
+   parameter and file names as the subsequent parameters. Have it write
+   out the names of the files that contain the string. See Problem 2.2
+   for how to find the command line parameters.
+
+#. Write a script that, given a file name, will count the number of
+   words in the file and write out the total. For our purposes, a word
+   is any sequence of non-white-space characters at the beginning of a
+   line, at the end of a line, or surrounded by white space. See Problem
+   2.2 for how to find the command line parameters.
+
+#. Write a script that, given a file name, will count the number of
+   occurrences of each word in the file and write out a sorted list of
+   words with the number of occurrences. For our purposes, a word is any
+   sequence of non-white-space characters at the beginning of a line, at
+   the end of a line, or surrounded by white space. See Problem 2.2 for
+   how to find the command line parameters.
+
+--------------
+
+1. Although Python2 does have Unicode strings.
+
+2. We say “x is considered false” and “x counts as false,” because
+various values, like zero, None, and empty sequences, are treated as
+being false by ``and`` and ``or`` operators and ``while`` and ``if``
+statements.
+
 .. [1]
    This chapter is adapted from Thiruvathukal, Christopher, and Shafaee,
    *Web Programming in Python*, 2002. Rights have been reverted to the
