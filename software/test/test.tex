@@ -666,10 +666,21 @@ two tests? There are four scenarios.'' You may ask.
 
 That is the problem.
 
+The following program can achive 100\% coverage but it has not tested
+cases like {\tt f(2, -2)} or {\tt f(-2, 2)}.
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/software/test/fullcover.py}
+\end{tt}
+\nolinenumbers
+
 What does this mean? Does this mean coverage is not helpful? Test
 coverage is very helpful.  You should check whether the specific lines
 you want to test have been covered.  Do not focus on the coverage
 number only.
+
 
 
 \section{Continous Integration}
