@@ -1,29 +1,10 @@
 \chapter{Testing}
 
-
-Have you ever had a situation when your software has a bug but it is
-not discovered for a long time?  The existence of the bug and its
-ability to escape detection may surprise your entire team. ``How did
-that happen?'', you may ask.  This may happen due to a wide variety of
-reasons. One of the possible reasons is that the software has not been
-well tested and as a result the bug is not detected. Testing is an
-important method detecting bugs.  However, testing can be tideous.  It
-is common that someone makes a ``small'' change and skips testing.
-The person believes the change is so small and cannot possibly have
-any bug.  If several people add a few small changes here and there,
-the software soon is full of ``small'' bugs.  Why do people not test
-their programs immediately after they have made changes?  One reason
-is that testing require additional work.
-
-Is it possible testing is fully automated without any additional
-effort? {\it Continuous Integration} (CI) does exactly that.
-
-You still need to write testers. There is no way avoiding that part.
-What continuous integration does is to automatically invole these
-testers whenver you push your program to the shared repository.
-This chapter uses {\tt Travis-CI} for continuous integration. Before explaining how
-to use Continuous Integration, it is necessary first explaining how Python
-testing works.
+Testing is an essential part for creating high-quality software.  Many
+software developers understand the importance of testing but they do
+not really understand how to write tests and they do not understand
+the limitations of testing. This chaptper provides deeper insight
+about testing.
 
 \section{Limitations of Testing}
 
@@ -507,6 +488,19 @@ called, not surprisingly, {\tt 3}, {\tt 4}, and {\tt 5}.
 \end{tt}
 \nolinenumbers
 
+These tests consider only single arguments ('3', '4', or '5').  If
+additional arguments are needed, they need to be put into an array
+becasue {\tt checkArgs} takes an array of arguments.
+The following shows how to test with additional arguments.
+
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/software/test/test_intpart2.py}
+\end{tt}
+\nolinenumbers
+\label{page:test_intpart2.py}
+
 \section{Test Coverage}
 
 \index{test coverage}
@@ -573,26 +567,42 @@ Many lines change from {\tt !} (not tested) to {\tt >} (tested).
 The second test has 80\% coverage, higher than the first test.
 Here are the tests that can achieve 100\% coverage:
 
-
+\begin{comment}
  
 \vspace{0.2in}
 
 \noindent
 \begin{tabular}{|p{5in}|}\hline
 \begin{verbatim}
+
+python3 intpart.py  5 > expected/5
+python3 intpart.py -o 5 > expected/o5
+python3 intpart.py -e 8 > expected/e8
+python3 intpart.py -e 5 > expected/e5
+python3 intpart.py -r 5 > expected/r5
+python3 intpart.py -s 4 > expected/s4
+python3 intpart.py -o -e 4 > expected/oe4
+python3 intpart.py  > expected/noargs
+python3 intpart.py -h > expected/h
+
+coverage erase
 coverage run intpart.py -o 5
-coverage run intpart.py -e 6
-coverage run intpart.py -o 8
-coverage run intpart.py -r 5
-coverage run intpart.py -s 4
-coverage run intpart.py
-coverage run intpart.py -h
+coverage run -a intpart.py -e 8
+coverage run -a intpart.py -e 5
+coverage run -a intpart.py -o 7
+coverage run -a intpart.py -r 5
+coverage run -a intpart.py -s 4
+coverage run -a intpart.py -o -e 4
+coverage run -a intpart.py
+coverage run -a intpart.py -h
+coverage report
+
 \end{verbatim}
 \\ \hline
 \end{tabular}
 \vspace{0.2in}
 
-
+\end{comment}
 
 Is a
 higher coverage always better? This a common misunderstanding.  The
@@ -657,12 +667,35 @@ two tests? There are four scenarios.'' You may ask.
 That is the problem.
 
 What does this mean? Does this mean coverage is not helpful? Test
-coverage is very helpful.  percentage. You should check whether the
-specific lines you want to test have been covered.  Do not focus on
-the coverage number only.
+coverage is very helpful.  You should check whether the specific lines
+you want to test have been covered.  Do not focus on the coverage
+number only.
 
 
 \section{Continous Integration}
+
+Have you ever had a situation when your software has a bug but it is
+not discovered for a long time?  The existence of the bug and its
+ability to escape detection may surprise your entire team. ``How did
+that happen?'', you may ask.  This may happen due to a wide variety of
+reasons. One of the possible reasons is that the software has not been
+well tested and as a result the bug is not detected. Testing is an
+important method detecting bugs.  However, testing can be tideous.  It
+is common that someone makes a ``small'' change and skips testing.
+The person believes the change is so small and cannot possibly have
+any bug.  If several people add a few small changes here and there,
+the software soon is full of ``small'' bugs.  Why do people not test
+their programs immediately after they have made changes?  One reason
+is that testing require additional work.
+
+Is it possible testing is fully automated without any additional
+effort? {\it Continuous Integration} (CI) does exactly that.  You
+still need to write testers. There is no way avoiding that part.  The
+previous sections explain how to write tests.  What continuous
+integration does is to automatically invole these testers whenver you
+push your program to the shared repository.  This section uses {\tt
+  Travis-CI} for continuous integration. 
+
 
 \begin{figure}[h] \centering
 {\includegraphics[width=4.5in]{\thischapterpath/figures/travis01.png}}
@@ -670,17 +703,30 @@ the coverage number only.
 \label{fig:travis01}
 \end{figure}
 
+Using Travis-CI is quite simple. You need to add a special file whose
+name is {\it .travis.yml}.  It tells Travis-CI what to do when changes
+are pushed to {\tt github}.  This is a simple example:
 
-\vspace{0.2in}
+\resetlinenumber[1]
+\linenumbers
+\begin{tt}
+  \lstinputlisting{\progpath/software/test/.travis.yml}
+\end{tt}
+\nolinenumbers
 
-\noindent
-\begin{tabular}{|p{5in}|}\hline
-\begin{verbatim}
-$ python3 --version
-Python 3.5.2
-\end{verbatim}
-\\ \hline
-\end{tabular}
-\vspace{0.2in}
+The content of this file should be pretty easy to understand: It says
+the repository uses Python as the language and version 3.5 is
+required.  When changes are pushed, run {\tt pytest} and it
+automatically looks for a Python program starting with {\tt test\_}
+(such as {\tt test\_intpart} on page \pageref{page:test_intpart2.py}.
+Figure~\ref{fig:travis02} shows running {\tt pytest} successfully.  If
+the test fails, it will appear red.  You are encouraged to modify the
+test, make it fail, and see what a failure looks like.
+
+\begin{figure}[h] \centering
+{\includegraphics[width=4.5in]{\thischapterpath/figures/travis02.png}}
+\caption{Running pytest successfully in Travis-CI.}
+\label{fig:travis02}
+\end{figure}
 
 \index{pytest|)}
