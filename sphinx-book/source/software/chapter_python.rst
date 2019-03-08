@@ -4,7 +4,7 @@
 Introduction to Python
 ======================
 
-In this chapter  [1]_, we will examine the basic facilities of the
+In this chapter [1]_, we will examine the basic facilities of the
 Python programming language, and go on to the more advanced features in
 the next.
 
@@ -61,7 +61,7 @@ High-Level
 
 Python is a high-level language. It has high-level data structures built
 into the language, such as dictionaries that allow you to associate
-values with objects. As of Python2, Python has had a garbage collector.
+values with objects. Python has had a garbage collector.
 You allocate objects whenever you need them, but you don't have to
 delete them. When there is no way left for the program to access the
 object, when there are no pointers left that point to it, Python
@@ -115,7 +115,7 @@ Interactive Use
 '''''''''''''''
 
 You can execute Python from the command line in a command window. It
-will come up with a greeting and a command prompt (``>>>``).  [2]_
+will come up with a greeting and a command prompt (``>>>``). [2]_
 
 ::
 
@@ -238,7 +238,7 @@ or lowercase, but lowercase is too hard to distinguish from the digit
 one). The difference between integer and long integer is that integers
 are fixed sized. Integer arithmetic will overflow if the results get too
 large. Long integers occupy as much storage as they need. Long integer
-arithmetic does not overflow.  [3]_ For example, :math:`2^{32}` cannot
+arithmetic does not overflow. [3]_ For example, :math:`2^{32}` cannot
 be represented in 32 bits. So here is what happens when we try to take
 two to the 32nd power, written ``2**32`` in Python:
 
@@ -444,7 +444,7 @@ For example
 Variable names and other identifiers in Python are composed of letters,
 digits, and underscore characters. The first character of the identifier
 must not be a digit. The letters are the ISO-Latin characters A-Z and
-a-z.  [4]_
+a-z. [4]_
 
 You can also do several assignments on the same line; for example let's
 swap the values of ``a`` and ``b`` :
@@ -519,7 +519,7 @@ places to try to find what it means:
 #. The built-in names in the Python system. For example, the function
    ``abs()`` is a built-in name in Python.
 
-The scopes  [5]_ are pictured in `See Scopes for Names Known in a
+The scopes [5]_ are pictured in `See Scopes for Names Known in a
 Function. <chap2.html#83458>`__. The search for a name starts in the
 innermost scope and proceeds outward until the name is found or until
 there are no more scopes. To find the name referenced in a function, at
@@ -644,7 +644,7 @@ to reload module ``A`` to get the new definitions and then reload module
 ``B`` to assign the new definitions to local names. This can quickly get
 confusing.
 
-Python2 provides the ability to import modules and assign them to
+Python provides the ability to import modules and assign them to
 variables with different names (i.e., not the name of the module), or
 import functions, classes, and variables from modules assigning them to
 local variables with different names. The syntax is
@@ -726,7 +726,7 @@ We will present a complete list of the file operations in
 print Statement
 ~~~~~~~~~~~~~~~
 
-The print statement  [6]_ writes to the standard output. You can find
+The print statement [6]_ writes to the standard output. You can find
 the standard output file object in the ``sys`` module, ``sys.stdout``
 
 ::
@@ -762,7 +762,7 @@ The form of the ``while`` loop is
 ::
 
    while expression :
-    indented body
+      indented body
 
 The ``expression`` is evaluated to get a truth value. Python considers
 zero to be false and any non-zero value to be true. It considers empty
@@ -805,8 +805,6 @@ following code is in a file ``listfile.py`` :
 We can import it and use it to list itself:
 
 ::
-
-
 
    def listfile(name):
      from listfile import listfile
@@ -1637,6 +1635,8 @@ if their contents are equal.
 These two displays create separate tuples, so ``is`` returns false, but
 they have the same contents, so ``==`` returns true.
 
+.. todo:: Rewrite for Python 3 world only.
+
 test in Python1 uses a simple recursive search to test for equality. If
 you have a circularly linked structure, e.g., a tuple containing a list
 that is embedded within itself, the ``==`` operator may crash your
@@ -1725,23 +1725,17 @@ had its value computed yet. The program can test to see if it has a
 value without having to test first whether it exists. Trying to access
 it if it doesn't exist causes a runtime error, as shown here:
 
-``x=None``
+::
 
-``x==None``
+   >>> x = None
+   >>> x == None
+   True
+   >>> del(x)
+   >>> x
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   NameError: name 'x' is not defined
 
-1
-
-``del x``
-
-``x``
-
-Traceback (innermost last):
-
-File "<stdin>", line 1, in ?
-
-NameError: x
-
-is considered to be false in logical expressions.
 
 More on Assignment
 ~~~~~~~~~~~~~~~~~~
@@ -1754,7 +1748,7 @@ things that need to be considered:
 #. Unpacking sequences, assigning components of sequences to different
    variables at the same time
 
-#. Operate-and-becomes assignments in Python2, e.g. +=
+#. Operate-and-becomes assignments in Python, e.g. +=
 
 #. The order of evaluation in assignment statements
 
@@ -1773,59 +1767,73 @@ form is
 This will assign the variables in the targets the value(s) of the
 expressions. For example:
 
-i=j=0
+::
 
-and ``j`` zero.
+   >>> i = j =0
+   >>> i
+   0
+   >>> j
+   0
+
+Both ``i`` and ``j`` are set zero.
 
 Second, as we have already seen, more than one value may be assigned at
 the same time by separating the values with commas, for example:
 
-j,m=0,1
+::
+
+   >>> j,m = 0,1
+   >>> j
+   0
+   >>> m
+   1
 
 This can be used to swap values
 
-a,b=b,a
+::
+
+   a, b = b, a
 
 And multiple assignment and unpacking sequences can be used together,
 albeit somewhat confusingly:
 
-``i,m=j,n=0,1``
+::
 
-``i,j,m,n``
-
-(0, 0, 1, 1)
+   >>> i,m = j,n = 0,1
+   >>> i,j,m,n
+   (0, 0, 1, 1)
 
 You can assign from any sequence type, as long as the length of the
 variable list is the same as the length of the sequence. Lists, tuples,
 and strings are sequences, so
 
-``i,j=(3,4)``
+::
 
-``i,j``
+   >>> i,j = (3,4)
+   >>> i,j
+   (3, 4)
 
-(3, 4)
+   >>> i,j=[5,6]
+   >>> i,j
+   (5, 6)
 
-``i,j=[5,6]``
-
-``i,j``
-
-(5, 6)
-
-``i,j="ab"``
-
-``i,j``
-
-('a', 'b')
+   >>> i,j="ab"
+   >> i,j
+   ('a', 'b')
 
 Moreover, you can include subsequences on the left-hand side of the
 assignment, enclosing the list of variables in parentheses or brackets,
 thus:
 
-``i,(j,[m,n])=x=[1,[2,(3,4)]]``
+::
 
-``i,j,m,n,x``
-
-2, (3, 4)]])
+   >>> i,(j,[m,n]) = x = [1,[2,(3,4)]]
+   >>> i,j,m,n,x
+   (1, 2, 3, 4, [1, [2, (3, 4)]])
+   >>> i,j,m,n
+   (1, 2, 3, 4)
+   >>> x
+   [1, [2, (3, 4)]]
 
 Notice that if there are several assignments in the statement, each one
 is matched separately to the value of the right-hand side. The different
@@ -1837,20 +1845,20 @@ As with tuples, a parenthesized variable is treated as a simple
 variable, but including a comma after it causes it to be matched to the
 contents of a single element sequence, as shown in the following:
 
-``(x)=[9]``
+::
 
-``x``
+   >>> (x)=[9]
+   >>> x
+   [9]
+   >>> (x,)=[9]
+   >>> x
+   9
 
-``(x,)=[9]``
-
-``x``
-
-9
 
 Operate and Becomes
 '''''''''''''''''''
 
-Python2 allows certain binary operators to be combined with the
+Python allows certain binary operators to be combined with the
 assignment operator. The general rule is that ``x op= y`` is equivalent
 to ``x = x op y``.
 
@@ -2232,7 +2240,7 @@ individual character. Python has no character data type. You get a
 string of length one containing the character.
 
 The original strings in Python contained byte-sized, Latin character
-set/ASCII characters. Python2 also provides Unicode character strings.
+set/ASCII characters. Python also provides Unicode character strings.
 We will assume the original character set in our discussion except where
 we explicitly discuss Unicode.
 
@@ -2543,7 +2551,7 @@ characters are
 '
 
 -  –Like s, but uses ``repr()`` rather than ``str()`` to convert the
-   argument (in Python2).
+   argument.
 
 -  –A single character. The value to be converted can either be an
    integer that is the internal code for a character or a string of
@@ -2644,7 +2652,7 @@ The String Module and String Methods
 ''''''''''''''''''''''''''''''''''''
 
 The string module provides a number of useful functions and constants.
-In Python2, functions from the string module were made into methods of
+In Python, functions from the string module were made into methods of
 string objects. `See Most Important String Functions and
 Methods. <chap2.html#33427>`__ shows the most useful of these functions
 and methods.
@@ -2824,7 +2832,7 @@ we used the interpreter to try out code to see what it would do.
 
 --------------
 
-1. Although Python2 does have Unicode strings.
+1. Python does have Unicode strings.
 
 2. We say "x is considered false" and "x counts as false," because
 various values, like zero, None, and empty sequences, are treated as
