@@ -214,8 +214,7 @@ Python has four built-in arithmetic data types:
 Integer literals can be written in decimal, octal, or hexadecimal (base
 16) format using the same syntax as in C or C++:
 
--  Octal integers begin with 0 and contain only octal digits (0-7).
-   Strangely, that means zero is written in octal.
+-  Octal integers begin with 0o (yes, it's weird but true) and contain only octal digits (0-7).
 
 -  Decimal integers begin with a decimal digit other than zero and
    contain only decimal digits.
@@ -228,33 +227,35 @@ Integer literals can be written in decimal, octal, or hexadecimal (base
 
    >>> 20
    20
-   >>> 020
-   020
-   >>> 0x20
+   >>> 0o20
    16
+   >>> 0x20
+   32
 
-Long integers are written as an integer followed with an L (in uppercase
-or lowercase, but lowercase is too hard to distinguish from the digit
-one). The difference between integer and long integer is that integers
-are fixed sized. Integer arithmetic will overflow if the results get too
-large. Long integers occupy as much storage as they need. Long integer
-arithmetic does not overflow. [3]_ For example, :math:`2^{32}` cannot
-be represented in 32 bits. So here is what happens when we try to take
-two to the 32nd power, written ``2**32`` in Python:
+Python (as of version 3) no longer distinguishes between integer and long integer,
+which is a result of `PEP 237 <https://www.python.org/dev/peps/pep-0237/>`_. Integers are 
+always ``<class 'int'>``. They are automatically widened to support any needed level of 
+precision. The following shows every 16 powers of 2 starting from 0.
 
 ::
 
-   >>> 2**32
-   4294967296
-
-::
-
-   >>> 2L**32
-   4294967296L
+   >>> for i in range(0, 129, 16):
+   ...    print( i, 2**i, type(2**i) )
+   ... 
+   0 1 <class 'int'>
+   16 65536 <class 'int'>
+   32 4294967296 <class 'int'>
+   48 281474976710656 <class 'int'>
+   64 18446744073709551616 <class 'int'>
+   80 1208925819614629174706176 <class 'int'>
+   96 79228162514264337593543950336 <class 'int'>
+   112 5192296858534827628530496329220096 <class 'int'>
+   128 340282366920938463463374607431768211456 <class 'int'>
 
 Since integers occupy single machine words, computers perform integer
 arithmetic very fast. Long integer arithmetic typically requires much
-more time.
+more time. Therefore, you should exercise care when taking advantage of
+higher precision as it will affect performance.
 
 Floating point numbers are written with a decimal point or an exponent,
 or both. For example: ``.2``, ``2.0``, ``20.``, ``2000e-1``, ``2E3``.
@@ -2865,10 +2866,6 @@ statements.
    Python is easy to run on Linux, OS X, and Windows. For Windows, we
    recommend installing Windows Subsystem for Linux to get a complete
    Linux shell environment. To be covered in preliminaries section.
-
-.. [3]
-   GKT: Latest releases of Python 2 and 3 do not overflow. This needs to
-   be revised.
 
 .. [4]
    Python also provides full UNICODE support.
