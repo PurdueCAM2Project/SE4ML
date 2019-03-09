@@ -474,7 +474,7 @@ statement, for example:
    >>> def diff(x,y):
    ...    return abs(x-y)
    ...
-   >>> diff(-10.5)
+   >>> diff(-10, 5)
    15
 
 creates a function ``diff`` that returns the absolute difference between
