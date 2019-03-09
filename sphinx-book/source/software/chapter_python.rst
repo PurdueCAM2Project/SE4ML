@@ -1862,19 +1862,15 @@ Python allows certain binary operators to be combined with the
 assignment operator. The general rule is that ``x op= y`` is equivalent
 to ``x = x op y``.
 
-So,
-
-x+=1
-
-.
+So, ``x+=1`` is ``x = x + 1``.
 
 The operators that you can combine with an assignment are:
 
--  The arithmetic operators: +, -, \*, /, %, \*\*
+-  The arithmetic operators: ``+``, ``-``, ``\*``, ``/``, ``%``, and ``**``
 
--  The bitwise operators: &, , ^
+-  The bitwise operators: ``&``, ``|``, and ``^``
 
--  The shift operators: <<, >>
+-  The shift operators: ``<<`` and ``>>``
 
 Evaluation Order
 ''''''''''''''''
@@ -1885,28 +1881,27 @@ the targets from left to right. Within the targets, it also goes left to
 right making assignments. This can produce some confusion. Consider the
 following code:
 
-``r=range(10)``
+::
 
-``r.reverse()``
-
-``r``
-
-``i=2``
-
-``i,r[i]=r[i],i``
-
-``r``
+   >>> r = list(range(10))
+   >>> r.reverse()
+   >>> r
+   [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+   >>> i=2
+   >>> i,r[i] = r[i],i
+   >>> r
+   [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 
 has an initial value of two, you would expect that the assignment
 
-``…,r[i]=…,i``
+``...,r[i]=...,i``
 
 to ``r[2]`` , replacing ``7`` with ``2`` in the sequence. But before
 that happens, we assign
 
-``i,…=r[i],…``
+``i,...=r[i],...``
 
-which is to say, we assign ``i=r[2]`` , or seven. Then we assign
+which is to say, we assign ``i=r[2]`` , or the value ``7``. Then we assign
 ``r[7]`` the value ``2`` , which was already there.
 
 Assignment to Local Scope
@@ -1928,8 +1923,7 @@ So what if you want to assign a value to a module-scope variable in a
 function? You can't just assign a value to the variable name; that would
 create a local variable with the same name. What you can do is use the
 only declaration in the Python language, the ``global`` statement. The
-global statement has the form
-
+global statement has the form ``global id1, id2, ...``.
 It declares that the variable names ``id1`` , ``id2`` , etc. are
 variables of the surrounding module and are to be fetched and assigned
 there. The ``global`` statement must appear before the variables are
@@ -1941,99 +1935,101 @@ Deleting Variables
 You create a variable in a scope just by assigning to it. You can delete
 it from the scope using the ``del`` statement.
 
-``x=9``
+::
 
-``x``
+   >>> x=9
+   >>> x
+   9
+   >>> 9
+   9
+   >>> del x
+   >>> x
 
-9
+   Traceback (most recent call last):
+   File "<stdin>", line 1, in <module>
+   NameError: name 'x' is not defined
 
-``del x``
-
-``x``
-
-Traceback (innermost last):
-
-File "<stdin>", line 1, in ?
-
-NameError: x
-
-.. _section-2:
+Dictionaries
+~~~~~~~~~~~~~~~~~~
 
 A dictionary is a mutable, associative structure. Considering these
 characteristics one at a time:
 
--  –You can add key-value pairs to a dictionary and remove them.
+-  *Mutable*: You can add key-value pairs to a dictionary and remove them.
 
--  –Dictionaries map keys into values. Given a key, you can look up its
+-  *Associaive*: Dictionaries map keys into values. Given a key, you can look up its
    value. It looks like indexing a list or tuple, but unlike lists and
    tuples, the keys can be almost any immutable data type, not just
    integers. (It is peferrable that keys be immutable because if you put
    the key in the table and then changed its contents, you might not be
    able to look it up again.)
 
-Dictionaries are like small, in-memory databases. `See Operations on
-Dictionaries. <chap2.html#13000>`__ shows the operators, functions, and
+.. todo:: Add cross reference to operations on dictionaries
+
+Dictionaries are like small, in-memory databases. The following table shows the operators, functions, and
 methods available for dictionaries.
 
-#. | 
-   | Operations on Dictionaries
+.. list-table:: Dictionary Methods
+   :widths: 15 45
+   :header-rows: 1
 
-Operator, Function, Method
+   * - Operator, Function, Method
+     - Explanation
 
-Explanation
+   * - ``{ k:v, ... }`` 
+     - Creates a dictionary with the given key-value pairs.
 
-Creates a dictionary with the given key-value pairs.
+   * - ``d[k]``
+     - Returns the value associated with key ``k`` in dictionary ``d``. It is an error if the key is not present in the dictionary. See methods ``has_key()`` and ``get()``.
 
-Returns the value associated with key ``k`` in dictionary ``d``. It is
-an error if the key is not present in the dictionary. See methods
-``has_key()`` and ``get()``.
+   * - ``d[k] = v``
+     - Associates value ``v`` with key ``k`` in dictionary ``d``. The key must be *hashable*. That is, it should not be mutable. Python won't accept lists as keys.
 
-with key ``k`` in dictionary ``d``. The key must be "hashable," that is,
-it should not be mutable. Python won't accept lists as keys.
+   * - ``del d[k]``
+     - Deletes key ``k`` and its associated value from dictionary ``d``. It is an error if the key doesn't exist.
 
-and its associated value from dictionary ``d``. It is an error if the
-key doesn't exist.
+   * - ``d.clear()``
+     - Removes all key-value pairs from dictionary ``d``.
 
-Removes all key-value pairs from dictionary ``d``.
+   * - ``d.copy()``
+     - Creates a copy of the dictionary ``d``. This is a *shallow* copy. The dictionary itself is copied, but none of the key or value objects it contains are copied.
 
-Creates a copy of dictionary ``d``. This is a shallow copy: The
-dictionary itself is copied, but none of the key or value objects it
-contains are copied.
 
-Returns the value associated with key ``k`` in dictionary ``d``. If
-``k`` isn't present in the dictionary, it returns ``None``.
+   * - ``d.get(k)``
+     - Returns the value associated with key ``k`` in dictionary ``d``. If ``k`` isn't present in the dictionary, it returns ``None``.
 
-Returns the value associated with key ``k`` in dictionary ``d``. If
-``k`` isn't present in the dictionary, it returns ``v``.
+   * - ``d.get(k,v)``
+     - Returns the value associated with key ``k`` in dictionary ``d``. If ``k`` isn't present in the dictionary, it returns ``v``.
 
-Returns true (1) if dictionary ``d`` contains key ``k`` and false (0)
-otherwise.
+   * - ``d.has_key(k)``
+     - Returns True if dictionary ``d`` contains key ``k`` and False otherwise.
 
-``]`` , a list of all the key-value pairs currently in the dictionary
-``d``. The key-value pairs are tuples of two elements ``(key,value)``.
+   * - ``d.items()``
+     -  Returns ``[(k,v), ...]``, a list of all the key-value pairs currently in the dictionary ``d``. The key-value pairs are tuples of two elements ``(key,value)``. Python 3 returns ``dict_items([(k,v), ...])``, which is a lazy form.
 
-| Returns a list of all the keys currently in
-| dictionary ``d``.
+   * - ``d.keys()``
+     - Returns a list of all the keys currently in dictionary ``d``. Similar to ``d.items()``, Python 3 returns ``dict_keys([k1, k2, ...])``, which is a lazy form. 
 
-Adds all the key-value pairs from dictionary ``m`` to dictionary ``d``.
-Any key in ``d`` that is the same as a key in ``m`` has its value
-reassigned.
+   * - ``d.update(m)``
+     - Adds all the key-value pairs from dictionary ``m`` to dictionary ``d``. Any key in ``d`` that is the same as a key in ``m`` has its value reassigned.
 
-Returns a list of all the values currently in dictionary ``d``.
+   * - ``d.values()``
+     - Returns a list of all the values currently in dictionary ``d``. Similar to ``d.keys()``, Python 3 returns Python 3 returns ``dict_keys([v1, v2, ...])``, which is a lazy form.
 
-``d.setdefault(k) d.setdefault(k,x)``
-
-with initialization. As if defined
-
-``def setdefault(self,k,x=None):``
-
- 
+   * - ``d.setdefault(k)`` or ``d.setdefault(k,x)``
+     - This method is a bit strangely named, because its end result is to set and then get a value from the dictionary. Its behavior is to test whether a key ``k`` is present. If present, the value is returned. If not present, the key ``k`` is set to None or to a default value of ``x``. In most cases, use ``d.get(k,None)`` or ``d.get(k,x)`` instead. 
 
 You can create an empty dictionary by writing an open-close-brace pair:
 
-``d={}``
+:: 
 
-``d``
+   >>> d={}
+   >>> d
+   {}
+
+
+
+   
 
 You can create a dictionary with initial contents by placing one or more
 associations in the braces:
