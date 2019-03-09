@@ -2270,67 +2270,83 @@ write the string on a single line, you can enclose it in single quotes (
 string containing one kind of quote inside the other kind of quotes, for
 example:
 
+::
 
-.. todo:: Need to fix this example
+   >>> 'He said, "Hi."'
+   'He said, "Hi."'
 
 
 If you need both kind of quotes, you can write more than one string in a
 row and let Python concatenate them for you. Here we use three strings
 in a row:
 
-.. todo:: Need to fix this example
+::
+
+   >>> 'He said, "She said,' "'Hi.'" '"'
+   'He said, "She said,\'Hi.\'"'
+
 
 The output here shows Python's incorporation character, the backslash.
 The backslash tells Python that the following character is to have a
 special interpretation within the string. Python's incorporation
-sequences are shown in `See Incorporation Character Sequences in String
-Literals. <chap2.html#44479>`__.
+sequences are shown in the following table.
 
-#. | 
-   | Incorporation Character Sequences in String Literals
+.. list-table:: Incorporation Character Sequences in String Literals
+   :widths: 15 45
+   :header-rows: 1
 
-Sequence
+   * - Sequence
+     - Meaning
 
-Meaning
+   * - ``\`` followed by end of line
+     - Continues the string literal to the next line, without including a newline character
 
-end-of-line
+   * - ``\\``
+     - Includes a backslash character
 
-Continues the string literal to the next line, without including a
-newline character
+   * - ``\'``
+     - Includes a single quote
 
-``\\``
+   * - ``\"``
+     - Includes a double quote
 
-Includes a backslash character
+   * - ``\a``
+     - Includes an attention signal (beep) character
 
-Includes a single quote
+   * - ``\b``
+     - Includes a backspace character
 
-Includes a double quote
+   * - ``\e``
+     - Includes an escape character
 
-Includes an attention signal (beep) character
+   * - ``\f``
+     - Includes a form feed character
 
-Includes a backspace character
+   * - ``\n``
+     - Includes a line feed (newline) character
 
-Includes an escape character
+   * - ``\t``
+     - Includes a tab character
 
-Includes a form feed character
+   * - ``\r``
+     - Includes a carriage return character
 
-Includes a line feed (newline) character
+   * - ``\v``
+     - Includes a vertical tab character
 
-Includes a tab character
+   * - ``\0``
+     - Includes a null character. (Unlike C, Python allows null characters in strings.)
 
-Includes a carriage return character
+   * - ``\0oo``
+     - Includes the character whose octal code is ``oo`` (digits 0 through 7)
 
-Includes a vertical tab character
+   * - ``\xhh``
+     - Includes the character whose hexadecimal code is ``hh`` (digits 0 through F)
 
-Includes a null character. (Unlike C, Python allows null characters in
-strings.)
+   * - ``\uhhhh``
+     - Only in Unicode strings, incorporates the character whose hexadecimal number in the Unicode character set is ``hhhh``.
 
-Includes the character whose octal code is oo.
-
-Includes the character whose hexadecimal code is hh.
-
-Only in Unicode strings, incorporates the character whose hexadecimal
-number in the Unicode character set is hhhh.
+.. todo:: Expand Unicode discussion. We cover it, but there is more in Python 3.
 
 Suppose you need a string to extend beyond the end of a line. There
 several ways to do it. You can get Python to continue the statement on
@@ -2338,48 +2354,61 @@ the next line and put quoted parts of the string on the separate lines.
 Since Python understands that unbalanced parentheses require continuing
 the statement to another line, this will work:
 
-``("a"``
+::
 
-'aB'
+   >>> ("a"
+   ... "B")
+   'aB'
 
 Python will also continue a statement if the last character on the line
 is a backslash.
 
-``"a"\``
+::
 
-'aB'
+   >>> "a"\
+   ... "B"
+   'aB'
 
 For that matter, a backslash also works within strings:
 
-``"a\``
+::
 
-'aB'
+   >>> "a\
+   ... B"
+   'aB'
 
 Python also allows strings to be enclosed in triple quotes, either
 ``"""`` or ``'''``. These strings may extend beyond the end of a line
 without special handling. However, they include a newline character
-(octal number 012) for each line boundary they cross:
+(``\n``) for each line boundary they cross:
 
-``"'a``
+::
 
-012B'
+   >>> """a
+   ... B"""
+   'a\nB'
+
 
 If you do not want a newline character included for the end of a line,
 put a backslash character at the end of the line:
 
-``"'a\``
+::
 
-'aB'
+   >>> """a\
+   ... B"""
+   'aB'
 
 Python also allows you to specify raw strings. In a raw string, you get
 the characters exactly as written. The incorporation character has no
 special meaning. This is more useful to people using Windows, since
-backslash is used to separate directories and files on paths, and it
+backslash is used to separate directories and files on paths (those found
+in the DOS/Windows world in particular), and it
 would be annoying to have to incorporate each one of them:
 
-``r"D:\Tests\SayHi.py"``
+::
 
-SayHi.py'
+   >>> r"D:\Tests\SayHi.py"
+   'D:\\Tests\\SayHi.py'
 
 One warning: A backslash may not be the last character of a raw string.
 Python tries to gobble up the following character as part of the string.
