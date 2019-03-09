@@ -27,12 +27,10 @@ Download
 
 See `PurdueCAM2Project/SE4ML/releases <https://github.com/PurdueCAM2Project/SE4ML/releases>`__ for *printable* PDF.
 
-Travis Build Status
-====================
+Want to cite us?
+==================
 
-.. image:: https://travis-ci.com/PurdueCAM2Project/SE4ML.svg?branch=master
-   :target: https://travis-ci.com/PurdueCAM2Project/SE4ML
-
+Yung-Hsiang Lu and George K. Thiruvathukal, Software Engineering and Machine Learning, PurdueCAM2Project/SE4ML, Zenodo, http://doi.org/10.5281/zenodo.2532051.
 
 Indices and tables
 ==================
