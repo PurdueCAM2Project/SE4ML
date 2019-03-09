@@ -6,14 +6,7 @@
 Software Engineering for Machine Learning
 =========================================
 
-This is a book in progress by Yung-Hsiang Lu and George K. Thiruvathukal.
-
-If you are looking for the book source, see
-`PurdueCAM2Project/SE4ML <https://github.com/PurdueCAM2Project/SE4ML>`__.
-
-If you are looking for the PDF snapshots, see
-`PurdueCAM2Project/SE4ML/releases <https://github.com/PurdueCAM2Project/SE4ML/releases>`__.
-
+A draft book by Yung-Hsiang Lu and George K. Thiruvathukal.
 
 .. toctree::
    :maxdepth: 2
@@ -23,6 +16,22 @@ If you are looking for the PDF snapshots, see
    unsupervised/part_unsupervised
    supervised/part_supervised
    misc/part_misc
+
+Source
+====================
+
+See `PurdueCAM2Project/SE4ML <https://github.com/PurdueCAM2Project/SE4ML>`__.
+
+Download
+====================
+
+See `PurdueCAM2Project/SE4ML/releases <https://github.com/PurdueCAM2Project/SE4ML/releases>`__ for *printable* PDF.
+
+Travis Build Status
+====================
+
+.. image:: https://travis-ci.com/PurdueCAM2Project/SE4ML.svg?branch=master
+   :target: https://travis-ci.com/PurdueCAM2Project/SE4ML
 
 
 Indices and tables
