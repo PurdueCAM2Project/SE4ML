@@ -1980,7 +1980,7 @@ methods available for dictionaries.
      - Creates a dictionary with the given key-value pairs.
 
    * - ``d[k]``
-     - Returns the value associated with key ``k`` in dictionary ``d``. It is an error if the key is not present in the dictionary. See methods ``has_key()`` and ``get()``.
+     - Returns the value associated with key ``k`` in dictionary ``d``. It is an error if the key is not present in the dictionary. See methods ``k in d`` (whether key ``k`` is in dict ``d``) and ``get()``.
 
    * - ``d[k] = v``
      - Associates value ``v`` with key ``k`` in dictionary ``d``. The key must be *hashable*. That is, it should not be mutable. Python won't accept lists as keys.
@@ -2001,7 +2001,7 @@ methods available for dictionaries.
    * - ``d.get(k,v)``
      - Returns the value associated with key ``k`` in dictionary ``d``. If ``k`` isn't present in the dictionary, it returns ``v``.
 
-   * - ``d.has_key(k)``
+   * - ``k in d``
      - Returns True if dictionary ``d`` contains key ``k`` and False otherwise.
 
    * - ``d.items()``
@@ -2026,17 +2026,16 @@ You can create an empty dictionary by writing an open-close-brace pair:
    >>> d={}
    >>> d
    {}
-
-
-
    
 
 You can create a dictionary with initial contents by placing one or more
 associations in the braces:
 
-``d={"a":1,1:(2,3),(2,3):"a"}``
+::
 
-``d``
+   >>> d={"a":1,1:(2,3),(2,3):"a"}
+   >>> d
+   {(2, 3): 'a', 1: (2, 3), 'a': 1}
 
 In this example, we associate the string key ``"a"`` with the value 1;
 key ``1`` with the value tuple ``(2,3)`` ; and the key tuple ``(2,3)``
@@ -2046,20 +2045,21 @@ this.)
 You can look up the value for a key by subscripting the dictionary with
 the value of the key.
 
-``d[1]``
+::
 
-(2, 3)
+   >>> d[1]
+   (2, 3)
+   >>> d[(2,3)]
+   'a'
 
-``d[(2,3)]``
-
-'a'
 
 Since Python uses the equality operator, ``==`` , to test the keys,
 equal numbers are considered to be the same key:
 
-``d[1.0]``
+::
 
-(2, 3)
+   >>> d[1.0]
+   (2, 3)
 
 Be careful, though, with floating point numbers. They are not exact, and
 they may differ by a few bits in the low order positions even if they
@@ -2067,13 +2067,12 @@ look equal.
 
 It is a runtime error to look up a nonexistent key in a dictionary.
 
-``d[10]``
+::
 
-Traceback (innermost last):
-
-File "<stdin>", line 1, in ?
-
-KeyError: 10
+   >>> d[10]
+   Traceback (innermost last):
+     File "<stdin>", line 1, in ?
+   KeyError: 10
 
 If you don't want to worry about an error when looking up a value, you
 can use the ``get()`` method. The call ``d.get(k)`` will yield the value
@@ -2081,127 +2080,134 @@ for key ``k`` in dictionary ``d`` , if it exists, or return the value
 ``None`` if it doesn't. The call ``d.get(k,v)`` is the same, except that
 it returns the value ``v`` if the key isn't present.
 
-``d``
+::
 
-``d.get(10)``
+   >>> d
+   {(2, 3): 'a', 1: (2, 3), 'a': 1}
 
-``d.get(10)==None``
+   >>> d.get(10)
+   >>> d.get(10) == None
+   True
 
-1
-
-``d.get(10,"absent")``
-
-'absent'
+   >>> d.get(10,"absent")
+   'absent'
 
 Notice that the Python interpreter doesn't write out the value ``None``
 in interactive mode.
 
 Alternatively, you can ask whether the dictionary contains the key
-before subscripting with it. Method call ``d.has_key(k)`` will return
+before subscripting with it. Method call ``k in d`` will return
 true or false (1 or 0) depending on whether the dictionary ``d``
 contains the key ``k`` or not. (Operator ``in`` does not apply to
 dictionaries.)
 
-``d.has_key(1)``
+::
 
-1
+   >>> 1 in d
+   True
 
-``d.has_key(10)``
-
-0
+   >>> 10 in d
+   False
 
 You can insert a new key-value pair into the dictionary by subscripting
 a dictionary on the left-hand side of an assignment operator with the
 key and assigning it the value. You can assign a new value to a key the
 same way:
 
-``d[10]=10``
+::
 
-``d``
+   >>> d[10]=10
+   >>> d
+   {(2, 3): 'a', 10: 10, 1: (2, 3), 'a': 1}
+   >>> d[10]="a"
+   >>> d
+   {(2, 3): 'a', 10: 'a', 1: (2, 3), 'a': 1}
 
-{(2, 3): 'a', 10: 10, 1: (2, 3), 'a': 1}
+The ``len()`` function will tell you the number of associations the dictionary contains:
 
-``d[10]="a"``
+::
 
-``d``
+   >>> d
+   {(2, 3): 'a', 10: 'a', 1: (2, 3), 'a': 1}
+   >>> len(d)
+   4
 
-{(2, 3): 'a', 10: 'a', 1: (2, 3), 'a': 1}
+You can use the ``del`` statement, ``del d[k]`` , to remove
+association ``k`` from the dictionary ``d``.
 
-function will tell you the number of associations the dictionary
-contains:
+::
 
-``d``
+   >>> del d[10]
+   >>> len(d)
+   3
 
-{(2, 3): 'a', 10: 'a', 1: (2, 3), 'a': 1}
+   >>> d
+   {1: (2, 3), (2, 3): 'a', 'a': 1}
 
-``len(d)``
-
-4
-
-statement, ``del`` ``dictionary`` ``[`` ``key`` ``]`` , to remove
-associations from the dictionary.
-
-``del d[10]``
-
-``len(d)``
-
-3
-
-``d``
+.. note:: Never depend on the ordering of keys in a dictionary. Dictionary key ordering may differ from what you see in any of our examples.
 
 There are three methods to examine the contents of a dictionary without
 knowing the keys:
 
-#. to get a list of all the keys currently in the dictionary.
+#. Call ``d.keys()`` to iterate of all of the keys currently in the dictionary.
 
-#. to get a list of all the values.
+#. Call ``d.values()`` to iterate all of all the values.
 
-#. to get a list of all the key-value pairs in ``d``.
+#. Call ``d.items()`` to iterate all of the key-value pairs in ``d``.
 
 The key-value pairs are in ``(`` ``key,value`` ``)`` tuples.
 
-``d``
+::
 
-``d.keys()``
-
-``d.values()``
-
-``d.items()``
-
-((2, 3), 'a'), (1, (2, 3)), ('a', 1)]
+   >>> d
+   {1: (2, 3), (2, 3): 'a', 'a': 1}
+   >>> d.keys()
+   dict_keys([1, (2, 3), 'a'])
+   >>> d.values()
+   dict_values([(2, 3), 'a', 1])
+   >>> d.items()
+   dict_items([(1, (2, 3)), ((2, 3), 'a'), ('a', 1)])
 
 To create a copy of a dictionary, you could create an empty dictionary
 and then update it from the one you want to copy, for example:
 
-``e={}``
+::
 
-``e.update(d)``
-
-``e``
+   >>> e={}
+   >>> e.update(d)
+   >>> e
+   {1: (2, 3), (2, 3): 'a', 'a': 1}
 
 behaves the same as:
 
-``for k in d.keys(): e[k]=d[k]``
+::
 
-But it is easier to use the ``copy()`` method:
+   >>> e = {}
+   >>> for k in d.keys():
+   ...   e[k] = d[k]
+   ... 
+   >>> e
+   {1: (2, 3), (2, 3): 'a', 'a': 1}
 
-e=d.copy()
+But it is easier, more efficient, and less error-prone to use the ``copy()`` method:
+
+:: 
+
+   >>> e = d.copy()
 
 When you copy a dictionary, you get a shallow copy. The dictionary
 object is copied, but none of the keys or values it contains are.
 Consider the following example:
 
-``x={"a":[0]}``
+::
 
-``y=x.copy()``
-
-``x is y``
-
-0
-
-``y["a"][0]=1``
-
-``x``
+   >>> x = { "a" : [0] } 
+   >>> y = x.copy()
+   >>> x is y
+   False
+   >>> y["a"][0]=1
+   >>> x
+   { "a" : [1] }
 
 The value associated with key ``"a"`` in dictionary ``x`` is a list
 containing a single value, zero. When we copy ``x`` , we get a new,
@@ -2210,23 +2216,37 @@ same, but the lists they contain are, so when we change the list
 associated with key ``"a"`` in dictionary ``y`` , that is the same list
 we see associated with " ``a`` " in dictionary ``x``.
 
-Relational operators work on dictionaries the same way as sequences:
-They do a lexicographical compare. They compare the components in sorted
-order by key. Expect this to be slow.
+Relational operators other than ``==`` do not work on dictionaries the same way as sequences as of Python 3,
+presumably because it is computationally expensive. It would also not be meaningful when the
+dictionaries have different sets of keys.
 
-``D1={"x":1,"y":2,"z":3}``
+If you wanted to compare dictionaries, you would need to obtain a representation 
+that is sorted by key. In the following, the two dictionaries are converted to lists of tuples,
+sorted, and compared.
 
-``D2={"x":1,"y":4,"z":3}``
+::
 
-``D1==D2``
+   >>> D1={ "x" : 1, "y" : 2, "z" : 3 }
+   >>> D2={ "x" : 1, "y" : 4, "z" : 3 }
+   >>> D1==D2
+   False
+   >>> L1 = list(D1.items())
+   >>> L2 = list(D2.items())
+   >>> L1.sort()
+   >>> L2.sort()
+   >>> L1
+   [('x', 1), ('y', 2), ('z', 3)]
+   >>> L2
+   [('x', 1), ('y', 4), ('z', 3)]
+   >>> L1 < L2
+   True
+   >>> L1 > L2
+   False
 
-0
 
-``D1<D2``
 
-1
-
-.. _section-3:
+Strings
+~~~~~~~~~~~~~~~~~~
 
 Strings are a kind of immutable sequence, like tuples. Once the string
 has been created, you can't change its contents. Unlike tuples, where
