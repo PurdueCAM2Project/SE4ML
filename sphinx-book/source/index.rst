@@ -6,7 +6,7 @@
 Software Engineering for Machine Learning
 =========================================
 
-A draft book by Yung-Hsiang Lu and George K. Thiruvathukal.
+A draft book by `Yung-Hsiang Lu <https://engineering.purdue.edu/ECE/People/ptProfile?resource_id=3355>`_ and  and `George K. Thiruvathukal <https://thiruvathukal.com/>`_.
 
 .. toctree::
    :maxdepth: 2
@@ -20,7 +20,7 @@ A draft book by Yung-Hsiang Lu and George K. Thiruvathukal.
 Source
 ====================
 
-See `PurdueCAM2Project/SE4ML <https://github.com/PurdueCAM2Project/SE4ML>`__.
+See `PurdueCAM2Project/SE4ML <https://github.com/PurdueCAM2Project/SE4ML>`_.
 
 Download
 ====================
