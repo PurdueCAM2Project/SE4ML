@@ -2423,61 +2423,53 @@ String Operators
 
 The string operators are the same as those that apply to tuples, with
 one extra operator for string formatting. The operators are shown in
-`See String Operators. <chap2.html#53096>`__.
+the following table.
 
-#. | 
-   | String Operators
+.. list-table:: String Operators
+   :widths: 15 45
+   :header-rows: 1
 
-Operator
+   * - Operator
+     - Meaning
 
-Meaning
 
-Produces a new string which is the concatenation of strings ``s`` and
-``u``. An ordinary string concatenated with a Unicode string gives a
-Unicode string result.
+   * - ``s+u``
+     - Produces a new string which is the concatenation of strings ``s`` and ``u``. An ordinary string concatenated with a Unicode string gives a Unicode string result.
 
-Creates a new string composed of ``n`` copies of string ``s`` , where
-``n`` is an integer.
+   * - ``n*s`` or ``s*n``
+     - Creates a new string composed of ``n`` copies of string ``s`` , where ``n`` is an integer.
 
-String formatting–Creates a new string by formatting values in tuple
-``t`` and inserting them into specified places in string ``s``. We
-discuss this later in the text.
+   * - ``s % t``
+     - String formatting–Creates a new string by formatting values in tuple ``t`` and inserting them into specified places in string ``s``. We discuss this later in the text.
 
-String formatting–Creates a new string by formatting values in
-dictionary ``d`` and inserting them into specified places in string
-``s``. We discuss this later in the text.
+   * - ``s % d``
+     - String formatting–Creates a new string by formatting values in dictionary ``d`` and inserting them into specified places in string ``s``. We discuss this later in the text.
 
-Yields a one-character string composed of the character at position
-``i`` in string ``s``.
+   * - ``s[i]``
+     - Yields a one-character string composed of the character at position ``i`` in string ``s``.
 
-| Yields a string composed of the characters from position ``i`` up to
-  but not including position ``j`` in
-| string ``s``.
+   * - ``s[i:j]`` 
+     - Yields a string composed of the characters from position ``i`` up to but not including position ``j`` in string ``s``.
 
-Converts the value of expression ``e`` into a string. Note: These are
-back-quotes. Regular quotes are used for string literals.
+   * - ``eval(e)``
+     - Converts the value of expression ``e`` into a string. Python previously supported a form of evaluation using back-tick style quotes. Exercise caution when evaluating expressions supplied from user interfaces (e.g. web apps) as this presents a security risk.
 
-``1`` ``, x`` ``2`` ``, …, x`` ``n-1`` ``=s``
+   * - ``x1,x2,x3,...,xN = s``
+     - Assigns one-character substrings of string ``s`` from left to right to variables x1,x2,..,xN. This is just a multiple assignment statement.
 
-one-character substrings of string ``s`` from left to right to variables
-``x`` ``0`` , ``x`` ``1`` , ``x`` ``2`` ,… ``x`` ``n-1``.This is just a
-multiple assignment statement.
+String Evaluation
 
-String Displays
-
-The equivalent of ``[…]`` for lists and ``(…)`` for tuples is ``'…'``
-for strings. The form ``'x'`` evaluates expression ``x`` and converts
+The equivalent of ``[...]`` for lists and ``(...)`` for tuples is ``eval(...)``
+for strings. The form ``eval(x)`` evaluates expression ``x`` and converts
 its value to a string, for example:
 
-``a=1;b=2``
+::
 
-``'a+b'``
-
-'3'
-
-``'(a,b)'``
-
-'(1, 2)'
+   >>> a=1;b=2
+   >>> eval("a+b")
+   3
+   >>> eval("(a,b)")
+   '(1, 2)'
 
 Sequence Operators
 
@@ -2514,185 +2506,170 @@ string, replacing its formatting sequence. For example, the following
 produces a string with the number 65 translated into octal, decimal, and
 hexadecimal, the translations separated by colons:
 
-``"%o:%d:%x" % (65,65,65)``
+::
 
-'101:65:41'
+   >>> "%o:%d:%x" % (65,65,65)
+   '101:65:41'
 
-If there is only one value to be formatted, you needn't include it in a
-tuple, for example:
+If there is only one value to be formatted, you needn't include it in a tuple, for example:
 
-``"%d" % 5``
+::
 
-'
+   >>> "|%d|" % 5`
+   |5|
 
 The formatting sequences have the form:
 
 % m f
 
-, are optional. The formatting character, ``f`` , tells Python
-(internally, the C library) what conversion to perform. The formatting
+The modifiers, are optional. The formatting character, ``f`` , tells Python (internally, the C library) what conversion to perform. The formatting 
 characters are
 
--  –Decimal integer. The corresponding element of the tuple is converted
-   to an integer and the integer is converted to a string in decimal
-   format.
+-  ``d`` - Decimal integer. The corresponding element of the tuple is converted to an integer and the integer is converted to a string in decimal format.
 
--  –Decimal integer. The same as ``%d``.
+-  ``i`` - Decimal integer. The same as ``%d``.
 
--  –Unsigned integer. The same as ``%d`` , but the integer is
-   interpreted as unsigned. The sign bit is interpreted as adding a
-   large positive amount to the number, rather than a large negative
-   amount.
+-  ``u`` - Unsigned integer. The same as ``%d`` , but the integer is interpreted as unsigned. The sign bit is interpreted as adding a large positive amount to the number, rather than a large negative amount.
 
--  –Octal integer. The corresponding element of the tuple is converted
-   to an integer and the integer is converted to a string in octal
-   format.
+-  ``o`` - Octal integer. The corresponding element of the tuple is converted to an integer and the integer is converted to a string in octal format.
 
--  –Hexadecimal integer. The corresponding element of the tuple is
-   converted to an integer and the integer is converted to a string in
-   hexadecimal format. Lowercase ``x`` uses lowercase letters for the
-   digits 10 through 15.
+-  ``x`` - Hexadecimal integer. The corresponding element of the tuple is converted to an integer and the integer is converted to a string in hexadecimal format. Lowercase ``x`` uses lowercase letters for the digits 10 through 15.
 
-``"%x" % (-2)``
+::
 
-'fffffffe'
+   >>> "%x" % (-2)
+   'fffffffe'
 
--  –Hexadecimal integer. The corresponding element of the tuple is
-   converted to an integer and the integer is converted to a string in
-   hexadecimal format. Uppercase ``X`` uses uppercase letters for the
-   digits 10 through 15.
+-  ``X`` - Hexadecimal integer. The corresponding element of the tuple is converted to an integer and the integer is converted to a string in hexadecimal format. Uppercase ``X`` uses uppercase letters for the digits 10 through 15.
 
-``"%X" % (-2)``
+::
 
-'FFFFFFFE'
+   >>> "%X" % (-2)
+   'FFFFFFFE'
 
--  –Floating point format, with decimal point but without an exponent.
+-  ``f`` - Floating point format, with decimal point but without an exponent.
 
-``"%f" % (0.5e-100)``
+::
 
-'0.000000'
+    >>> "%f" % (0.5e-100)
+   '0.000000'
 
--  –Floating point format, with decimal point and an exponent (with a
-   lowercase ``e`` ).
+-  ``e`` - Floating point format, with decimal point and an exponent (with a lowercase ``e`` ).
 
-``"%e" % (0.5e-100)``
+::
 
-'5.000000e-101'
+   >>> "%e" % (0.5e-100)
+  '5.000000e-101'
 
--  –Floating point format, with decimal point and an exponent (with an
-   uppercase ``E`` ).
+-  ``E`` - Floating point format, with decimal point and an exponent (with an uppercase ``E`` ).
 
-``"%E" % (0.5e-100)``
+::
 
-'5.000000E-101'
+   >>> ``"%E" % (0.5e-100)``
+  '5.000000E-101'
 
--  –Choose either ``f`` or ``e,`` depending on the size of the exponent.
+-  ``g`` - Choose either ``f`` or ``e,`` depending on the size of the exponent.
 
--  –Choose either ``f`` or ``E,`` depending on the size of the exponent.
+-  ``G`` - Choose either ``f`` or ``E,`` depending on the size of the exponent.
 
--  –String, or any object being converted to a string.
+-  ``s`` - String, or any object being converted to a string.
 
-``"%s" % ([1,2])``
+   >>> "%s" % ([1,2])
+   '[1, 2]'
 
-'
+-  ``r`` - Like s, but uses ``repr()`` rather than ``str()`` to convert the argument.
 
--  –Like s, but uses ``repr()`` rather than ``str()`` to convert the
-   argument.
 
--  –A single character. The value to be converted can either be an
-   integer that is the internal code for a character or a string of
-   length one.
+-  ``c`` - A single character. The value to be converted can either be an integer that is the internal code for a character or a string of length one.
 
-``"%c" % (88)``
+::
 
-'X'
+   >>> "%c" % (88)
+   'X'
+   >>> "%c" % ("Y")
+   'Y'
 
-``"%c" % ("Y")``
-
-'Y'
-
--  –This does not match an element from the tuple. It is the way to
-   incorporate a percent sign into the string.
+-  ``%`` - This does not match an element from the tuple. It is the way to incorporate a percent sign into the string.
 
 The modifiers, if present, have the form
 
-a w.p
+::
+
+   a w.p
 
 each of which is optional. These parts are as follows:
 
--  –The alignment; can be a plus sign, a minus sign, or 0, or some
+-  ``a`` - The alignment; can be a plus sign, a minus sign, or 0, or some
    combination of them. They mean the following:
 
-: Align the characters at the left in the field
+   - ``-`` - Align the characters at the left in the field
 
-: Include a sign for numeric values, even if positive. (Normally only a
-negative sign would be included.)
+   - ``+`` - Include a sign for numeric values, even if positive. (Normally only a negative sign would be included.)
 
-: Zero-fill the number in the field.
+   - ``0`` - Zero-fill the number in the field.
 
--  The width; specifies the minimum field width the formatted value is
-   to occupy. This allows nicely aligned output, at least with
-   fixed-width fonts, if the values fit within the field width
-   specified. If they don't fit, they will use all the character
-   positions required.
+-  ``w`` - The width; specifies the minimum field width the formatted value is to occupy. This allows nicely aligned output, at least with fixed-width fonts, if the values fit within the field width specified. If they don't fit, they will use all the character positions required.
 
-``"%4d" % 5``
+::
 
-'
+   >>> "|%4d|" % 5
+   '|   4]'
 
-``"%4d" % 500000``
+   >>> "|%4d|" % 500000
+   '|500000|'
 
-'
+-  ``p`` - The precision; follows a decimal point. It has one of three meanings:
 
--  The precision; follows a decimal point. It has one of three meanings:
+   -  For strings, the precision specifies the maximum number of characters that may be printed from the string.
 
--  For strings, the precision specifies the maximum number of characters
-   that may be printed from the string.
+      ::
+      
+         >>> "|%.3s|" % ("abcdef")
+         '|abc|'
 
-``"%.3s" % ("abcdef")``
+   - For floating point numbers, it specifies the maximum number of digits following the decimal point.
 
-'
+     ::
 
-#. For floating point numbers, it specifies the maximum number of digits
-   following the decimal point.
+         >>> "|%.4f|" % (1.0/3.0)
+         '|0.3333|'
 
-``"%.4f" % (1.0/3.0)``
+   - For integers, the precision specifies the minimum number of digits to represent.
 
-'
+     ::
 
-#. For integers, the precision specifies the minimum number of digits to
-   represent.
+         >>> "%4.2d" % 5
+         '|  05|'
 
-``"%4.2d" % 5``
-
-'
 
 If you want to compute the width or precision, you can use stars, ``*``
 s, in width or precision fields. The star tells Python to use the next
 item in the tuple, which must be an integer, as the value in the field,
 for example:
 
-``"%.*d" % (4,2,5)``
+::
 
-'
+   >>> "|%*.*d|" % (4,2,5)
+   '|  05|'
 
 You can use a dictionary instead of a tuple. You instruct Python what
 value to format by putting the key string in parentheses just after the
 opening ``%`` , inside the formatting sequence:
 
-``"%(x)4.2d" % {"x":5}``
+::
 
-'
+   >>> "|%(x)4.2d|" % {"x":5}
+   '|  05|'
+
 
 However, this doesn't work for the formatting fields:
 
-``"%(x)4.(p)d" % {"p":2,"x":5}``
+::
 
-Traceback (innermost last):
-
-File "<stdin>", line 1, in ?
-
-ValueError: unsupported format character '(' (0x28)
+   >>> "|%(x)4.(p)d|" % {"p":2,"x":5}
+   Traceback (most recent call last):
+   File "<stdin>", line 1, in <module>
+   ValueError: unsupported format character '(' (0x28) at index 7
 
 The String Module and String Methods
 ''''''''''''''''''''''''''''''''''''
