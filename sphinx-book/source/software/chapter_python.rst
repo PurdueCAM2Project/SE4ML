@@ -2676,191 +2676,113 @@ The String Module and String Methods
 
 The string module provides a number of useful functions and constants.
 In Python, functions from the string module were made into methods of
-string objects. `See Most Important String Functions and
-Methods. <chap2.html#33427>`__ shows the most useful of these functions
+string objects. The following table shows the most useful of these functions
 and methods.
 
-#. | 
-   | Most Important String Functions and Methods
+.. list-table:: Most Important String Operators and Methods
+   :widths: 20 20 20
+   :header-rows: 1
 
-String Module
+   * - String Module
+     - Method
+     - Explanation
 
-Method (Python2)
+   * - ``find(s, sub, [start, [end]])``
+     - ``s.find(sub, [start, [end]])``
+     - Find the index of the first occurrence of ``sub`` in string ``s``. If they are provided, find the first occurrence at or beyond ``start`` and not extending beyond ``end``. Returns minus 1 if it is not found.
 
-Explanation
+   * - ``index(s, sub, [start, [end]])``
+     - ``s.index(sub, [start, [end]])``
+     - Find the index of the first occurrence of ``sub`` in string ``s``. If they are provided, find the first occurrence at or beyond ``start`` and not extending beyond ``end``. Raise a ``ValueError`` exception if it is not found.
 
-Find the index of the first occurrence of ``sub`` in string ``s``. If
-they are provided, find the first occurrence at or beyond ``start`` and
-not extending beyond ``end``. Returns minus 1 if it is not found.
+   * - ``rfind(s, sub, [start, [end]])``
+     - ``s.rfind(sub, [start, [end]])``
+     - Find the index of the last occurrence of ``sub`` in string ``s``. If they are provided, find the rightmost occurrence lying totally within the range beginning at ``start`` and not extending beyond ``end``. Returns minus 1 if it is not found.
 
-Find the index of the first occurrence of ``sub`` in string ``s``. If
-they are provided, find the first occurrence at or beyond ``start`` and
-not extending beyond ``end``. Raise a ``ValueError`` exception if it is
-not found.
+   * - ``rindex(s, sub, [start, [end]])``
+     - ``s.rindex(sub, [start, [end]])``
+     - Find the index of the last occurrence of ``sub`` in string ``s``. If they are provided, find the rightmost occurrence lying totally within the range beginning at ``start`` and not extending beyond ``end``. Raise a ``ValueError`` exception if it is not found.
 
-Find the index of the last occurrence of ``sub`` in string ``s``. If
-they are provided, find the rightmost occurrence lying totally within
-the range beginning at ``start`` and not extending beyond ``end``.
-Returns minus 1 if it is not found.
+   * - ``split(s, [sep, [maxtimes]])``
+     - ``s.split([sep, [maxtimes]])``
+     - Return a list of the substrings of ``s`` separated by string ``sep``. If ``sep`` is ``None`` , or omitted, return the substrings separated by white space. If ``maxtimes`` is present, return no more than ``maxtimes`` substrings followed by the remainder of ``s`` , if any.
 
-Find the index of the last occurrence of ``sub`` in string ``s``. If
-they are provided, find the rightmost occurrence lying totally within
-the range beginning at ``start`` and not extending beyond ``end``. Raise
-a ``ValueError`` exception if it is not found.
+   * - ``join(seq, [sep])``
+     - ``seq.join([sep])``
+     - Concatenate the strings in list or tuple ``seq``. Put ``sep`` between each pair. Use a single blank if ``sep`` is omitted.
+    
+   * - ``lower(s)``, ``upper(s)``
+     - ``s.lower()`` or ``s.upper()``
+     - Return a copy of ``s`` with all letters converted to lower or uppercase.
 
-Return a list of the substrings of ``s`` separated by string ``sep``. If
-``sep`` is ``None`` , or omitted, return the substrings separated by
-white space. If ``maxtimes`` is present, return no more than
-``maxtimes`` substrings followed by the remainder of ``s`` , if any.
+   * - ``strip(s)``, ``lstrip(s)``, ``rstrip(s)``
+     - ``s.strip()``,``s.lstrip()``, ``s.rstrip()``
+     - Return a copy of ``s`` with all white space removed from both ends, from the left, or from the right.
 
-Concatenate the strings in list or tuple ``seq``. Put ``sep`` between
-each pair. Use a single blank if ``sep`` is omitted.
+   * - ``ljust(s,w)``, ``rjust(s,w)``, ``center(s,w)``
+     - ``s.ljust(w)``, ``s.rjust(w)``, ``s.center(w)``
+     - Return a copy of ``s`` padded with blanks, left justified, right justified, or centered in a field of width ``w``. Return ``s`` itself if it is as long as or longer than ``w``.
 
-with all letters converted to lower or uppercase.
+   * - ``expandtabs(s)``, ``expandtabs(s,w)``
+     - ``s.expandtabs()``, ``s.expandtabs(w)``
+     - Return a copy of ``s`` with tabs expanded into blanks. The tab stops occur each ``w`` characters, eight characters if ``w`` is omitted.
 
-with all white space removed from both ends, from the left, or from the
-right.
-
-padded with blanks, left justified, right justified, or centered in a
-field of width ``w``. Return ``s`` itself if it is as long as or longer
-than ``w``.
-
-with tabs expanded into blanks. The tab stops occur each ``w``
-characters, eight characters if ``w`` is omitted.
-
- 
-
-ends with the ``suffix`` , begins with the ``prefix`` , or contains
-``prefix`` starting at position ``pos``.
+   * - 
+     - ``s.endswith(suffix)``, ``s.startswith(prefix)``, ``s.startswith(prefix,pos)``
+     - True if ``s`` ends with the ``suffix`` , begins with the ``prefix`` , or contains ``prefix`` starting at position ``pos``, respectively.
 
 Built-In String Functions
 '''''''''''''''''''''''''
 
--  –Returns the character (in a one-character string), whose ASCII code
-   is integer ``i``. This is equivalent to ``("%c" % i)``.
+Python features some built-in functions not addressed in the preceding discussion.
 
--  –Evaluates the string ``s`` as if it were a Python expression.
+- ``chr(i)`` - Returns the character (in a one-character string), whose ASCII code is integer ``i``. This is equivalent to ``("%c" % i)``.
 
-``eval("[1,2]")``
+- ``ord(c)`` - Returns the ASCII code of ``c``
 
-dictionaries to look up variables in: ``eval(s,globals)`` or
-``eval(s, globals, locals)`` :
+- ``eval(s)`` - Evaluates the string ``s`` as if it were a Python expression.
 
-``eval("x+y",{"x":1,"y":2},{"x":3})``
+   ::
 
-5
+      >>> eval("[1,2]")
+      [1, 2]
 
--  –Returns a string representation of integer ``i`` converted to
-   hexadecimal representation.
 
-``hex(65)``
+   You can also give ``eval()`` dictionaries to look up variables in: ``eval(s,globals)`` or``eval(s, globals, locals)``:
 
-'0x41'
+   ::
 
-It is not equivalent to ``("%x" % i)`` , which does not put ``"0x"`` on
-the front.
+      >>> eval("x+y",{"x":1,"y":2},{"x":3})
+      5
 
--  –Returns string ``s`` or a copy of the string ``s``. Each call to
-   ``intern()`` with an equal string will return the identical string.
-   You use this to speed up compares and to save storage.
+-  ``hex(i) - Returns a string representation of integer ``i`` converted to hexadecimal representation.
 
-Equal strings may be different objects, i.e., both have the same
-characters, but they were created at different times. It is faster to
-compare strings for identity ``(x is y)`` than for equality ``(x == y)``
-, since Python only has to compare the memory addresses for identity,
-but must compare the characters in them for equality. Therefore, if you
-are going to have a set of strings that you are comparing for equality
-frequently, you can speed up your program by interning them and just
-comparing their interned values.
+   ::
 
-``"ab"=="a"+"b"``
+      >>> hex(65)
+      '0x41'
 
-1
+   It is not equivalent to ``("%x" % i)`` , which does not put ``"0x"`` on the front.
 
-``"ab" is "a"+"b"``
+- ``int(s)`` - Converts a string to an integer. (It will also convert long integers and floating point numbers to integers.)
 
-0
+- ``oct(i)`` - Converts integer ``i`` to a string representation of it as an unsigned octal integer.
 
-``intern("ab") is intern("a"+"b")``
+   :: 
 
-1
+      >>> ``oct(65)``
+      '0101'
 
-Moreover, by interning strings that are used throughout your data
-structures, all instances of the string will occupy the same block of
-storage, rather than many blocks. This may save considerable storage.
+      >>> oct(-1)
+      '037777777777'
 
--  –Converts a string to an integer. (It will also convert long integers
-   and floating point numbers to integers.)
+-  ``ord(c)`` - Returns the integer representing the single character in string ``c``.
 
--  –Converts integer ``i`` to a string representation of it as an
-   unsigned octal integer.
+-  ``repr(x)`` - Returns a string representation of object ``x`` that could be passed to ``eval(e)``.
 
-``oct(65)``
+-  ``str(s) - Returns a string representation of object ``x``. Unlike ``repr()`` , ``str()`` does not attempt to be the inverse of ``eval()``. It attempts to make the translated string legible.
 
-'0101'
 
-``oct(-1)``
-
-'037777777777'
-
--  –Returns the integer representing the single character in string
-   ``c``.
-
--  –Returns a string representation of object ``x``. It is the same as
-   ``'x'``.
-
--  –Returns a string representation of object ``x``. Unlike ``repr()`` ,
-   ``str()`` does not attempt to be the inverse of ``eval()``. It
-   attempts to make the translated string legible.
-
-.. _section-4:
-
-In this chapter we looked at elementary Python programming. We examined
-expressions and simple control statements like ``while`` , ``for`` , and
-``if``. We looked at arithmetic data types, lists, tuples, strings, and
-dictionaries. We learned a little bit about modules and functions. And
-we used the interpreter to try out code to see what it would do.
-
- 
-
-#. that will write out the first ``n`` Fibonacci numbers. Fibonacci
-   numbers form a sequence 1, 1, 2, 3, 5, 8, … where each number after
-   the first two is the sum of the two numbers preceding it. Use a loop.
-   Use a single assignment statement in the loop. Make sure ``fib(100)``
-   works.
-
-#. Put your solution to Problem 2.1 into a script. Have the script take
-   the value of ``n`` from its command line and write out that many
-   Fibonacci numbers. The command line parameters are in variable
-   ``argv`` in module ``sys``. The name of the program being executed is
-   in ``argv[0]``. The first parameter is in ``argv[1]``.
-
-#. Write a script that takes a string as its first command line
-   parameter and file names as the subsequent parameters. Have it write
-   out the names of the files that contain the string. See Problem 2.2
-   for how to find the command line parameters.
-
-#. Write a script that, given a file name, will count the number of
-   words in the file and write out the total. For our purposes, a word
-   is any sequence of non-white-space characters at the beginning of a
-   line, at the end of a line, or surrounded by white space. See Problem
-   2.2 for how to find the command line parameters.
-
-#. Write a script that, given a file name, will count the number of
-   occurrences of each word in the file and write out a sorted list of
-   words with the number of occurrences. For our purposes, a word is any
-   sequence of non-white-space characters at the beginning of a line, at
-   the end of a line, or surrounded by white space. See Problem 2.2 for
-   how to find the command line parameters.
-
---------------
-
-1. Python does have Unicode strings.
-
-2. We say "x is considered false" and "x counts as false," because
-various values, like zero, None, and empty sequences, are treated as
-being false by ``and`` and ``or`` operators and ``while`` and ``if``
-statements.
 
 .. [1]
    This chapter is adapted from Thiruvathukal, Christopher, and Shafaee,
