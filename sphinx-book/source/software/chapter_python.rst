@@ -463,7 +463,7 @@ For example
 Variable names and other identifiers in Python are composed of letters,
 digits, and underscore characters. The first character of the identifier
 must not be a digit. The letters are the ISO-Latin characters A-Z and
-a-z. [4]_
+a-z. [3]_
 
 You can also do several assignments on the same line; for example let's
 swap the values of ``a`` and ``b`` :
@@ -538,9 +538,17 @@ places to try to find what it means:
 #. The built-in names in the Python system. For example, the function
    ``abs()`` is a built-in name in Python.
 
-.. todo: Add scopes figure
 
-The scopes [5]_ are pictured in FIGURE TODO. The search for a name starts in the
+.. _figure-python-scopes:
+
+.. figure:: figures/scopes.png
+   :scale: 100 %
+   :alt: Understanding Python Scopes
+
+   Understanding Python scopes
+
+Figure :ref:`figure-python-scopes` shows how Python searches scopes 
+for names.  The search for a name starts in the
 innermost scope and proceeds outward until the name is found or until
 there are no more scopes. To find the name referenced in a function, at
 most three scopes will be searched. When a variable is assigned a value
@@ -742,10 +750,10 @@ There are three methods you especially need to know for files:
 We will present a complete list of the file operations in
 ` <chap4.html#22958>`__ of Chapter 4.
 
-print Statement
-~~~~~~~~~~~~~~~
+print() and printing
+~~~~~~~~~~~~~~~~~~~~~
 
-The print statement [6]_ writes to the standard output. You can find
+The print function [4]_ writes to the standard output. You can find
 the standard output file object in the ``sys`` module, ``sys.stdout``
 
 ::
@@ -764,9 +772,17 @@ line.
 The expressions are optional. You use a print with no expressions to
 write out a newline.
 
-Python 2 allowed printing to a file. This has been subsumed by writing
-to a file. We recommend using the ``write()`` method on file objects to
-achive this.
+
+.. note:: Python 2 allowed printing to a file. This has been subsumed by writing
+   to a file. We recommend using the ``write()`` method on file objects to
+   achive this.
+
+
+input() and raw_input()
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo:: Add these (soon).
+
 
 ``while`` loops
 ~~~~~~~~~~~~~~~~~
@@ -1989,8 +2005,6 @@ characteristics one at a time:
    the key in the table and then changed its contents, you might not be
    able to look it up again.)
 
-.. todo:: Add cross reference to operations on dictionaries
-
 Dictionaries are like small, in-memory databases. The table :ref:`table-dictionary-methods` shows the operators, functions, and methods available for dictionaries.
 
 .. _table-dictionary-methods:
@@ -2372,8 +2386,6 @@ sequences are shown in the following table :ref:`table-incorporation`.
 
    * - ``\uhhhh``
      - Only in Unicode strings, incorporates the character whose hexadecimal number in the Unicode character set is ``hhhh``.
-
-.. todo:: Expand Unicode discussion. We cover it, but there is more in Python 3.
 
 Suppose you need a string to extend beyond the end of a line. There
 several ways to do it. You can get Python to continue the statement on
@@ -2835,12 +2847,9 @@ Python features some built-in functions not addressed in the preceding discussio
    recommend installing Windows Subsystem for Linux to get a complete
    Linux shell environment. To be covered in preliminaries section.
 
-.. [4]
+.. [3]
    Python also provides full UNICODE support.
 
-.. [5]
-   Need to add figure 2-1 from original book by redrawing it.
+.. [4]
+   Earlier Python versions feature a ``print`` statement, which allows you to write code without calling a function. This is no longer supported in Python 3.
 
-.. [6]
-   Now entirely a function in Python 3. Also need to include info about
-   key useful options, e.g. the separator.
