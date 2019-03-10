@@ -270,7 +270,7 @@ are mixed in expressions, integers will be converted to long integers or
 floats, and long integers will be converted to floats. The conversions
 to float may lose some low-order digits.
 
-Table :ref:`table-operators-and-precedence` is a complete list of Python operators and their precedence
+Tables :ref:`table-operators-and-precedence` and :ref:`table-operators-and-precedence-continued` show a complete list of Python operators and their precedence
 levels. Some of the operators won't be discussed until later sections;
 we'll refer to the table then. The operators with higher precedence
 levels are performed before those with lower precedence.
@@ -336,6 +336,17 @@ discuss ``while`` loops.
    * - 11 
      - ``-y``,  ``y``, ``+y`` 
      - Negation, bitwise complement, and unary plus (no operation for numbers).
+
+
+.. _table-operators-and-precedence-continued:
+
+.. list-table:: Operators and Precedence (Continued)
+   :widths: 15 10 30
+   :header-rows: 1
+
+   * - Precedence
+     - Operator(s)
+     - Comments
 
    * - 12 
      - ``x ** y``
@@ -2694,8 +2705,7 @@ The String Module and String Methods
 
 The string module provides a number of useful functions and constants.
 In Python, functions from the string module were made into methods of
-string objects. The table :ref:`table-string-ops-methods` shows the most useful of these functions
-and methods.
+string objects. The tables :ref:`table-string-ops-methods` and :ref:`table-string-ops-methods-continued` shows the most useful of these functions and methods.
 
 .. _table-string-ops-methods:
 
@@ -2730,6 +2740,16 @@ and methods.
    * - ``join(seq, [sep])``
      - ``seq.join([sep])``
      - Concatenate the strings in list or tuple ``seq``. Put ``sep`` between each pair. Use a single blank if ``sep`` is omitted.
+
+.. _table-string-ops-methods-continued:
+
+.. list-table:: Most Important String Operators and Methods (Continued)
+   :widths: 20 20 20
+   :header-rows: 1
+
+   * - String Module
+     - Method
+     - Explanation
     
    * - ``lower(s)``, ``upper(s)``
      - ``s.lower()`` or ``s.upper()``
