@@ -12,28 +12,40 @@ A draft book by `Yung-Hsiang Lu <https://engineering.purdue.edu/ECE/People/ptPro
    :maxdepth: 2
    :caption: Contents:
 
-   software/part_software
-   unsupervised/part_unsupervised
-   supervised/part_supervised
-   misc/part_misc
+   software/chapter_python
+   software/chapter_vc
+   software/chapter_test
+   software/chapter_ws
+   software/chapter_ci
+   software/chapter_graphics
+   
+   unsupervised/chapter_ml
+   unsupervised/chapter_kmeans
+   unsupervised/chapter_hierarchical
+   unsupervised/chapter_practical
+   unsupervised/chapter_floating_point
+   
+   supervised/chapter_supervised.rst
+   supervised/chapter_svm.rst
+   supervised/chapter_neural_networks.rst
 
-Source
-====================
+   misc/chapter_building_the_book
+   misc/chapter_sphinx_demo
+
+
+**GitHub Repository**
 
 See `PurdueCAM2Project/SE4ML <https://github.com/PurdueCAM2Project/SE4ML>`_.
 
-Download
-====================
+**Download for Printing**
 
 See `PurdueCAM2Project/SE4ML/releases <https://github.com/PurdueCAM2Project/SE4ML/releases>`__ for *printable* PDF.
 
-Want to cite us?
-==================
+**Want to cite us?**
 
 Yung-Hsiang Lu and George K. Thiruvathukal, Software Engineering and Machine Learning, PurdueCAM2Project/SE4ML, Zenodo, http://doi.org/10.5281/zenodo.2532051.
 
-Indices and tables
-==================
+**Index**
 
 * :ref:`genindex`
 * :ref:`modindex`
