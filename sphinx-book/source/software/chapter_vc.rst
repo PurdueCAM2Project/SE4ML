@@ -65,14 +65,14 @@ github
 
 This book chooses github for three reasons: (1) It is widely used. (2)
 It is free for education purposes. (3) It is supported by many tools
-other than the github website. Figure :ref:`figure-github1` shows the
+other than the github website. :numref:`figure-github1` shows the
 website of github and the portal for an education account. Signing up in
-github is easy, as shown in Figure :ref:`figure-github3`. After
+github is easy, as shown in :numref:`figure-github3`. After
 creating an account, a repository can be created as shown in
-Figure :ref:`figure-github4`. This website has many
+:numref:`figure-github4`. This website has many
 options: the name of the repository, whether it is public or private,
 whether to initialize the repository with README, etc.
-Figure :ref:`figure-github5` shows the options for creating a new
+:numref:`figure-github5` shows the options for creating a new
 repository:
 
 .. _figure-github3:
@@ -115,7 +115,7 @@ repository:
 
 -  Select “Add a license: Apache License 2.0”
 
-Figure :ref:`figure-github5` and :ref:`figure-github6` shows the repository
+:numref:`figure-github5` and :numref:`figure-github6` shows the repository
 after it has been created. As can be seen on the website, there are many
 options changing this repository. For example, it is possible adding new
 files or uploading files. It is also possible editing an file by
@@ -126,7 +126,7 @@ Clone a Repository
 
 A more common way of using a repository, however, is to clone the
 repository on another computer, as illustrated in
-Figure :ref:`figure-gitclone`.
+:numref:`figure-gitclone`.
 
 .. _figure-gitclone:
 
@@ -136,7 +136,7 @@ Figure :ref:`figure-gitclone`.
    Using git clone command creates a repository on another computer.
 
 To clone a repository, it is necessary knowing the path in github.
-Figure :ref:`figure-github7` shows the path of the repository.
+:numref:`figure-github7` shows the path of the repository.
 
 .. _figure-github7:
 
@@ -288,7 +288,7 @@ command git push is needed.
 
 The git push command needs an user name and the password because it does
 not allow everyone to push and modify the repository. The rest of the
-message can be ignored for now. Figure :ref:`figure-gitpush` shows
+message can be ignored for now. :numref:`figure-gitpush` shows
 the typical workflow of using github: Use git push to modify the remote
 repository after several git commit commands creating new versions on
 the local repository.
@@ -300,7 +300,7 @@ the local repository.
 
    Typical workflow of using github
 
-Figure :ref:`figure-github8` shows the github website after git
+:numref:`figure-github8` shows the github website after git
 push. The changes are clearly marked: if a new line is added, a “+” sign
 is added in front. Similarly, if a line is deleted, a “-” sign is added
 in front (not shown in this example).
@@ -397,7 +397,7 @@ push is used, the file is also removed from github.
 It is important to know that the deleted file does not disappear. It is
 still stored in the history of the repository. In github, clicking the
 commit history shows all the changes over time, as shown in
-Figure :ref:`figure-github11`.
+:numref:`figure-github11`.
 
 .. _figure-github11:
 
@@ -443,7 +443,7 @@ Does does “hub” in github mean? Think of it as an airline hub or a bus
 hub, where travellers come from many different places in order to change
 flights or bus lines. Similarly, github allows collaborators to share
 and exchange. Adding collaborators would be easy, by clicking Settings
-and Collaborators, as shown in Figure :ref:`figure-github9`.
+and Collaborators, as shown in :numref:`figure-github9`.
 
 .. _figure-github9:
 
@@ -453,10 +453,10 @@ and Collaborators, as shown in Figure :ref:`figure-github9`.
    Add collaborators to a repository.
 
 Two people may share and modify the same repository in github in the way
-depicted in Figure :ref:`figure-githubcollaborate`. In this figure,
+depicted in :numref:`figure-githubcollaborate`. In this figure,
 the numbers in black ovals indicate steps within individual’s local
 repository. The numbers in white ovals indicate steps involving the
-remote repository. Figure :ref:`figure-githubcollaborate` shows two
+remote repository. :numref:`figure-githubcollaborate` shows two
 people start from the same remote repository. This is not necessary. It
 is possible to clone the remote repository after many modifications have
 already been made by another person.
@@ -504,7 +504,7 @@ been modified by a collaborator (maybe several collaborators).
     2 files changed, 101 insertions(+), 128 deletions(-)
 
 Now is a good time explaining the advantage of distributed version
-control systems like git. Figure :ref:`figure-githubcollaborate`
+control systems like git. :numref:`figure-githubcollaborate`
 shows three repositories: one remote and shared in github and two local
 repositories by two different people. These two people can change the
 files on their local repositories without affecting the other person. In
@@ -733,7 +733,7 @@ On github website, the new branch can be seen:
    A new branch has been added to github.
 
 The file partition.py is available only in the partition branch, not in
-the master branch, as shown in Figure :ref:`figure-github134`.
+the master branch, as shown in :numref:`figure-github134`.
 
 .. _figure-github134:
 .. _figure-github13:
@@ -1094,7 +1094,7 @@ added, no partition is printed at all.
      partition(args)
 
 The person writing this program wants to get help from a collaborator by
-creating a pull request. Figures :ref:`figure-github15` and :ref:`figure-github18`
+creating a pull request. :numref:`figure-github15` and :numref:`figure-github18`
 show how to create a pull request on github and assign it to a
 collaborator.
 
@@ -1113,7 +1113,7 @@ collaborator.
    Assign it to a specific collaborator.
 
 A pull request can automatically mark the line-by-line changes as shown
-in Figure :ref:`figure-github16` and :ref:`figure-github17`.
+in :numref:`figure-github16` and :numref:`figure-github17`.
 
 .. _figure-github16:
 
@@ -1139,7 +1139,7 @@ message.
 
    The pull request allows comments.
 
-Figure :ref:`figure-github2` shows an example of a response of the
+:numref:`figure-github2` shows an example of a response of the
 pull request. Usually, responses are in the form of suggestions to
 improve code or questions for clarification.
 
@@ -1155,7 +1155,7 @@ Issues
 
 Pull requests are restricted to the users that have write permissions.
 Issues can be raised by people that have no write permissions.
-Figure :ref:`figure-githubissue` shows an example of an issue of a
+:numref:`figure-githubissue` shows an example of an issue of a
 possible error in this book.
 
 .. _figure-githubissue:
