@@ -12,6 +12,8 @@ A draft book by `Yung-Hsiang Lu <https://engineering.purdue.edu/ECE/People/ptPro
    :maxdepth: 2
    :caption: Contents:
 
+   frontmatter/preface
+
    software/chapter_python
    software/chapter_vc
    software/chapter_test
