@@ -270,7 +270,7 @@ are mixed in expressions, integers will be converted to long integers or
 floats, and long integers will be converted to floats. The conversions
 to float may lose some low-order digits.
 
-Table TODO is a complete list of Python operators and their precedence
+Table :ref:`table-operators-and-precedence` is a complete list of Python operators and their precedence
 levels. Some of the operators won't be discussed until later sections;
 we'll refer to the table then. The operators with higher precedence
 levels are performed before those with lower precedence.
@@ -283,6 +283,7 @@ used much in Web enterprise applications, we won't discuss them further.
 We will discuss the logical and comparison operators later when we
 discuss ``while`` loops.
 
+.. _table-operators-and-precedence:
 
 .. list-table:: Operators and Precedence
    :widths: 15 10 30
@@ -304,17 +305,21 @@ discuss ``while`` loops.
      - ``not x`` 
      - This is the logical NOT operator. It returns 1 if ``x`` is zero; it returns 0 if ``x`` is anything else.  * - 4 & ``x < y``, ``x > y``, ``x <= y``, and ``x >= y`` & The relational operators are much like they are in other languages. Operators ``!=`` and ``<>`` both mean not equal.
 
-   * - 
+   * - 4
      - ``x == y``, ``x != y``, ``x <> y`` 
      -  Testing for equality, ``==`` and ``!=``, can be applied to structured objects as discussed later.  They attempt to find out if the structured objects have equal components.
 
-   * - 
+   * - 4
      - ``x is y``, ``x is not y``, ``x in y``, ``x not in y`` 
      -  Operators ``x is y`` and ``x is not y`` test whether two names reference the same object, so they will be much faster than ``==`` and ``!=`` for structured objects, but they don't perform the same test. We will discuss ``x in y`` and ``x not in y`` later, when we discuss sequence types.
 
    * - 5 
      -  ``x | y`` 
      - This is the bitwise OR operation, ORing the XORing the corresponding bits in two integers.
+
+   * - 6
+     - ``x ^ y``
+     - This is the bitwise EXCLUSIVE-OR (XOR) operation, XORing the corresponding bits in two integers.
 
    * - 7 
      - ``x & y``
@@ -340,15 +345,15 @@ discuss ``while`` loops.
      - ``f(...)``
      - Function call
 
-   * -
+   * - 13
      - ``x.attr``
      - attribute access
 
-   * -
+   * - 13
      - ``x[i]``
      - subscripting
 
-   * - 
+   * - 13
      - ``x[i:j]``
      - slicing
 
@@ -356,24 +361,26 @@ discuss ``while`` loops.
      - ``(...)``
      - construct tuple
 
-   * - 
+   * - 14
      - ``[...]``
      - construct list
 
-   * -
+   * - 14
      - ``{...}``
      - construct dictionary
 
-   * - 
+   * - 14
      - :literal:`\`...\`` 
      - construct string
 
 Built-in Arithmetic Functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Python has a number of built-in functions you can call. Other
+Python has a number of built-in :ref:`table-mathematical-functions` you can call. Other
 mathematical functions can be found in module ``math``. Complex
 arithmetic functions are in module ``cmath``.
+
+.. _table-mathematical-functions:
 
 .. list-table:: Mathematical Functions
    :widths: 15 45
@@ -520,14 +527,14 @@ places to try to find what it means:
 #. The built-in names in the Python system. For example, the function
    ``abs()`` is a built-in name in Python.
 
-The scopes [5]_ are pictured in `See Scopes for Names Known in a
-Function. <chap2.html#83458>`__. The search for a name starts in the
+.. todo: Add scopes figure
+
+The scopes [5]_ are pictured in FIGURE TODO. The search for a name starts in the
 innermost scope and proceeds outward until the name is found or until
 there are no more scopes. To find the name referenced in a function, at
 most three scopes will be searched. When a variable is assigned a value
 in a function, its name will be placed in the local scope if it is not
-already there. For example, in `See Scopes for Names Known in a
-Function. <chap2.html#83458>`__, if the function looks up the value of
+already there. For example, in if the function looks up the value of
 ``x`` , it will get 1, the value of variable ``x`` in the function
 itself. The variable ``x`` with a value 2 is in the global scope and is
 hidden by the local ``x``. If the function tries to look up ``y`` , it
@@ -750,13 +757,13 @@ Python 2 allowed printing to a file. This has been subsumed by writing
 to a file. We recommend using the ``write()`` method on file objects to
 achive this.
 
-while loops
-~~~~~~~~~~~
+``while`` loops
+~~~~~~~~~~~~~~~~~
 
 .. _while-statement:
 
-while
-'''''
+``while``
+''''''''''
 
 The form of the ``while`` loop is
 
@@ -863,7 +870,8 @@ The first of the two expressions is equivalent to
 ``-2 < -1 and -1 < 0``. Python duplicates the value between the two
 operators and does both comparisons separately. In the second
 expression, ``(-2 < -1)`` yields ``True`` , then ``True<0`` yields
-``False``.
+``False`` as ``True`` is promoted to ``1`` for the purpose of an
+integer comparison.
 
 If you find any of this confusing, just remember that True and False can
 be converted as neeeded to 1 and 0, respectively. You can use these
@@ -1199,8 +1207,8 @@ You can also delete an item from a listusing the ``del`` statement:
    >>> r
    [0, 1, 2, 6, 7, 8, 9]
 
-List objects have a number of methods you can call, as shown in table
-`See List Methods. <chap2.html#20881>`__. They fall into several groups.
+List objects have a number of methods you can call, as shown in the table :ref:`table-list-methods`.
+They fall into several groups.
 Two of the methods add elements to the list. Method call ``L.append(x)``
 adds an element ``x`` to the end of the list ``L`` (the new highest
 position). Method call ``L.insert(i,x)`` inserts an element ``x`` at any
@@ -1208,6 +1216,8 @@ position ``i`` in the list ``L``. All elements previously at that
 position or beyond are moved up one position. The index ``i`` can be at
 the end of the list, whereupon ``insert()`` behaves like ``append()``.
 
+
+.. _table-list-methods:
 
 .. list-table:: List Methods
    :widths: 15 45
@@ -1338,8 +1348,8 @@ positions, you can use the loop:
    for item in L:
       # do something with each item in L
 
-continue
-~~~~~~~~
+``continue`` Statement
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you decide that you are finished with the current iteration of a
 loop, you can execute the continue statement. It consists of the single
@@ -1380,8 +1390,8 @@ where we iterate over a filtered result:
    placid
    mother  
 
-break and else in loops
-~~~~~~~~~~~~~~~~~~~~~~~
+``break`` and ``else`` in loops
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Often you will use a loop to search for something. Once you've found it,
 you want to escape from the loop. If you don't find it, you often need
@@ -1421,8 +1431,8 @@ is in Python too. It is perhaps not the best word to express the concept
 of *on normal termination*, but it is what Python uses.
 
 
-if-else
-'''''''
+``if-else``
+'''''''''''''
 
 statement will execute code based on whether an expression is true. The
 form of an ``if`` statement is
@@ -1442,8 +1452,8 @@ If you want to execute other code if the expression is false, use the
   else:
     indented code to be executed if expr is false
 
-elif
-''''
+``elif``
+''''''''
 
 Of course, you often want to test a sequence of conditions and execute
 code for the first one that's true. Because of indentation, it would be
@@ -1778,6 +1788,9 @@ expressions. For example:
 
 Both ``i`` and ``j`` are set zero.
 
+Unpacking Sequences
+''''''''''''''''''''
+
 Second, as we have already seen, more than one value may be assigned at
 the same time by separating the values with commas, for example:
 
@@ -1967,8 +1980,9 @@ characteristics one at a time:
 
 .. todo:: Add cross reference to operations on dictionaries
 
-Dictionaries are like small, in-memory databases. The following table shows the operators, functions, and
-methods available for dictionaries.
+Dictionaries are like small, in-memory databases. The table :ref:`table-dictionary-methods` shows the operators, functions, and methods available for dictionaries.
+
+.. _table-dictionary-methods:
 
 .. list-table:: Dictionary Methods
    :widths: 15 45
@@ -2289,7 +2303,9 @@ in a row:
 The output here shows Python's incorporation character, the backslash.
 The backslash tells Python that the following character is to have a
 special interpretation within the string. Python's incorporation
-sequences are shown in the following table.
+sequences are shown in the following table :ref:`table-incorporation`.
+
+.. _table-incorporation:
 
 .. list-table:: Incorporation Character Sequences in String Literals
    :widths: 15 45
@@ -2423,7 +2439,9 @@ String Operators
 
 The string operators are the same as those that apply to tuples, with
 one extra operator for string formatting. The operators are shown in
-the following table.
+the table :ref:`table-string-operators`.
+
+.. _table-string-operators:
 
 .. list-table:: String Operators
    :widths: 15 45
@@ -2676,8 +2694,10 @@ The String Module and String Methods
 
 The string module provides a number of useful functions and constants.
 In Python, functions from the string module were made into methods of
-string objects. The following table shows the most useful of these functions
+string objects. The table :ref:`table-string-ops-methods` shows the most useful of these functions
 and methods.
+
+.. _table-string-ops-methods:
 
 .. list-table:: Most Important String Operators and Methods
    :widths: 20 20 20
