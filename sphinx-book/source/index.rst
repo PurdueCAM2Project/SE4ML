@@ -34,14 +34,18 @@ A draft book by `Yung-Hsiang Lu <https://engineering.purdue.edu/ECE/People/ptPro
    misc/chapter_sphinx_demo
 
 
-GitHub
-   `PurdueCAM2Project/SE4ML <https://github.com/PurdueCAM2Project/SE4ML>`_.
+Repository
+   `github.com/PurdueCAM2Project/SE4ML <https://github.com/PurdueCAM2Project/SE4ML>`_
 
-Download
-   `PurdueCAM2Project/SE4ML/releases <https://github.com/PurdueCAM2Project/SE4ML/releases>`__ (for *printable* PDF).
+Continuous Integration
+   `travis-ci.com/PurdueCAM2Project/SE4ML <https://travis-ci.com/PurdueCAM2Project/SE4ML>`_
+
+Releases
+   `github.com/PurdueCAM2Project/SE4ML/releases <https://github.com/PurdueCAM2Project/SE4ML/releases>`_ 
 
 Cite
-   Yung-Hsiang Lu and George K. Thiruvathukal, Software Engineering and Machine Learning, PurdueCAM2Project/SE4ML, Zenodo, http://doi.org/10.5281/zenodo.2532051.
+   Yung-Hsiang Lu and George K. Thiruvathukal, *Software Engineering and Machine Learning*, PurdueCAM2Project/SE4ML, Zenodo, http://doi.org/10.5281/zenodo.2532051.
 
-:ref:`genindex`
+Topics
+   :ref:`genindex`
 
