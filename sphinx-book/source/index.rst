@@ -10,7 +10,6 @@ A draft book by `Yung-Hsiang Lu <https://engineering.purdue.edu/ECE/People/ptPro
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
    frontmatter/preface
 
@@ -35,20 +34,14 @@ A draft book by `Yung-Hsiang Lu <https://engineering.purdue.edu/ECE/People/ptPro
    misc/chapter_sphinx_demo
 
 
-**GitHub Repository**
+GitHub
+   `PurdueCAM2Project/SE4ML <https://github.com/PurdueCAM2Project/SE4ML>`_.
 
-See `PurdueCAM2Project/SE4ML <https://github.com/PurdueCAM2Project/SE4ML>`_.
+Download
+   `PurdueCAM2Project/SE4ML/releases <https://github.com/PurdueCAM2Project/SE4ML/releases>`__ (for *printable* PDF).
 
-**Download for Printing**
+Cite
+   Yung-Hsiang Lu and George K. Thiruvathukal, Software Engineering and Machine Learning, PurdueCAM2Project/SE4ML, Zenodo, http://doi.org/10.5281/zenodo.2532051.
 
-See `PurdueCAM2Project/SE4ML/releases <https://github.com/PurdueCAM2Project/SE4ML/releases>`__ for *printable* PDF.
+:ref:`genindex`
 
-**Want to cite us?**
-
-Yung-Hsiang Lu and George K. Thiruvathukal, Software Engineering and Machine Learning, PurdueCAM2Project/SE4ML, Zenodo, http://doi.org/10.5281/zenodo.2532051.
-
-**Index**
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
