@@ -23,6 +23,7 @@ A draft book by `Yung-Hsiang Lu <https://engineering.purdue.edu/ECE/People/ptPro
    unsupervised/chapter_ml
    unsupervised/chapter_kmeans
    unsupervised/chapter_hierarchical
+   unsupervised/chapter_pca
    unsupervised/chapter_practical
    unsupervised/chapter_floating_point
    
