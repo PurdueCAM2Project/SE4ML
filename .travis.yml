@@ -19,8 +19,8 @@ addons:
 script:
 - pip install -r requirements.txt
 - make all
-- pushd sphinx-book && travis-sphinx build -s source && popd
-- pushd sphinx-book && make latexpdf && popd
+- BOOK_VERSION=$(./get-current-version.sh) pushd sphinx-book && travis-sphinx build -s source && popd
+- BOOK_VERSION=$(./get-current-version.sh) pushd sphinx-book && make latexpdf && popd
 after_success:
 - pushd sphinx-book && travis-sphinx deploy --cname se4ml.org && popd
 before_deploy:
