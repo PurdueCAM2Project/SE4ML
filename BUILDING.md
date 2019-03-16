@@ -50,12 +50,20 @@ by making sure Python's `venv` support is installed. Virtual environments allow 
 ## Building the book in your virtualenv:
 
 
+0. Make sure you are in the `sphinx-book` folder
+
+  ```
+  cd sphinx-book
+  ```
 
 1. Build the Sphinx book:
   ```
+  make clean
   make html
   make latexpdf
   ```
+
+  I recommend always doing `make clean` before any build, similar to LaTeX work. This ensures any cached data are cleared out.
 
 2. Check the build results (Linux only shown here):
 
