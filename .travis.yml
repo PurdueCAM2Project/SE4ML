@@ -18,7 +18,7 @@ addons:
     - latexmk
 script:
 - pip install -r requirements.txt
-- make all
+- pushd latex-book && make all && popd
 - pushd sphinx-book && BOOK_VERSION=$(../get-current-version.sh) travis-sphinx build -s source && popd
 - pushd sphinx-book && BOOK_VERSION=$(../get-current-version.sh) make latexpdf && popd
 after_success:
