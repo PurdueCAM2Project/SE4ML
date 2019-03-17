@@ -10,4 +10,10 @@
    .wy-table-responsive {
       overflow: visible !important;
    }
+
+   /* Purdue Campus Gold */
+   .wy-side-nav-search, .wy-nav-top {
+      background: #C28E0E;
+   }
+
 }
