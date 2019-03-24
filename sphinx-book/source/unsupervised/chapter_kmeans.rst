@@ -139,3 +139,47 @@ following properties must be satisfied:
   i, 1 \le i \le n` if :math:`x_i \in C_j` and :math:`x_i \in C_m` then :math:`j = m`,
   here :math:`1 \le j, m \le k`.  To put it in another way, :math:`C_j` and :math:`C_m`
   has no overlap if :math:`j \ne m`: :math:`C_j \cap C_m = \emptyset`.
+
+  
+How is the problem defined? Suppose :math:`D` (as distance) defines
+how dissimilar the data points of each cluster.  If the data points
+are quite similar, :math:`D` is small.  If the data points are
+quite dissimilar, :math:`D` is large.  The goal is to assign :math:`x_1`,
+:math:`x_2`, ..., :math:`x_n` to :math:`C_1`, :math:`C_2`, ..., :math:`C_k` so that
+
+:math:`\min \underset{j = 1}{\overset{k}{\sum}} D(C_j)`
+
+is as small as possible.
+
+
+This is a *minimization problem*. A minimization problem aims to make
+a quantity, called the *cost function*, as small as possible.
+Minimization problems are *optimization problems*, so are
+*maximization problems*.  A maximization problem aims to make a
+quantity, called the *profit function* or *score function*, as large
+as possible.
+
+.. index::
+   cost function
+   profit function
+   minimization problem
+   maximization problem
+   optimization problem
+
+How is :math:`D` defined?  It can be defined in many ways. One commonly
+used definition is the sum of pairwise Euclidean distance:
+
+.. index::
+   Euclidean distance
+
+
+:math:`D(C_j) = \underset{x_r, x_s \in C_j}{\sum} (x_r - x_s)^ 2`
+
+
+If :math:`x_r` and :math:`x_s` are :math:`p`-dimensional vectors:
+:math:`x_r = (x_{r1}, x_{r2}, ..., x_{rp})` and
+:math:`x_s = (x_{s1}, x_{s2}, ..., x_{sp})`.
+The distance of them is defined as the sum of the square
+of the difference in each dimension:
+
+:math:`(x_r - x_s)^ 2 = \underset{i = 1}{\overset{p}{\sum}} (x_{ri} - x_{si})^2`.
