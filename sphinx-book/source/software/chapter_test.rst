@@ -558,7 +558,18 @@ file:
      
 
 Many lines change from ! (not tested) to > (tested). The second test has
-80% coverage, higher than the first test. Here are the tests that can
+80% coverage, higher than the first test.
+
+Figure \ `[fig:comparecoverage] <#fig:compareconverage>`__.
+
+
+.. figure:: test/figures/comparecoverage.png
+
+Compare the two coverage outputs.
+
+
+
+Here are the tests that can
 achieve 100% coverage:
 
 ::
