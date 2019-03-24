@@ -1,29 +1,13 @@
 Testing
 =======
 
-Have you ever had a situation when your software has a bug but it is not
-discovered for a long time? The existence of the bug and its ability to
-escape detection may surprise your entire team. “How did that happen?”,
-you may ask. This may happen due to a wide variety of reasons. One of
-the possible reasons is that the software has not been well tested and
-as a result the bug is not detected. Testing is an important method
-detecting bugs. However, testing can be tideous. It is common that
-someone makes a “small” change and skips testing. The person believes
-the change is so small and cannot possibly have any bug. If several
-people add a few small changes here and there, the software soon is full
-of “small” bugs. Why do people not test their programs immediately after
-they have made changes? One reason is that testing require additional
-work.
 
-Is it possible testing is fully automated without any additional effort?
-Continuous Integration (CI) does exactly that.
+Testing is an essential part for creating high-quality software.  Many
+software developers understand the importance of testing but they do
+not really understand how to write tests and they do not understand
+the limitations of testing. This chaptper provides deeper insight
+about testing.
 
-You still need to write testers. There is no way avoiding that part.
-What continuous integration does is to automatically invole these
-testers whenver you push your program to the shared repository. This
-chapter uses Travis-CI for continuous integration. Before explaining how
-to use Continuous Integration, it is necessary first explaining how
-Python testing works.
 
 Limitations of Testing
 ----------------------
