@@ -32,7 +32,6 @@ wants to provide only a few (say 10) types of coupons.  The store
 wants to group the customers based on what they bought together.  For
 example
 
-\begin{itemize}
 
 - If a customer has bought shirts, shoes, and a sweater together,  this customer is given a coupon for clothes.
 
@@ -183,3 +182,45 @@ The distance of them is defined as the sum of the square
 of the difference in each dimension:
 
 :math:`(x_r - x_s)^ 2 = \underset{i = 1}{\overset{p}{\sum}} (x_{ri} - x_{si})^2`.
+
+      
+
+It is common to divide :math:`D(C_j)` by the number of data points
+in :math:`C_j` so that clusters of different sizes
+are treated equally. Thus, :math:`D(C_j)` is redefined as
+
+:math:`D(C_j) = \frac{1}{|C_j|} \underset{x_r, x_s \in C_j}{\sum} (x_r - x_s)^ 2`.
+
+Rewrite the cost function as 
+
+:math:`\min \underset{j = 1}{\overset{k}{\sum}}  \frac{1}{|C_j|} \underset{x_r, x_s \in C_j}{\sum} (x_r - x_s)^ 2`.
+
+      
+Number of Solutions for Clustering
+----------------------------------
+
+Deciding the proper value of :math:`k` is a difficult problem because
+there are many possible solutions when :math:`n` and :math:`k` are
+large. How many possible solutions are there?  This is equivalent to
+the *set partition problem*: divided a set of :math:`n` elements into
+:math:`k` non-overlapping non-empty subsets.  Suppose the :math:`n`
+data points can be assigned to any of the :math:`k` clusters, there
+are :math:`k^n` possibilities.  This, however, allows empty clusters.
+Thus, we have to exclude the situation when one cluster is empty. In
+this case, there are :math:`(k-1)^n` options.  If two clusters are
+empty, there are :math:`(k-2)^n` options.  Continue until all except
+one cluster is empty. The total number of options is
+
+:math:`k^n - (k-1)^n - (k -2) ^ n ... - 1^n = k^n - \underset{i = 1}{\overset{k-1} \sum} (k-i)^n`.
+
+      
+K-Mean Algorithm
+----------------      
+
+
+When $n$ and $k$ are large, there are too many possible solutions and
+finding the best solution (or one of the best solutions, if several
+solutions are equally good and better than the other solutions) would
+be difficult. Instead of find the best solution, a heuristic, called
+the *k-mean algorithm*, usually finds good solutions.  This is the
+step of the k-mean algorithm:
