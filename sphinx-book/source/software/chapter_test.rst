@@ -660,8 +660,8 @@ Travis-CI.com is a website supporting continuous integration.
 
 
 Using Travis-CI is quite simple. You need to add a special file whose
-name is {\it .travis.yml}.  It tells Travis-CI what to do when changes
-are pushed to {\tt github}.  This is a simple example:
+name is ``.travis.yml``.  It tells Travis-CI what to do when changes
+are pushed to github.  This is a simple example:
 
 ::
 
@@ -669,3 +669,16 @@ are pushed to {\tt github}.  This is a simple example:
    Python 3.5.2
 
 
+
+The content of this file should be pretty easy to understand: It says
+the repository uses Python as the language and version 3.5 is
+required.  When changes are pushed, run ``pytest`` and it
+automatically looks for a Python program starting with ``test_`` (such
+as ``test_intpart``}.  If it runn successfully, it is green.  If the
+test fails, it will appear red.  You are encouraged to modify the
+test, make it fail, and see what a failure looks like.
+
+
+.. image:: test/figures/travis02.png
+
+Running pytest successfully in Travis-CI.	   
