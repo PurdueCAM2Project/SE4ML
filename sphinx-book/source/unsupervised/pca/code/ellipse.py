@@ -31,5 +31,5 @@ class Ellipse:
         return points
     
 if __name__ == "__main__":
-   ep = Ellipse(10, 5, 10, -3, -1)
+   ep = Ellipse(100, 5, 10, -3, 0)
    points = ep.getPoints(100, True)

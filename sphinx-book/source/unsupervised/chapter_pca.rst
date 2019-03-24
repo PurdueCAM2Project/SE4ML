@@ -13,7 +13,20 @@ expressed in lower dimensions.  To put in another way, PCA aims to
 discover which components have the greatest impacts in the data.
 Before we get into the details of PCA, let's first consider some examples.
 
+Examples
+--------
 
+Consider an ellipse. There are two common ways to express an ellipse:
+
+:math: `\frac{x^2}{a ^ 2} + \frac{y^2}{b ^ 2} = 1`
+
+.. or \langle \lbrace { x = a \cos(t) \atop y = b \sin(t) }
+
+   
+
+       
+
+(Figure: Ellipse)
 
 review Linear
 Algebra.

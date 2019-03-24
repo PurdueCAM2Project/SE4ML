@@ -17,7 +17,7 @@ A draft book by `Yung-Hsiang Lu <https://engineering.purdue.edu/ECE/People/ptPro
    software/chapter_vc
    software/chapter_test
    software/chapter_ws
-..   software/chapter_ci
+   software/chapter_ci
    software/chapter_graphics
    
    unsupervised/chapter_ml
