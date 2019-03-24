@@ -145,14 +145,14 @@ same:
 
    assert (x == y)
 
-The earlier assert statement assigns y’s value to x. Hence, their values
-are same and the intended assert is actually true. If you remove the
-assert and no longer assign y’s value to x, the program may not work any
-more. Human eyes are not good detecting the differences between = and
-==. This is a difficult bug to fix because keeping assert means the
-program is correct. Removing assert means the program is wrong.
-These problems about misuse ``assert`` were observed
-  in the authors' classes.  They actually happened multiple times.
+The earlier assert statement assigns y’s value to x. Hence, their
+values are same and the intended assert is actually true. If you
+remove the assert and no longer assign y’s value to x, the program may
+not work any more. Human eyes are not good detecting the differences
+between = and ==. This is a difficult bug to fix because keeping
+assert means the program is correct. Removing assert means the program
+is wrong.  These problems about misuse ``assert`` were observed in the
+authors' classes.  They actually happened multiple times.
 
 The third problem is, perhaps, somewhat philosophical. It is the
 attitude of creating good software. Software is deployed in many
