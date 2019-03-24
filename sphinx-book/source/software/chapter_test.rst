@@ -13,12 +13,12 @@ Limitations of Testing
 ----------------------
 
 It is important understanding that testing has limitations. It is
-practically impossible testing every possible scenario. Every if is a
+practically impossible testing every possible scenario. Every ``if`` is a
 condition. A condition divides a program into two different paths
 depending whether the condition is true or not. A non-trivial program
 can easily have hundreds of conditions. As a simple explanation why it
 is not possible testing every possible scenario. Let’s consider a
-program with 100 independent conditions, i.e., whether condition is true
+program with 100 independent conditions, i.e., whether one condition is true
 or false does not affect any other condition. There are :math:`2^{100}`
 possible scenarios. The fastest computer in the world can perform
 several hundred quadrillion (:math:`10^{15}`) calculations per second;
