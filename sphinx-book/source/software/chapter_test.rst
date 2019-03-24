@@ -81,8 +81,9 @@ testing code, the inputs, and the expected outputs before releasing your
 product. Figure \ `[fig:teststructure01] <#fig:teststructure01>`__
 illustrates this concept.
 
-CAPTION: Production code and test code should be completely separated.
-.. image:: test/figures/teststructure01.png
+.. figure:: test/figures/teststructure01.png
+
+   Production code and test code should be completely separated.
 
 Use Assert Correctly
 --------------------
@@ -166,7 +167,9 @@ at all? You should not use assert in production code. You can use assert
 in the testing code, as shown in
 Figure \ `[fig:teststructure02] <#fig:teststructure02>`__.
 
-.. image:: test/figures/teststructure02.png
+.. figure:: test/figures/teststructure02.png
+
+   TODO: Change this to be the actual caption.
 
 In this example, the testing code uses assert to check whether the
 output from function 1 is correct. This is particularly important before
