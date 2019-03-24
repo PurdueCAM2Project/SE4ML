@@ -151,6 +151,8 @@ assert and no longer assign y’s value to x, the program may not work any
 more. Human eyes are not good detecting the differences between = and
 ==. This is a difficult bug to fix because keeping assert means the
 program is correct. Removing assert means the program is wrong.
+These problems about misuse ``assert`` were observed
+  in the authors' classes.  They actually happened multiple times.
 
 The third problem is, perhaps, somewhat philosophical. It is the
 attitude of creating good software. Software is deployed in many
@@ -169,7 +171,7 @@ Figure \ `[fig:teststructure02] <#fig:teststructure02>`__.
 
 .. figure:: test/figures/teststructure02.png
 
-   TODO: Change this to be the actual caption.
+Use ``assert`` in the testing code. Do not put ``assert`` in  production code.
 
 In this example, the testing code uses assert to check whether the
 output from function 1 is correct. This is particularly important before
@@ -178,6 +180,8 @@ importance of separating production code from testing code.
 
 Exception
 ---------
+
+To be added later
 
 Pytest
 ------
@@ -627,7 +631,37 @@ coverage number only.
 Continous Integration
 ---------------------
 
+Have you ever had a situation when your software has a bug but it is
+not discovered for a long time?  The existence of the bug and its
+ability to escape detection may surprise your entire team. "How did
+that happen?", you may ask.  This may happen due to a wide variety of
+reasons. One of the possible reasons is that the software has not been
+well tested and as a result the bug is not detected. Testing is an
+important method detecting bugs.  However, testing can be tideous.  It
+is common that someone makes a "small" change and skips testing.
+The person believes the change is so small and cannot possibly have
+any bug.  If several people add a few small changes here and there,
+the software soon is full of "small" bugs.  Why do people not test
+their programs immediately after they have made changes?  One reason
+is that testing require additional work.
+
+Is it possible testing is fully automated without any additional
+effort? *Continuous Integration* (CI) does exactly that.  You
+still need to write testers. There is no way avoiding that part.  The
+previous sections explain how to write tests.  What continuous
+integration does is to automatically invole these testers whenver you
+push your program to the shared repository.  This section uses 
+``Travis-CI`` for continuous integration. 
+
 .. image:: test/figures/travis01.png
+
+Travis-CI.com is a website supporting continuous integration.
+
+
+
+Using Travis-CI is quite simple. You need to add a special file whose
+name is {\it .travis.yml}.  It tells Travis-CI what to do when changes
+are pushed to {\tt github}.  This is a simple example:
 
 ::
 
