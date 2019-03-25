@@ -291,3 +291,18 @@ cluster this line belongs to.
 
 .. literalinclude:: kmean/code/testmain.py
    :language: python
+
+.. literalinclude:: kmean/code/testgen.py
+   :language: python
+
+
+TO DO: Need to explain the program
+	      
+To run the program using the default values, type ``python3 main.py``.  This is an example output ``data.txt``:
+
+.. literalinclude:: kmean/code/data.txt
+
+This is the corresponding ``cluster.txt``.
+
+.. literalinclude:: kmean/code/cluster.txt
+
