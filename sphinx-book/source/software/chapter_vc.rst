@@ -1183,3 +1183,99 @@ it is released.
 
 Set Up SSH Key
 --------------
+
+Using SSH keys is helpful to avoid entering username and password when pushing local changes to a remote repository.
+
+Ensure you have ssh-keygen on your system:
+
+::
+
+   $ which ssh-keygen
+   /usr/bin/ssh-keygen
+
+We do not cover installation of basic Unix tools here; however, this tool is provided on all modern Unix systems, including OS X and Windows (using Windows Subsystem for Linux).
+
+
+Generate your private/public key pair.
+In this example, we use the RSA algorithm with 2048-bit keys. 
+
+::
+
+   $ ssh-keygen -t rsa -b 2048
+   Generating public/private rsa key pair.
+   Enter file in which to save the key (/home/thiruvathukal/.ssh/id_rsa): gkthiruvathukal
+   Enter passphrase (empty for no passphrase): 
+   Enter same passphrase again: 
+   Your identification has been saved in gkthiruvathukal.
+   Your public key has been saved in gkthiruvathukal.pub.
+   The key fingerprint is:
+   SHA256:8KETYZ4cAtMCDNMXP8IadYv6DjzuNpN0f67W7oCRtKM thiruvathukal@penguin
+   The key's randomart image is:
+   +---[RSA 2048]----+
+   |*ooo+.=          |
+   | oo+oO =         |
+   |  .o= X .        |
+   |   = + * .       |
+   |  o = o S        |
+   | ..o.+ .         |
+   | .Eoo...         |
+   | .=+  o.o        |
+   | ooo...*+        |
+   +----[SHA256]-----+
+
+
+Display the public key. This is what you need to upload to GitHub.
+
+::
+
+   $ cat gkthiruvathukal.pub
+   ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXiY/Bn1ZrwVqy6W6g8dPL1QQ5QnRojF4UmhbRihER7nefoSS9c6kwoD7cnD8fM2UINiRYI56j7vek1qqH09SstmnuKQLNf6tJqYgcRUguSQRqhS+yjJ2HLkm/GCXXrja/SFTHjspLwgZRsQFWK8yZXNSPZZnxUOXI3UBc4z2nTQ+MclhU0VzcbJhH9LeqyvKNtiTRjhVXF8wXJzWRQ8wVPKvd2Jl8fYqfoExRAAHDBEmxQyTraawA8J5cNS24EWAoKIR4rT9H7u1UKGjyoII53U137IsPG5SCZ9rNG/XAzF7GC18S+MbBwJ9W5LjaaGEqy0UOq2FtF3UMGdFtxSCV thiruvathukal@penguin
+
+.. note:: The keys used here (public and private) were only used for testing and have already been deleted.
+
+Upload key to GitHub.
+
+.. figure:: vc/figures/ssh-key-add-key.png
+   :alt: Copy/paste public key in GitHub SSH Config
+
+   Copy/paste public key in GitHub SSH Config
+
+Successful upload of key
+
+.. figure:: vc/figures/ssh-key-success.png
+   :alt: Successful upload shows fingerprint
+
+   Successful upload shows fingerprint
+
+
+Add Host entry in `~/.ssh/config`:
+
+::
+
+   Host gkthiruvathukal-github
+      HostName github.com
+      IdentityFile ~/.ssh/gkthiruvathukal
+
+
+
+Now try cloning a repository with a git-style location and the newly created Host entry:
+
+::
+
+   $ git clone git@gkthiruvathukal-github:PurdueCAM2Project/SE4ML
+   Cloning into 'SE4ML'...
+   remote: Enumerating objects: 75, done.
+   remote: Counting objects: 100% (75/75), done.
+   remote: Compressing objects: 100% (38/38), done.
+   remote: Total 1772 (delta 47), reused 61 (delta 35), pack-reused 1697
+   Receiving objects: 100% (1772/1772), 10.82 MiB | 5.45 MiB/s, done.
+   Resolving deltas: 100% (898/898), done.
+
+
+As you can see, adding an entry to `~/.ssh/config` creates a pseudo-hostname that can be used as the hostname in a git-style URL.
+
+While it is not strictly required to create a Host entry in `~/.ssh/config`, you may find it convenient to have separate entries if you have multiple git identities (i.e. different GitHub accounts for different projects). Given that we as co-authors have multiple identities on git, we have written these instructions to be as general as possible.
+
+If you have already generated a default identity such as `id_dsa` or `id_rsa`, just upload the file `id_dsa.pub` or `id_rsa.pub` to GitHub. and use `git@github.com` in the git location string.
+
+
