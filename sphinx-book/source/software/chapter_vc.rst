@@ -1233,6 +1233,12 @@ Display the public key. This is what you need to upload to GitHub.
 
 .. note:: The keys used here (public and private) were only used for testing and have already been deleted.
 
+.. figure:: vc/figures/githubprofile.png
+   :alt: Github profile settings
+
+   Select settings in github settings
+
+	  
 Upload key to GitHub.
 
 .. figure:: vc/figures/ssh-key-add-key.png
