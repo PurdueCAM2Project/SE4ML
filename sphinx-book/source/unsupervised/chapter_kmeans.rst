@@ -218,9 +218,76 @@ K-Mean Algorithm
 ----------------      
 
 
-When $n$ and $k$ are large, there are too many possible solutions and
-finding the best solution (or one of the best solutions, if several
-solutions are equally good and better than the other solutions) would
-be difficult. Instead of find the best solution, a heuristic, called
-the *k-mean algorithm*, usually finds good solutions.  This is the
-step of the k-mean algorithm:
+When :math:`n` and :math:`k` are large, there are too many possible
+solutions and finding the best solution (or one of the best solutions,
+if several solutions are equally good and better than the other
+solutions) would be difficult. Instead of find the best solution, a
+heuristic, called the *k-mean algorithm*, usually finds good
+solutions.  This is the step of the k-mean algorithm:
+
+.. figure:: kmean/figures/kmeanalgorithm.png
+
+   K-Mean Algorithm
+
+
+A cluster's centroid is  the center of the data points assigned to this cluster.
+For cluster :math:`C_j`, its centroid is 
+
+:math:`\frac{1}{|C_j|} \underset{x_r \in C_j}{\sum} x_r`.
+
+Please remember that each data point is a :math:`p`-dimensional vector.
+
+This is a *heuristic solution*, meaning that the solution often works
+but there is no assurance. The solution may fail in some cases.  For
+many problems, finding the best solution (or solutions) can be
+computationally difficult because there are too many possibilities to
+check.  Instead of finding the best solution, an algorithm is adopted
+to find "good enough" solutions fast.  For the *k-mean* clustering
+problem, there is no easy way to determine the best value of
+:math:`k`. Thus, there is not clearly defined best solution.
+
+      
+Generate Test Cases
+-------------------
+
+Before showing the implementation in Python, this section
+discusses how to generate test cases.  Lacking test cases of known
+properties is one common problem in developing software for machine learning.  The purpose of machine
+learning is to recognize unknown patterns in data.  How can we know
+that the programs are correct if we do not know what the programs
+should find?
+Two methods are commonly used:
+
+- Creating simple test cases manually with known patterns.
+
+- Adopting widely used test cases whose patterns have already been studied.
+
+The first methods is restricted to only very small test cases that are
+unlikely to have sophisticated patterns needed to test computer
+programs.  The second methods, in contrast, may have sophisticated
+patterns but the data may be too complex for identifying problems in
+the programs.
+
+
+
+Another approach is to write another program (or several programs) as
+a "test case generators" to generate the test cases of known patterns.
+More specifically, for this problem, we can write a program that
+generates :math:`n` data points in :math:`k` clusters (:math:`n > k`).
+Since the data points are generated intentionally, it is easy to test
+whether the :math:`k`-mean program is correct.
+
+
+Writing a good test case generator takes some thinking because the
+generator has to consider many different possible properties. The
+programs in this chapter handles integers only because floating-point
+numbers have limited precision and sometimes give surprising results,
+to be discussed later in this book.  This program generates two output
+files: ``data.txt`` and ``cluster.txt``.  The first file has :math:`n`
+lines and each line has :math:`p` integers.  The second file also has
+:math:`n` lines; each line has the same :math:`p` integers, following
+by one integer between :math`0` and :math:`m - 1` to indicate which
+cluster this line belongs to.
+
+.. literalinclude:: kmean/code/testmain.py
+   :language: python
