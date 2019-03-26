@@ -1,4 +1,4 @@
 Supervised Machine Learning
 ============================
 
-Text
+Another type of learning is called *supervised learning*. 
