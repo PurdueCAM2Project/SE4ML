@@ -220,16 +220,15 @@ trained medical doctors.
 
 
 Unsupervised learning can be applied when a person mimicks the
-behaviors of another person.  Imagine that you have a vacation in
-Korea and hear people saying ``안녕하세요`` when they meet.  Even
-though nobody (i.e., there is no teacher) tells you what it means, you
-start saying ``안녕하세요`` when you meet people.  This is an example
-of unsupervised learning.  Unsupervised learning can also be used to
-discover patterns in data, for example, people that buy apples are
-liekly to buy organes also.  Web search engines are examples of
-unsupervised learning.  These engines analyze many websites and rank
-websites for different search keywords. There is no "teacher"
-specifying the correct orders.
+behaviors of another person.  Imagine that you have a vacation in USA
+and hear people saying "hello" when they meet.  Even though nobody
+(i.e., there is no teacher) tells you what it means, you start saying
+"hello" when you meet people.  This is an example of unsupervised
+learning.  Unsupervised learning can also be used to discover patterns
+in data, for example, people that buy apples are liekly to buy organes
+also.  Web search engines are examples of unsupervised learning.
+These engines analyze many websites and rank websites for different
+search keywords. There is no "teacher" specifying the correct orders.
 
 Define Learning
 ---------------

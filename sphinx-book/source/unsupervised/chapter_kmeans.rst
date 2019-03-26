@@ -476,3 +476,11 @@ Be careful using time as random number seeds for keys in security
 programs.  Using microseconds restrict the possible keys to only ``0``
 and ``999999``, not the full scale of all possible integers.
 
+
+It is possible that the data points that should be in the cluster are
+put into different clusters. When this occurs, the results are not
+very useful.  Since the *k-mean* algorithm does not guarantee finding
+the best clustering solution, it is advised running the program
+multiple times and find the result that has the smallest value of the
+cost function.
+
