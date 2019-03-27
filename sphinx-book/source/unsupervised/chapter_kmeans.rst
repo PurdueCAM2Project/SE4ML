@@ -484,3 +484,100 @@ the best clustering solution, it is advised running the program
 multiple times and find the result that has the smallest value of the
 cost function.
 
+
+Determine ``k``'s Value
+-----------------------
+
+
+One important question is to determine the value of ``k``.  This can
+also be answered by using different values and choose one that
+minimize the cost function.  The following function considers
+different values of ``k`` and runs the program multiple times for each
+value.
+
+Consider the data generated using ``-d 6 -c 10 -m 50 -M 60`` as the
+input.  The following figure shows the sum of the distances to the
+centrolds for different values of ``k``.  It is clear that when ``k``
+is too small (below 8), the distances are much larger.
+
+
+.. figure:: kmean/figures/iteratedistance.png   
+
+	    Distances for different values of ``k``.  Five times for each value.
+
+.. figure:: kmean/figures/iteratemindistance.png   
+
+	    Smallest distance for each value. Please notice that the smallest distance occurs when ``k`` is 13. The data is generated for 10 clusters.
+
+   
+Each value runs five times and has five bars. The size of each cluster
+is shown as the height. Since the clusters together contain all data
+points, the sum of the cluters' sizes is always the same.   The
+sizes of the clusters can vary significantly.  For example, when ``k``
+is 5, the smallest cluster has no data point and the largest cluster
+has more than one third of the data points.
+	    
+
+.. figure:: kmean/figures/clustersizes.png   
+
+	    Sizes of clusters for different values of ``k``.
+
+	    
+Clean Data before Clustering
+----------------------------
+
+
+The k-mean algorithm seems relatively simple. Is it actually useful?
+Yes. The beginning of this chapter describes several scenarios where
+clustering would be helpful.  Here are some other applications.
+Imagine that you own several pizza stores and want to open new stores.
+You want to decide the new stores' locations.  You have the budget to
+open at most five more stores (in this case ``k`` is between 1 to 5).
+You want to use the addresses of deliveries to determine the stores'
+locations as the centroids of the clusters based on customers'
+addresses.  This can be applied to many other scenarios: As another
+example, a bank wants to decide where to install four ATM (automatic
+teller machine) machines (``k`` is 4 in this case) based on customers'
+home and office addresses.  Both of them can take advantage of the
+clustering method.
+
+It is common that the data needs to be "cleaned" before sending to a
+clustering program.  For example, if you want to decide the locations
+of pizza stores, you may want to exclude the customers that are too
+far away from the other customers, maybe more than 10 km away from all
+the other customers.  Maybe you also want to consider how often
+customers order deliveries and give frequent customers larger weights
+so that the stores are closer to these customers.  The same thinking
+can be applied to selecting ATM locations: maybe you want to give
+higher weights to the customers that have high account balances or use
+ATM more often.
+
+Such "data cleaning" usually requires human judgement. In the example
+of deciding pizza stores' locations, should the customers be excluded
+if they are more than 10km away from all the other customers?  Why
+should it be 10km? Why not 5, or 8, or 15km?  If you want to include
+the customers that order deliveries often even though they live more
+than 10km away, how do you define "often"?  Is more than once per week
+considered often? Or more than twice per week?  Is one week too short?
+Instead, you prefer to consider ordering more than five times per
+month?  Doing meaningful data cleaning often requires knowledge about
+the business. You need to know how much it costs to deliver pizza for
+customers living at different distances from the store. You also need
+to know the traffic conditions: delivering pizza to a customer living
+in the center of a city may take longer even though the distance is
+shorter.  The business knowledge is essential understanding what data
+is needed, what data should be excluded, and how to interpret the
+results from the clustering method.  Using the k-mean method, or any
+machine learning method, is not as simple as throwing data into a
+program and get meaningful results effortlessly.
+
+Summary
+-------
+
+K-Mean is a simple clustering method and it can be the starting point
+of more complex methods. It can handle high-dimensional data (even
+though visualization above three-dimensional is difficult). When you
+get a set of data, you may use K-Mean (experiment with different
+values of ``k``) to obtain some idea whether the data is somewhat
+clustered.
+
