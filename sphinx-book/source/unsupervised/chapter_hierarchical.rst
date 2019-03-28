@@ -29,7 +29,264 @@ has several major problems:
 
 - The k-mean algorithm assigns all data points to one of the ``k``  clusters in the very first step.  Then the algorithm adjusts the  clusters by the finding closest centroid from each data  point. Because the initial assignments have direct impacts on the  final results, the program often needs to run multiple times for  selecting better results.
 
+*Hierarchical Clustering* is a method that does  not have these same problems as the k-mean algorithm.
 
 
+Examples of Hierarchical clustering
+-----------------------------------
+
+Hierarchical clustering iteratively finds the closest pair of clusters
+(at the beginning, each data point is a cluster by itself).  The
+algorithm makes the pair two children of a binary tree.  For
+hierarchical clustering, it is called *dendrogram*, instead of binary
+tree. This book uses both terms interchangably.  The tree node becomes
+a new cluster.  The algorithm continues until only one tree node is
+left.  Before formally describing the algorithm, let us go through
+several examples.  The simplest case is when there is only one data
+point but it is not very meaningful. Thus, let us start with two data
+points.
+
++-------+-----+-----+
+| index |  x  |  y  |
++=======+=====+=====+
+|   0   | -66 |  45 |
++-------+-----+-----+
+|   1   |  95 | -84 |
++-------+-----+-----+
+
+They are the two children of a binary tree:
+
+.. figure:: hierarchical/figures/cluster2.png
+
+	    Two data points are the two children of a binary tree.
+
+
+Next, we consider the case when there are four data points:
+
++-------+-----+-----+
+| index |  x  |  y  |
++=======+=====+=====+
+|   0   | -66 |  45 |
++-------+-----+-----+
+|   1   |  95 | -84 |
++-------+-----+-----+
+|   2   | -35 | -70 |
++-------+-----+-----+
+|   3   | 26  |  94 |
++-------+-----+-----+
+
+We use the *Euclidean distance* here. Consider two data points:
+:math:`(x_a, y_a)` and :math:`(x_b, y_b)`. The distance between them
+is defined as
+
+:math:`\sqrt{(x_a - x_b)^2 + (y_a - y_b)^2}`.
+
+Consider three data points: :math:`(x_a, y_a)`, :math:`(x_b, y_b)`,
+and :math:`(x_c, y_c)`.  The following inequality is true.
+      
+:math:`\sqrt{(x_a - x_b)^2 + (y_a - y_b)^2} > \sqrt{(x_a - x_c)^2 + (y_a - y_c)^2}  \Leftrightarrow ((x_a - x_b)^2 + (y_a - y_b)^2) > ((x_a - x_c)^2 + (y_a - y_c)^2)`.
+
+We care about only the order of the distance so we do not really care
+about the square root.
+
+
+The following table shows :math:`(x_a - x_b)^2 + (y_a - y_b)^2`
+between the pairs of the data points.
+
+
++---+-------+-------+-------+-------+
+|   |  0    | 1     | 2     | 3     |
++===+=======+=======+=======+=======+
+| 0 |  0    | 42562 | 14186 | 10865 | 
++---+-------+-------+-------+-------+
+| 1 | 42562 | 0     | 17096 | 36445 |
++---+-------+-------+-------+-------+
+| 2 | 14186 | 17096 | 0     | 30617 |
++---+-------+-------+-------+-------+
+| 3 | 10865 | 36445 | 30617 | 0     |
++---+-------+-------+-------+-------+
+
+
+The shortest distance (10865) occurs between :math:`(x_0, y_0)` and
+:math:`(x_3,y_3)`.  They are the first pair to be put into the same
+cluster.  Thus, points 0 and 3 are the two children of the same parent
+node.  
+
+
+.. figure:: hierarchical/figures/cluster4.png
+
+	    Clusters of four data points. Do not worry about the colors, nor the numbers along the vertical axis. Pay attention to the shape only.
+
+	    
+How do we represent the cluster that includes points 0 and 3?  There
+are several different commonly used representations.  This example
+uses the centroid method: a cluster is represented by the centroid of
+the data points in the cluster.  The cluster that contains
+:math:`(x_0, y_0)` and :math:`(x_3, y_3)` is represented by
+:math:`(\frac{-66+26}{2}, \frac{45+94}{2}) = (-20, 69.5)`.  This
+cluster is marked as the new :math:`(x_0, y_0)` and :math:`(x_3, y_3)`
+no longer exists.  We can recompute the distances among the pairs of
+points:
+
+TO DO: make the table align right
+
++---+-------+-------+-------+-------+
+|   |  0    | 1     | 2     | 3     |
++===+=======+=======+=======+=======+
+| 0 |  0    | 42562 | 14186 | 10865 | 
++---+-------+-------+-------+-------+
+| 1 | 42562 | 0     | 17096 | 36445 |
++---+-------+-------+-------+-------+
+| 2 | 14186 | 17096 | 0     | 30617 |
++---+-------+-------+-------+-------+
+| 3 | 10865 | 36445 | 30617 | 0     |
++---+-------+-------+-------+-------+
+
+
+The shortest distance (10865) occurs between :math:`(x_0, y_0)` and
+:math:`(x_3,y_3)`.  They are the first pair to be put into the same
+cluster.  Thus, points 0 and 3 are the two children of the same parent
+node.  
+
+
+	    
+How do we represent the cluster that includes points 0 and 3?  There
+are several different commonly used representations.  This example
+uses the centroid method: a cluster is represented by the centroid of
+the data points in the cluster.  The cluster that contains
+:math:`(x_0, y_0)` and :math:`(x_3, y_3)` is represented by
+:math:`(\frac{-66+26}{2}, \frac{45+94}{2}) = (-20, 69.5)`.  This
+cluster is marked as the new :math:`(x_0, y_0)` and :math:`(x_3, y_3)`
+no longer exists.  We can recompute the distances among the pairs of
+points:
+
+TO DO: make the table align right
+
++---+----------+----------+----------+
+|   |  0       | 1        | 2        |
++===+==========+==========+==========+
+| 0 | 0.0      | 36787.25 | 19685.25 |
++---+----------+----------+----------+
+| 1 | 36787.25 | 0        | 17096    |
++---+----------+----------+----------+
+| 2 | 19685.25 | 17096    | 0        |
++---+----------+----------+----------+
+
+
+Now, the shortest distance (17096) occurs between :math:`(x_1, y_1)`
+and :math:`(x_2, y_2)`.  These two data points are the two children of
+a tree node.  At this moment, there are only two clusters and they are
+the children of a binary tree node.  The final result is shown below
+
+.. figure:: hierarchical/figures/cluster4.png
+
+	    Clusters of four data points. Do not worry about the colors, nor the numbers along the vertical axis. Pay attention to the shape only.
+
+Next, let's add two more data points.
+
+
++-------+-----+-----+
+| index |  x  |  y  |
++=======+=====+=====+
+|   0   | -66 |  45 |
++-------+-----+-----+
+|   1   |  95 | -84 |
++-------+-----+-----+
+|   2   | -35 | -70 |
++-------+-----+-----+
+|   3   | 26  |  94 |
++-------+-----+-----+
+|   4   | 15  | 20  |
++-------+-----+-----+
+|   5   | 66  | -3  |
++-------+-----+-----+
+
+
+The pair-wise distances is shown below
+
+
++---+-------+-------+-------+-------+-------+-------+
+|   | 0     | 1     | 2     | 3     | 4     | 5     | 
++===+=======+=======+=======+=======+=======+=======+
+| 0 | 0     | 42562 | 14186 | 10865 | 7186  | 19728 |
++---+-------+-------+-------+-------+-------+-------+
+| 1 | 42562 | 0     | 17096 | 36445 | 17216 | 7402  |
++---+-------+-------+-------+-------+-------+-------+
+| 2 | 14186 | 17096 | 0     | 30617 | 10600 | 14690 |
++---+-------+-------+-------+-------+-------+-------+
+| 3 | 10865 | 36445 | 30617 | 0     | 5597  | 11009 |
++---+-------+-------+-------+-------+-------+-------+
+| 4 | 7186  | 17216 | 10600 | 5597  | 0     | 3130  | 
++---+-------+-------+-------+-------+-------+-------+
+| 5 | 19728 | 7402  | 14690 | 11009 | 3130  | 0     |
++---+-------+-------+-------+-------+-------+-------+
+
+
+The shortest distance (3130) occurs between :math:`(x_4, y_4)` and
+:math:`(x_5, y_5)`.  These two data points are the two children of a
+node.  This cluster is represented by the centroid :math:`(\frac{15 +
+66}{2}, \frac{20 + (-3)}{2}) = (\frac{81}{2}, \frac{17}{2}) = (40.5,
+8.5)`.  The cluster is expressed as :math:`(x_4, y_4)` and
+:math:`(x_5, y_5)` is removed.  Now there are four data points and one
+cluster.  The distances are shown in the following table:
+
++---+---------+---------+---------+--------+---------+
+|   | 0       | 1       | 2       | 3      | 4       | 
++===+=========+=========+=========+========+=========+
+| 0 | 0       | 42562   | 14186   | 10865  | 12674.5 |
++---+---------+---------+---------+--------+---------+
+| 1 | 42562   | 0       | 17096   | 36445  | 11526.5 |
++---+---------+---------+---------+--------+---------+
+| 2 | 14186   | 17096   | 0       | 30617  | 11862.5 |
++---+---------+---------+---------+--------+---------+
+| 3 | 10865   | 36445   | 30617   | 0      | 7520.5  |
++---+---------+---------+---------+--------+---------+
+| 4 | 12674.5 | 11526.5 | 11862.5 | 7520.5 | 0       | 
++---+---------+---------+---------+--------+---------+
+
+The smallest distance is 7520.5 and it is between :math:`(x_3, y_3)`
+and the cluster created earlier. Thus, :math:`(x_3, y_3)` and the
+cluster are put together by making them the two childrens of a binary
+tree node.  This process continues until there is only cluster left.
+The final binary tree is shown below:
+
+.. figure:: hierarchical/figures/cluster6.png
+
+	    Cluster of the six data points.
+
+The examples are generated using the following program:
+   
+.. literalinclude:: hierarchical/code/example1.py
+   :language: python
+
+Hierarchical Clustering Algorithm
+---------------------------------	      
+
+The hierarchical clustering algorithm starts by treating each data
+point as a cluster. Then it repetively finds the closest two clusters.
+These two clusters are the two children of a binary tree node and form
+one cluster.  As a result, two clusters become one cluster.  This
+process continues until only one cluster is left.  The algorithm is
+described below:
     
-  
+
+.. figure:: hierarchical/figures/hierarchicalalgorithm.png
+
+	    Hierarchical Clustering Algorithm
+
+Define Distance of Two Clusters
+-------------------------------   
+
+The earlier examples use the centroid to express each cluster.  Other
+definitions of clusters' distances are also used.  There are four
+commonly adopted definitions for the distance of two clusters (``An
+Introduction to Statistical Learning by James, Witten, Hastie, and
+Tibshirani``): *complete*, *single*, *average*, and *centroid*.  They
+are described below.
+
+Suppose $\mathds{A} = \{a_1, a_2, ..., a_n\}$ is a cluster
+and $a_1$, $a_2$, ..., $a_n$ are the $n$ data points in this cluster.
+Suppose $\mathds{B} = \{b_1, b_2, ..., b_m\}$ is another cluster
+and $b_1$, $b_2$, ..., $b_m$ are the $m$ data points in this cluster.
+The distance between these two clusters can be defined as
+	    
