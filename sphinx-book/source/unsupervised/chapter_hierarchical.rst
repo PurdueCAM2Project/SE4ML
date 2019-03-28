@@ -293,22 +293,59 @@ be defined as
 	    
 
 
--  Complete: Compute the pairwise distances of every point in  :math:`A` and every point in :math:`B`, then select the  largest distance.  Mathematically, the distance is defined as :math:`\underset{a_i \in A}, b_j \in B}}{\max}{|a_i - b_j|}`.
+-  Complete: Compute the pairwise distances of every point in  :math:`A` and every point in :math:`B`, then select the  largest distance.  Mathematically, the distance is defined as :math:`\underset{a_i \in A, b_j \in B}{\max}{|a_i - b_j|}`.   Here, :math:`|a_i - b_j|` means the distance of the two points.
 
-  Here, :math:`|a_i - b_j|` means the distance of the two points.
+-  Single. This definition considers the smallest distance  among all pairs of points in :math:`A` and :math:`B`:  :math:`\underset{a_i \in A, b_j \in B}{\min}{|a_i - b_j|}`.
 
--  Single. This definition considers the smallest distance  among all pairs of points in :math:`A` and :math:`B`.
-  
-:math:`\underset{a_i \in A}, b_j \in B}}{\min}{|a_i - b_j|}`.
-
--  Average. This definition computes the average of the pairwise  distances.
-
-:math:`\frac{1}{n \times m} \underset{a_i \in A}, b_j \in B}}{\Sigma} {|a_i - b_j|}`.
+-  Average. This definition computes the average of the pairwise  distances: :math:`\frac{1}{n \times m} \underset{a_i \in A, b_j \in B}{\Sigma} {|a_i - b_j|}`.
 
 
-- Centroid. Find the centroid :math:`c_A` of :math:`A` and the    centroid of :math:`c_B` of :math:`B` using in Chapter of k-mean.   The distance of the two clusters is the distance of the two    centroids:
-
-:math:`| c_A - c_B|`.
+- Centroid. Find the centroid :math:`c_A` of :math:`A` and the    centroid of :math:`c_B` of :math:`B` using in Chapter of k-mean.   The distance of the two clusters is the distance of the two    centroids: :math:`| c_A - c_B|`.
 
   
 
+Implementation
+--------------  
+
+Data Structures
+^^^^^^^^^^^^^^^
+
+TO DO: Explain list and tree
+
+Procedure
+^^^^^^^^^
+
+To implement hierarchical clustering, we will use two types of data
+structures: *binary tree node* and *list node*.  Each binary tree node
+represents a cluster. The original data points are stored in the
+*leaf* nodes and each data point is a cluster of its own. These binary
+tree nodes are stored in a list.  In a binary tree, a node is a leaf
+if it has no child.  Then, the cloest two clusters are fused together
+into a single cluster.  The two clusters are removed from the list and
+the new cluster is added to the list.  In each step, two clusters are
+removed and one cluster is added.  As a result, the number of clusters
+is reduced by one in each step.  This process continues until only one
+cluster is left.
+
+TO DO: Make a figure
+
+The program's starting point is relatively simple.  It accepts one
+argument as the input file. Please notice that it is different from
+the k-mean solution since hierarchical clustering does not need the
+value of ``k``.
+
+TO DO: Explain the code
+
+.. literalinclude:: hierarchical/code/main.py
+   :language: python
+
+
+.. literalinclude:: hierarchical/code/cluster.py
+   :language: python	   
+
+.. literalinclude:: hierarchical/code/hctree.py
+   :language: python	   
+
+.. literalinclude:: hierarchical/code/hclist.py
+   :language: python	   
+	            
