@@ -284,9 +284,31 @@ Introduction to Statistical Learning by James, Witten, Hastie, and
 Tibshirani``): *complete*, *single*, *average*, and *centroid*.  They
 are described below.
 
-Suppose $\mathds{A} = \{a_1, a_2, ..., a_n\}$ is a cluster
-and $a_1$, $a_2$, ..., $a_n$ are the $n$ data points in this cluster.
-Suppose $\mathds{B} = \{b_1, b_2, ..., b_m\}$ is another cluster
-and $b_1$, $b_2$, ..., $b_m$ are the $m$ data points in this cluster.
-The distance between these two clusters can be defined as
+Suppose :math:`A = \{a_1, a_2, ..., a_n\}` is a cluster and :math:`a_1`,
+:math:`a_2`, ..., :math:`a_n` are the :math:`n` data points in this
+cluster.  Suppose :math:`B = \{b_1, b_2, ..., b_m\}` is another cluster
+and :math:`b_1`, :math:`b_2`, ..., :math:`b_m` are the :math:`m` data
+points in this cluster.  The distance between these two clusters can
+be defined as
 	    
+
+
+-  Complete: Compute the pairwise distances of every point in  :math:`A` and every point in :math:`B`, then select the  largest distance.  Mathematically, the distance is defined as :math:`\underset{a_i \in A}, b_j \in B}}{\max}{|a_i - b_j|}`.
+
+  Here, :math:`|a_i - b_j|` means the distance of the two points.
+
+-  Single. This definition considers the smallest distance  among all pairs of points in :math:`A` and :math:`B`.
+  
+:math:`\underset{a_i \in A}, b_j \in B}}{\min}{|a_i - b_j|}`.
+
+-  Average. This definition computes the average of the pairwise  distances.
+
+:math:`\frac{1}{n \times m} \underset{a_i \in A}, b_j \in B}}{\Sigma} {|a_i - b_j|}`.
+
+
+- Centroid. Find the centroid :math:`c_A` of :math:`A` and the    centroid of :math:`c_B` of :math:`B` using in Chapter of k-mean.   The distance of the two clusters is the distance of the two    centroids:
+
+:math:`| c_A - c_B|`.
+
+  
+
