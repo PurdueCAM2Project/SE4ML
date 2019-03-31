@@ -1,6 +1,18 @@
 Supervised Machine Learning
 ============================
 
+Learning Objectives
+
+- Understand supervised learning and the distinction from unsupervised learning
+  
+- Understand how supervised learning may be used
+  
+- Distinguish classification and regression problems
+
+Distinguish Supervised and Unsupervised Learning
+------------------------------------------------
+
+
 Another type of learning is called *supervised learning*.
 Unsupervised learning means discovering patterns from data, just data.
 Supervised learning means associating data with *labels*. When a

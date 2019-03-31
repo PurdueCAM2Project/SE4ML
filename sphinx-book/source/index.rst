@@ -28,6 +28,7 @@ A draft book by `Yung-Hsiang Lu <https://engineering.purdue.edu/ECE/People/ptPro
    unsupervised/chapter_floating_point
    
    supervised/chapter_supervised.rst
+   supervised/chapter_gradient.rst	      
    supervised/chapter_svm.rst
    supervised/chapter_neural_networks.rst
 
