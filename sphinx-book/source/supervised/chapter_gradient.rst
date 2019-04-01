@@ -7,7 +7,10 @@ Learning Objectives
 
 - Understand how gradient descent may be used in optimization problems
 
-- Apply gradient descent in machine learning    
+- Apply gradient descent in machine learning
+
+This chapter starts with a review of multivariable calculus.    
+    
 
 Partial Derivative
 ------------------
@@ -37,3 +40,29 @@ Similarly, the partial derivative of :math:`f(x,y)` with respect to
 
 :math:`\frac{\partial f}{\partial y}| _{(x_0, y_0)} = \frac{d}{dy} f(x, y_0) | _{y = y_0} =\underset{h \rightarrow 0}{\text{lim}} \frac{f(x_0, y_0 + h) - f(x_0, y_0)}{h}`
       
+This can be further extended to a function of :math:`n` variables :math:`f(x_1, x_2, ..., x_n)`. 
+      
+Gradient
+--------
+
+The *gradient* of a two-variable function :math:`f(x, y)` is at point :math:`(x_0, y_0)` is defined as
+
+:math:`\nabla f|_{(x_0, y_0)} = \frac{\partial f}{\partial x} {\bf i} + \frac{\partial f}{\partial y} {\bf j}`
+
+Here, :math:`{\bf i}` and :math:`{\bf j}` are the unit vector in the :math:`x` and :math:`y` directions.
+
+Rate of Change
+--------------
+
+Suppose :math:`{\bf u} = u {\bf i} + v {\bf j}` is a unit
+vector. Then, the amount of :math:`f`'s changes in the direction of
+:math:`{\bf u}` is the inner product of :math:`\nabla f` and
+:math:`{\bf u}`.  Apparently, the greatest change occurs at the
+direction when :math:`{\bf u}` is the unit vector of :math:`\nabla f`.
+
+Gradient Descent
+----------------
+
+*Gradient Descent* is a method for solving *minimization* problems.  
+
+	    
