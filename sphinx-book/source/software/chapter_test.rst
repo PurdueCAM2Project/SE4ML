@@ -9,39 +9,6 @@ the limitations of testing. This chaptper provides deeper insight
 about testing.
 
 
-Limitations of Testing
-----------------------
-
-It is important understanding that testing has limitations. It is
-practically impossible testing every possible scenario. Every ``if`` is a
-condition. A condition divides a program into two different paths
-depending whether the condition is true or not. A non-trivial program
-can easily have hundreds of conditions. As a simple explanation why it
-is not possible testing every possible scenario. Let’s consider a
-program with 100 independent conditions, i.e., whether one condition is true
-or false does not affect any other condition. There are :math:`2^{100}`
-possible scenarios. The fastest computer in the world can perform
-several hundred quadrillion (:math:`10^{15}`) calculations per second;
-this is a parallel computer but let’s not worry about that detail.
-Because :math:`\log_2(10) \approx 3.3`,
-:math:`10^{15} \approx 2 ^ {50}`. Thus, the fastest computer can check
-as many as :math:`2 ^ {50}` conditions per second. How many can this
-computer check per minute? :math:`2 ^ {50} \times 60`. How about a day
-(86,400 seconds)? :math:`2 ^ {50} \times 86400 \approx 2 ^ {66}`. In
-order to test :math:`2^{100}` possible scenarios, this computer needs to
-work :math:`2^{34}` days; this is very long time (much longer than the
-history of humans). In fact, the situation is even worse. The estimation
-above considers only two possible cases for each condition: true or
-false. If the condition compares two numbers, then “every possible
-scenario” means every possible pairs of these two numbers. What does
-this mean? It would be completely impossible testing every possible
-scenario of a program’s execution paths controlled by the conditions.
-
-Does this mean there is no need to test because it is not possible
-testing all possible scenarios? No. What it means is that testing has to
-be done carefully so that testing can detect as many problems (i.e.,
-bugs) as possible. Good tests should consider many different scenarios.
-
 Structure of Tests
 ------------------
 
@@ -693,3 +660,38 @@ test, make it fail, and see what a failure looks like.
 .. image:: test/figures/travis02.png
 
 Running pytest successfully in Travis-CI.	   
+
+
+
+Limitations of Testing
+----------------------
+
+It is important understanding that testing has limitations. It is
+practically impossible testing every possible scenario. Every ``if`` is a
+condition. A condition divides a program into two different paths
+depending whether the condition is true or not. A non-trivial program
+can easily have hundreds of conditions. As a simple explanation why it
+is not possible testing every possible scenario. Let’s consider a
+program with 100 independent conditions, i.e., whether one condition is true
+or false does not affect any other condition. There are :math:`2^{100}`
+possible scenarios. The fastest computer in the world can perform
+several hundred quadrillion (:math:`10^{15}`) calculations per second;
+this is a parallel computer but let’s not worry about that detail.
+Because :math:`\log_2(10) \approx 3.3`,
+:math:`10^{15} \approx 2 ^ {50}`. Thus, the fastest computer can check
+as many as :math:`2 ^ {50}` conditions per second. How many can this
+computer check per minute? :math:`2 ^ {50} \times 60`. How about a day
+(86,400 seconds)? :math:`2 ^ {50} \times 86400 \approx 2 ^ {66}`. In
+order to test :math:`2^{100}` possible scenarios, this computer needs to
+work :math:`2^{34}` days; this is very long time (much longer than the
+history of humans). In fact, the situation is even worse. The estimation
+above considers only two possible cases for each condition: true or
+false. If the condition compares two numbers, then “every possible
+scenario” means every possible pairs of these two numbers. What does
+this mean? It would be completely impossible testing every possible
+scenario of a program’s execution paths controlled by the conditions.
+
+Does this mean there is no need to test because it is not possible
+testing all possible scenarios? No. What it means is that testing has to
+be done carefully so that testing can detect as many problems (i.e.,
+bugs) as possible. Good tests should consider many different scenarios.
