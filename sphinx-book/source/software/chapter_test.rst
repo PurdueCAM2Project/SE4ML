@@ -695,3 +695,66 @@ Does this mean there is no need to test because it is not possible
 testing all possible scenarios? No. What it means is that testing has to
 be done carefully so that testing can detect as many problems (i.e.,
 bugs) as possible. Good tests should consider many different scenarios.
+
+Halting Problems: Unsolvable Problems
+-------------------------------------
+
+Is it possible checking whether a program is correct by using another program?
+More specifically, is it possible writing a program, called :math:`p`, that has
+three inputs: (1) another  program :math:`q`, (2)  input data :math:`i`,  and
+(3) expected output :math:`e` and decides whether program :math:`q`
+produces :math:`e` when taking the input :math:`i`, *without* running
+the program :math:`q`. This problem is at least as difficult as another problem:
+
+Is it possible writing a program, called :math:`p`, that has two
+inputs: (1) another program :math:`q`, (2) input data :math:`i` and
+decides whether program :math:`q` will eventually stop or not (i.e.,
+entering an infinite loop) when taking the input :math:`i`.  This is
+called thd *halting problem* in computation theory.  It turns that the
+halting problem cannot be solved.
+
+This is not a formal proof but it gives the intuition why the halting
+problem cannot be solved.
+
+First, it is possible to write a program :math:`p` that takes another
+program :math:`q` as the input. An operating system is such as program
+:math:`p`. A compiler is also such a program :math:`p`.  Second,
+:math:`p` cannot simply run :math:`q` with input :math:`i`. The reason
+is that if :math:`q` does not stop, :math:`p` runs indefintely without
+an answer.  We do not know whether :math:`q` takes very long time and
+will eventually stop, or it will never stop.  Third, since :math:`p`
+can take a program :math:`q` as the input, :math:`p` can also take
+itself as the input.
+
+So far, nothing is surprising. Next, we will explain why such a
+program :math:`p` is not possible. The "proof" uses contradition: We
+first assume that it is possible creating such a program :math:`p` and
+then show that contradition occurs. Thus, the assumption (it is
+possible creating such a program :math:`p`) is wrong.
+
+If it is possible creating :math:`p`, then it is possible creating
+:math:`\tilde{p}` by changing :math:`p` slightly:
+
+- If :math:`p`'s answer is yes, :math:`\tilde{p}` enters an infinite loop and thus cannot answer the question.
+
+- If :math:`p`'s answer is no, :math:`\tilde{p}` says yes.
+
+Next, rename :math:`\tilde{p}` as :math:`p`.    
+
+Now, there is a problem.  If :math:`p`'s answer is Yes, it enters an
+infinite loop and it will not halt.  If :math:`p`'s answer is no, it
+says yes.  In other words, :math:`p`'s answer should be exactly the
+opposite of its answer.  What does this mean? How can this be
+possible?  Why do we get contradiction?
+
+We get contradiction because we have made a wrong assumption: it is
+possible creating :math:`p`.  The truth is that it is not possible
+creating a program :math:`p` that takes a program :math:`q` and an
+input :math:`i` and decides whether :math:`q` halts when giving the
+input :math:`i`.
+
+What does this mean to testing?  Deciding whether a program halts is
+no more difficult deciding whether the program produces a correct
+output.  If it impossible to solve the halting problem, it is
+impossible writing a program :math:`p` that decides whether program
+:math:`q` given input :math:`i` produces expected output :math:`e`.
