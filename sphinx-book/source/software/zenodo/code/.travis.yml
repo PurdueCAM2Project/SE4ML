@@ -1,0 +1,38 @@
+sudo: false
+language: python
+addons:
+  apt:
+    packages:
+    - latex-xcolor
+    - texlive-base
+    - texlive-latex-base
+    - texlive-latex-recommended
+    - texlive-fonts-recommended
+    - texlive-fonts-extra
+    - texlive-latex-extra
+    - texlive-formats-extra
+    - texlive-bibtex-extra
+    - texlive-humanities
+    - texinfo
+    - texlive-science
+    - latexmk
+script:
+- pip install -r requirements.txt
+- pushd latex-book && make all && popd
+- pushd sphinx-book && BOOK_VERSION=$(../get-current-version.sh) travis-sphinx build -s source && popd
+- pushd sphinx-book && BOOK_VERSION=$(../get-current-version.sh) make latexpdf && popd
+after_success:
+- pushd sphinx-book && travis-sphinx deploy --cname se4ml.org && popd
+before_deploy:
+- cd $TRAVIS_BUILD_DIR
+deploy:
+  provider: releases
+  api_key: $GH_TOKEN
+  file_glob: true
+  file:
+    - ./**/se4ml.pdf
+    - ./**/SoftwareEngineeringforMachineLearning.pdf
+  skip_cleanup: true
+  on:
+    repo: PurdueCAM2Project/SE4ML
+    tags: true
