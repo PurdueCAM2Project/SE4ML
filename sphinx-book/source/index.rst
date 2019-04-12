@@ -19,6 +19,7 @@ A draft book by `Yung-Hsiang Lu <https://engineering.purdue.edu/ECE/People/ptPro
    software/chapter_ws
    software/chapter_ci
    software/chapter_graphics
+   software/chapter_reproducibility
    
    unsupervised/chapter_ml
    unsupervised/chapter_kmeans
