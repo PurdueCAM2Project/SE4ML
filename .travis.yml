@@ -18,9 +18,9 @@ addons:
     - latexmk
 script:
 - pip install -r requirements.txt
-- pushd latex-book && make all && popd
 - pushd sphinx-book && BOOK_VERSION=$(../get-current-version.sh) travis-sphinx build -s source && popd
 - pushd sphinx-book && BOOK_VERSION=$(../get-current-version.sh) make latexpdf && popd
+- pushd sphinx-book && make epub && popd
 after_success:
 - pushd sphinx-book && travis-sphinx deploy --cname se4ml.org && popd
 before_deploy:
@@ -30,8 +30,8 @@ deploy:
   api_key: $GH_TOKEN
   file_glob: true
   file:
-    - ./**/se4ml.pdf
     - ./**/SoftwareEngineeringforMachineLearning.pdf
+    - ./**/SoftwareEngineeringforMachineLearning.epub
   skip_cleanup: true
   on:
     repo: PurdueCAM2Project/SE4ML
