@@ -758,3 +758,10 @@ no more difficult deciding whether the program produces a correct
 output.  If it impossible to solve the halting problem, it is
 impossible writing a program :math:`p` that decides whether program
 :math:`q` given input :math:`i` produces expected output :math:`e`.
+
+Another unsolvable problem is determining whether two programs (that
+are not identical) have the same outputs when given the same inputs.
+Precisely, It is not possible creating a program :math:`p` that takes
+two inputs: (1) a program :math:`q` and (2) the third program
+:math:`r` and answers whether :math:`q` and :math:`r` have the same
+output for every possible input.

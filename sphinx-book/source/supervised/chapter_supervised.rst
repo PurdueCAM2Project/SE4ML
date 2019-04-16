@@ -127,6 +127,9 @@ worse than the answer 1.5.
 What are good ways to evaluate the quality of :math:`f` for
 clssification problems?
 
+Precision and Recall
+^^^^^^^^^^^^^^^^^^^^
+
 One common method is to calculate *precision*
 and *recall*.
 
@@ -137,13 +140,13 @@ Suppose :math:`x` is an input image and a classification function :math:`f` give
 :math:`\tilde{y}` (i.e., :math:`f(x) = \tilde{y}`). Consider the class "bus", there are
 four possibilities:
 
-- The image is a bus and :math:`\tilde{y}` is "bus". This is called *true positive*.
+- The image is a bus and :math:`\tilde{y}` is "bus". This is called *true positive* (TP).
 
-- The image is not bus and :math:`\tilde{y}` is "bus". This is called *false positive*.
+- The image is not bus and :math:`\tilde{y}` is "bus". This is called *false positive* (FP).
 
-- The image is a bus and :math:`\tilde{y}` is not "bus". This is called *false negative*.
+- The image is a bus and :math:`\tilde{y}` is not "bus". This is called *false negative* (FN).
 
-- The image is not bus and :math:`\tilde{y}` is not "bus". This is called *true negative*.
+- The image is not bus and :math:`\tilde{y}` is not "bus". This is called *true negative* (TN).
 
     
 These four scenarios can be expressed by the table:
@@ -160,7 +163,41 @@ These four scenarios can be expressed by the table:
 +-----------+--------+-----------------+-----------------+
 
 
-with the following four additional images.
+
+.. figure:: supervised/figures/positivenegative.png
+
+   Four possible outcomes of classification
+
+In this figure, the left side (blue) means the object exists in the
+image. The right side means the object doest not exist in the image.
+   
+A commonly used method to quantify a classification is called *presision*. It is defined as
+
+:math:`\frac{TP}{TP + FP}`
+
+It means "among the reported positive cases, how many are actually
+positive?"
+
+Another commonly used method  is called *recall*. It is defined as
+
+:math:`\frac{TP}{TP + FN}`
+
+It means "among all positive cases, how many are actually found?"
+
+
+F1 Score
+^^^^^^^^
+
+Precision or recall individually does not provide enough information to evaluate
+:math:`f`. *F1 score* uses both precision and recall:
+
+:math:`2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}`       
+      
+
+Confusion Matrix
+^^^^^^^^^^^^^^^^
+
+Let's add four more images:
 
 .. figure:: supervised/figures/coco000000001584.jpg  
 
@@ -178,11 +215,55 @@ with the following four additional images.
 
    Zebra
 
-Four of the eight images are buses; two are zebra; one is a tram; the last is elephant.
+Among the eight images, four are buses; two are zebra; one is a tram;
+the last is elephant.  The following table shows the situation if
+:math:`f` is always correct.  The rows represent the inputs :math:`x`.
+The columns represent the outputs :math:`\tilde{y}`.  The table shows
+that there are four bus images (:math:`x`) and all of them are
+classified as bus. No input bus image is classified as zebra, tram, or
+elephant.  Similiarly, the two zebra images are classified as zebra
+correctly.  The correct results should have non-zero values
+only along the diagonal.
+
++-----------+--------+-----------+-------+----------+
+|           |        Output                         |
++ input     +--------+-----------+-------+----------+
+|           | bus    |  zebra    | tram  | elephant | 
++===========+========+===========+=======+==========+
+| bus       |   4    |  0        |  0    | 0        |
++-----------+--------+-----------+-------+----------+
+| zebra     |   0    |  2        |  0    | 0        |
++-----------+--------+-----------+-------+----------+
+| tram      |   0    |  0        |  1    | 0        |
++-----------+--------+-----------+-------+----------+
+| elephant  |   0    |  0        |  0    | 1        |
++-----------+--------+-----------+-------+----------+
+
+Next, consider another function :math:`f` that is not so good.
+The result is also expressed in a table:
+
++-----------+--------+-----------+-------+----------+
+|           |        Output                         |
++ input     +--------+-----------+-------+----------+
+|           | bus    |  zebra    | tram  | elephant | 
++===========+========+===========+=======+==========+
+| bus       |   2    |  0        |  1    | 1        |
++-----------+--------+-----------+-------+----------+
+| zebra     |   0    |  1        |  1    | 0        |
++-----------+--------+-----------+-------+----------+
+| tram      |   0    |  0        |  1    | 0        |
++-----------+--------+-----------+-------+----------+
+| elephant  |   0    |  1        |  0    | 0        |
++-----------+--------+-----------+-------+----------+
+
+The four bus images are classified as 2 bus, 1 tram, and 1
+elephant. Please notice that the numbers in the row add to four.  The
+two zebra images are classified as 1 zebra and 1 tram.  The tram image
+is classified correctly. The elephant image is classified as tram.
+This is called a *confusion matrix*: it measures how many inputs are
+incorrectlly classified.
+
+The difference of these two matrices (the sum of absolute values or
+sum of squres) can measure how good :math:`f` is.
 
 
-.. figure:: supervised/figures/positivenegative.png
-
-   Four possible outcomes of classification
-
-   
