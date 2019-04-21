@@ -27,6 +27,13 @@ author = 'Yung-Hsiang Lu and George K. Thiruvathukal'
 version = os.environ.get("BOOK_VERSION", "beta")
 release = version
 
+rst_epilog = """
+.. |pdf-version| replace:: `printable PDF  <https://github.com/PurdueCAM2Project/SE4ML/releases/download/%(version)s/SoftwareEngineeringforMachineLearning.pdf>`__
+
+.. |epub-version| replace:: `eBook <https://github.com/PurdueCAM2Project/SE4ML/releases/download/%(version)s/SoftwareEngineeringforMachineLearning.epub>`__
+
+""" % vars()
+
 
 # -- General configuration ---------------------------------------------------
 

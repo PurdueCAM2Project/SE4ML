@@ -43,8 +43,8 @@ Repository
 Continuous Integration
    `travis-ci.com/PurdueCAM2Project/SE4ML <https://travis-ci.com/PurdueCAM2Project/SE4ML>`_
 
-Releases
-   `github.com/PurdueCAM2Project/SE4ML/releases <https://github.com/PurdueCAM2Project/SE4ML/releases>`_ 
+Download Release Builds
+   Available as |pdf-version| and |epub-version|
 
 Cite
    Yung-Hsiang Lu and George K. Thiruvathukal, *Software Engineering and Machine Learning*, PurdueCAM2Project/SE4ML, Zenodo, http://doi.org/10.5281/zenodo.2532051.
