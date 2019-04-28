@@ -65,12 +65,15 @@ The gradient of a function at a point is the rate of changes at that
 point.  Let's consider a simple example: use gradient descent to find
 a line that has the smallest sum of square error.
 
+Linear Approximation with Least Square Error
+--------------------------------------------
+
 Consider a list of :math:`n` points: :math:`(x_1, y_1)`, :math:`(x_2,
 y_2)`, ..., :math:`(x_n, y_n)`. The goal is to find the values of
 :math:`a` and :math:`b` for a line :math:`\tilde{y} = a \times x + b`
 such that
 
-:math:`\underset{i=1}{\overset{n}{\sum}} (y_i - (a \times x_i + b))^2`
+:math:`e(a, b)= \underset{i=1}{\overset{n}{\sum}} (y_i - (a  x_i + b))^2`
 
 is as small as possible. This is the cumulative error. Let's call it
 :math:`e(a, b)` because it has two variables :math:`a` and :math:`b`.
@@ -83,30 +86,32 @@ Analytics Method for Least Square Error
 To minimize the error function, we take the partial derivatives of
 :math:`a` and :math:`b` respectively:
 
-:math:`\frac{\partial e}{\partial a} = 2 (a \times x_1 + b - y_1) \times x_1 + 2 (a \times x_2 + b - y_2) \times x_2 + ... + 2 (a \times x_n + b - y_n) \times x_n = 2 a (x_1^2 + x_2^2 + ... + x_n^2) + 2 b (x_1 + x_2 + ... + x_n) - 2 (x_1 y_1 + x_2 y_2 + ... + x_n y_n)`
+:math:`\frac{\partial e}{\partial a}  = 2 (a  x_1 + b - y_1)  x_1 + 2 (a  x_2 + b - y_2)  x_2 + ... + 2 (a  x_n + b - y_n)  x_n`
 
+:math:`\frac{\partial e}{\partial a}  = 2 a (x_1^2 + x_2^2 + ... + x_n^2) + 2 b (x_1 + x_2 + ... + x_n) - 2 (x_1 y_1 + x_2 y_2 + ... + x_n y_n)`
 
-:math:`\frac{\partial e}{\partial b} = 2 (a \times x_1 + b - y_1) + 2 (a \times x_2 + b - y_2) \times x_2 + 2 (a \times x_3 + b - y_3) \times x_3 + ... + 2 (a \times x_n + b - y_n) \times x_n = 2b + 2 a (x_1 + x_2 + ... + x_n) + - 2 (y_1 + y_2 + ... + y_n)`
+:math:`\frac{\partial e}{\partial a}  = 2 (a \underset{i=1}{\overset{n}{\sum}} x_i^2 + b \underset{i=1}{\overset{n}{\sum}} x_i - \underset{i=1}{\overset{n}{\sum}} x_i y_i)`
 
-To find the minimum, set both to zero and obtain two linear equations:
+For :math:`b`:   
+
+:math:`\frac{\partial e}{\partial b} = 2 (a  x_1 + b - y_1) + 2 (a  x_2 + b - y_2) + ... + 2 (a \times x_n + b - y_n)`
+
+:math:`\frac{\partial e}{\partial b} = 2 a (x_1 + x_2 + ... + x_n) + 2 n b  - 2 (y_1 + y_2 + ... + y_n)`
+
+:math:`\frac{\partial e}{\partial b} = 2 (a \underset{i=1}{\overset{n}{\sum}} x_i + b n - \underset{i=1}{\overset{n}{\sum}} y_i)`          
+
+      
+To find the minimum, set both to zero and obtain two linear equations of :math:`a` and :math:`b`.
       
 :math:`a \underset{i=1}{\overset{n}{\sum}} x_i^2 + b \underset{i=1}{\overset{n}{\sum}} x_i = \underset{i=1}{\overset{n}{\sum}} x_i y_i`       
 
 :math:`a \underset{i=1}{\overset{n}{\sum}} x_i + b n = \underset{i=1}{\overset{n}{\sum}} y_i`       
 
-To find the values of :math:`a` and :math:`b`, we set these two derivateis to zero and obtain
+The values of :math:`a` and :math:`b` can be expressed by
 
-:math:`sx = \underset{i=1}{\overset{n}{\sum}} x_i`
+:math:`a =\frac{n \underset{i=1}{\overset{n}{\sum}} x_i y_i - \underset{i=1}{\overset{n}{\sum}} x_i \underset{i=1}{\overset{n}{\sum}} y_i}{n \underset{i=1}{\overset{n}{\sum}} x_i^2 - \underset{i=1}{\overset{n}{\sum}} x_i \underset{i=1}{\overset{n}{\sum}} x_i}`
 
-:math:`sy = \underset{i=1}{\overset{n}{\sum}} y_i`      
-
-:math:`sx2 = \underset{i=1}{\overset{n}{\sum}} x_i^2`
-
-:math:`sxy = \underset{i=1}{\overset{n}{\sum}} x_i y_i`         
-
-:math:`a =\frac{sx sy - n sxy}{sx (sx - n)}`
-
-:math:`b =\frac{sxy sx - sx2 sy}{sx sx - n sx2}`      
+:math:`b =\frac{\underset{i=1}{\overset{n}{\sum}} y_i \underset{i=1}{\overset{n}{\sum}} x_i^2 - \underset{i=1}{\overset{n}{\sum}} x_i y_i \underset{i=1}{\overset{n}{\sum}} x_i}{n \underset{i=1}{\overset{n}{\sum}} x_i^2 - \underset{i=1}{\overset{n}{\sum}} x_i \underset{i=1}{\overset{n}{\sum}} x_i}`      
 
 TODO: examples
 
