@@ -37,9 +37,29 @@ def sums(x, y):
         sumxy = sumxy + x[ind] * y[ind]
     return [n, sumx, sumy, sumx2, sumxy]
 
-def gradient(a, b, n, sumx, sumy, sumx2, sumxy):
+def gradient1(a, b, n, sumx, sumy, sumx2, sumxy):
     pa = 2 * (a * sumx2 + b * sumx - sumxy)
     pb = 2 * (a * sumx + b * n - sumy)
+    # conver to unit vector
+    length = math.sqrt(pa * pa + pb * pb)
+    ua = pa / length
+    ub = pb / length
+    return [ua, ub]
+
+def gradient2(a, b, n, x, y):
+    h = 0.01
+    error0 = 0
+    errora = 0
+    errorb = 0
+    for ind in range(n):
+        diff0 = y[ind] - (a * x[ind] + b)
+        diffa = y[ind] - ((a + h) * x[ind] + b)
+        diffb = y[ind] - (a * x[ind] + (b + h))
+        error0 = error0 + diff0 * diff0
+        errora = errora + diffa * diffa
+        errorb = errorb + diffb * diffb
+    pa = (errora - error0) / h
+    pb = (errorb - error0) / h
     # conver to unit vector
     length = math.sqrt(pa * pa + pb * pb)
     ua = pa / length
@@ -49,30 +69,32 @@ def gradient(a, b, n, sumx, sumy, sumx2, sumxy):
 def findab(args):
     [x, y] = readfiles(args.file1, args.file2)
     '''
-    print (x)
-    print (y)
+    method 1: know the formula for the gradient
     '''
     [n, sumx, sumy, sumx2, sumxy] = sums(x, y)
-    '''
-    print (n)
-    print (sumx)
-    print (sumy)
-    print (sumx2)
-    print (sumxy)
-    '''
     # initial values for a and b
     a = -5
     b = 2
     eta = 0.1
-    count =  10000
+    count =  1000
     while (count > 0):
-        [pa, pb] = gradient(a, b, n, sumx, sumy, sumx2, sumxy)
-        # print (pa, pb)
+        [pa, pb] = gradient1(a, b, n, sumx, sumy, sumx2, sumxy)
         a = a - eta * pa
         b = b - eta * pb
-        print (a, b)
         count = count - 1
-
+    print (a, b)
+    '''
+    method 2: do not know the formula
+    '''
+    a = -15
+    b = 21
+    count =  1000
+    while (count > 0):
+        [pa, pb] = gradient2(a, b, n, x, y)
+        a = a - eta * pa
+        b = b - eta * pb
+        count = count - 1
+    print (a, b)
 
 def checkArgs(args = None):
   parser = argparse.ArgumentParser(description='parse arguments')
