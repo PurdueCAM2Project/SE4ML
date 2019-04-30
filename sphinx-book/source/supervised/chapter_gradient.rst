@@ -314,13 +314,17 @@ This section is further divided into two different scenarios.
 
 For the first case, 
 
-:math:`\nabla e = \frac{\partial }{\partial a} {\bf i} + \frac{\partial e}{\partial b} {\bf j}`
+:math:`\nabla e = \frac{\partial e}{\partial a} {\bf i} + \frac{\partial e}{\partial b} {\bf j}`
 
             
 :math:`\frac{\partial e}{\partial a} = 2 (a \underset{i=1}{\overset{n}{\sum}} x_i^2 + b \underset{i=1}{\overset{n}{\sum}} x_i - \underset{i=1}{\overset{n}{\sum}} x_i y_i)`
 
       
 :math:`\frac{\partial e}{\partial b} = 2 (a \underset{i=1}{\overset{n}{\sum}} x_i + b n - \underset{i=1}{\overset{n}{\sum}} y_i)`
+
+For a given pair of values :math:`a` and :math:`b`, their changes will
+be :math:`- \eta \nabla e`. Thus, This is ``gradient1`` below.
+
 
 .. literalinclude:: gradient/code/gradientdescent.py
    :language: python
