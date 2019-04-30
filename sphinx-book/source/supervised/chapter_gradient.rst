@@ -9,11 +9,39 @@ Learning Objectives
 
 - Apply gradient descent in machine learning
 
-This chapter starts with a review of multivariable calculus.    
-    
+Linear Approximation with Least Square Error
+--------------------------------------------
 
-Partial Derivative
-------------------
+As mentioned in the previous section, supervised machinear learning
+can be formulated as a minimization problem: minimizing the
+error. This chapter starts with a problem that is probably farmiliar
+to many people already: *linear approximation with least square
+error*.
+
+Consider a list of :math:`n` points: :math:`(x_1, \tilde{y_1})`,
+:math:`(x_2, \tilde{y_2})`, ..., :math:`(x_n, \tilde{y_n})`.  Please
+notice the convention: :math:`y = a x + b` is the underlying equation
+and :math:`y` is the "correct" value. It is generally not possible
+getting the correct value of :math:`y` due to noise and limitation of
+meausrement instruments. Instead, we can get only the observed
+:math:`y` with noise.  To distinguish these two, we use
+:math:`\tilde{y}` to express the observed value. It may be different
+from the true value of :math:`y`.
+
+
+The problem is to find the values of :math:`a` and :math:`b` for a
+line :math:`y = a x + b` such that
+
+:math:`e(a, b)= \underset{i=1}{\overset{n}{\sum}} (y_i - (a x_i +   b))^2`
+
+is as small as possible. This is the cumulative error. Let's call it
+:math:`e(a, b)` because it has two variables :math:`a` and :math:`b`.
+Here we will solve this problem in two ways: analytically and
+numerically.
+
+Analytics Method for Least Square Error
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 In Calculus, you have learned the concept of derivative. Suppose
 :math:`f(x)` is a function of a single variable :math:`x`. The
@@ -39,49 +67,7 @@ Similarly, the partial derivative of :math:`f(x,y)` with respect to
 :math:`y` at point :math:`(x_0, y_0)` is defined as
 
 :math:`\frac{\partial f}{\partial y}| _{(x_0, y_0)} = \frac{d}{dy} f(x_0, y) | _{y = y_0} =\underset{h \rightarrow 0}{\text{lim}} \frac{f(x_0, y_0 + h) - f(x_0, y_0)}{h}`
-      
-This can be further extended to a function of :math:`n` variables :math:`f(x_1, x_2, ..., x_n)`. 
-      
-Gradient
---------
 
-The *gradient* of a two-variable function :math:`f(x, y)` is at point :math:`(x_0, y_0)` is defined as
-
-:math:`\nabla f|_{(x_0, y_0)} = \frac{\partial f}{\partial x} {\bf i} + \frac{\partial f}{\partial y} {\bf j}`
-
-Here, :math:`{\bf i}` and :math:`{\bf j}` are the unit vector in the :math:`x` and :math:`y` directions.
-
-Suppose :math:`{\bf v} = \alpha {\bf i} + \beta {\bf j}` is a unit
-vector. Then, the amount of :math:`f`'s changes in the direction of
-:math:`{\bf v}` is the inner product of :math:`\nabla f` and
-:math:`{\bf v}`.  Apparently, the greatest change occurs at the
-direction when :math:`{\bf v}` is the unit vector of :math:`\nabla f`.
-
-Gradient Descent
-----------------
-
-*Gradient Descent* is a method for solving *minimization* problems.
-The gradient of a function at a point is the rate of changes at that
-point.  Let's consider a simple example: use gradient descent to find
-a line that has the smallest sum of square error.
-
-Linear Approximation with Least Square Error
---------------------------------------------
-
-Consider a list of :math:`n` points: :math:`(x_1, y_1)`, :math:`(x_2,
-y_2)`, ..., :math:`(x_n, y_n)`. The goal is to find the values of
-:math:`a` and :math:`b` for a line :math:`\tilde{y} = a \times x + b`
-such that
-
-:math:`e(a, b)= \underset{i=1}{\overset{n}{\sum}} (y_i - (a  x_i + b))^2`
-
-is as small as possible. This is the cumulative error. Let's call it
-:math:`e(a, b)` because it has two variables :math:`a` and :math:`b`.
-Here we will solve this problem in two ways: analytically and
-numerically.
-
-Analytics Method for Least Square Error
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To minimize the error function, we take the partial derivatives of
 :math:`a` and :math:`b` respectively:
@@ -190,9 +176,9 @@ The pairs are plotted below:
 
 The value of :math:`y` is calculated by
 
-:math:`y = 3 x - 5 + e`
+:math:`y = 3 x - 5 + \epsilon`
 
-here :math:`e` is the error (or noise) and it is set to a randeom number between -8 and 8.
+here :math:`\epsilon` is the error (or noise) and it is set to a randeom number between -8 and 8.
 
 The figure shows the line without noise:
 
@@ -201,13 +187,92 @@ The figure shows the line without noise:
 Using the equations, :math:`a = 3.11806` and :math:`b = -5.18776`.
 
 
+  
+This chapter starts with a review of multivariable calculus.
+    
+
+Next, we explain how to solve the problem using *gradient descent*.
       
+Gradient
+--------
+
+The *gradient* of a two-variable function :math:`f(x, y)` is at point :math:`(x_0, y_0)` is defined as
+
+:math:`\nabla f|_{(x_0, y_0)} = \frac{\partial f}{\partial x} {\bf i} + \frac{\partial f}{\partial y} {\bf j}`
+
+Here, :math:`{\bf i}` and :math:`{\bf j}` are the unit vector in the :math:`x` and :math:`y` directions.
+
+Suppose :math:`{\bf v} = \alpha {\bf i} + \beta {\bf j}` is a unit
+vector. Then, the amount of :math:`f`'s changes in the direction of
+:math:`{\bf v}` is the inner product of :math:`\nabla f` and
+:math:`{\bf v}`.  Apparently, the greatest change occurs at the
+direction when :math:`{\bf v}` is the unit vector of :math:`\nabla f`.
+
+One way to understand graident is to think about speed bumps on roads.
+
+.. figure:: gradient/figures/roadbump.png
+
+The bump is modeled as a half cylinder. For simplicity, we assume that
+the bump is infinitely long in the :math:`x` direction. A point on the
+surface of the bump can be expressed as
+
+:math:`p = x {\bf i} + \alpha \cos(\theta) {\bf j} + \beta \sin(\theta) {\bf k}`
+
+The gradient is
+
+:math:`\nabla p = \frac{\partial p}{\partial x} {\bf i} + \frac{\partial p}{\partial y} {\bf j} + \frac{\partial p}{\partial z} {\bf k} = {\bf i} + \alpha (- \sin(\theta)) {\bf j} + \beta \cos(\theta) {\bf k}.`
+
+This is the *tangent* of the point on the surface.
+
+Next, consider another vector (such as the tire of your unicycle) goes
+through this bump. What is the rate of changes along this surface. If
+you ride the unicycle along this bump without getting onto the bump, then
+the vector of your movement can be expressed by
+
+:math:`v = x {\bf i}`
+
+How is this affected by the slope of the bump? The calculation is the *inner product* of the two vectors:
+
+:math:`\nabla p \cdot v = x {\bf i}`.
+
+Notice that this inner product contains no :math:`\theta`. What does
+this mean? It means that your movement is not affected by
+:math:`\theta`. This is obvious because you are not riding onto the
+bump.
+
+Next, consider that you ride straight to the bump. The vector will be
+
+:math:`v = - y {\bf j}`
+
+The slop of the bump affects your actual movement, again by the inner product:
+
+:math:`\nabla p \cdot v = y \alpha \sin(\theta) {\bf j}`.
+
+How can we interpret this? The moment when your tire hits the bump,
+:math:`\theta` is zero so your tire's movement along the :math:`{\bf
+j}` direction is zero. This is understandable because you cannot
+penetrate into the bump.  When the tire is at the top of the bump,
+:math:`\theta` is :math:`\frac{\pi}{2}` and the tire has the highest
+speed.
+
+Based on this understanding, it is easier to answer the following
+question: "Which direction along the surface gives the greatest
+changes?"  Because the actual change is the inner product of the
+direction and the gradient, the greatest change occurs along the
+direction of the gradient.
+
+
 Gradient Descent
 ----------------
 
+*Gradient Descent* is a method for solving *minimization* problems.
+The gradient of a function at a point is the rate of changes at that
+point.  Let's consider a simple example: use gradient descent to find
+a line that has the smallest sum of square error.
+
 The gradient of a function is the direction of changes. 
 
-:math:`\nabla e = \frac{\partial }{\partial a} {\bf i} + \frac{\partial e}{\partial b} {\bf j}`
+:math:`\nabla e = \frac{\partial e}{\partial a} {\bf i} + \frac{\partial e}{\partial b} {\bf j}`
 
 Suppose :math:`\Delta w = \alpha {\bf i} + \beta {\bf j}` is a vector.   
     
@@ -252,8 +317,10 @@ For the first case,
 :math:`\nabla e = \frac{\partial }{\partial a} {\bf i} + \frac{\partial e}{\partial b} {\bf j}`
 
             
-:math:`\frac{\partial e}{\partial a} = 2 (a \underset{i=1}{\overset{n}{\sum}} x_i^2 + b \underset{i=1}{\overset{n}{\sum}} x_i - \underset{i=1}{\overset{n}{\sum}} x_i y_i`
+:math:`\frac{\partial e}{\partial a} = 2 (a \underset{i=1}{\overset{n}{\sum}} x_i^2 + b \underset{i=1}{\overset{n}{\sum}} x_i - \underset{i=1}{\overset{n}{\sum}} x_i y_i)`
 
       
-:math:`\frac{\partial e}{\partial b} = a \underset{i=1}{\overset{n}{\sum}} x_i + b n - \underset{i=1}{\overset{n}{\sum}} y_i`
+:math:`\frac{\partial e}{\partial b} = 2 (a \underset{i=1}{\overset{n}{\sum}} x_i + b n - \underset{i=1}{\overset{n}{\sum}} y_i)`
 
+.. literalinclude:: gradient/code/gradientdescent.py
+   :language: python

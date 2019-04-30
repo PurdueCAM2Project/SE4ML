@@ -40,7 +40,7 @@ def sums(x, y):
 def gradient1(a, b, n, sumx, sumy, sumx2, sumxy):
     pa = 2 * (a * sumx2 + b * sumx - sumxy)
     pb = 2 * (a * sumx + b * n - sumy)
-    # conver to unit vector
+    # convert to unit vector
     length = math.sqrt(pa * pa + pb * pb)
     ua = pa / length
     ub = pb / length
@@ -60,7 +60,7 @@ def gradient2(a, b, n, x, y):
         errorb = errorb + diffb * diffb
     pa = (errora - error0) / h
     pb = (errorb - error0) / h
-    # conver to unit vector
+    # convert to unit vector
     length = math.sqrt(pa * pa + pb * pb)
     ua = pa / length
     ub = pb / length

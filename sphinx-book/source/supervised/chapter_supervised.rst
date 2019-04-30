@@ -267,7 +267,7 @@ The difference of these two matrices (the sum of absolute values or
 sum of squres) can measure how good :math:`f` is.
 
 Regression Problems
-===================
+-------------------
 
 Regression problems the values are continuous. Consider the following example.
 We have some values of :math:`(x,y)`.  What we want to do is to find the best
