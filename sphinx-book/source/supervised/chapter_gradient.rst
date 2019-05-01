@@ -310,7 +310,7 @@ This section is further divided into two different scenarios.
 
 - The first assumes that we know the function :math:`e` but we do not have formulaes for :math:`a` or :math:`b`.
 
-- The second assumes that we do not know the function :math:`e` and certainly do not know the formulaes for :math:`a` or :math:`b`.
+- The second assumes that we do not know the function :math:`e` and certainly do not know the formulaes for :math:`a` or :math:`b`.  This is the common scenario. 
 
 For the first case, 
 
@@ -322,9 +322,18 @@ For the first case,
       
 :math:`\frac{\partial e}{\partial b} = 2 (a \underset{i=1}{\overset{n}{\sum}} x_i + b n - \underset{i=1}{\overset{n}{\sum}} y_i)`
 
-For a given pair of values :math:`a` and :math:`b`, their changes will
-be :math:`- \eta \nabla e`. Thus, This is ``gradient1`` below.
+This is ``gradient1`` below.
 
+
+For the second case, the gradient can be estimated using the definition of partial derivative. This is shown in
+``gradient2`` below.
+
+After finding the gradient using either method, the values of
+:math:`a` and :math:`b` change by :math:`- \eta \nabla e`.
 
 .. literalinclude:: gradient/code/gradientdescent.py
    :language: python
+
+The two methods get similar results: The first method gets 3.153 and
+-5.187 for :math:`a` and :math:`b` respectively.  The second method
+gets 3.027 and -5.192.

@@ -47,6 +47,9 @@ def gradient1(a, b, n, sumx, sumy, sumx2, sumxy):
     return [ua, ub]
 
 def gradient2(a, b, n, x, y):
+    # use the definition
+    # the partial derivative of function f respect to variable a is
+    # (f(a + h) - f(a)) / h for small h
     h = 0.01
     error0 = 0
     errora = 0

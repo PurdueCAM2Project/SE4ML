@@ -346,4 +346,118 @@ The pairs are plotted below:
 
 .. figure:: supervised/figures/xy1.png
 
-	    
+Next chapter (Gradient Descent) will explain how to find a line
+that has the least sum of error square.
+
+Overfitting
+-----------
+
+Have you ever had the following experience: You studied extremely hard
+for an exam and could answer every practice question
+perfectly. However, you performed in the actual exam. How can this be
+possible?  This is called the *overfitting* problem in machine
+learning (seems to be applicable to human learning also).
+
+Consider the following figure (this figure has fewer data point.).
+
+.. figure:: supervised/figures/xy2.png
+
+This is the data:
+
++--------------------+----------------------+
+| x                  | y                    |
++====================+======================+
+| 13.25288           | 40.89277             |
++--------------------+----------------------+
+| -14.8602           |  -45.3906            |
++--------------------+----------------------+
+| -5.68594           |  -22.806             | 
++--------------------+----------------------+
+| 18.02815           | 50.83212             | 
++--------------------+----------------------+
+| -10.9294           | -30.8796             | 
++--------------------+----------------------+
+| -19.5857           | -60.713              | 
++--------------------+----------------------+
+| -6.93697           | -32.6769             | 
++--------------------+----------------------+
+| -1.07072           | -3.18677             | 
++--------------------+----------------------+
+| 7.796119           | 16.73295             | 
++--------------------+----------------------+
+| -11.9286           | -43.9226             | 
++--------------------+----------------------+
+| 13.36518           | 28.79474             | 
++--------------------+----------------------+
+
+If this trend is consistent, by interpolation, when :math:`x` is 6,
+the value of :math:`y` is around 13.  By observation, a straight line
+seems to be a pretty good way to express the relations between the
+values of :math:`x` and :math:`y`, as shown below.
+
+.. figure:: supervised/figures/xy3.png
+
+The straight line, however, is not a "perfect" solution: it does not
+pass most points.  Would it be better if we can find a polynomial that
+passes every data point?  Given a list of :math:`n` pairs of
+:math:`(x, y)`, it is always possible finding a polynomial of degree
+:math:`n-1` passing every pair of point, as long as the :math:`x`
+values are distinct.
+
+Using the ``polyfit`` function in MATLAB, it is possible to find a
+polynomial of the 10th degree passing all elevent points. The
+coefficients are
+
++--------------------+----------------------+
+| Degree             | Coefficient          |
++====================+======================+
+| :math:`x^{10}`     |  -0.000000005588280  |
++--------------------+----------------------+
+| :math:`x^{9}`      |   -0.000000016933579 |
++--------------------+----------------------+
+| :math:`x^{8}`      |    0.000004911667751 |
++--------------------+----------------------+
+| :math:`x^{7}`      |    0.000019301830733 |
++--------------------+----------------------+
+| :math:`x^{6}`      |   -0.001461105562290 |
++--------------------+----------------------+
+| :math:`x^{5}`      |   -0.007306583900806 |
++--------------------+----------------------+
+| :math:`x^{4}`      |    0.166442447665419 |
++--------------------+----------------------+
+| :math:`x^{3}`      |    0.999911252411206 |
++--------------------+----------------------+
+| :math:`x^{2}`      |   -5.336314308798566 |
++--------------------+----------------------+
+| :math:`x^{1}`      |  -34.670075611821026 |
++--------------------+----------------------+
+| :math:`x^{0}`      |  -33.190351515165069 |
++--------------------+----------------------+
+
+The following shows the polynomial when :math:`x` is between -20 and 20.
+
+.. figure:: supervised/figures/xy5.png
+
+Zoom in the vertical axix, we can very clearly that this polynomail passes every data point
+
+.. figure:: supervised/figures/xy4.png
+
+Is this polynomial a good representation of the data? Based on this
+polynomial, when :math:`x` is -18, the :math:`y` value is 329.303.
+When :math:`x` is 6, the :math:`y` value is -113.469.  Are these
+expected?  From the original data, we would expect that when :math:`x`
+is -18, :math:`y`'s value is around -50.  The problem is
+*overfitting*: the polynomial intends to match the data, including the
+noise. A better solution is to use a lower-degree (such as linear) and
+allow some errors.  Allowing some errors can be better generalizing
+the seen data to unseen data (such as when :math:`x` is -18 or 6).
+
+How can this concept be applicable to human learning? Some people
+study "too much" and memorize the details, instead of fully
+understanding the concepts.  These people try to match problems with
+what they have already seen and answer based on these seen problems.
+If the new problems are different, these people may be unable to solve
+the new problems.  They can solve the seen problems perfectly (like
+the 10-th degree polynomial) but these people cannot handle new
+problems.
+
