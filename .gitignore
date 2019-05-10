@@ -126,3 +126,6 @@ book.pdf
 # vim
 
 *.swp
+
+# vscode
+.vscode/
