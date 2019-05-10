@@ -1,4 +1,0 @@
-Neural Networks
-==================
-
-Text
