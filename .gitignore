@@ -127,5 +127,5 @@ book.pdf
 
 *.swp
 
-# vscode
+# vscode configurations folder
 .vscode/
