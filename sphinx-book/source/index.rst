@@ -15,6 +15,7 @@ A draft book by `Yung-Hsiang Lu <https://engineering.purdue.edu/ECE/People/ptPro
 
    software/chapter_python
    software/chapter_vc
+   software/chapter_cr
    software/chapter_test
    software/chapter_ws
    software/chapter_ci
