@@ -23,6 +23,8 @@ Researchers at Microsoft have found that code review acts as a transfer of knowl
 
 How To Start Code Review
 ------------------------
+#. Make sure your local changes have been pushed to your working branch/fork by running `git push origin
+#. Using a projects respective version control tool (e.g., Git), make a pull request to merge your changes into the parent version. 
 
 What to Review
 --------------
@@ -47,3 +49,4 @@ Things to Take into Consideration
 
 .. [Sadowski-Soderberg-Bacchelli] Modern Code Review: A Case Study at Google, https://sback.it/publications/icse2018seip.pdf
 .. [Grady-Van-Slack] Key lessons in achieving widespread inspection use, https://ieeexplore.ieee.org/document/300084
+.. [Bacchelli-Bird] Expectations, outcomes, and challenges of modern code review, https://dl.acm.org/citation.cfm?id=2486882
