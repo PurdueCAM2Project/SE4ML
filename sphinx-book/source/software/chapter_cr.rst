@@ -23,6 +23,10 @@ Will use [Bacchelli-Bird]_
 
 How To Start A Code Review
 --------------------------
+
+General Steps To Start A Code Review
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 #.  Make sure your local changes have been pushed to your working branch/fork.
     You can accomplish this by running:
     ::
