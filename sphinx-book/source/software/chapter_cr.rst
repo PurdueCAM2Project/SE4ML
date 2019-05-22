@@ -19,7 +19,7 @@ Both open-source and industry software projects utilize modern code review for r
 While code reviews require a large time investment, impressive returns have been shown from a multitude of companies.
 For instance, code review at Hewlett-Packard was found to reduce the time for an application to get to market by 1.8 months [Grady-Van-Slack]_. However, the returns do not stop at simple gains in time efficiency.
 Researchers at Microsoft have found that code review acts as a transfer of knowledge between the code reviewer and reviewee
-
+Will use [Bacchelli-Bird]_
 
 How To Start A Code Review
 --------------------------
