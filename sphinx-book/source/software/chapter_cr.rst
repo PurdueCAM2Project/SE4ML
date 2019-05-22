@@ -62,9 +62,35 @@ How To Start A Code Review
     regularly check the pull request until it is rejected or
     accepted.
 
-Make nano-commits (i.e., small changes) during the code writing
-process. This will keep relevant changes together, making it easier
-to find the source of bugs when the occur. Do not commit work
+Making Nano-Commits
+~~~~~~~~~~~~~~~~~~~
+
+A *nano-commit* is the act of committing code in small, homogenous 
+portions. In other words, the code is meant to complete a sub-task
+of the overarching feature being implemented. During the development
+process, making nano-commits can you help keep track of the work-flow.
+For instance, if a bug is found, then you can sift through the small 
+changes until the bug either disappears or changes. This will help you
+make the necessary changes at the root, keeping the fix clean.
+
+Some tasks you may consider keeping as separate commits are:
+
+-   Refracting code before making changes to its logic;
+-   Adding or modifying documentation;
+-   Fixing a bug or creating a small feature;
+-   Changing configuration settings;
+-   Or anything else that can be kept short.
+
+Keep in mind that you as the developer are responsible for
+making code as smooth to review as possible. Nano-commits can
+aid the code reviewer to follow your work-flow easily. Furthermore, 
+while smaller commit sizes greatly reduce the likelihood of
+creating bugs [Purushothaman-Perry]_, they still pose a risk
+and should be reviewed for correctness.
+
+Ensure Code Is Complete
+~~~~~~~~~~~~~~~~~~~~~~~
+Do not commit work
 that is half-finished, causing code to no longer compile and 
 unit tests to break.
 
@@ -92,3 +118,4 @@ Things to Take into Consideration
 .. [Sadowski-Soderberg-Bacchelli] Modern Code Review: A Case Study at Google, https://sback.it/publications/icse2018seip.pdf
 .. [Grady-Van-Slack] Key lessons in achieving widespread inspection use, https://ieeexplore.ieee.org/document/300084
 .. [Bacchelli-Bird] Expectations, outcomes, and challenges of modern code review, https://dl.acm.org/citation.cfm?id=2486882
+.. [Purushothaman-Perry] Toward Understanding the Rhetoricof Small Source Code Changes, https://ieeexplore.ieee.org/abstract/document/1463233
