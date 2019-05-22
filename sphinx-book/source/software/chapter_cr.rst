@@ -102,12 +102,16 @@ Furthermore, it is important to be curteous of your code reviewer's
 time.  Your code should be ready for customers and void of any obvious
 bugs. Ideally, the code reviewer should only have to make comments
 regarding the implementation and not about major issues that need fixed. 
-In fact, a study from Microsoft found that only around 15% of comments 
-during code review address bugs [Czerwonka-Greiler-Tilford]_.
-It is not the job of the code reviewer to fix your bugs; their
-job is to notice and bring small, easy-to-miss issues to your attention
-for you to go back and fix them. If you submit incomplete code with known
-issues, then you waste both your and the code reviewer's time.
+A study from Microsoft found that only around 15% of comments 
+during code review address bugs [Czerwonka-Greiler-Tilford]_, which
+indicates a greater emphasis on other areas, such as code styling or
+long-term maintainability. It is also important to keep the responsibilities
+of the code review in mind: it is not their job to fix your bugs; their
+purpose is to notice and bring small, easy-to-miss issues to your attention
+for you to go back and fix. If you submit incomplete code with known
+issues, then you waste both your and your code reviewer's time. In
+order to collaborate as a team and achieve results, it is important to
+remain considerate of your collaborators efforts [Dreu-Weingart]_.
 
 A change causing external features to fail is a less obvious sign
 of incomplete code. With an extensive system of unit tests, it is easy
@@ -143,3 +147,4 @@ Things to Take into Consideration
 .. [Purushothaman-Perry] Toward Understanding the Rhetoricof Small Source Code Changes, https://ieeexplore.ieee.org/abstract/document/1463233
 .. [Czerwonka-Greiler-Tilford] Code reviews do not find bugs: how the current code review best practice slows us down, https://dl.acm.org/citation.cfm?id=2819015
 .. [Humphrey] The Personal Software Process, https://resources.sei.cmu.edu/library/asset-view.cfm?assetid=5283
+.. [Dreu-Weingart] Task Versus Relationship Conflict, Team Performance,and Team Member Satisfaction: A Meta-Analysis, https://psycnet.apa.org/record/2003-99635-017
