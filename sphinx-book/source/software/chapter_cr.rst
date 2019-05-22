@@ -21,10 +21,52 @@ For instance, code review at Hewlett-Packard was found to reduce the time for an
 Researchers at Microsoft have found that code review acts as a transfer of knowledge between the code reviewer and reviewee
 
 
-How To Start Code Review
-------------------------
-#. Make sure your local changes have been pushed to your working branch/fork by running `git push origin
-#. Using a projects respective version control tool (e.g., Git), make a pull request to merge your changes into the parent version. 
+How To Start A Code Review
+--------------------------
+#.  Make sure your local changes have been pushed to your working branch/fork.
+    You can accomplish this by running:
+    ::
+
+        $ git push origin HEAD
+
+#.  Using a project's respective version control 
+    service (e.g. GitHub, BitBucket), create a
+    pull request to merge your changes into the parent
+    version. Provide a title for what the feature adds 
+    and a longer desription with a change
+    log. :numref:`pullrequest` and :numref:`pullrequestform`
+    demonstrate an example pull request in GitHub.
+
+    .. _pullrequest:
+    .. figure:: cr/figures/pullrequest.png
+       
+       Press "Compare & Pull Request" to review your changes
+       and submit a pull request.
+
+
+    .. _pullrequestform:
+    .. figure:: cr/figures/pullrequestform.png
+       
+       Pull requests should have a title summarizing the 
+       new feature and a comment giving a more descriptive
+       explaination of the changes the pull request will make.
+
+
+#.  Request for another developer of the project to review
+    your changes. Ideally, they should be an expert of the
+    methods used to create the changes.
+
+#.  Wait for (or bug) the assigned code reviewer to look over
+    your changes. They may ask for you to clarify your methods
+    or ask for you to make additional changes, so make sure you
+    regularly check the pull request until it is rejected or
+    accepted.
+
+Make nano-commits (i.e., small changes) during the code writing
+process. This will keep relevant changes together, making it easier
+to find the source of bugs when the occur. Do not commit work
+that is half-finished, causing code to no longer compile and 
+unit tests to break.
 
 What to Review
 --------------
