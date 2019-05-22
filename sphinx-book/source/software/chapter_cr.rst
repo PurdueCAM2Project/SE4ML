@@ -78,10 +78,9 @@ Some tasks you may consider keeping as separate commits are:
 -   Refracting code before making changes to its logic;
 -   Adding or modifying documentation;
 -   Fixing a bug or creating a small feature;
--   Changing configuration settings;
--   Or anything else that can be kept short.
+-   Or changing configuration settings.
 
-Keep in mind that you as the developer are responsible for
+Keep in mind that you, as the developer, are responsible for
 making code as smooth to review as possible. Nano-commits can
 aid the code reviewer to follow your work-flow easily. Furthermore, 
 while smaller commit sizes greatly reduce the likelihood of
