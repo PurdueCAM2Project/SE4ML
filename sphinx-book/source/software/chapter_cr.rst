@@ -113,12 +113,18 @@ issues, then you waste both your and your code reviewer's time. In
 order to collaborate as a team and achieve results, it is important to
 remain considerate of your collaborators efforts [Dreu-Weingart]_.
 
-A change causing external features to fail is a less obvious sign
-of incomplete code. With an extensive system of unit tests, it is easy
-to ensure that a change does not damage other features. In the same vein, 
-the project's build failing to compile is another sign of incomplete code.
-Before submitting a feature for a code review, verify that none of the unit
-tests fail and the project successfully compiles.
+A change that causes external features to fail is a less obvious 
+sign of incomplete code. With an extensive system of unit tests, 
+these issues are more obvious by validating that a change does not 
+damage older features. With this in mind, it is vital to implement 
+unit tests alongside new features. Implementation of unit tests 
+guarentees protection from hidden bugs. In a similar vein, failure 
+to compile is another sign of a project containing incomplete code.
+The error output of the compiler will normally indicate where the
+issue is located, so it is vital to read and understand what it says.
+It is crucial to verify that none of the unit tests fail and the
+build successfully compiles *before* submitting the change for
+a code review.
 
 What to Review
 --------------
