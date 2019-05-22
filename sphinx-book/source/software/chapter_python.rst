@@ -1707,7 +1707,7 @@ For example,
 
 ::
 
-   >>> (x,y,x+y) for x in range(5) if x%2!=0 for y in range(5) if y!=x]
+   >>> [(x,y,x+y) for x in range(5) if x%2!=0 for y in range(5) if y!=x]
 
    (1, 0, 1), (1, 2, 3), (1, 3, 4), (1, 4, 5), (3, 0, 3), (3, 1, 4), (3, 2, 5), (3, 4, 7)]
 
@@ -1717,12 +1717,13 @@ example:
 
 ::
 
-   (x,y,x*y) for x in range(10) if x%2!=0 for y in range(10) if y!=x]
+   [(x,y,x*y) for x in range(10) if x%2!=0 for y in range(10) if y!=x]
 
 is roughly equivalent to
 
 ::
 
+   L = []
    for x in range(10):
      for y in range(10):
        if x%2!=0 and y!=x:
@@ -1732,6 +1733,29 @@ is now the list to use.
 
 If you use a tuple as the expression in the list comprehension, you must
 put parentheses around it.
+
+Dictionary Comprehensions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Python also supports dictionary comprehensions::
+
+   >>> { chr(x + ord('A')) : ord('A') + x  for x in range(0, 26) }
+   {'A': 65, 'B': 66, 'C': 67, 'D': 68, 'E': 69, 'F': 70, 'G': 71, 'H': 72, 'I': 73, 'J': 74, 'K': 75, 'L': 76, 'M': 77, 'N': 78, 'O': 79, 'P': 80, 'Q': 81, 'R': 82, 'S': 83, 'T': 84, 'U': 85, 'V': 86, 'W': 87, 'X': 88, 'Y': 89, 'Z': 90}
+
+The behavior is as if you initialized an empty dictionary and inserted
+the expression to it in the ``for`` statement.
+
+The dictionary comprehension above generates a dictionary of the ASCII values for the English letters 'A' through 'Z'.
+
+.. note::
+
+   Do not assume the keys of this dictionary will be in order. Dictionaries make no guarantees about ordering of the keys.
+
+This code is roughly equivalent to the following::
+
+   D = {}
+   for x in range(0, 26):
+      D[chr(x + ord('A'))] = ord('A') + x
 
 None
 ~~~~
