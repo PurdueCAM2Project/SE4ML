@@ -4,22 +4,52 @@ Code Review
 .. warning::
    This chapter is in draft status.
 
-Code review is a software quality assurance activity in which one or more people evaluate a program against some list of standards.
-The program must be carefully inspected, line-by-line in order to ensure all defects are removed from the program.
-Without a standard, code reviewers will miss defects due to improper code review techniques.
-This chapter will cover how to perform a proper code review from start to finish.
+Code review is a software quality assurance activity during
+which a program is evaluate against a standardized list of
+expectations. During the evaluation, the program is carefully
+inspected for bugs that the original developer overlooked.
+Without standards to uphold, code reviewers will miss defects 
+due to improper code review techniques.
+
+This chapter begins with a thorough description of code review
+and its benefits; then, it discusses how to initiate a code 
+review followed by an extensive walkthrough on how to perform a 
+code review from start to finish.
 
 Modern Code Review
 ------------------
-In the past, the author of a change in code would sit down with reviewers to go through the code and find defects.
-However, in recent years, code reviewers employ tools to make the process asynchronous, which means the reviewer can review the code at any time.
-This approach is known as *modern code review*.
 
-Both open-source and industry software projects utilize modern code review for reviewing code changes [Sadowski-Soderberg-Bacchelli]_—and for good reasons, as the benefits for reviewing code are abundant.
-While code reviews require a large time investment, impressive returns have been shown from a multitude of companies.
-For instance, code review at Hewlett-Packard was found to reduce the time for an application to get to market by 1.8 months [Grady-Van-Slack]_. However, the returns do not stop at simple gains in time efficiency.
-Researchers at Microsoft have found that code review acts as a transfer of knowledge between the code reviewer and reviewee
-Will use [Bacchelli-Bird]_
+In the past, the author of a code change would sit down
+with reviewers to go through the code and find defects. However,
+it was found that meetings took significantly more time and money
+while providing no significant increace in defect detection
+[Johnson-Tjahjono]_. As a solution, code reviewers began to employ
+tools to make the process asynchronous, which means the reviewer
+can inspect code at any time. Through the use of source control
+tools, code writers began to make small, relevant changes
+rather than large, intricate changes. This approach came to
+be known as *modern code review*.
+
+Both open-source and industry software projects utilize modern code 
+review [Sadowski-Soderberg-Bacchelli]_—and for good reasons: the 
+benefits for reviewing code are abundant. While code reviews require 
+a large time investment, impressive returns have been shown. For
+instance, code review at Hewlett-Packard was found to reduce the time 
+for an application to get to market by 1.8 months [Grady-Van-Slack]_. 
+However, the returns do not stop at gains in time efficiency. Researchers
+at Microsoft have found that code review acts as a transfer of knowledge
+between the code reviewer and reviewee, increases team paricipation,
+and helps provide a productive way of finding alternative solutions
+to problems [Bacchelli-Bird]_.
+
+The main purpose of code review is to locate overlooked defects within
+submitted code. These include both *functionality* and *evolvability
+defects*. *Functional defects* include issues with code logic or 
+resource use, while *evolvability defects* umbrella problems relating
+to the organization of code or the contents of documentation
+[Mantyla-Lassenius]_. Of the two, evolvability defects are the most 
+common and economically damaging. The latter is due to its negative
+impact on the efficiency of problem-solving.
 
 How To Start A Code Review
 --------------------------
@@ -27,7 +57,7 @@ How To Start A Code Review
 General Steps To Start A Code Review
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#.  Make sure your local changes have been pushed to your working branch/fork.
+#.  Make sure your local commits have been pushed to your working branch/fork.
     You can accomplish this by running:
     ::
 
@@ -35,7 +65,7 @@ General Steps To Start A Code Review
 
 #.  Using a project's respective version control 
     service (e.g. GitHub, BitBucket), create a
-    pull request to merge your changes into the parent
+    pull request to merge your commits into the parent
     version. Provide a title for what the feature adds 
     and a longer desription with a change
     log. :numref:`pullrequest` and :numref:`pullrequestform`
@@ -158,3 +188,5 @@ Things to Take into Consideration
 .. [Czerwonka-Greiler-Tilford] Code reviews do not find bugs: how the current code review best practice slows us down, https://dl.acm.org/citation.cfm?id=2819015
 .. [Humphrey] The Personal Software Process, https://resources.sei.cmu.edu/library/asset-view.cfm?assetid=5283
 .. [Dreu-Weingart] Task Versus Relationship Conflict, Team Performance,and Team Member Satisfaction: A Meta-Analysis, https://psycnet.apa.org/record/2003-99635-017
+.. [Johnson-Tjahjono] Does Every Inspection Really Need a Meeting, https://link.springer.com/content/pdf/10.1023%2FA%3A1009787822215.pdf
+.. [Mantyla-Lassenius] What Types of Defects Are Really Discovered in Code Reviews?,https://ieeexplore-ieee-org.ezproxy.lib.purdue.edu/document/4604671/
