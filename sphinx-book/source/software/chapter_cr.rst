@@ -172,6 +172,9 @@ a code review.
 What to Review
 --------------
 
+Determining what to review is just as important as the review
+itself.
+
 Code Formatting and Styling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
