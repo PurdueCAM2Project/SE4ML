@@ -21,8 +21,9 @@ Modern Code Review
 
 In the past, the author of a code change would sit down
 with reviewers to go through the code and find defects. However,
-it was found that meetings took significantly more time and money
-while providing no significant increase in defect detection
+it was found that code reviews with meetings consumed significantly
+more time and money than code reviews without meetings without
+providing a significant increase in defect detection
 [Johnson-Tjahjono]_. As a solution, code reviewers began to employ
 tools to make the process asynchronous, which means the reviewer
 can inspect code at any time. Through the use of source control
@@ -31,25 +32,32 @@ rather than large, intricate changes. This approach came to
 be known as *modern code review*.
 
 Both open-source and industry software projects utilize modern code 
-review [Sadowski-Soderberg-Bacchelli]_—and for good reasons: the 
-benefits for reviewing code are abundant. While code reviews require 
-a large time investment, impressive returns have been shown. For
-instance, code review at Hewlett-Packard was found to reduce the time 
-for an application to get to market by 1.8 months [Grady-Van-Slack]_. 
-However, the returns do not stop at gains in time efficiency. Researchers
-at Microsoft have found that code review acts as a transfer of knowledge
-between the code reviewer and reviewee, increases team participation,
-and helps provide a productive way of finding alternative solutions
-to problems [Bacchelli-Bird]_.
+review [Sadowski-Soderberg-Bacchelli]_—and for good reasons: the
+reported benefits from reviewing code are abundant. While code reviews
+require a large time investment, an impressive return on investment has
+been shown. For instance, at Hewlett-Packard, code review was found to
+reduce the time for an application to get to market by 1.8 months
+[Grady-Van-Slack]_. It was further shown that code review has many positive
+side effects. Researchers at Microsoft have found that code review
+acts as a transfer of knowledge between the code reviewer and reviewee,
+increases team participation, and helps provide a productive way of
+finding alternative solutions to problems [Bacchelli-Bird]_. The magnitude
+of these benefits greatly depends on the skill-level of the code reviewers
+involved. Therefore, it is critical to choose highly experienced reviewers
+when submitting code for inspection.
 
-The main purpose of code review is to locate overlooked defects within
-submitted code. These include both *functionality* and *evolvability
-defects*. *Functional defects* include issues with code logic or 
-resource use, while *evolvability defects* umbrella problems relating
-to the organization of code or the contents of documentation
-[Mantyla-Lassenius]_. Of the two, evolvability defects are the most 
-common and economically damaging. The latter is due to its negative
-impact on the efficiency of problem-solving.
+Locating overlooked defects is the main motive for reviewing code submitted
+for inspection. These defects are generally split into two categories:
+*functionality* and *evolvability defects*. When discussing *functionality 
+defects* during an inspection, the code reviewer is typically indicating 
+that a code of code has logical issues. On the other hand, *evolvability
+defects* describe issues with the organization of code or the contents of
+documentation [Mantyla-Lassenius]_. Of the two kinds of defects, evolvability
+defects are the most damaging to a project over the course of the development
+life cycle. This is due to the large time investment required in order to
+rewrite a piece of software that has matured around evolvability defects.
+Unfortunately, they also happen to be the most common; therefore, most of
+efforts of code review are spent locating these kinds of bugs.
 
 How To Start A Code Review
 --------------------------
