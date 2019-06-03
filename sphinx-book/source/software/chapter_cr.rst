@@ -172,8 +172,58 @@ a code review.
 What to Review
 --------------
 
+For experts, knowing what to review is almost second nature. However, for
+those just learning how to review code, it is crucial to have a checklist
+of standards. While reviewing code, you should refer to the checklist and
+ensure that every criteria has been met. In doing so, you will avoid missing
+vital steps that may catch many defects.
+
+It is important to note that extreme caution must be used while relying
+entirely on the checklist during code reviews. Unfortunately, here are too
+many possible kinds of defects, making it impossible to cover all
+of them within a checklist; therefore, as a reviewer, you must develop an ability
+to detect unique defects on the fly.
+
+Nevertheless, a checklist is helpful for learning, so please use the following
+sections as guidance while reviewing code.
+
 Code Formatting and Styling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As a reviewer, it is vital to ensure the submitted code meets the project's
+code formatting standards. It can take a long time to manually check every 
+standard, so utilizing automatic formatting tools helps boost
+the efficiency of a code review. Oftentimes, these tools come equipped with
+the ability to verify that the input files pass all the standards. For instance,
+if your codebase is written in Python and you are looking to follow the *pep8*
+standards, then you can do the following:
+::
+
+        $ pip install --user autopep8
+        $ find . -iname *.py -exec autopep8 --verbose --aggressive --aggressive -diff {}
+
+The above commands first install *autopep8* to the your user Python
+install directory. This will allow you to use the auto formatter on any Python
+project you write or review. Then, the command is recursively executed on every
+Python file within the current directory and all of its subdirectories. The use
+of the `--diff` flag only prints the fixed violations to the console, leaving
+the files unchanged. If you want to change the contents of the file, use `--in-line`
+instead of `--diff`. See :numref:`autoformatter` for a before and after comparison
+of one file that has been changed with *autopep8*.
+
+.. _autoformatter:
+.. figure:: cr/figures/autoformatter.png
+
+    Before (left) and after (right) using the *autopep8* auto-formatter. Notice
+    how the code is much easier to read after it has been formatted properly.
+    For code to be readable, it is vital for it to be properly formatted. Example
+    code is from https://pypi.org/project/autopep8/.
+
+
+While tools that automate the process are extremely helpful, they do not
+catch every formatting issue. After applying the auto-formatter, you must
+double-check each file under review ensure the auto-formatter did not miss
+any important standards.
 
 Comment Formatting and Styling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
