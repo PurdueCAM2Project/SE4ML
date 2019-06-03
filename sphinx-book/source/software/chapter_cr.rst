@@ -13,7 +13,7 @@ due to improper code review techniques.
 
 This chapter begins with a thorough description of code review
 and its benefits; then, it discusses how to initiate a code 
-review followed by an extensive walkthrough on how to perform a 
+review followed by an extensive walk-through on how to perform a 
 code review from start to finish.
 
 Modern Code Review
@@ -21,8 +21,9 @@ Modern Code Review
 
 In the past, the author of a code change would sit down
 with reviewers to go through the code and find defects. However,
-it was found that meetings took significantly more time and money
-while providing no significant increace in defect detection
+it was found that code reviews with meetings consumed significantly
+more time and money than code reviews without meetings without
+providing a significant increase in defect detection
 [Johnson-Tjahjono]_. As a solution, code reviewers began to employ
 tools to make the process asynchronous, which means the reviewer
 can inspect code at any time. Through the use of source control
@@ -31,25 +32,32 @@ rather than large, intricate changes. This approach came to
 be known as *modern code review*.
 
 Both open-source and industry software projects utilize modern code 
-review [Sadowski-Soderberg-Bacchelli]_—and for good reasons: the 
-benefits for reviewing code are abundant. While code reviews require 
-a large time investment, impressive returns have been shown. For
-instance, code review at Hewlett-Packard was found to reduce the time 
-for an application to get to market by 1.8 months [Grady-Van-Slack]_. 
-However, the returns do not stop at gains in time efficiency. Researchers
-at Microsoft have found that code review acts as a transfer of knowledge
-between the code reviewer and reviewee, increases team paricipation,
-and helps provide a productive way of finding alternative solutions
-to problems [Bacchelli-Bird]_.
+review [Sadowski-Soderberg-Bacchelli]_—and for good reasons: the
+reported benefits from reviewing code are abundant. While code reviews
+require a large time investment, an impressive return on investment has
+been shown. For instance, at Hewlett-Packard, code review was found to
+reduce the time for an application to get to market by 1.8 months
+[Grady-Van-Slack]_. It was further shown that code review has many positive
+side effects. Researchers at Microsoft have found that code review
+acts as a transfer of knowledge between the code reviewer and reviewee,
+increases team participation, and helps provide a productive way of
+finding alternative solutions to problems [Bacchelli-Bird]_. The magnitude
+of these benefits greatly depends on the skill-level of the code reviewers
+involved. Therefore, it is critical to choose highly experienced reviewers
+when submitting code for inspection.
 
-The main purpose of code review is to locate overlooked defects within
-submitted code. These include both *functionality* and *evolvability
-defects*. *Functional defects* include issues with code logic or 
-resource use, while *evolvability defects* umbrella problems relating
-to the organization of code or the contents of documentation
-[Mantyla-Lassenius]_. Of the two, evolvability defects are the most 
-common and economically damaging. The latter is due to its negative
-impact on the efficiency of problem-solving.
+Locating overlooked defects is the main motive for reviewing code submitted
+for inspection. These defects are generally split into two categories:
+*functionality* and *evolvability defects*. When discussing *functionality 
+defects* during an inspection, the code reviewer is typically indicating 
+that a code of code has logical issues. On the other hand, *evolvability
+defects* describe issues with the organization of code or the contents of
+documentation [Mantyla-Lassenius]_. Of the two kinds of defects, evolvability
+defects are the most damaging to a project over the course of the development
+life cycle. This is due to the large time investment required in order to
+rewrite a piece of software that has matured around evolvability defects.
+Unfortunately, they also happen to be the most common; therefore, most of
+efforts of code review are spent locating these kinds of bugs.
 
 How To Start A Code Review
 --------------------------
@@ -67,7 +75,7 @@ General Steps To Start A Code Review
     service (e.g. GitHub, BitBucket), create a
     pull request to merge your commits into the parent
     version. Provide a title for what the feature adds 
-    and a longer desription with a change
+    and a longer description with a change
     log. :numref:`pullrequest` and :numref:`pullrequestform`
     demonstrate an example pull request in GitHub.
 
@@ -83,7 +91,7 @@ General Steps To Start A Code Review
        
        Pull requests should have a title summarizing the 
        new feature and a comment giving a more descriptive
-       explaination of the changes the pull request will make.
+       explanation of the changes the pull request will make.
 
 
 #.  Request for another developer of the project to review
@@ -99,13 +107,14 @@ General Steps To Start A Code Review
 Making Nano-Commits
 ~~~~~~~~~~~~~~~~~~~
 
-A *nano-commit* is the act of committing code in small, homogenous 
-portions. In other words, the code is meant to complete a sub-task
-of the overarching feature being implemented. During the development
-process, making nano-commits can you help keep track of the work-flow.
-For instance, if a bug is found, then you can sift through the small 
-changes until the bug either disappears or changes. This will help you
-make the necessary changes at the root, keeping the fix clean.
+*Nano-committing* is the act of submitting code for review in small,
+homogenous portions. In other words, the code is meant to complete 
+a sub-task of the overarching feature being implemented. During the
+development process, making nano-commits can you help keep track of
+the work-flow. For instance, if a bug is found, then you can sift
+through the small changes until the bug either disappears or changes.
+This will help you make the necessary changes at the root, keeping
+the fix clean.
 
 Some tasks you may consider keeping as separate commits are:
 
@@ -132,7 +141,7 @@ perform the personal code review, you should keep a checklist of
 common mistakes to look for. By utilizing a checklist, you will 
 ensure both efficiency and consistency from your personal code reviews.
 
-Furthermore, it is important to be curteous of your code reviewer's 
+Furthermore, it is important to be courteous of your code reviewer's 
 time.  Your code should be ready for customers and void of any obvious
 bugs. Ideally, the code reviewer should only have to make comments
 regarding the implementation and not about major issues that need fixed. 
@@ -152,7 +161,7 @@ sign of incomplete code. With an extensive system of unit tests,
 these issues are more obvious by validating that a change does not 
 damage older features. With this in mind, it is vital to implement 
 unit tests alongside new features. Implementation of unit tests 
-guarentees protection from hidden bugs. In a similar vein, failure 
+guarantees protection from hidden bugs. In a similar vein, failure 
 to compile is another sign of a project containing incomplete code.
 The error output of the compiler will normally indicate where the
 issue is located, so it is vital to read and understand what it says.
@@ -163,8 +172,58 @@ a code review.
 What to Review
 --------------
 
+For experts, knowing what to review is almost second nature. However, for
+those just learning how to review code, it is crucial to have a checklist
+of standards. While reviewing code, you should refer to the checklist and
+ensure that every criteria has been met. In doing so, you will avoid missing
+vital steps that may catch many defects.
+
+It is important to note that extreme caution must be used while relying
+entirely on the checklist during code reviews. Unfortunately, here are too
+many possible kinds of defects, making it impossible to cover all
+of them within a checklist; therefore, as a reviewer, you must develop an ability
+to detect unique defects on the fly.
+
+Nevertheless, a checklist is helpful for learning, so please use the following
+sections as guidance while reviewing code.
+
 Code Formatting and Styling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As a reviewer, it is vital to ensure the submitted code meets the project's
+code formatting standards. It can take a long time to manually check every 
+standard, so utilizing automatic formatting tools helps boost
+the efficiency of a code review. Oftentimes, these tools come equipped with
+the ability to verify that the input files pass all the standards. For instance,
+if your codebase is written in Python and you are looking to follow the *pep8*
+standards, then you can do the following:
+::
+
+        $ pip install --user autopep8
+        $ find . -iname *.py -exec autopep8 --verbose --aggressive --aggressive -diff {}
+
+The above commands first install *autopep8* to the your user Python
+install directory. This will allow you to use the auto formatter on any Python
+project you write or review. Then, the command is recursively executed on every
+Python file within the current directory and all of its subdirectories. The use
+of the `--diff` flag only prints the fixed violations to the console, leaving
+the files unchanged. If you want to change the contents of the file, use `--in-line`
+instead of `--diff`. See :numref:`autoformatter` for a before and after comparison
+of one file that has been changed with *autopep8*.
+
+.. _autoformatter:
+.. figure:: cr/figures/autoformatter.png
+
+    Before (left) and after (right) using the *autopep8* auto-formatter. Notice
+    how the code is much easier to read after it has been formatted properly.
+    For code to be readable, it is vital for it to be properly formatted. Example
+    code is from https://pypi.org/project/autopep8/.
+
+
+While tools that automate the process are extremely helpful, they do not
+catch every formatting issue. After applying the auto-formatter, you must
+double-check each file under review ensure the auto-formatter did not miss
+any important standards.
 
 Comment Formatting and Styling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -184,9 +243,9 @@ Things to Take into Consideration
 .. [Sadowski-Soderberg-Bacchelli] Modern Code Review: A Case Study at Google, https://sback.it/publications/icse2018seip.pdf
 .. [Grady-Van-Slack] Key lessons in achieving widespread inspection use, https://ieeexplore.ieee.org/document/300084
 .. [Bacchelli-Bird] Expectations, outcomes, and challenges of modern code review, https://dl.acm.org/citation.cfm?id=2486882
-.. [Purushothaman-Perry] Toward Understanding the Rhetoricof Small Source Code Changes, https://ieeexplore.ieee.org/abstract/document/1463233
+.. [Purushothaman-Perry] Toward Understanding the Rhetoric of Small Source Code Changes, https://ieeexplore.ieee.org/abstract/document/1463233
 .. [Czerwonka-Greiler-Tilford] Code reviews do not find bugs: how the current code review best practice slows us down, https://dl.acm.org/citation.cfm?id=2819015
 .. [Humphrey] The Personal Software Process, https://resources.sei.cmu.edu/library/asset-view.cfm?assetid=5283
 .. [Dreu-Weingart] Task Versus Relationship Conflict, Team Performance,and Team Member Satisfaction: A Meta-Analysis, https://psycnet.apa.org/record/2003-99635-017
 .. [Johnson-Tjahjono] Does Every Inspection Really Need a Meeting, https://link.springer.com/content/pdf/10.1023%2FA%3A1009787822215.pdf
-.. [Mantyla-Lassenius] What Types of Defects Are Really Discovered in Code Reviews?,https://ieeexplore-ieee-org.ezproxy.lib.purdue.edu/document/4604671/
+.. [Mantyla-Lassenius] What Types of Defects Are Really Discovered in Code Reviews?, https://ieeexplore-ieee-org.ezproxy.lib.purdue.edu/document/4604671/
