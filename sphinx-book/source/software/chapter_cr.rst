@@ -238,10 +238,10 @@ instance, take the following example:
    # badnaming.py
 
    def printadd(x1, x2):
-     print(x1 + "/" + x2 + "=" + x1/x2)
-     
+      print(x1, "/", x2, "=", x1/x2)
+      
    if __name__== "__main__":
-     printadd()
+      printadd(6, 3)
 
 You should notice two things that are wrong with this code. First, the method's
 name misleads the user from its actual function. A good method name should
@@ -258,11 +258,80 @@ review, you should see similar code to below.
    # goodnaming.py
 
    def printdivide(dividend, divisor):
-     print(dividend + "/" + divisor + "=" + dividend/divisor)
-     
+      print(dividend, "/", divisor, "=", dividend/divisor)
+      
    if __name__== "__main__":
-     printdivide()
+      printdivide(6, 3)
 
+Another common mistake to keep an eye out for are *magic numbers*, or constants
+that are hard-coded into an algorithm. The following code demonstrates an important
+instance where this error occurs.
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # magicnumbers.py
+
+   class MyMonth:
+
+      def __init__(self, month):
+         self.month = month
+
+      def printmonth(self):
+         if self.month == 1:
+            print("January")
+         elif self.month == 2:
+            print("February")
+         # ...
+         elif self.month == 12:
+            print("December")
+         else:
+            print("Not a real month")
+
+   if __name__== "__main__":
+      month = MyMonth(3)
+      month.printmonth()
+
+In this instance, it is more appropriate to use enumeration to declare
+the months as constants. Even though the order of months is common knowledge,
+it helps preserve the readability of code to declare the numerical values
+of the months as an appropriately labeled constant. In python, to obtain the
+library for enumeration, you must do
+::
+
+        $ pip install enum34
+
+The code that follows should give a clear example on how to achieve the desired
+result.
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # enumeration.py
+
+   from enum import Enum
+
+   Month = Enum('Month', 'January February ... December')
+
+   class MyMonth:
+
+      def __init__(self, month):
+         self.month = month
+
+      def printmonth(self):
+         if self.month == Month.January:
+               print("January")
+         elif self.month == Month.February:
+               print("February")
+         # ...
+         elif self.month == Month.December:
+               print("December")
+         else:
+               print("Not a real month")
+
+   if __name__== "__main__":
+      month = MyMonth(Month.March)
+      month.printmonth()
 
 Comment Formatting and Styling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
