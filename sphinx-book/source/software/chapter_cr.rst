@@ -378,6 +378,12 @@ it easy to differentiate between information you do and do not want written
 to log files in the production build of an application. At the minimum, debugging
 information should *not* be written to log files in the production code.
 
+When reviewing code formatting, it is important to know your team's standards.
+Without this knowledge, it is nearly impossible to locate the defects in
+the submitted source code. Using tools for automatic formatting is crucial for
+boosting code review efficiency, but they will not catch errors related to naming
+conventions and code organization.
+
 Comment Formatting and Styling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
