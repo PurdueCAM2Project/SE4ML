@@ -223,7 +223,46 @@ of one file that has been changed with *autopep8*.
 While tools that automate the process are extremely helpful, they do not
 catch every formatting issue. After applying the auto-formatter, you must
 double-check each file under review ensure the auto-formatter did not miss
-any important standards.
+any important standards and did not raise a false-positive. In the case of
+the latter issue, auto-formatter tools often come equipped with the ability
+to suppress the false-positive. Refer to the documentation of the auto-
+formatter you are using for how to do this.
+
+There are also some standards that automated tools cannot detect. These tend
+to rely on human choice, such as proper method and variable names. For
+instance, take the following example:
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # badnaming.py
+
+   def printadd(x1, x2):
+     print(x1 + "/" + x2 + "=" + x1/x2)
+     
+   if __name__== "__main__":
+     printadd()
+
+You should notice two things that are wrong with this code. First, the method's
+name misleads the user from its actual function. A good method name should
+describe exactly what its action is. Second, the names of the function's
+parameters are vague. While they are not incorrect, for the sake of readability,
+it is advised to give a clear meaning behind their values. As a code reviewer,
+you will want to point out that the name choices used here are unclear, and
+advise the code reviewee to change the names. When they resubmit the code for
+review, you should see similar code to below.
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # goodnaming.py
+
+   def printdivide(dividend, divisor):
+     print(dividend + "/" + divisor + "=" + dividend/divisor)
+     
+   if __name__== "__main__":
+     printdivide()
+
 
 Comment Formatting and Styling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
