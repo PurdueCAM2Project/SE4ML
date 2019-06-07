@@ -206,9 +206,9 @@ The above commands first install *autopep8* to the your user Python
 install directory. This will allow you to use the auto formatter on any Python
 project you write or review. Then, the command is recursively executed on every
 Python file within the current directory and all of its subdirectories. The use
-of the `--diff` flag only prints the fixed violations to the console, leaving
-the files unchanged. If you want to change the contents of the file, use `--in-line`
-instead of `--diff`. See :numref:`autoformatter` for a before and after comparison
+of the :code:`--diff` flag only prints the fixed violations to the console, leaving
+the files unchanged. If you want to change the contents of the file, use :code:`--in-line`
+instead of :code:`--diff`. See :numref:`autoformatter` for a before and after comparison
 of one file that has been changed with *autopep8*.
 
 .. _autoformatter:
@@ -292,8 +292,9 @@ instance where this error occurs.
       month = MyMonth(3)
       month.printmonth()
 
-In this instance, it is more appropriate to use enumeration to declare
-the months as constants. Even though the order of months is common knowledge,
+Magic numbers should be replaced by either stand alone constants or an enumeration of 
+constant values. In this instance, it is more appropriate to use enumeration
+to declare the months as constants. Even though the order of months is common knowledge,
 it helps preserve the readability of code to declare the numerical values
 of the months as an appropriately labeled constant. In python, to obtain the
 library for enumeration, you must do
@@ -332,6 +333,50 @@ result.
    if __name__== "__main__":
       month = MyMonth(Month.March)
       month.printmonth()
+
+So far, we have used the :code:`print` method in the examples in this
+chapter; however, it is often undesirable to use :code:`print` in production
+code. The more appropriate choice is to utilize a logging library. For instance,
+the previous example could be written like so with the python :code:`logging` library:
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # log.py
+
+   from enum import Enum
+   import logging
+
+   logging.basicConfig(level=logging.INFO)
+
+   Month = Enum('Month', 'January February ... December')
+
+   class MyMonth:
+
+      def __init__(self, month):
+         self.month = month
+
+      def printmonth(self):
+         if self.month == Month.January:
+               logging.info("January")
+         elif self.month == Month.February:
+               logging.info("February")
+         # ...
+         elif self.month == Month.December:
+               logging.info("December")
+         else:
+               logging.error("Not a real month")
+
+   if __name__== "__main__":
+      month = MyMonth(Month.March)
+      month.printmonth()
+
+By default, the :code:`logging` library only logs messages with severity
+level of :code:`WARNING` and above, so :code:`DEBUG` and :code:`INFO` are
+not included unless the basic configuration is changed. This is makes 
+it easy to differentiate between information you do and do not want written
+to log files in the production build of an application. At the minimum, debugging
+information should *not* be written to log files in the production code.
 
 Comment Formatting and Styling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
