@@ -187,10 +187,6 @@ The figure shows the line without noise:
 Using the equations, :math:`a = 3.11806` and :math:`b = -5.18776`.
 
 
-  
-This chapter starts with a review of multivariable calculus.
-    
-
 Next, we explain how to solve the problem using *gradient descent*.
       
 Gradient
@@ -205,8 +201,10 @@ Here, :math:`{\bf i}` and :math:`{\bf j}` are the unit vector in the :math:`x` a
 Suppose :math:`{\bf v} = \alpha {\bf i} + \beta {\bf j}` is a unit
 vector. Then, the amount of :math:`f`'s changes in the direction of
 :math:`{\bf v}` is the inner product of :math:`\nabla f` and
-:math:`{\bf v}`.  Apparently, the greatest change occurs at the
-direction when :math:`{\bf v}` is the unit vector of :math:`\nabla f`.
+:math:`{\bf v}`.  The greatest change occurs at the direction when
+:math:`{\bf v}` is the unit vector of :math:`\nabla f`.  Since
+:math:`{\bf v}` is a unit vector, if its direction is different from
+:math:`\nabla f`, the inner product must be smaller.
 
 One way to understand graident is to think about speed bumps on roads.
 
@@ -225,9 +223,10 @@ The gradient is
 This is the *tangent* of the point on the surface.
 
 Next, consider another vector (such as the tire of your unicycle) goes
-through this bump. What is the rate of changes along this surface. If
-you ride the unicycle along this bump without getting onto the bump, then
-the vector of your movement can be expressed by
+through this bump.  We consider a unicycle because it is simpler: we
+need to consider only one wheel. What is the rate of changes along
+this surface? If you ride the unicycle along this bump without getting
+onto the bump, then the vector of your movement can be expressed by
 
 :math:`v = x {\bf i}`
 
@@ -244,7 +243,7 @@ Next, consider that you ride straight to the bump. The vector will be
 
 :math:`v = - y {\bf j}`
 
-The slop of the bump affects your actual movement, again by the inner product:
+The slope of the bump affects your actual movement, again by the inner product:
 
 :math:`\nabla p \cdot v = y \alpha \sin(\theta) {\bf j}`.
 
@@ -268,7 +267,9 @@ Gradient Descent
 *Gradient Descent* is a method for solving *minimization* problems.
 The gradient of a function at a point is the rate of changes at that
 point.  Let's consider a simple example: use gradient descent to find
-a line that has the smallest sum of square error.
+a line that has the smallest sum of square error. This is the same
+problem described above. The earlier solution uses formulae to find
+:math:`a` and :math:`b`. Here, we will not use the formulae.
 
 The gradient of a function is the direction of changes. 
 
@@ -337,3 +338,94 @@ After finding the gradient using either method, the values of
 The two methods get similar results: The first method gets 3.153 and
 -5.187 for :math:`a` and :math:`b` respectively.  The second method
 gets 3.027 and -5.192.
+
+
+Numerical Method for Least Square Error of Quadratic Function
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The examples above uses a linear function :math:`y = a x + b`. Now,
+let's consider a more complex example: a quadratic function:
+:math:`y = a x^2  + b x + c`. The error function is defined
+by three terms: :math:`a`, :math:`b`, and :math:`c`.
+
+:math:`e(a, b, c)= \underset{i=1}{\overset{n}{\sum}} (y_i - (a x_i ^ 2 +  b x_i + c))^2`
+
+The value of :math:`y` is calculated by
+
+:math:`y = 3 x^2 - 5 x + 4 + \epsilon`
+
+here :math:`\epsilon` is the error (or noise) and it is set to a randeom number between -8 and 8.
+
+
++--------------------+----------------------+
+| x                  | y                    |
++====================+======================+
+| -3.370103805       | 60.79185325          |
++--------------------+----------------------+
+| 0.417414305	     | -5.323619187         |
++--------------------+----------------------+
+| -6.159102555	     | 154.3634865          |
++--------------------+----------------------+
+| -4.407403766	     | 82.5948879           |
++--------------------+----------------------+
+| 9.217171131	     | 211.5745285          |
++--------------------+----------------------+
+| -7.174813026	     | 188.278774           |
++--------------------+----------------------+
+| 6.361795959	     | 88.5112383           |
++--------------------+----------------------+
+| 1.79223335	     | 11.99774387          |
++--------------------+----------------------+
+| -1.926842791	     | 26.55005374          |
++--------------------+----------------------+
+| 3.11961916	     | 12.0001045           |
++--------------------+----------------------+
+| 3.407105822        | 25.23458989          |
++--------------------+----------------------+
+| 3.516276644        | 27.86258459          |
++--------------------+----------------------+
+| -6.446048868       | 153.4091251          |
++--------------------+----------------------+
+| -1.611122918       | 16.29112594          |
++--------------------+----------------------+
+| -9.423197392       | 320.9271831          |
++--------------------+----------------------+
+| -0.163191843       | 1.413342642          |
++--------------------+----------------------+
+| -7.984372477       | 237.3069972          |
++--------------------+----------------------+
+| -1.083286108       | 20.77621844          |
++--------------------+----------------------+
+| -1.721374317       | 28.35361787          |
++--------------------+----------------------+
+| 9.307151676        | 211.0397578          |
++--------------------+----------------------+
+| 2.847589125        | 15.49036578          |
++--------------------+----------------------+
+| -9.704318719       | 333.9723539          |
++--------------------+----------------------+
+| 6.652947501        | 106.6501811          |
++--------------------+----------------------+
+| 1.286261333        | -2.972412887         |
++--------------------+----------------------+
+| 6.730248976        | 104.7116952          |
++--------------------+----------------------+
+| 4.198544935        | 29.78821666          |
++--------------------+----------------------+
+| 8.730545018        | 183.571542           |
++--------------------+----------------------+
+| -5.944582098       | 142.8709084          |
++--------------------+----------------------+
+| 3.596351215        | 19.40151             |
++--------------------+----------------------+
+| -5.606758376       | 132.9978749          |
++--------------------+----------------------+
+| -7.680210557       | 215.0928846          |
++--------------------+----------------------+
+| 1.852911853        | 2.423800574          |
++--------------------+----------------------+
+
+The pairs are plotted below:
+
+.. figure:: gradient/figures/quadratic.png
+

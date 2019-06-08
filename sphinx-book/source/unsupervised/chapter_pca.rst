@@ -18,7 +18,7 @@ Examples
 
 Consider an ellipse. There are two common ways to express an ellipse:
 
-:math: `\frac{x^2}{a ^ 2} + \frac{y^2}{b ^ 2} = 1`
+:math:`\frac{x^2}{a ^ 2} + \frac{y^2}{b ^ 2} = 1`
 
 .. or \langle \lbrace { x = a \cos(t) \atop y = b \sin(t) }
 
