@@ -206,9 +206,9 @@ The above commands first install *autopep8* to the your user Python
 install directory. This will allow you to use the auto formatter on any Python
 project you write or review. Then, the command is recursively executed on every
 Python file within the current directory and all of its subdirectories. The use
-of the `--diff` flag only prints the fixed violations to the console, leaving
-the files unchanged. If you want to change the contents of the file, use `--in-line`
-instead of `--diff`. See :numref:`autoformatter` for a before and after comparison
+of the :code:`--diff` flag only prints the fixed violations to the console, leaving
+the files unchanged. If you want to change the contents of the file, use :code:`--in-line`
+instead of :code:`--diff`. See :numref:`autoformatter` for a before and after comparison
 of one file that has been changed with *autopep8*.
 
 .. _autoformatter:
@@ -223,7 +223,166 @@ of one file that has been changed with *autopep8*.
 While tools that automate the process are extremely helpful, they do not
 catch every formatting issue. After applying the auto-formatter, you must
 double-check each file under review ensure the auto-formatter did not miss
-any important standards.
+any important standards and did not raise a false-positive. In the case of
+the latter issue, auto-formatter tools often come equipped with the ability
+to suppress the false-positive. Refer to the documentation of the auto-
+formatter you are using for how to do this.
+
+There are also some standards that automated tools cannot detect. These tend
+to rely on human choice, such as proper method and variable names. For
+instance, take the following example:
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # badnaming.py
+
+   def printadd(x1, x2):
+      print(x1, "/", x2, "=", x1/x2)
+      
+   if __name__== "__main__":
+      printadd(6, 3)
+
+You should notice two things that are wrong with this code. First, the method's
+name misleads the user from its actual function. A good method name should
+describe exactly what its action is. Second, the names of the function's
+parameters are vague. While they are not incorrect, for the sake of readability,
+it is advised to give a clear meaning behind their values. As a code reviewer,
+you will want to point out that the name choices used here are unclear, and
+advise the code reviewee to change the names. When they resubmit the code for
+review, you should see similar code to below.
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # goodnaming.py
+
+   def printdivide(dividend, divisor):
+      print(dividend, "/", divisor, "=", dividend/divisor)
+      
+   if __name__== "__main__":
+      printdivide(6, 3)
+
+Another common mistake to keep an eye out for are *magic numbers*, or constants
+that are hard-coded into an algorithm. The following code demonstrates an important
+instance where this error occurs.
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # magicnumbers.py
+
+   class MyMonth:
+
+      def __init__(self, month):
+         self.month = month
+
+      def printmonth(self):
+         if self.month == 1:
+            print("January")
+         elif self.month == 2:
+            print("February")
+         # ...
+         elif self.month == 12:
+            print("December")
+         else:
+            print("Not a real month")
+
+   if __name__== "__main__":
+      month = MyMonth(3)
+      month.printmonth()
+
+Magic numbers should be replaced by either stand alone constants or an enumeration of 
+constant values. In this instance, it is more appropriate to use enumeration
+to declare the months as constants. Even though the order of months is common knowledge,
+it helps preserve the readability of code to declare the numerical values
+of the months as an appropriately labeled constant. In python, to obtain the
+library for enumeration, you must do
+::
+
+        $ pip install enum34
+
+The code that follows should give a clear example on how to achieve the desired
+result.
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # enumeration.py
+
+   from enum import Enum
+
+   Month = Enum('Month', 'January February ... December')
+
+   class MyMonth:
+
+      def __init__(self, month):
+         self.month = month
+
+      def printmonth(self):
+         if self.month == Month.January:
+               print("January")
+         elif self.month == Month.February:
+               print("February")
+         # ...
+         elif self.month == Month.December:
+               print("December")
+         else:
+               print("Not a real month")
+
+   if __name__== "__main__":
+      month = MyMonth(Month.March)
+      month.printmonth()
+
+So far, we have used the :code:`print` method in the examples in this
+chapter; however, it is often undesirable to use :code:`print` in production
+code. The more appropriate choice is to utilize a logging library. For instance,
+the previous example could be written like so with the python :code:`logging` library:
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # log.py
+
+   from enum import Enum
+   import logging
+
+   logging.basicConfig(level=logging.INFO)
+
+   Month = Enum('Month', 'January February ... December')
+
+   class MyMonth:
+
+      def __init__(self, month):
+         self.month = month
+
+      def printmonth(self):
+         if self.month == Month.January:
+               logging.info("January")
+         elif self.month == Month.February:
+               logging.info("February")
+         # ...
+         elif self.month == Month.December:
+               logging.info("December")
+         else:
+               logging.error("Not a real month")
+
+   if __name__== "__main__":
+      month = MyMonth(Month.March)
+      month.printmonth()
+
+By default, the :code:`logging` library only logs messages with severity
+level of :code:`WARNING` and above, so :code:`DEBUG` and :code:`INFO` are
+not included unless the basic configuration is changed. This is makes 
+it easy to differentiate between information you do and do not want written
+to log files in the production build of an application. At the minimum, debugging
+information should *not* be written to log files in the production code.
+
+When reviewing code formatting, it is important to know your team's standards.
+Without this knowledge, it is nearly impossible to locate the defects in
+the submitted source code. Using tools for automatic formatting is crucial for
+boosting code review efficiency, but they will not catch errors related to naming
+conventions and code organization.
 
 Comment Formatting and Styling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
