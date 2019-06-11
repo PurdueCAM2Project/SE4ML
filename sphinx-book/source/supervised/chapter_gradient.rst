@@ -463,3 +463,231 @@ Running this program ten times gets the following results:
 +--------------------+----------------------+----------------------+
 
 The calculated values are pretty consistent.
+
+
+
+Gradient Descent for Three-Layer Neural Networks
+------------------------------------------------
+
+Neural networks are the foundation of the recent impressive progress
+in machine learning. The problems described so far have pretty clear
+mathematical foundations (for example, linear approximation or
+quadratic approximation). More complex problems can be difficult to
+express mathematically. Let's consider an example in our everyday
+life: How do you describe a "chair"? "Simple", you may say. You define
+"A chair has four legs with a flat surface on which a person can sit,
+like this figure":
+
+.. figure:: gradient/figures/chair1.jpg
+
+If that is a chair, how about this one?  "Well, that is also a
+chair.", you may say. 
+
+.. figure:: gradient/figures/chair2.jpg
+
+You change your answer to "A chair has two or four legs with a flat
+surface on which a person can sit."  There are still problems: How about
+the following two? Are they chairs?
+
+.. figure:: gradient/figures/chair3.png
+
+.. figure:: gradient/figures/chair4.jpg
+
+As you can see, it is not so easy to define a chair.
+   
+The same problem occurs in many other cases. How do you define a car?
+You may say, "A car is a vehicle with four wheels and can transport
+people."  Some cars have only three wheels. Some cars have six
+wheels. Some cars do not transport people.
+
+Instead of giving a definition, another approach is to give many
+examples and a complex enough function so that the function can learn
+the common characteristics of these examples.  Neural networks are
+complex functions and they have the capabilities of learning from many
+examples.  More details about neural networks will be covered in later
+chapters. This chapter gives only a simple example showing how
+gradient descent can be used to learn.  Neural networks use one
+particular architecture for computing.  This architecture is inspired
+by animal brains where billions of neurons are connected.  This book
+does not intend to how neural networks resemble brains, and biological
+experiments discovering the mechanisms of brain functions.  Instead,
+this section solve relatively simple problems (creating logic gates)
+using this particular architecture.
+
+The following figure is an example of a neural network with three
+layers: an input layer, an output layer, and a hidden layer. A layer
+is hidden simply because it is neither the input layer nor the output
+layer.
+
+.. figure:: gradient/figures/layers.png
+
+   Neural network of three layers
+
+In this example, the input layer has two neurons (neurons 0-1), the
+hidden layer has four neurons (neurons 0-3), and the output layer has
+two neurons (neurons 0-1).  Prior studies show that a neural network
+with only two layers (input and output) without any hidden layer has
+limited capability. Thus, almost all neural networks have hidden
+layers.  Some complex networks can have dozens or even hundreds of
+hidden layers.  Information moves from the layers on the left toward
+the layers on the right.  There is no feedback of information.  Nor do
+two neurons of the same layer exchange information.
+
+
+.. figure:: gradient/figures/forward.png
+
+   Connects neurons of different layers.  These are the only connections between enurons.
+
+The neurons in two adjacent layers are connected by weights, are
+expressed as a three-dimensional array:
+
+:math:`weights[l][s][d]`
+
+connects the neuron at layer :math:`l` to layer :math:`l + 1`;
+:math:`s` is the source and :math:`d` is the destination. It is also
+written as :math:`w_{l, s, d}`.  Please notice that the indexes start
+from zero.
+
+.. figure:: gradient/figures/weights.png   
+
+	    Definition of the indexes for weights
+
+	    
+In the example, the left weight :math:`weights[0][1][2]` has the first
+index 0 because it connects the input layer (layer 0) with the hidden
+layer (layer 1). From the top, this is the second neuron of the input
+layer; thus, the second index is 1.  The destination is the third
+neuron in the hidden layer and the index is 2.  The right weight is
+:math:`weights[1][3][0]`. The first index is 1 because it is from the
+hidden layer (layer 1). The second index is 3 because the source
+is the fourth neuron from the top. 
+
+Each neuron performs relatively simple calculation, as shown below.
+
+.. figure:: gradient/figures/neuron.png   
+
+	    Computation performed by one neuron
+
+A neuron in the input layer has only one input (only :math:`x_0`) and
+the weight is always 1. A neuron in the hidden or the output layer has
+multiple inputs.  Each neuron performs three stages of
+computation. First, the products of the input and the weight are
+added.
+
+:math:`\underset{k = 0}{\overset{n-1}{\Sigma}} x_k w_k`.
+
+Next, a constant called *bias* is added
+
+:math:`b + \underset{k = 0}{\overset{n-1}{\Sigma}} x_k w_k`.
+
+The value is then passed to an *activation function* :math:`f`.  This
+must be a non-linear function because linear functions are too limited
+in their ability to handle non-linear situations.  Several activation
+functions are popular. This section uses the *sigmoid* function,
+expressed as :math:`\sigma(x)`, is one of the most widely used:
+
+:math:`\sigma(x) = \frac{1}{1 + e^{-x}}`.
+
+Because :math:`e^{-x} > 0`, :math:`\sigma(x)` is always between 0
+and 1.
+
+      
+The :math:`\sigma` function has a special property: the derivative of
+:math:`\sigma(x)` can be calculated easily:
+
+.. math::
+  :nowrap:
+     
+  \begin{eqnarray}
+  & \frac{d \sigma(x)}{d x} \\
+  & =  \frac{d}{dx} (\frac{1}{1 + e^{-x}}) \\
+  & = - \frac{1}{(1 + e^{-x})^2} \frac{d}{dx} (1 + e^{-x}) \\
+  & =  \frac{e^{-x}}{(1 + e^{-x})^2} \\
+  & = \frac{1}{1 + e^{-x}} \frac{e^{-x}}{1 + e^{-x}} \\
+  & = \frac{1}{1 + e^{-x}} \frac{1 + e^{-x} - 1}{1 + e^{-x}} \\
+  & = \sigma(x) (1 - \sigma(x)).
+  \end{eqnarray}  
+
+What does this mean? It means that we can calculate :math:`\frac{d
+\sigma(x)}{d x}` if we know :math:`\sigma(x)` *without* knowing the
+value of :math:`x`.  If the value of :math:`\sigma(x)` is :math:`v`
+for a particular value of :math:`x`, then the derivative of
+:math:`\sigma(x)` at this value of :math:`x` is :math:`v (1-v)`.
+      
+
+Consider the following neuron. It has two inputs with values 0.99 and
+0.01 respectively.  The weights are 0.8 and 0.2. The bias is 0.3.
+
+.. figure:: gradient/figures/neuralnet1.png   
+
+	    Example to calculate a neuron's output
+
+The value of :math:`s` is 0.3 + 0.99 :math:`\times` 0.8 + 0.01 :math:`\times` 0.2 = 1.094.
+After the *sigmoid* function, this neuron's output is
+
+
+:math:`\frac{1}{1+ e^{-1.094}} = 0.7491342`.
+
+
+Next, consider a complete neural network with all weights and biases:      
+      
+.. figure:: gradient/figures/neuralnet2.png   
+
+	    Example to calculate a neural network's outputs
+
+The following table shows how to calculate the outputs of the
+four neurons in the hidden layer:
+
+
++--------+--------+--------+------+-------+--------------------+
+| neuron | input  | weight | bias | sum   | output             |
++========+========+========+======+=======+====================+
+| 0      | 0.99   |  0.7   | 0.1  | 0.798 | 0.689546499265968  | 
+|        +--------+--------+      |       |                    |      
+|        | 0.01	  |  0.5   |      |       |                    |
++--------+--------+--------+------+-------+--------------------+
+| 1      | 0.99   |  0.8   | 0.3  | 1.094 | 0.749134199078648  | 
+|        +--------+--------+      |       |                    |      
+|        | 0.01	  |  0.2   |      |       |                    |
++--------+--------+--------+------+-------+--------------------+
+| 2      | 0.99   |  0.8   | 0.5  | 1.2955| 0.785076666300568  | 
+|        +--------+--------+      |       |                    |      
+|        | 0.01	  |  0.35  |      |       |                    |
++--------+--------+--------+------+-------+--------------------+
+| 3      | 0.99   |  0.6   | 0.4  | 0.9965| 0.730369880613158  | 
+|        +--------+--------+      |       |                    |      
+|        | 0.01	  |  0.25  |      |       |                    |
++--------+--------+--------+------+-------+--------------------+
+
+How are these numbers calculated. This is the procedure for
+the first neuron:
+
+:math:`s = 0.1 + 0.99 \times 0.7 + 0.01 \times 0.5 = 0.798`
+
+:math:`\frac{1}{1 + e^{-0.798}} = 0.689546499265968`
+
+The next table shows how the outputs are calculated.
+
++--------+--------------------+--------+------+-----------------+--------------------+
+| neuron | input              | weight | bias | sum             | output             |
++========+====================+========+======+=================+====================+
+| 0      | 0.689546499265968  |  0.33  | 0.27 | 1.5473332709399 | 0.824528239528756  |
+|        +--------------------+--------+      |                 |                    |      
+|        | 0.7491341990786481 |  0.16  |      |                 |                    |
+|        +--------------------+--------+      |                 |                    |
+|        | 0.785076666300568  |  0.31  |      |                 |                    |
+|        +--------------------+--------+      |                 |                    |
+|        | 0.730369880613158  |  0.94  |      |                 |                    |
++--------+--------------------+--------+------+-----------------+--------------------+
+| 1      | 0.689546499265968  |  0.28  | 0.45 | 1.75723688345954| 0.852863261520065  |
+|        +--------------------+--------+      |                 |                    |      
+|        | 0.7491341990786481 |  0.76  |      |                 |                    |
+|        +--------------------+--------+      |                 |                    |
+|        | 0.785076666300568  |  0.48  |      |                 |                    |
+|        +--------------------+--------+      |                 |                    |
+|        | 0.730369880613158  |  0.23  |      |                 |                    |
++--------+--------------------+--------+------+-----------------+--------------------+
+
+The outputs of the two neurons are 0.824528239528756 and 0.852863261520065.
+
+
