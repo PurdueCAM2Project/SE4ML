@@ -466,8 +466,12 @@ The calculated values are pretty consistent.
 
 
 
-Gradient Descent for Three-Layer Neural Networks
-------------------------------------------------
+Gradient Descent for Neural Networks
+------------------------------------
+
+Three-Layer Neural Networks
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 Neural networks are the foundation of the recent impressive progress
 in machine learning. The problems described so far have pretty clear
