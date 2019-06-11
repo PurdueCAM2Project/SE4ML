@@ -158,7 +158,7 @@ the files starting with test\_ and ending with .py and executes the
 functions whose names start with test\_. The following is a simple
 example.
 
-.. literalinclude:: ../../../programs/software/test/test_example1.py
+.. literalinclude:: ../../programs/software/test/test_example1.py
    :language: python
 
 
@@ -180,7 +180,7 @@ means the tests have passed.
 Change the program as follows: returntrue returns False and returnfalse
 returns True:
 
-.. literalinclude:: ../../../programs/software/test/test_example2.py
+.. literalinclude:: ../../programs/software/test/test_example2.py
    :language: python
 
 Running pytest gets this result, showing the test has failed.
@@ -206,7 +206,7 @@ If a test can never fail, this test is useless.
 Next, considers a slightly more complex program for testing two
 functions: f1 and f2:
 
-.. literalinclude:: ../../../programs/software/test/test_example3.py
+.. literalinclude:: ../../programs/software/test/test_example3.py
    :language: python
 
 This is the output of pytest:
@@ -234,7 +234,7 @@ separated. The examples for pytest above violated this rule. The
 following examples will follow the rule separating the testing code from
 the tested code. Consider a file with two functions: f1 and f2:
 
-.. literalinclude:: ../../../programs/software/test/funcs.py
+.. literalinclude:: ../../programs/software/test/funcs.py
    :language: python
 
 This is the output when calling the functions interactively:
@@ -255,7 +255,7 @@ This is the output when calling the functions interactively:
 
 A test program calls funcs.f1(3) and funcs.f2(5).
 
-.. literalinclude:: ../../../programs/software/test/test_example4.py
+.. literalinclude:: ../../programs/software/test/test_example4.py
    :language: python
 
 This is the output when calling the functions interactively:
@@ -274,7 +274,7 @@ not to print to the screen.
 The second is a better and more general solution: it saves the captured
 output to a file. It is actually quite straightforward:
 
-.. literalinclude:: ../../../programs/software/test/test_example5.py
+.. literalinclude:: ../../programs/software/test/test_example5.py
    :language: python
 
 
@@ -310,7 +310,7 @@ without human watching by following these steps:
 The following program shows these steps
 
 
-.. literalinclude:: ../../../programs/software/test/test_example6.py
+.. literalinclude:: ../../programs/software/test/test_example6.py
    :language: python
 
 
@@ -330,7 +330,7 @@ different values: 3, 4, and 5. The expected outputs are stored in a
 separate directory called expected and the files are called, not
 surprisingly, 3, 4, and 5.
 
-.. literalinclude:: ../../../programs/software/test/test_intpart1.py
+.. literalinclude:: ../../programs/software/test/test_intpart1.py
    :language: python
 
 Test Coverage
