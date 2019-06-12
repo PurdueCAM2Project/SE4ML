@@ -387,6 +387,19 @@ conventions and code organization.
 Comment Formatting and Styling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+For someone well-versed in programming language syntax, reading code should be as
+easy as reading a book. However, when details are obfuscated due to multiple levels
+of abstraction, it can even become difficult for experts to discern the function of
+a block of code, and even more difficult if the original developer is no longer in contact
+with the project. But what if there were a trail of clues that helped you traverse
+the maze of logic?
+
+Comments play an integral part in the documentation of modern frameworks. As such,
+they should be treated carefully during the code review process. One bad comment
+can cause a world of problems months or years down the line. As the code reviewer, it
+is your job to ensure blatant documentation defects are caught early and before they
+cause any major issues.
+
 Code Logic
 ~~~~~~~~~~
 
