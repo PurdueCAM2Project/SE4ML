@@ -50,12 +50,6 @@ by making sure Python's `venv` support is installed. Virtual environments allow 
 ## Building the book in your virtualenv:
 
 
-0. Make sure you are in the `sphinx-book` folder
-
-  ```
-  cd sphinx-book
-  ```
-
 1. Build the Sphinx book:
   ```
   make clean
