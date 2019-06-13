@@ -400,6 +400,74 @@ can cause a world of problems months or years down the line. As the code reviewe
 is your job to ensure blatant documentation defects are caught early and before they
 cause any major issues.
 
+First, all methods, classes, and modules should have a proper explanation of the
+input parameters, the return, and what happens in between. In Python, documentation
+strings (docstrings) link documentation with methods, classes, and modules. There are
+several ways to format docstrings, but none are any better than the others. One popular
+format is the reStructuredText (reST) format, which uses Sphinx to generate the documentation.
+This is the same tool used to generate this book.
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # docstrings.py
+
+   class ExampleClass(object):
+      """
+      Need to decide on a format.
+      """
+
+It is also important to document the body of methods. This is where the interesting logic
+work occurs, which means complicated or complex logic can be difficult to read. Providing
+general comments on what is occurring can help an unfamiliar reader understand the work
+better. As a code reviewer, you want to make sure you completely follow the logic and provide
+suggestions for where clarifications can be made. If you have a hard time following the logic,
+the comments definitely need improvement. Even so, before approving the comments, try to put
+yourself in the shoes of a new developer who has never seen this code before. You are probably
+familiar enough that most of the code would make some sense either way; however, newer developers
+will not have the same prior experience. For the sake of example, the following code may make sense
+to a senior developer, but not a newly hired developer. (We hope a newly hired developer knows Bubble
+Sort.)
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # badcomments.py
+
+   def bubbleSort(arr):
+      n = len(arr)
+      for i in range(n):
+         for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+               arr[j], arr[j+1] = arr[j+1], arr[j]
+
+Notice how there are no comments describing any of the code. Ideally, there would be docstrings
+and a few lines of commends inline with the code, so you should request changes from the code
+writer. When they finish making their changes, they may provide the following:
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # goodcomments.py
+
+   def bubbleSort(arr):
+      """Sorts an array in ascending order.
+      
+      :param arr: The array to be sorted.
+      :type arr: int[]
+      """
+      n = len(arr)
+      # Iterate through all elements n and its pairs
+      # in positions greater than it
+      for i in range(n):
+         for j in range(0, n-i-1):
+            # Swap elements when the left element 
+            # is larger than the right element
+            if arr[j] > arr[j+1]:
+               arr[j], arr[j+1] = arr[j+1], arr[j]
+
+
+
 Code Logic
 ~~~~~~~~~~
 
