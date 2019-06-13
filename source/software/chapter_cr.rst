@@ -432,7 +432,7 @@ Sort.)
 .. code:: python
 
    #!/usr/bin/python3
-   # badcomments.py
+   # nocomments.py
 
    def bubbleSort(arr):
       n = len(arr)
@@ -441,9 +441,9 @@ Sort.)
             if arr[j] > arr[j+1]:
                arr[j], arr[j+1] = arr[j+1], arr[j]
 
-Notice how there are no comments describing any of the code. Ideally, there would be docstrings
-and a few lines of commends inline with the code, so you should request changes from the code
-writer. When they finish making their changes, they may provide the following:
+Notice how there are no comments within the code. Ideally, the script should at least 
+contain docstrings and a few inline comments, so you must request changes from the code
+author. The author should edit the code to resemble something like the following:
 
 .. code:: python
 
@@ -465,6 +465,44 @@ writer. When they finish making their changes, they may provide the following:
             # is larger than the right element
             if arr[j] > arr[j+1]:
                arr[j], arr[j+1] = arr[j+1], arr[j]
+
+Now, the code has explanations that even a new programmer should understand. All
+of the important steps in the algorithm are described and the overarching goal
+of the algorithm is made clear. As a result, this code will be easy to figure out
+when the original developer is no longer working on this project.
+
+Ultimately, the goal of every comment should be to describe the logic's meaning
+in a clear and concise manner. Therefore, redundant comments should be avoided as
+well, as they will make the algorithm unclear. Furthermore, commented out code
+should also be removed, especially when the code is for debugging purposes. When
+reviewing code, keep an eye out for ineffective comments. The block of code below
+shows an example of such comments.
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # badcomments.py
+
+   def findMaxVal(arr):
+      """Find the maximum value in an array.
+      
+      :param arr: The array to be searched. This should be only non-negative numbers.
+      :type arr: int[]
+      :return: The maximum value.
+      :rtype: int
+      """
+      # Initialize the max value to a negative number 
+      # since this is guaranteed to be smaller than
+      # the smallest value in the array.
+      max = -1
+
+      # Iterate through the array
+      for i in arr:
+         # If the current value is greater than the max value
+         if max < i:
+            # print("Found max!", "Value: ", i, "Old Max: ", max)
+            max = i # Make the current value the max value
+      return max
 
 
 
