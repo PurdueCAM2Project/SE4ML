@@ -389,8 +389,8 @@ Comment Formatting and Styling
 
 For someone well-versed in programming language syntax, reading code should be as
 easy as reading a book. However, when details are obfuscated due to multiple levels
-of abstraction, it can even become difficult for experts to discern the function of
-a block of code, and even more difficult if the original developer is no longer in contact
+of abstraction, even experts can find it difficult to discern the purpose of
+a block of code, especially if the original developer is no longer in contact
 with the project. But what if there were a trail of clues that helped you traverse
 the maze of logic?
 
@@ -401,11 +401,12 @@ is your job to ensure blatant documentation defects are caught early and before 
 cause any major issues.
 
 First, all methods, classes, and modules should have a proper explanation of the
-input parameters, the return, and what happens in between. In Python, documentation
-strings (docstrings) link documentation with methods, classes, and modules. There are
-several ways to format docstrings, but none are any better than the others. One popular
-format is the reStructuredText (reST) format, which uses Sphinx to generate the documentation.
-This is the same tool used to generate this book.
+input parameters, the return value(s), and what happens in between. In Python, documentation
+strings (docstrings) link documentation frameworks with methods, classes, and modules. There are
+several ways to format docstrings depending on the kind of automatic documentation framework being
+used, but none are any better than the others. One popular format is the reStructuredText (reST)
+format, which uses Sphinx to generate the documentation. This is the same tool used to generate
+this book. Carefully review the following example of reST.
 
 .. code:: python
 
@@ -418,32 +419,17 @@ This is the same tool used to generate this book.
       """
 
 It is also important to document the body of methods. This is where the interesting logic
-work occurs, which means complicated or complex logic can be difficult to read. Providing
-general comments on what is occurring can help an unfamiliar reader understand the work
-better. As a code reviewer, you want to make sure you completely follow the logic and provide
-suggestions for where clarifications can be made. If you have a hard time following the logic,
-the comments definitely need improvement. Even so, before approving the comments, try to put
-yourself in the shoes of a new developer who has never seen this code before. You are probably
-familiar enough that most of the code would make some sense either way; however, newer developers
-will not have the same prior experience. For the sake of example, the following code may make sense
-to a senior developer, but not a newly hired developer. (We hope a newly hired developer knows Bubble
-Sort.)
+occurs, which can often be complicated and difficult to read. Providing step-by-step comments
+on what is computed can help an unfamiliar reader understand the program more easily.
+As a code reviewer, ensure you are able to completely follow the logic, and when you cannot,
+provide suggestions for where the code writer should clarify documentation. It is important during
+this process to put yourself in the shoes of a new hire who has never seen this code before.
+Newer hires will not have nearly the same experience with the code base as a veteran reviewer, so
+it is important to keep this in mind.
 
-.. code:: python
-
-   #!/usr/bin/python3
-   # nocomments.py
-
-   def bubbleSort(arr):
-      n = len(arr)
-      for i in range(n):
-         for j in range(0, n-i-1):
-            if arr[j] > arr[j+1]:
-               arr[j], arr[j+1] = arr[j+1], arr[j]
-
-Notice how there are no comments within the code. Ideally, the script should at least 
-contain docstrings and a few inline comments, so you must request changes from the code
-author. The author should edit the code to resemble something like the following:
+Ideally, the script should at least contain docstrings and a few inline comments. When these
+elements are missing you must request changes from the code author. Below you will find
+an example of what a well-documented body of code looks like.
 
 .. code:: python
 
@@ -471,8 +457,8 @@ of the important steps in the algorithm are described and the overarching goal
 of the algorithm is made clear. As a result, this code will be easy to figure out
 when the original developer is no longer working on this project.
 
-Ultimately, the goal of every comment should be to describe the logic's meaning
-in a clear and concise manner. Therefore, redundant comments should be avoided as
+Ultimately, the goal of every comment is to describe the logic's meaning
+in a clear and concise manner. Therefore, redundant comments must avoided as
 well, as they will make the algorithm unclear. Furthermore, commented out code
 should also be removed, especially when the code is for debugging purposes. When
 reviewing code, keep an eye out for ineffective comments. The block of code below
@@ -493,7 +479,7 @@ shows an example of such comments.
       """
       # Initialize the max value to a negative number 
       # since this is guaranteed to be smaller than
-      # the smallest value in the array.
+      # the smallest value in the non-negative array.
       max = -1
 
       # Iterate through the array
