@@ -401,7 +401,7 @@ is your job to ensure blatant documentation defects are caught early and before 
 cause any major issues.
 
 First, there must be a proper explanation of the input parameters, return value(s) and
-functionality of each method, classe, and module. Typically, this is formatted through some
+functionality of each method, class, and module. Typically, this is formatted through some
 standard, such as JavaDocs or JSDocs. In Python, this standard is implemented through documentation
 strings (docstrings), which links documentation frameworks towards methods, classes, and modules. 
 Depending on which documentation framework is used, docstrings can be formatted in many different
@@ -459,6 +459,12 @@ overarching goal of the algorithm is made clear. As a result, a new developer
 can figure out the functionality of the program when the original developer is
 absent from the project.
 
+There are several important areas to regularly check for documentation defects.
+For instance, make sure edge cases are properly described and justified. It is
+also important to document where future work needs to be completed if the work
+is out of the scope of the current feature (usually this is indicated by
+:code:`TODO:`). 
+
 Ultimately, the goal of every comment is to describe the meaning of the code
 in a clear and concise manner. Therefore, a code writer must avoid redundant
 comments, as they will make the algorithm unclear. Furthermore, commented out
@@ -499,10 +505,10 @@ developers of the project is no longer involved. Furthermore, poor documentation
 can mislead developers into thinking that a particular piece of code can perform a
 falsely implied action, which can impede development until they discover the defect.
 If this goes unnoticed for long enough, an entire framework can build around these
-false assumptions, requiring for the framework to undergo large-scale refractoring.
+false assumptions, requiring for the framework to undergo large-scale refactoring.
 Any of these scenarios waste large amounts of project's resources, delaying
 important features from being implemented. As a code reviewer, it is your job to
-prevent these scenarios from occuring.
+prevent these scenarios from occurring.
 
 Code Logic
 ~~~~~~~~~~
