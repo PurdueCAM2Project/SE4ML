@@ -400,13 +400,14 @@ can cause a world of problems months or years down the line. As the code reviewe
 is your job to ensure blatant documentation defects are caught early and before they
 cause any major issues.
 
-First, all methods, classes, and modules should have a proper explanation of the
-input parameters, the return value(s), and what happens in between. In Python, documentation
-strings (docstrings) link documentation frameworks with methods, classes, and modules. There are
-several ways to format docstrings depending on the kind of automatic documentation framework being
-used, but none are any better than the others. One popular format is the reStructuredText (reST)
-format, which uses Sphinx to generate the documentation. This is the same tool used to generate
-this book. Carefully review the following example of reST.
+First, there must be a proper explanation of the input parameters, return value(s) and
+functionality of each method, classe, and module. Typically, this is formatted through some
+standard, such as JavaDocs or JSDocs. In Python, this standard is implemented through documentation
+strings (docstrings), which links documentation frameworks towards methods, classes, and modules. 
+Depending on which documentation framework is used, docstrings can be formatted in many different
+ways, none of which are universally greater than all others. This book uses Sphinx to generate 
+documentation from reStructuredText (reST), one such popular format. Carefully review the 
+following example of reST.
 
 .. code:: python
 
@@ -418,16 +419,16 @@ this book. Carefully review the following example of reST.
       Need to decide on a format.
       """
 
-It is also important to document the body of methods. This is where the interesting logic
+It is also important to document the method bodies. This is where the interesting logic
 occurs, which can often be complicated and difficult to read. Providing step-by-step comments
-on what is computed can help an unfamiliar reader understand the program more easily.
+alongside the computations can help an unfamiliar reader understand the program more easily.
 As a code reviewer, ensure you are able to completely follow the logic, and when you cannot,
 provide suggestions for where the code writer should clarify documentation. It is important during
 this process to put yourself in the shoes of a new hire who has never seen this code before.
 Newer hires will not have nearly the same experience with the code base as a veteran reviewer, so
 it is important to keep this in mind.
 
-Ideally, the script should at least contain docstrings and a few inline comments. When these
+Ideally, a script should at least contain docstrings and a few inline comments. When these
 elements are missing you must request changes from the code author. Below you will find
 an example of what a well-documented body of code looks like.
 
@@ -452,17 +453,19 @@ an example of what a well-documented body of code looks like.
             if arr[j] > arr[j+1]:
                arr[j], arr[j+1] = arr[j+1], arr[j]
 
-Now, the code has explanations that even a new programmer should understand. All
-of the important steps in the algorithm are described and the overarching goal
-of the algorithm is made clear. As a result, this code will be easy to figure out
-when the original developer is no longer working on this project.
+The above snippet of code has explanations that even a new programmer should 
+understand. All of the important steps in the algorithm are described and the
+overarching goal of the algorithm is made clear. As a result, a new developer
+can figure out the functionality of the program when the original developer is
+absent from the project.
 
-Ultimately, the goal of every comment is to describe the logic's meaning
-in a clear and concise manner. Therefore, redundant comments must avoided as
-well, as they will make the algorithm unclear. Furthermore, commented out code
-should also be removed, especially when the code is for debugging purposes. When
-reviewing code, keep an eye out for ineffective comments. The block of code below
-shows an example of such comments.
+Ultimately, the goal of every comment is to describe the meaning of the code
+in a clear and concise manner. Therefore, a code writer must avoid redundant
+comments, as they will make the algorithm unclear. Furthermore, commented out
+code should also be removed, especially when the code was originally used for
+debugging purposes. When reviewing code, keep an eye out for ineffective comments
+that may cause future confusion. The block of code below shows an example of poorly
+commented code.
 
 .. code:: python
 
