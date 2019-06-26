@@ -493,7 +493,16 @@ commented code.
             max = i # Make the current value the max value
       return max
 
-
+For the sake of future developers, it is important to catch documentation
+defects early in the development process, especially before one of the original
+developers of the project is no longer involved. Furthermore, poor documentation
+can mislead developers into thinking that a particular piece of code can perform a
+falsely implied action, which can impede development until they discover the defect.
+If this goes unnoticed for long enough, an entire framework can build around these
+false assumptions, requiring for the framework to undergo large-scale refractoring.
+Any of these scenarios waste large amounts of project's resources, delaying
+important features from being implemented. As a code reviewer, it is your job to
+prevent these scenarios from occuring.
 
 Code Logic
 ~~~~~~~~~~
