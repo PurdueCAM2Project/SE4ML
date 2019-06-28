@@ -18,11 +18,11 @@ addons:
     - latexmk
 script:
 - pip install -r requirements.txt
-- pushd sphinx-book && BOOK_VERSION=$(../get-current-version.sh) travis-sphinx build -s source && popd
-- pushd sphinx-book && BOOK_VERSION=$(../get-current-version.sh) make latexpdf && popd
-- pushd sphinx-book && make epub && popd
+- BOOK_VERSION=$(./get-current-version.sh) travis-sphinx build -s source
+- BOOK_VERSION=$(./get-current-version.sh) make latexpdf
+- make epub
 after_success:
-- pushd sphinx-book && travis-sphinx deploy --cname se4ml.org && popd
+- travis-sphinx deploy --cname se4ml.org
 before_deploy:
 - cd $TRAVIS_BUILD_DIR
 deploy:
