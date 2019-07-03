@@ -387,6 +387,129 @@ conventions and code organization.
 Comment Formatting and Styling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+For someone well-versed in programming language syntax, reading code should be as
+easy as reading a book. However, when details are obfuscated due to multiple levels
+of abstraction, even experts can find it difficult to discern the purpose of
+a block of code, especially if the original developer is no longer in contact
+with the project. But what if there were a trail of clues that helped you traverse
+the maze of logic?
+
+Comments play an integral part in the documentation of modern frameworks. As such,
+they should be treated carefully during the code review process. One bad comment
+can cause a world of problems months or years down the line. As the code reviewer, it
+is your job to ensure blatant documentation defects are caught early and before they
+cause any major issues.
+
+First, there must be a proper explanation of the input parameters, return value(s) and
+functionality of each method, class, and module. Typically, this is formatted through some
+standard, such as JavaDocs or JSDocs. In Python, this standard is implemented through documentation
+strings (docstrings), which links documentation frameworks towards methods, classes, and modules. 
+Depending on which documentation framework is used, docstrings can be formatted in many different
+ways, none of which are universally greater than all others. This book uses Sphinx to generate 
+documentation from reStructuredText (reST), one such popular format. Carefully review the 
+following example of reST.
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # docstrings.py
+
+   class ExampleClass(object):
+      """
+      Need to decide on a format.
+      """
+
+It is also important to document the method bodies. This is where the interesting logic
+occurs, which can often be complicated and difficult to read. Providing step-by-step comments
+alongside the computations can help an unfamiliar reader understand the program more easily.
+As a code reviewer, ensure you are able to completely follow the logic, and when you cannot,
+provide suggestions for where the code writer should clarify documentation. It is important during
+this process to put yourself in the shoes of a new hire who has never seen this code before.
+Newer hires will not have nearly the same experience with the code base as a veteran reviewer, so
+it is important to keep this in mind.
+
+Ideally, a script should at least contain docstrings and a few inline comments. When these
+elements are missing you must request changes from the code author. Below you will find
+an example of what a well-documented body of code looks like.
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # goodcomments.py
+
+   def bubbleSort(arr):
+      """Sorts an array in ascending order.
+      
+      :param arr: The array to be sorted.
+      :type arr: int[]
+      """
+      n = len(arr)
+      # Iterate through all elements n and its pairs
+      # in positions greater than it
+      for i in range(n):
+         for j in range(0, n-i-1):
+            # Swap elements when the left element 
+            # is larger than the right element
+            if arr[j] > arr[j+1]:
+               arr[j], arr[j+1] = arr[j+1], arr[j]
+
+The above snippet of code has explanations that even a new programmer should 
+understand. All of the important steps in the algorithm are described and the
+overarching goal of the algorithm is made clear. As a result, a new developer
+can figure out the functionality of the program when the original developer is
+absent from the project.
+
+There are several important areas to regularly check for documentation defects.
+For instance, make sure edge cases are properly described and justified. It is
+also important to document where future work needs to be completed if the work
+is out of the scope of the current feature (usually this is indicated by
+:code:`TODO:`). 
+
+Ultimately, the goal of every comment is to describe the meaning of the code
+in a clear and concise manner. Therefore, a code writer must avoid redundant
+comments, as they will make the algorithm unclear. Furthermore, commented out
+code should also be removed, especially when the code was originally used for
+debugging purposes. When reviewing code, keep an eye out for ineffective comments
+that may cause future confusion. The block of code below shows an example of poorly
+commented code.
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # badcomments.py
+
+   def findMaxVal(arr):
+      """Find the maximum value in an array.
+      
+      :param arr: The array to be searched. This should be only non-negative numbers.
+      :type arr: int[]
+      :return: The maximum value.
+      :rtype: int
+      """
+      # Initialize the max value to a negative number 
+      # since this is guaranteed to be smaller than
+      # the smallest value in the non-negative array.
+      max = -1
+
+      # Iterate through the array
+      for i in arr:
+         # If the current value is greater than the max value
+         if max < i:
+            # print("Found max!", "Value: ", i, "Old Max: ", max)
+            max = i # Make the current value the max value
+      return max
+
+For the sake of future developers, it is important to catch documentation
+defects early in the development process, especially before one of the original
+developers of the project is no longer involved. Furthermore, poor documentation
+can mislead developers into thinking that a particular piece of code can perform a
+falsely implied action, which can impede development until they discover the defect.
+If this goes unnoticed for long enough, an entire framework can build around these
+false assumptions, requiring for the framework to undergo large-scale refactoring.
+Any of these scenarios waste large amounts of project's resources, delaying
+important features from being implemented. As a code reviewer, it is your job to
+prevent these scenarios from occurring.
+
 Code Logic
 ~~~~~~~~~~
 
