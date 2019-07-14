@@ -507,16 +507,18 @@ wheels. Some cars do not transport people.
 Instead of giving a definition, another approach is to give many
 examples and a complex enough function so that the function can learn
 the common characteristics of these examples.  Neural networks are
-complex functions and they have the capabilities of learning from many
-examples.  More details about neural networks will be covered in later
-chapters. This chapter gives only a simple example showing how
-gradient descent can be used to learn.  Neural networks use one
-particular architecture for computing.  This architecture is inspired
-by animal brains where billions of neurons are connected.  This book
-does not intend to how neural networks resemble brains, and biological
-experiments discovering the mechanisms of brain functions.  Instead,
-this section solve relatively simple problems (creating logic gates)
-using this particular architecture.
+complex *non-linear* functions and they have the capabilities of
+learning from many examples.  More details about neural networks will
+be covered in later chapters. This chapter gives only a few simple
+examples showing how gradient descent can be used to learn.
+
+Neural networks use one particular architecture for computing.  This
+architecture is inspired by animal brains where billions of neurons
+are connected.  This book does not intend to explain how neural
+networks resemble brains, nor the biological experiments discovering the
+mechanisms of brain functions.  Instead, this section solve relatively
+simple problems (creating logic gates) using this particular
+architecture.
 
 The following figure is an example of a neural network with three
 layers: an input layer, an output layer, and a hidden layer. A layer
@@ -533,14 +535,17 @@ two neurons (neurons 0-1).  Prior studies show that a neural network
 with only two layers (input and output) without any hidden layer has
 limited capability. Thus, almost all neural networks have hidden
 layers.  Some complex networks can have dozens or even hundreds of
-hidden layers.  Information moves from the layers on the left toward
-the layers on the right.  There is no feedback of information.  Nor do
-two neurons of the same layer exchange information.
+hidden layers.  It has been shown that *deep* neural networks can be
+effective learning complex tasks. Here, deep means neural networks
+have many hidden layers.  Information moves from the layers on the
+left toward the layers on the right.  There is no feedback of
+information.  Nor do two neurons of the same layer exchange
+information.  Different layers may have different numbers of neurons.
 
 
 .. figure:: gradient/figures/forward.png
 
-   Connects neurons of different layers.  These are the only connections between enurons.
+   Connects neurons of different layers.  These are the only connections between enurons.  Please notice that the numbers of neurons are 2, 4, and 2 in the three layers.
 
 The neurons in two adjacent layers are connected by weights, are
 expressed as a three-dimensional array:
@@ -563,8 +568,9 @@ layer (layer 1). From the top, this is the second neuron of the input
 layer; thus, the second index is 1.  The destination is the third
 neuron in the hidden layer and the index is 2.  The right weight is
 :math:`weights[1][3][0]`. The first index is 1 because it is from the
-hidden layer (layer 1). The second index is 3 because the source
-is the fourth neuron from the top. 
+hidden layer (layer 1). The second index is 3 because the source is
+the fourth neuron from the top. The destination is the first neuron in
+the output layer; thus, the third index is 0.
 
 Each neuron performs relatively simple calculation, as shown below.
 
@@ -572,7 +578,7 @@ Each neuron performs relatively simple calculation, as shown below.
 
 	    Computation performed by one neuron
 
-A neuron in the input layer has only one input (only :math:`x_0`) and
+A neuron in the input layer has only one input (only :math:`x_i`) and
 the weight is always 1. A neuron in the hidden or the output layer has
 multiple inputs.  Each neuron performs three stages of
 computation. First, the products of the input and the weight are
@@ -586,7 +592,24 @@ Next, a constant called *bias* is added
 
 The value is then passed to an *activation function* :math:`f`.  This
 must be a non-linear function because linear functions are too limited
-in their ability to handle non-linear situations.  Several activation
+in their ability to handle complex situations.
+
+.. note::
+
+   The world is not linear. Imagine that you really love chocolate. If
+   you eat one piece of chocolate, you feel pretty good. If you eat
+   two pieces of chocolate, you feel even better. Does this mean you
+   feel better and better after you eat more and more chocolate?
+   No. After you eat a lof of chocolate, you may feel that's enough
+   and want to stop. The same situation applies to everything. Imagine
+   you get paid $20 an hour. If you work for two hours, you get
+   $40. Can you make more and more money if you work longer and
+   longer? No. First, each day has only 24 hours. You can make at most
+   $480 per day if you do not sleep.  If you do not sleep, you will
+   fall ill soon and have to stop working.
+
+
+Several activation
 functions are popular. This section uses the *sigmoid* function,
 expressed as :math:`\sigma(x)`, is one of the most widely used:
 
@@ -616,7 +639,7 @@ What does this mean? It means that we can calculate :math:`\frac{d
 \sigma(x)}{d x}` if we know :math:`\sigma(x)` *without* knowing the
 value of :math:`x`.  If the value of :math:`\sigma(x)` is :math:`v`
 for a particular value of :math:`x`, then the derivative of
-:math:`\sigma(x)` at this value of :math:`x` is :math:`v (1-v)`.
+is :math:`v (1-v)`.
       
 
 Consider the following neuron. It has two inputs with values 0.99 and
@@ -694,4 +717,142 @@ The next table shows how the outputs are calculated.
 
 The outputs of the two neurons are 0.824528239528756 and 0.852863261520065.
 
+Gradient Descent in Neural Networks (Backpropagation)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+How can the concept of gradient descent be used to make neural
+networks produce the desired outputs? The answer is to adjust the
+weights and the biases. More precisely, the adjustment starts from the
+outputs toward the inputs and it is called *back propagation*.  For
+the three layer networks shown above, the changes start from
+:math:`weight[1]` based on the differences of the desired and the
+actual outputs. After adjusting :math:`weight[1]`, the method adjusts
+:math:`weight[0]` between the hidden layer and the input layer.
+
+
+When the actual outputs are different from the expected outputs, the
+difference is called the *error*, usually expressed as :math:`E`.
+Consider the following definition of error:
+
+:math:`E = \frac{1}{2} (e - o)^2`,
+
+Here :math:`e` is the expect value and :math:`o` is the actual output.
+Do not worry about the constant :math:`\frac{1}{2}` because it is for
+convenience here.  It will be cancelled later.
+
+*Gradient descent* can also be used to reduce the errors.  The process
+is more complex than the previous examples because neural networks are
+more complex: We can change the weights but their effects go through
+the non-linear activiation function.  It is not easy expressing the
+relationships between the error and the weights.  In other words, the
+effects of weights go through a composition of functions (additions
+first and then the non-linear function).
+
+Chain Rule
+""""""""""
+
+Before explaining how to adjusting the weights, let's review function
+composition.  Consider that :math:`f(x)` and :math:`g(x)` are
+functions.  We can create a *composition of these two functions*. For
+example, suppose :math:`f(x) = 3 x + 8` and :math:`g(x) = (x + 1) ^
+2`. The composition of :math:`f(x)` and :math:`g(x)` can be written
+as:
+
+:math:`(f \circ g)(x) = f(g(x)) = f((x+1)^2) = 3 (x + 1) ^ 2 + 8 = 3 x^2 + 6 x + 11`.
+
+In this case, :math:`g(x)` is applied first and then :math:`f(x)`.
+
+It is also possible to switch the order of the composition, written differently:
+
+:math:`(g \circ f)(x) = g(f(x)) = g(3x + 8) = ((3x + 8) + 1) ^ 2 = 9 x^2 + 54 x + 81`.
+
+In this case, :math:`f(x)` is applied first and then :math:`g(x)`.
+
+What happens if we want to calculate the effect of changes in
+:math:`x` to the composite function :math:`(f \circ g)(x)`? We need to
+apply the *chain rule*.  
+
+:math:`(f \circ g)'(x) = f'(g(x)) \cdot g'(x)`.
+
+Let's validate this by using the example:
+
+:math:`(f \circ g)(x) = 3 x ^ 2 + 6 x + 11`.
+
+Thus, :math:`(f \circ g)'(x) = 6 x + 6`.
+
+Next, we calculate :math:`f'(x) = 3` and :math:`g'(x) = 2 x + 2`.
+
+:math:`(f \circ g)'(x) = f'(g(x)) \cdot g'(x) = 3 (2 x + 2) = 6x + 6`.
+
+
+Error and Weights
+"""""""""""""""""
+
+Now, we can apply the chain rule to calculate the relationship between
+the error and a weight.  The expected value :math:`e` is a constant
+and its derivative is zero. Thus, we can ignore :math:`\frac{\partial
+e}{\partial w}`. Instead, we need to worry about only the relationship
+between the actual output :math:`o` and a weight :math:`w`.
+
+:math:`\frac{\partial E}{\partial w} = \frac{\partial E}{\partial o} \frac{\partial o}{\partial w}`
+
+:math:`\frac{\partial E}{\partial o} = \frac{\partial}{\partial o}  \frac{1}{2} (e - o) ^ 2= (e - o)`.
+
+As you can see, the constant :math:`\frac{1}{2}` has been cancelled.
+      
+      
+      \frac{\partial E}{\partial o} \frac{\partial o}{\partial w}`      
+
+
+We need to use the *chain rule* in Calculus:
+
+:math:`\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}`.
+
+It can be written in a different way.      
+
+
+
+\begin{equation}
+(f \circ g)'(x) = f'(g(x)) \cdot g'(x).
+\end{equation}
+
+What does this mean?  The derivative of a composite function can be
+obtained by taking derivatives one at a time.
+
+
+This concept is from Calculus (please review Calculus if necessary).
+The relationship between $\mathds{E}$ and a particular weight $w$ can
+be expressed as a function.  Since the value of $w$ can change by
+small amounts (it is double-precision floating point), this function
+can be thought of as continuous.  The speed of change in $\mathds{E}$
+at this weight $w$ is defined as the {\it gradient}:
+
+
+
+
+Neural Networks as Logic Gates
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+After understanding the operations of neural networks, it is time to use neural networks
+doing something useful. This example considers building a two-input logic gate.
+Each gate receives either false (also represented by 0) or true (also represented by 1).
+Commonly used gates are shown in the table below:
+
+
++---------+---------+-----+----+-----+
+| input 0 | input 1 | AND | OR | XOR |
++=========+=========+=====+====+=====+
+|    0    |    0    |  0  | 0  |   0 |
++---------+---------+-----+----+-----+
+|    0    |    1    |  0  | 1  |   1 |
++---------+---------+-----+----+-----+
+|    1    |    0    |  0  | 1  |   1 |
++---------+---------+-----+----+-----+
+|    1    |    1    |  1  | 1  |   0 |
++---------+---------+-----+----+-----+
+
+
+
+Prior studies have shown that it would not be possible make an XOR gate without
+any hidden layer. We won't talk about that here. Instead, right now we focus on how to use graident descent to create logic gates.
 
