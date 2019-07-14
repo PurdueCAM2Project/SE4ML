@@ -734,9 +734,9 @@ When the actual outputs are different from the expected outputs, the
 difference is called the *error*, usually expressed as :math:`E`.
 Consider the following definition of error:
 
-:math:`E = \frac{1}{2} (e - o)^2`,
+:math:`E = \frac{1}{2} (exv - aco)^2`,
 
-Here :math:`e` is the expect value and :math:`o` is the actual output.
+Here :math:`exv` is the expect value and :math:`aco` is the actual output.
 Do not worry about the constant :math:`\frac{1}{2}` because it is for
 convenience here.  It will be cancelled later.
 
@@ -751,7 +751,7 @@ first and then the non-linear function).
 Chain Rule
 """"""""""
 
-Before explaining how to adjusting the weights, let's review function
+Before explaining how to adjust the weights, let's review function
 composition.  Consider that :math:`f(x)` and :math:`g(x)` are
 functions.  We can create a *composition of these two functions*. For
 example, suppose :math:`f(x) = 3 x + 8` and :math:`g(x) = (x + 1) ^
@@ -785,50 +785,125 @@ Next, we calculate :math:`f'(x) = 3` and :math:`g'(x) = 2 x + 2`.
 :math:`(f \circ g)'(x) = f'(g(x)) \cdot g'(x) = 3 (2 x + 2) = 6x + 6`.
 
 
-Error and Weights
-"""""""""""""""""
+Error and Weights between Output and Hidden Layers
+""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Now, we can apply the chain rule to calculate the relationship between
-the error and a weight.  The expected value :math:`e` is a constant
+the error and a weight.  The expected value :math:`exv` is a constant
 and its derivative is zero. Thus, we can ignore :math:`\frac{\partial
-e}{\partial w}`. Instead, we need to worry about only the relationship
-between the actual output :math:`o` and a weight :math:`w`.
+exv}{\partial w}`. Instead, we need to worry about only the
+relationship between the actual output :math:`aco` and a weight
+:math:`w`.
 
-:math:`\frac{\partial E}{\partial w} = \frac{\partial E}{\partial o} \frac{\partial o}{\partial w}`
+:math:`\frac{\partial E}{\partial w} = \frac{\partial E}{\partial aco} \frac{\partial aco}{\partial w}`
 
-:math:`\frac{\partial E}{\partial o} = \frac{\partial}{\partial o}  \frac{1}{2} (e - o) ^ 2= (e - o)`.
+:math:`\frac{\partial E}{\partial aco} = \frac{\partial}{\partial aco}  \frac{1}{2} (exv - aco) ^ 2= (aco - exv)`.
 
 As you can see, the constant :math:`\frac{1}{2}` has been cancelled.
+
+How is the output calculated? It is the *sigmoid* function's output of
+the sum of products of weights and the previous layer, plus the bias:
+
+:math:`aco = \sigma(z)`,
+
+:math:`z = b + \underset{k = 0}{\overset{n-1}{\Sigma}} y_k w_k`,
+
+here, :math:`n` is the number of neurons from the previous layer (the
+hidden layer).
+
+Applying the chain rule again:
+
+:math:`\frac{\partial aco}{\partial w} = \frac{\partial aco}{\partial z} \frac{\partial z}{\partial w}`.
+
+As explained earlier,
+:math:`\frac{\partial aco}{\partial z} = \sigma(z)(1 - \sigma(z))`.
+
+For a particular weight :math:`w_i`, :math:`\frac{\partial}{\partial w}
+(b + \underset{k = 0}{\overset{n-1}{\Sigma}} y_k w_k) = y_i`.
+
+Now, we can put everything together:
+
+:math:`\frac{\partial E}{\partial w_i} = (aco - exv) aco (1 - aco) y_i`.
+
+Using gradient descent, we want to change the weight
+
+:math:`\Delta w_i = - \eta \frac{\partial E}{\partial w_i} = - \eta (aco - exv) aco (1 - aco) y_i`.
+
+This is a reminder of the symbols:
+
++-------------------+----------------------------------------------------------+
+| symbol            | meaning                                                  |
++===================+==========================================================+
+| :math:`w_i`       | weight to adjust                                         |
++-------------------+----------------------------------------------------------+
+| :math:`y_i`       | value from the hidden layer multiplied with :math:`w_i`  |
++-------------------+----------------------------------------------------------+
+| :math:`aco`       | actual output                                            |
++-------------------+----------------------------------------------------------+
+| :math:`\eta`      | learning rate                                            |
++-------------------+----------------------------------------------------------+
+| :math:`exv`       | expected value                                           |
++-------------------+----------------------------------------------------------+
+
+.. figure:: gradient/figures/hiddenoutput.png
+
+	    Graphical representations of the symbols between the hidden and the output layers
+
+	    
+
+
+
+Error and Weights between Output and Hidden Layers
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+The problem of the hidden layer is that we do not have expected values
+for the neurons. Instead, we must rely on the expected values at the
+output layer.
+
+Continue from the previous derivation, the output of the neuron
+:math:`y_i` depends on the values of the input layer, the weights
+between the input layer and the hidden layer, and the bias.  To avoid
+confusion, here :math:`\psi`, instead of :math:`w`, is used to
+express the weight between the input and the hidden layer.
+
+:math:`y_i = \sigma(x_i)`,
+
+and
+
+:math:`x_i = b_i + \underset{j = 0}{\overset{m-1}{\Sigma}} t_j \psi_j`,
+
+here, :math:`m` is the number of neurons in the input layer and
+:math:`t_j` is the input to a particular neuron.
+
+
+.. figure:: gradient/figures/inputhidden.png
+
+	    Graphical representations of the symbols of the input and the hidden layers
+
+How does the weight :math:`\psi_j` affects the error? We can apply the chain rule again:
+
+:math:`\frac{\partial E}{\partial \psi_j} = \frac{\partial E}{\partial x_i} \frac{\partial x_i}{\partial \psi_j}`.
+
+:math:`\frac{\partial x_i}{\partial \psi_j} = t_j`; this is easy.
+
+How about :math:`\frac{\partial E}{\partial x_i}`?
+
+We  apply the chair rule again:
+
+:math:`\frac{\partial E}{\partial x_i} = \frac{\partial E}{\partial y_i} \frac{\partial y_i}{\partial x_i}`.
+
+:math:`\frac{\partial y_i}{\partial x_i} = \frac{\partial}{\partial x_i} \sigma(x_i) = \sigma(x_i) (1 - \sigma(x_i)) = y_i (1 - y_i)`.
+
+Apply the chain rule and we can get :math:`\frac{\partial E}{\partial
+y_i} = \frac{\partial E}{\partial aco} \frac{\partial aco}{\partial
+y_i} = (aco - exv) z (1 - z)`.
       
+Putting everything together:
+
+:math:`\frac{\partial E}{\partial \psi_j} = t_j y_i (1 - y_i) (aco - exv) z (1 - z)`.
+
+
       
-      \frac{\partial E}{\partial o} \frac{\partial o}{\partial w}`      
-
-
-We need to use the *chain rule* in Calculus:
-
-:math:`\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}`.
-
-It can be written in a different way.      
-
-
-
-\begin{equation}
-(f \circ g)'(x) = f'(g(x)) \cdot g'(x).
-\end{equation}
-
-What does this mean?  The derivative of a composite function can be
-obtained by taking derivatives one at a time.
-
-
-This concept is from Calculus (please review Calculus if necessary).
-The relationship between $\mathds{E}$ and a particular weight $w$ can
-be expressed as a function.  Since the value of $w$ can change by
-small amounts (it is double-precision floating point), this function
-can be thought of as continuous.  The speed of change in $\mathds{E}$
-at this weight $w$ is defined as the {\it gradient}:
-
-
-
 
 Neural Networks as Logic Gates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
