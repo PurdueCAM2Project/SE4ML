@@ -816,7 +816,7 @@ Applying the chain rule again:
 :math:`\frac{\partial aco}{\partial w} = \frac{\partial aco}{\partial z} \frac{\partial z}{\partial w}`.
 
 As explained earlier,
-:math:`\frac{\partial aco}{\partial z} = \sigma(z)(1 - \sigma(z))`.
+:math:`\frac{\partial aco}{\partial z} = \sigma(z)(1 - \sigma(z)) = aco (1 - aco)`.
 
 For a particular weight :math:`w_i`, :math:`\frac{\partial}{\partial w}
 (b + \underset{k = 0}{\overset{n-1}{\Sigma}} y_k w_k) = y_i`.
@@ -829,6 +829,15 @@ Using gradient descent, we want to change the weight
 
 :math:`\Delta w_i = - \eta \frac{\partial E}{\partial w_i} = - \eta (aco - exv) aco (1 - aco) y_i`.
 
+Similarly,
+
+:math:`\frac{\partial E}{\partial b} = (aco - exv) aco (1 - aco)`.
+
+To change the bias:
+
+:math:`\Delta b = - \eta \frac{\partial E}{\partial b} = - \eta (aco - exv) aco (1 - aco)`.
+
+      
 This is a reminder of the symbols:
 
 +-------------------+----------------------------------------------------------+
@@ -896,11 +905,11 @@ We  apply the chair rule again:
 
 Apply the chain rule and we can get :math:`\frac{\partial E}{\partial
 y_i} = \frac{\partial E}{\partial aco} \frac{\partial aco}{\partial
-y_i} = (aco - exv) z (1 - z)`.
+y_i} = (aco - exv) aco (1 - aco)`.
       
 Putting everything together:
 
-:math:`\frac{\partial E}{\partial \psi_j} = t_j y_i (1 - y_i) (aco - exv) z (1 - z)`.
+:math:`\frac{\partial E}{\partial \psi_j} = t_j y_i (1 - y_i) (aco - exv) aco (1 - aco)`.
 
 
       
