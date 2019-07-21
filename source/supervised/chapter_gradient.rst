@@ -911,6 +911,15 @@ Putting everything together:
 
 :math:`\frac{\partial E}{\partial \psi_j} = t_j y_i (1 - y_i) (aco - exv) aco (1 - aco)`.
 
+Using gradient descent, we want to change the weight
+   
+
+:math:`\Delta \psi_j = -\eta t_j y_i (1 - y_i) (aco - exv) aco (1 - aco)`.
+
+Similarly,
+
+:math:`\Delta b_i = -\eta y_i (1 - y_i) (aco - exv) aco (1 - aco)`.
+
 
       
 
