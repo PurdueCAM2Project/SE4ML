@@ -734,10 +734,12 @@ When the actual outputs are different from the expected outputs, the
 difference is called the *error*, usually expressed as :math:`E`.
 Consider the following definition of error:
 
-:math:`E = \frac{1}{2} (exv - aco)^2`,
+:math:`E = \underset{i=1}{\overset{k}{\sum}} \frac{1}{2} (exv_i - aco_i)^2`,
 
-Here :math:`exv` is the expect value and :math:`aco` is the actual output.
-Do not worry about the constant :math:`\frac{1}{2}` because it is for
+Here :math:`exv_i` is the expect value and :math:`aco_i` is the actual
+output of the :math:`i^{th}` neuron (among :math:`k` neurons).  This
+definition adds the squares of errors from all output neurons. Do not
+worry about the constant :math:`\frac{1}{2}` because it is for
 convenience here.  It will be cancelled later.
 
 *Gradient descent* can also be used to reduce the errors.  The process
@@ -788,12 +790,37 @@ Next, we calculate :math:`f'(x) = 3` and :math:`g'(x) = 2 x + 2`.
 Error and Weights between Output and Hidden Layers
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
+.. figure:: gradient/figures/hiddenoutput.png
+
+	    Graphical representations of the symbols between the hidden and the output layers
+
+      
+Symbols and their meanings:
+
++-------------------+----------------------------------------------------------+
+| symbol            | meaning                                                  |
++===================+==========================================================+
+| :math:`w_i`       | weight to adjust                                         |
++-------------------+----------------------------------------------------------+
+| :math:`y_i`       | value from the hidden layer multiplied with :math:`w_i`  |
++-------------------+----------------------------------------------------------+
+| :math:`aco`       | actual output                                            |
++-------------------+----------------------------------------------------------+
+| :math:`\eta`      | learning rate                                            |
++-------------------+----------------------------------------------------------+
+| :math:`exv`       | expected value                                           |
++-------------------+----------------------------------------------------------+
+
+
+
 Now, we can apply the chain rule to calculate the relationship between
-the error and a weight.  The expected value :math:`exv` is a constant
-and its derivative is zero. Thus, we can ignore :math:`\frac{\partial
-exv}{\partial w}`. Instead, we need to worry about only the
-relationship between the actual output :math:`aco` and a weight
-:math:`w`.
+the error and a weight.  Consider the output of a particular
+neuron. Since the weight affects only one output, we can ignore the
+other neurons.  For simplicity, we do not add the subscript.  The
+expected value :math:`exv` is a constant and its derivative is
+zero. Thus, we can ignore :math:`\frac{\partial exv}{\partial
+w}`. Instead, we need to worry about only the relationship between the
+actual output :math:`aco` and a weight :math:`w`.
 
 :math:`\frac{\partial E}{\partial w} = \frac{\partial E}{\partial aco} \frac{\partial aco}{\partial w}`
 
@@ -837,33 +864,10 @@ To change the bias:
 
 :math:`\Delta b = - \eta \frac{\partial E}{\partial b} = - \eta (aco - exv) aco (1 - aco)`.
 
-      
-This is a reminder of the symbols:
-
-+-------------------+----------------------------------------------------------+
-| symbol            | meaning                                                  |
-+===================+==========================================================+
-| :math:`w_i`       | weight to adjust                                         |
-+-------------------+----------------------------------------------------------+
-| :math:`y_i`       | value from the hidden layer multiplied with :math:`w_i`  |
-+-------------------+----------------------------------------------------------+
-| :math:`aco`       | actual output                                            |
-+-------------------+----------------------------------------------------------+
-| :math:`\eta`      | learning rate                                            |
-+-------------------+----------------------------------------------------------+
-| :math:`exv`       | expected value                                           |
-+-------------------+----------------------------------------------------------+
-
-.. figure:: gradient/figures/hiddenoutput.png
-
-	    Graphical representations of the symbols between the hidden and the output layers
-
-	    
 
 
-
-Error and Weights between Output and Hidden Layers
-""""""""""""""""""""""""""""""""""""""""""""""""""
+Error and Weights between Hidden and Input Layers
+"""""""""""""""""""""""""""""""""""""""""""""""""
 
 The problem of the hidden layer is that we do not have expected values
 for the neurons. Instead, we must rely on the expected values at the
@@ -906,6 +910,11 @@ We  apply the chair rule again:
 Apply the chain rule and we can get :math:`\frac{\partial E}{\partial
 y_i} = \frac{\partial E}{\partial aco} \frac{\partial aco}{\partial
 y_i} = (aco - exv) aco (1 - aco)`.
+
+So far we consider only neuron in the hidden layer. This neuron can
+affect the output of every neuron in the output layer.  Remember that
+the error function is defined as the sum of squares of the difference
+between the expected value and the actual value of each output neuron.
       
 Putting everything together:
 
