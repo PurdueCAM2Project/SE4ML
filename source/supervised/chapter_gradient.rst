@@ -838,24 +838,28 @@ Symbols and their meanings:
 
 Here are the equations expressing the relationships among these terms:
 
+Error: 
 :math:`E = \underset{k=0}{\overset{t-1}{\sum}} \frac{1}{2} (aco_k - exv_k)^2`,
 
+Actual output of the :math:`k^{th}` neuron:       
 :math:`aco_k = \sigma(z_k)`
 
+Input to the :math:`k^{th}` neuron:       
 :math:`z_k = b_k + \underset{j=0}{\overset{s-1}{\sum}} y_j w_{j,k}`
 
+Output of the :math:`j^{th}` neuron:             
 :math:`y_j = \sigma(x_j)`
 
+
+Input to the :math:`j^{th}` neuron:       
 :math:`x_j = \beta_j + \underset{i=0}{\overset{r-1}{\sum}} u_i \psi_{i,j}`      
 
 Now, we can apply the chain rule to calculate the relationship between
-the error and a weight.  Consider the output of a particular
-neuron. Since the weight affects only one output, we can ignore the
-other neurons.  For simplicity, we do not add the subscript.  The
-expected value :math:`exv` is a constant and its derivative is
-zero. Thus, we can ignore :math:`\frac{\partial exv}{\partial
-w}`. Instead, we need to worry about only the relationship between the
-actual output :math:`aco` and a weight :math:`w`.
+the error and a weight or a bias.  Consider the output of a particular
+neuron.  The expected value is a constant and its derivative is
+zero. Thus, we can ignore :math:`\frac{\partial exv_k}{\partial
+w_{j,k}}`. Instead, we need to worry about only the relationship
+between the actual output :math:`aco_k` and a weight :math:`w_{j,k}`.
 
 :math:`\frac{\partial E}{\partial w_{j,k}} = \frac{\partial E}{\partial aco_k} \frac{\partial aco_k}{\partial w_{j,k}}`
 
@@ -875,7 +879,7 @@ As explained earlier,
 
 Now, we can put everything together:
 
-:math:`\frac{\partial E}{\partial w_{j,k}} = (aco_k - exv_k) aco_k (1 - aco_k) y_{j,k}`.
+:math:`\frac{\partial E}{\partial w_{j,k}} = (aco_k - exv_k) aco_k (1 - aco_k) y_j`.
 
 Using gradient descent, we want to change the weight
 
@@ -905,13 +909,14 @@ neuron in the hidden layer.  This weight may affect every neuron in
 the output layer.
 
 Continue from the previous derivation, the output of the neuron
-:math:`y_i` depends on the values of the input layer, the weights
+:math:`y_j` depends on the values of the input layer, the weights
 between the input layer and the hidden layer, and the bias.  To avoid
 confusion, here :math:`\psi`, instead of :math:`w`, is used to
 express the weight between the input and the hidden layer.
 
 
-How does the weight :math:`\psi_j` affects the error? We can apply the chain rule again:
+How does the weight :math:`\psi_{i,j}` affects the error? We can apply
+the chain rule again:
 
 :math:`\frac{\partial E}{\partial \psi_{i,j}} = \frac{\partial
 }{\partial \psi_{i,j}} \underset{k=0}{\overset{t-1}{\sum}} \frac{1}{2}
