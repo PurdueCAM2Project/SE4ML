@@ -734,10 +734,10 @@ When the actual outputs are different from the expected outputs, the
 difference is called the *error*, usually expressed as :math:`E`.
 Consider the following definition of error:
 
-:math:`E = \underset{i=1}{\overset{k}{\sum}} \frac{1}{2} (exv_i - aco_i)^2`,
+:math:`E = \underset{k=0}{\overset{t-1}{\sum}} \frac{1}{2} (exv_k - aco_k)^2`,
 
-Here :math:`exv_i` is the expect value and :math:`aco_i` is the actual
-output of the :math:`i^{th}` neuron (among :math:`k` neurons).  This
+Here :math:`exv_k` is the expect value and :math:`aco_k` is the actual
+output of the :math:`k^{th}` neuron (among :math:`t` neurons).  This
 definition adds the squares of errors from all output neurons. Do not
 worry about the constant :math:`\frac{1}{2}` because it is for
 convenience here.  It will be cancelled later.
@@ -790,28 +790,63 @@ Next, we calculate :math:`f'(x) = 3` and :math:`g'(x) = 2 x + 2`.
 Error and Weights between Output and Hidden Layers
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-.. figure:: gradient/figures/hiddenoutput.png
+.. figure:: gradient/figures/threelayers.png
 
-	    Graphical representations of the symbols between the hidden and the output layers
+	    Definitions of the symbols
+
 
       
 Symbols and their meanings:
 
-+-------------------+----------------------------------------------------------+
-| symbol            | meaning                                                  |
-+===================+==========================================================+
-| :math:`w_i`       | weight to adjust                                         |
-+-------------------+----------------------------------------------------------+
-| :math:`y_i`       | value from the hidden layer multiplied with :math:`w_i`  |
-+-------------------+----------------------------------------------------------+
-| :math:`aco`       | actual output                                            |
-+-------------------+----------------------------------------------------------+
-| :math:`\eta`      | learning rate                                            |
-+-------------------+----------------------------------------------------------+
-| :math:`exv`       | expected value                                           |
-+-------------------+----------------------------------------------------------+
++-------------------+-----------------------------------------------------------------+
+| symbol            | meaning                                                         |
++===================+=================================================================+
+| :math:`r`         | number of neurons in the input layer                            |
++-------------------+-----------------------------------------------------------------+
+| :math:`s`         | number of neurons in the hidden layer                           |
++-------------------+-----------------------------------------------------------------+
+| :math:`t`         | number of neurons in the output layer                           |
++-------------------+-----------------------------------------------------------------+
+| :math:`i`         | index of a neuron in the input layer :math:`0 \le i < r`        |
++-------------------+-----------------------------------------------------------------+
+| :math:`j`         | index of a neuron in the hidden layer :math:`0 \le j < s`       |
++-------------------+-----------------------------------------------------------------+
+| :math:`k`         | index of a neuron in the output layer :math:`0 \le k < t`       |
++-------------------+-----------------------------------------------------------------+
+| :math:`\beta_j`   | bias of the :math:`j^{th}` neuron in the hidden layer           |
++-------------------+-----------------------------------------------------------------+
+| :math:`b_k`       | bias of the :math:`k^{th}` neuron in the output layer           |
++-------------------+-----------------------------------------------------------------+
+| :math:`u_i`       | input to the :math:`i^{th}` neuron in the input layer           |
++-------------------+-----------------------------------------------------------------+
+| :math:`x_j`       | input to the :math:`j^{th}` neuron in the hidden layer          |
++-------------------+-----------------------------------------------------------------+
+| :math:`y_j`       | output of the :math:`j^{th}` neuron in the hidden layer         |
++-------------------+-----------------------------------------------------------------+
+| :math:`z_k`       | input to the :math:`k^{th}` neuron in the output layer          |
++-------------------+-----------------------------------------------------------------+
+| :math:`aco_k`     | output of the :math:`k^{th}` neuron in the output layer         |
++-------------------+-----------------------------------------------------------------+
+| :math:`exv_k`     | expected value of the :math:`k^{th}` neuron in the output layer |
++-------------------+-----------------------------------------------------------------+
+|:math:`\psi_{i,j}` | weight connecting the :math:`i^{th}` and :math:`j^{th}` neurons |
++-------------------+-----------------------------------------------------------------+
+|:math:`w_{j, k}`   | weight connecting the :math:`j^{th}` and :math:`k^{th}` neurons |
++-------------------+-----------------------------------------------------------------+
+| :math:`\eta`      | learning rate                                                   |
++-------------------+-----------------------------------------------------------------+
 
+Here are the equations expressing the relationships among these terms:
 
+:math:`E = \underset{k=0}{\overset{t-1}{\sum}} \frac{1}{2} (aco_k - exv_k)^2`,
+
+:math:`aco_k = \sigma(z_k)`
+
+:math:`z_k = b_k + \underset{j=0}{\overset{s-1}{\sum}} y_j w_{j,k}`
+
+:math:`y_j = \sigma(x_j)`
+
+:math:`x_j = \beta_j + \underset{i=0}{\overset{r-1}{\sum}} u_i \psi_{i,j}`      
 
 Now, we can apply the chain rule to calculate the relationship between
 the error and a weight.  Consider the output of a particular
@@ -822,56 +857,52 @@ zero. Thus, we can ignore :math:`\frac{\partial exv}{\partial
 w}`. Instead, we need to worry about only the relationship between the
 actual output :math:`aco` and a weight :math:`w`.
 
-:math:`\frac{\partial E}{\partial w} = \frac{\partial E}{\partial aco} \frac{\partial aco}{\partial w}`
+:math:`\frac{\partial E}{\partial w_{j,k}} = \frac{\partial E}{\partial aco_k} \frac{\partial aco_k}{\partial w_{j,k}}`
 
-:math:`\frac{\partial E}{\partial aco} = \frac{\partial}{\partial aco}  \frac{1}{2} (exv - aco) ^ 2= (aco - exv)`.
+:math:`\frac{\partial E}{\partial aco_k} = (aco_k - exv_k)`, because
+:math:`aco_k` does not depend on any other neuron in the output layer.
 
 As you can see, the constant :math:`\frac{1}{2}` has been cancelled.
 
-How is the output calculated? It is the *sigmoid* function's output of
-the sum of products of weights and the previous layer, plus the bias:
-
-:math:`aco = \sigma(z)`,
-
-:math:`z = b + \underset{k = 0}{\overset{n-1}{\Sigma}} y_k w_k`,
-
-here, :math:`n` is the number of neurons from the previous layer (the
-hidden layer).
-
 Applying the chain rule again:
 
-:math:`\frac{\partial aco}{\partial w} = \frac{\partial aco}{\partial z} \frac{\partial z}{\partial w}`.
+:math:`\frac{\partial aco_k}{\partial w_{j,k}} = \frac{\partial aco_k}{\partial z_k} \frac{\partial z_k}{\partial w_{j,k}}`.
 
 As explained earlier,
-:math:`\frac{\partial aco}{\partial z} = \sigma(z)(1 - \sigma(z)) = aco (1 - aco)`.
+:math:`\frac{\partial aco_k}{\partial z_k} = \sigma(z_k)(1 - \sigma(z_k)) = aco _k(1 - aco_k)`.
 
-For a particular weight :math:`w_i`, :math:`\frac{\partial}{\partial w}
-(b + \underset{k = 0}{\overset{n-1}{\Sigma}} y_k w_k) = y_i`.
+:math:`\frac{\partial z_k}{\partial w_{j,k}} = y_j`.
 
 Now, we can put everything together:
 
-:math:`\frac{\partial E}{\partial w_i} = (aco - exv) aco (1 - aco) y_i`.
+:math:`\frac{\partial E}{\partial w_{j,k}} = (aco_k - exv_k) aco_k (1 - aco_k) y_{j,k}`.
 
 Using gradient descent, we want to change the weight
 
-:math:`\Delta w_i = - \eta \frac{\partial E}{\partial w_i} = - \eta (aco - exv) aco (1 - aco) y_i`.
+:math:`\Delta w_{j,k} = - \eta \frac{\partial E}{\partial w_{j,k}} = - \eta (aco_k - exv_k) aco_k (1 - aco_k) y_j`.
 
 Similarly,
 
-:math:`\frac{\partial E}{\partial b} = (aco - exv) aco (1 - aco)`.
+:math:`\frac{\partial E}{\partial b_k} = (aco_k - exv_k) aco_k (1 - aco_k)`.
 
 To change the bias:
 
-:math:`\Delta b = - \eta \frac{\partial E}{\partial b} = - \eta (aco - exv) aco (1 - aco)`.
+:math:`\Delta b_k = - \eta \frac{\partial E}{\partial b_k} = - \eta (aco_k - exv_k) aco_k (1 - aco_k)`.
 
 
 
 Error and Weights between Hidden and Input Layers
 """""""""""""""""""""""""""""""""""""""""""""""""
 
+Next, we adjust the weights between the input and the hidden layer.
 The problem of the hidden layer is that we do not have expected values
 for the neurons. Instead, we must rely on the expected values at the
-output layer.
+output layer.  This is called *back propagation*: propagating the
+expected values from the output layer to the hidden layer in order to
+adjust the weights.  Consider the weight :math:`\psi_{i,j}` between
+the :math:`i^{th}` neuron of the input layer and the :math:`j^{th}`
+neuron in the hidden layer.  This weight may affect every neuron in
+the output layer.
 
 Continue from the previous derivation, the output of the neuron
 :math:`y_i` depends on the values of the input layer, the weights
@@ -879,56 +910,44 @@ between the input layer and the hidden layer, and the bias.  To avoid
 confusion, here :math:`\psi`, instead of :math:`w`, is used to
 express the weight between the input and the hidden layer.
 
-:math:`y_i = \sigma(x_i)`,
-
-and
-
-:math:`x_i = b_i + \underset{j = 0}{\overset{m-1}{\Sigma}} t_j \psi_j`,
-
-here, :math:`m` is the number of neurons in the input layer and
-:math:`t_j` is the input to a particular neuron.
-
-
-.. figure:: gradient/figures/inputhidden.png
-
-	    Graphical representations of the symbols of the input and the hidden layers
 
 How does the weight :math:`\psi_j` affects the error? We can apply the chain rule again:
 
-:math:`\frac{\partial E}{\partial \psi_j} = \frac{\partial E}{\partial x_i} \frac{\partial x_i}{\partial \psi_j}`.
-
-:math:`\frac{\partial x_i}{\partial \psi_j} = t_j`; this is easy.
-
-How about :math:`\frac{\partial E}{\partial x_i}`?
-
-We  apply the chair rule again:
-
-:math:`\frac{\partial E}{\partial x_i} = \frac{\partial E}{\partial y_i} \frac{\partial y_i}{\partial x_i}`.
-
-:math:`\frac{\partial y_i}{\partial x_i} = \frac{\partial}{\partial x_i} \sigma(x_i) = \sigma(x_i) (1 - \sigma(x_i)) = y_i (1 - y_i)`.
-
-Apply the chain rule and we can get :math:`\frac{\partial E}{\partial
-y_i} = \frac{\partial E}{\partial aco} \frac{\partial aco}{\partial
-y_i} = (aco - exv) aco (1 - aco)`.
-
-So far we consider only neuron in the hidden layer. This neuron can
-affect the output of every neuron in the output layer.  Remember that
-the error function is defined as the sum of squares of the difference
-between the expected value and the actual value of each output neuron.
+:math:`\frac{\partial E}{\partial \psi_{i,j}} = \frac{\partial
+}{\partial \psi_{i,j}} \underset{k=0}{\overset{t-1}{\sum}} \frac{1}{2}
+(aco_k - exv_k)^2 = \underset{k=0}{\overset{t-1}{\sum}} (aco_k -
+exv_k) \frac{\partial aco_k}{\partial \psi_{i,j}}`
       
-Putting everything together:
+Our next step is to calculate :math:`\frac{\partial aco_k}{\partial \psi_{i,j}}`
 
-:math:`\frac{\partial E}{\partial \psi_j} = t_j y_i (1 - y_i) (aco - exv) aco (1 - aco)`.
+We can apply the chair rule again:
+
+:math:`\frac{\partial aco_k}{\partial \psi_{i,j}} = \frac{\partial
+aco_k}{\partial z_k} \frac{\partial z_k}{\partial \psi_{i,j}} = aco_k
+(1 - aco_k) \frac{\partial z_k}{\partial \psi_{i,j}}`
+
+:math:`\frac{\partial z_k}{\partial \psi_{i,j}} = \frac{\partial      z_k}{\partial y_j} \frac{\partial y_j}{\partial \psi_{i,j}} =      w_{j, k} \frac{\partial y_j}{\partial \psi_{i,j}}`
+
+Apply the chain rule and we can get
+
+:math:`\frac{\partial y_j}{\partial \psi_{i,j}} = \frac{\partial y_j}{\partial x_j} \frac{\partial x_j}{\partial \psi_{i,j}} = y_j (1 - y_j) \frac{\partial x_j}{\partial \psi_{i,j}}`
+
+Finally,
+:math:`\frac{\partial x_j}{\partial \psi_{i,j}} = u_i`.
+
+Put everything together:
+
+:math:`\frac{\partial E}{\partial \psi_{i,j}} = \underset{k=0}{\overset{t-1}{\sum}} (aco_k - exv_k)  aco_k (1 - aco_k)  w_{j, k} y_j (1 - y_j) u_i`
+
 
 Using gradient descent, we want to change the weight
    
 
-:math:`\Delta \psi_j = -\eta t_j y_i (1 - y_i) (aco - exv) aco (1 - aco)`.
+:math:`\Delta \psi_{i,j} = -\eta \underset{k=0}{\overset{t-1}{\sum}} (aco_k - exv_k)  aco_k (1 - aco_k)  w_{j, k} y_j (1 - y_j) u_i`
 
 Similarly,
 
-:math:`\Delta b_i = -\eta y_i (1 - y_i) (aco - exv) aco (1 - aco)`.
-
+:math:`\Delta \beta_j = -\eta \underset{k=0}{\overset{t-1}{\sum}} (aco_k - exv_k)  aco_k (1 - aco_k)  w_{j, k} y_j (1 - y_j)`.
 
       
 
