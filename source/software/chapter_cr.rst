@@ -389,8 +389,8 @@ Comment Formatting and Styling
 
 For someone well-versed in programming language syntax, reading code should be as
 easy as reading a book. However, when details are obfuscated due to multiple levels
-of abstraction, it can even become difficult for experts to discern the function of
-a block of code, and even more difficult if the original developer is no longer in contact
+of abstraction, even experts can find it difficult to discern the purpose of
+a block of code, especially if the original developer is no longer in contact
 with the project. But what if there were a trail of clues that helped you traverse
 the maze of logic?
 
@@ -400,12 +400,14 @@ can cause a world of problems months or years down the line. As the code reviewe
 is your job to ensure blatant documentation defects are caught early and before they
 cause any major issues.
 
-First, all methods, classes, and modules should have a proper explanation of the
-input parameters, the return, and what happens in between. In Python, documentation
-strings (docstrings) link documentation with methods, classes, and modules. There are
-several ways to format docstrings, but none are any better than the others. One popular
-format is the reStructuredText (reST) format, which uses Sphinx to generate the documentation.
-This is the same tool used to generate this book.
+The first comments to check for are the documentation of all methods, classes, and modules,
+ensuring they properly explain the input parameter(s), return value(s), and what happens in between.
+In Python, documentation strings (docstrings) link documentation frameworks with methods, classes,
+and modules. There are several ways to format docstrings depending on the kind of automatic
+documentation framework being used. Regardless of the tool used, ensure that the comments conform
+to the required format required by the automatic documentation framework. One popular format is
+reStructuredText (reST), which uses Sphinx to generate the documentation. This is the same tool
+used to generate this book. The following example demonstrates how reST can be utilized.
 
 .. code:: python
 
@@ -417,33 +419,19 @@ This is the same tool used to generate this book.
       Need to decide on a format.
       """
 
-It is also important to document the body of methods. This is where the interesting logic
-work occurs, which means complicated or complex logic can be difficult to read. Providing
-general comments on what is occurring can help an unfamiliar reader understand the work
-better. As a code reviewer, you want to make sure you completely follow the logic and provide
-suggestions for where clarifications can be made. If you have a hard time following the logic,
-the comments definitely need improvement. Even so, before approving the comments, try to put
-yourself in the shoes of a new developer who has never seen this code before. You are probably
-familiar enough that most of the code would make some sense either way; however, newer developers
-will not have the same prior experience. For the sake of example, the following code may make sense
-to a senior developer, but not a newly hired developer. (We hope a newly hired developer knows Bubble
-Sort.)
+While documenting method bodies, it is import to ensure it is completely accurate and comprehensive.
+This is where the interesting logic occurs, which can often be complicated and difficult to read.
+Therefore, providing step-by-step comments alongside the code can help an unfamiliar reader
+understand the program more easily. As a code reviewer, make sure you are able to completely understand
+the logic and provide suggestions on what to clarify when you fail to understand a part of the code.
+During this process, it is crucial to put yourself in the shoes of someone who has never seen
+the code before. The reason being is that newly hired developers will not have nearly the same level
+of experience a veteran reviewer (such as yourself), so it is important to keep thieir perspective
+in mind.
 
-.. code:: python
-
-   #!/usr/bin/python3
-   # nocomments.py
-
-   def bubbleSort(arr):
-      n = len(arr)
-      for i in range(n):
-         for j in range(0, n-i-1):
-            if arr[j] > arr[j+1]:
-               arr[j], arr[j+1] = arr[j+1], arr[j]
-
-Notice how there are no comments within the code. Ideally, the script should at least 
-contain docstrings and a few inline comments, so you must request changes from the code
-author. The author should edit the code to resemble something like the following:
+At the bare minimum, a block of code should have docstrings (or a comparable equivalent depending
+on the langauge) and inline comments. When these are missing you must request changes from the
+author of the code. Below you will find an example of what a well-documented body of code looks like.
 
 .. code:: python
 
@@ -466,14 +454,16 @@ author. The author should edit the code to resemble something like the following
             if arr[j] > arr[j+1]:
                arr[j], arr[j+1] = arr[j+1], arr[j]
 
-Now, the code has explanations that even a new programmer should understand. All
+The code above has comments that even a brand new programmer could understand. All
 of the important steps in the algorithm are described and the overarching goal
-of the algorithm is made clear. As a result, this code will be easy to figure out
-when the original developer is no longer working on this project.
+of the algorithm is made clear. While this is the desired goal of comments, it will
+not always be the case that new programmers can understand it. Sometimes, there are
+programming concepts and strategies that only understood due to experience. In these
+cases, do your best to make the code as easy to understand as possible.
 
-Ultimately, the goal of every comment should be to describe the logic's meaning
-in a clear and concise manner. Therefore, redundant comments should be avoided as
-well, as they will make the algorithm unclear. Furthermore, commented out code
+Ultimately, the goal of every comment is to describe the code's meaning
+in a clear and concise manner. Therefore, redundant comments must be avoided as
+well, as they may make the code unclear or confusing. Furthermore, commented out code
 should also be removed, especially when the code is for debugging purposes. When
 reviewing code, keep an eye out for ineffective comments. The block of code below
 shows an example of such comments.
@@ -486,25 +476,61 @@ shows an example of such comments.
    def findMaxVal(arr):
       """Find the maximum value in an array.
       
-      :param arr: The array to be searched. This should be only non-negative numbers.
+      :param arr: The array to be searched.
       :type arr: int[]
       :return: The maximum value.
       :rtype: int
       """
-      # Initialize the max value to a negative number 
-      # since this is guaranteed to be smaller than
-      # the smallest value in the array.
-      max = -1
+      # Initialize the max value to the first value of the array.
+      max = arr[0]
 
-      # Iterate through the array
-      for i in arr:
+      # Iterate through the array, skipping the first value
+      for i in arr[1:]:
          # If the current value is greater than the max value
          if max < i:
-            # print("Found max!", "Value: ", i, "Old Max: ", max)
+            # print("New max found at", i, "with value of", arr[i], ".")
             max = i # Make the current value the max value
       return max
 
+It is also highly advised that edge cases are clearly indicated, described, and
+justified within a nearby comment. For similar reasons as before, this will help
+someone understand the rationale behind the sudden break in logic due to some
+condition. Take the following example for instance.
 
+.. code:: python
+
+   #!/usr/bin/python3
+   # edgecase.py
+
+   def findMaxVal(arr):
+      """Find the maximum value in an array.
+      
+      :param arr: The array to be searched. Must contain at least one element.
+      :type arr: int[]
+      :return: The maximum value.
+      :rtype: int
+      """
+      # Ensure there is at least one element in the array
+      if len(arr) > 0:
+         # Initialize the max value to the first value of the array.
+         max = arr[0]
+
+         # Iterate through the array, skipping the first value
+         for i in arr[1:]:
+            # If the current value is greater than the max value
+            if max < i:
+               max = i # Make the current value the max value
+         return max
+      # Otherwise, raise an error that there is an empty array
+      else:
+         raise ValueError("Array must have length of at least 1.") 
+
+As noted above, the code checks that the array is not empty. Without this
+edge case, the code may raise vauge errors. In this example, the comments are not
+the only benefit resulting from careful placement of edge cases. If you look at the
+:code:`else` condition, you will notice that the reason the error was raised is
+explcitly stated, making it easy for a user of this function to understand what is going
+wrong during runtime.
 
 Code Logic
 ~~~~~~~~~~
