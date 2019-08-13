@@ -454,7 +454,7 @@ author of the code. Below you will find an example of what a well-documented bod
             if arr[j] > arr[j+1]:
                arr[j], arr[j+1] = arr[j+1], arr[j]
 
-The code above has comments that even a brand new programmer could understand. All
+The code above has comments that even a beginner programmer could understand. All
 of the important steps in the algorithm are described and the overarching goal
 of the algorithm is made clear. While this is the desired goal of comments, it will
 not always be the case that new programmers can understand it. Sometimes, there are
@@ -492,10 +492,10 @@ shows an example of such comments.
             max = i # Make the current value the max value
       return max
 
-It is also highly advised that edge cases are clearly indicated, described, and
-justified within a nearby comment. For similar reasons as before, this will help
+It is also highly advised to clearly indicate, describe, and justify edge cases
+within a nearby comment. For similar reasons as before, this will help
 someone understand the rationale behind the sudden break in logic due to some
-condition. Take the following example for instance.
+condition handling the edge case. Take the following example for instance.
 
 .. code:: python
 
