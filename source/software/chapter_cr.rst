@@ -416,8 +416,41 @@ used to generate this book. The following example demonstrates how reST can be u
 
    class ExampleClass(object):
       """
-      Need to decide on a format.
+      This is a description of what ExampleClass does.
+      The purpose of this class is to demonstrate the
+      power of docstrings.
+
+      :param var: This is a variable argument
+      :type var: int
+      :param `*args`: The variable args
+      :param `**kwargs`: The keyowrd args
+      :ivar var1: This is where var1 is stored
+      :vartype var1: int
       """
+      
+      def __init__(self, var1, *args, **kwargs):
+         self.var1 = var1
+
+      def ExampleMethod(var1, var2, var3):
+         """This first method is part of the ExampleClass.
+
+         :param var1: This is the first variable for this method.
+         :type var1: int
+         :param var2: This is the second variable for this method.
+         :type var2: int
+         :param var3: This is the third variable for this method.
+         :type var3: int[]
+         :return: This is the return value for this method.
+         :rtype: str
+         """
+
+         print("The value of arg1 is", arg1)
+         print("The value of arg2 is", arg2)
+         print("The list of arg3 contains", arg3)
+
+         strVar = "Hello World"
+
+         return strVar
 
 While documenting method bodies, it is import to ensure it is completely accurate and comprehensive.
 This is where the interesting logic occurs, which can often be complicated and difficult to read.
