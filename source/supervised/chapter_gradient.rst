@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-Gradient Descent
-================
 
 Learning Objectives
 
@@ -1681,4 +1678,3 @@ Commonly used gates are shown in the table below:
 Prior studies have shown that it would not be possible make an XOR gate without
 any hidden layer. We won't talk about that here. Instead, right now we focus on how to use graident descent to create logic gates.
 
->>>>>>> d0656bd158170401dfaff23a3704ca4eab2a0b8c
