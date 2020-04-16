@@ -334,7 +334,7 @@ discuss ``while`` loops.
      - Multiplication, division, and modulus (or remainder). Operator ``%`` will also work with floating point numbers. Operator ``*`` also applies to sequence types, and operator ``%`` has a special function for strings. We will look at these other uses later.
 
    * - 11 
-     - ``-y``,  ``y``, ``+y`` 
+     - ``-y``,  ``~y``, ``+y`` 
      - Negation, bitwise complement, and unary plus (no operation for numbers).
 
 
