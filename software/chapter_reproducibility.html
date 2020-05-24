@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Reproducibility &mdash; Software Engineering for Machine Learning  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Machine Learning" href="../unsupervised/chapter_ml.html" />
+    <link rel="prev" title="Graphics" href="chapter_graphics.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Software Engineering for Machine Learning
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../frontmatter/preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_python.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_vc.html">Version Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_cr.html">Code Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_test.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_ws.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_ci.html">Continuous Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_graphics.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reproducibility</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#reproducibility-packages">Reproducibility Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#containers">Containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zenodo-and-github-release-archival">Zenodo and GitHub Release Archival</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_ml.html">Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_kmeans.html">K-Means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_hierarchical.html">Hierarchical Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_pca.html">Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_practical.html">Practical Considerations of Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_floating_point.html">Floating Point and Finite Precision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supervised/chapter_supervised.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supervised/chapter_gradient.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supervised/chapter_svm.html">Support Vector Machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supervised/chapter_neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/chapter_building_the_book.html">Building the Book using Sphinx, GitHub Pages, and Travis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/chapter_sphinx_demo.html">Sphinx Demonstration</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Software Engineering for Machine Learning</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Reproducibility</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/software/chapter_reproducibility.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="reproducibility">
+<h1>Reproducibility<a class="headerlink" href="#reproducibility" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="reproducibility-packages">
+<h2>Reproducibility Packages<a class="headerlink" href="#reproducibility-packages" title="Permalink to this headline">¶</a></h2>
+<p>Reproducible computation requires more than being open source and providing open data sets.
+While open access and liberal licensing are essential prerequisites, on top of this minimum we require structured organization of the materials and detailed documentation of the processes.</p>
+<p>A “reproducibility package” <a class="reference internal" href="#barba-praxis" id="id1"><span>[Barba-Praxis]</span></a> includes descriptions about files uploaded to a data repository, including but not limited to code, parameters, input arguments, plotting scripts, and figures corresponding to a particular result. In software engineering, we often use the term “configuraiton management” to manage software artifacts; however, a reproducibility package is focused not only the software artifact but all artifacts in support of reproducibility to ensure that an experiment can be carried out fully by others trying to use the methods.</p>
+<p>IEEE Computing in Science and Engineering, a publication focused on scientific and engineering computing, has a Reproducible Research Department <a class="reference internal" href="#barba-thiruvathukal-rr" id="id2"><span>[Barba-Thiruvathukal-RR]</span></a>, which is the first magazine department in the IEEE Computer Society to have a peer-reviewed track that requires authors to submit reproducibility packages and undergo peer review (which is also done openly). For an article to be accepted, all code and datasets must meet specific requirements and be deposited prior to peer review. The ideas of this chapter build on the work done to form this track.</p>
+</div>
+<div class="section" id="containers">
+<h2>Containers<a class="headerlink" href="#containers" title="Permalink to this headline">¶</a></h2>
+<p>Containers a provide support for a “virtual environment”. Containers can be particularly helpful toward building reproducibility packages for machine learning and computer vision research, since the container scripts themselves are assets that can be maintained under version control  and included with the reproducibility package. There is no limit on how many scripts can be created.</p>
+<p>Beyond software, in the case of machine learning and computer vision, it is crucial to support data artifacts.
+A key component of reproducibility is to integrate with scholarly archival. Acquiring and obtaining a DOI for the package assures that the materials are  discoverable and citable.
+There is a growing trend toward software citation.</p>
+<p>IEEE Computing in Science and Engineering’s Reproducible Research track and the Journal of Open Source Software. %, which are both pioneering efforts in reproducible research, focused on computational science and research software, respectively.</p>
+</div>
+<div class="section" id="zenodo-and-github-release-archival">
+<h2>Zenodo and GitHub Release Archival<a class="headerlink" href="#zenodo-and-github-release-archival" title="Permalink to this headline">¶</a></h2>
+<p>This book itself is an example of a Zenodo artifact.</p>
+<p>We use Travis to <em>release</em> the book, which in our case means bundling the source code (which is done by default as part of the release process) and the HTML/PDF versions. The HTML version is pushed to GitHub pages upon successful build. The PDF version is pushed to GitHub Releases as part of the post-build (deploy) process, assuming a successful build.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">sudo</span><span class="o">:</span> <span class="kc">false</span>
+<span class="nx">language</span><span class="o">:</span> <span class="nx">python</span>
+<span class="nx">addons</span><span class="o">:</span>
+  <span class="nx">apt</span><span class="o">:</span>
+    <span class="nx">packages</span><span class="o">:</span>
+    <span class="o">-</span> <span class="nx">latex</span><span class="o">-</span><span class="nx">xcolor</span>
+    <span class="o">-</span> <span class="nx">texlive</span><span class="o">-</span><span class="nx">base</span>
+    <span class="o">-</span> <span class="nx">texlive</span><span class="o">-</span><span class="nx">latex</span><span class="o">-</span><span class="nx">base</span>
+    <span class="o">-</span> <span class="nx">texlive</span><span class="o">-</span><span class="nx">latex</span><span class="o">-</span><span class="nx">recommended</span>
+    <span class="o">-</span> <span class="nx">texlive</span><span class="o">-</span><span class="nx">fonts</span><span class="o">-</span><span class="nx">recommended</span>
+    <span class="o">-</span> <span class="nx">texlive</span><span class="o">-</span><span class="nx">fonts</span><span class="o">-</span><span class="nx">extra</span>
+    <span class="o">-</span> <span class="nx">texlive</span><span class="o">-</span><span class="nx">latex</span><span class="o">-</span><span class="nx">extra</span>
+    <span class="o">-</span> <span class="nx">texlive</span><span class="o">-</span><span class="nx">formats</span><span class="o">-</span><span class="nx">extra</span>
+    <span class="o">-</span> <span class="nx">texlive</span><span class="o">-</span><span class="nx">bibtex</span><span class="o">-</span><span class="nx">extra</span>
+    <span class="o">-</span> <span class="nx">texlive</span><span class="o">-</span><span class="nx">humanities</span>
+    <span class="o">-</span> <span class="nx">texinfo</span>
+    <span class="o">-</span> <span class="nx">texlive</span><span class="o">-</span><span class="nx">science</span>
+    <span class="o">-</span> <span class="nx">latexmk</span>
+<span class="nx">script</span><span class="o">:</span>
+<span class="o">-</span> <span class="nx">pip</span> <span class="nx">install</span> <span class="o">-</span><span class="nx">r</span> <span class="nx">requirements</span><span class="p">.</span><span class="nx">txt</span>
+<span class="o">-</span> <span class="nx">pushd</span> <span class="nx">latex</span><span class="o">-</span><span class="nx">book</span> <span class="o">&amp;&amp;</span> <span class="nx">make</span> <span class="nx">all</span> <span class="o">&amp;&amp;</span> <span class="nx">popd</span>
+<span class="o">-</span> <span class="nx">pushd</span> <span class="nx">sphinx</span><span class="o">-</span><span class="nx">book</span> <span class="o">&amp;&amp;</span> <span class="nx">BOOK_VERSION</span><span class="o">=</span><span class="nx">$</span><span class="p">(..</span><span class="o">/</span><span class="nx">get</span><span class="o">-</span><span class="nx">current</span><span class="o">-</span><span class="nx">version</span><span class="p">.</span><span class="nx">sh</span><span class="p">)</span> <span class="nx">travis</span><span class="o">-</span><span class="nx">sphinx</span> <span class="nx">build</span> <span class="o">-</span><span class="nx">s</span> <span class="nx">source</span> <span class="o">&amp;&amp;</span> <span class="nx">popd</span>
+<span class="o">-</span> <span class="nx">pushd</span> <span class="nx">sphinx</span><span class="o">-</span><span class="nx">book</span> <span class="o">&amp;&amp;</span> <span class="nx">BOOK_VERSION</span><span class="o">=</span><span class="nx">$</span><span class="p">(..</span><span class="o">/</span><span class="nx">get</span><span class="o">-</span><span class="nx">current</span><span class="o">-</span><span class="nx">version</span><span class="p">.</span><span class="nx">sh</span><span class="p">)</span> <span class="nx">make</span> <span class="nx">latexpdf</span> <span class="o">&amp;&amp;</span> <span class="nx">popd</span>
+<span class="nx">after_success</span><span class="o">:</span>
+<span class="o">-</span> <span class="nx">pushd</span> <span class="nx">sphinx</span><span class="o">-</span><span class="nx">book</span> <span class="o">&amp;&amp;</span> <span class="nx">travis</span><span class="o">-</span><span class="nx">sphinx</span> <span class="nx">deploy</span> <span class="o">--</span><span class="nx">cname</span> <span class="nx">se4ml</span><span class="p">.</span><span class="nx">org</span> <span class="o">&amp;&amp;</span> <span class="nx">popd</span>
+<span class="nx">before_deploy</span><span class="o">:</span>
+<span class="o">-</span> <span class="nx">cd</span> <span class="nx">$TRAVIS_BUILD_DIR</span>
+<span class="nx">deploy</span><span class="o">:</span>
+  <span class="nx">provider</span><span class="o">:</span> <span class="nx">releases</span>
+  <span class="nx">api_key</span><span class="o">:</span> <span class="nx">$GH_TOKEN</span>
+  <span class="nx">file_glob</span><span class="o">:</span> <span class="kc">true</span>
+  <span class="nx">file</span><span class="o">:</span>
+    <span class="o">-</span> <span class="p">.</span><span class="cm">/**/</span><span class="nx">se4ml</span><span class="p">.</span><span class="nx">pdf</span>
+    <span class="o">-</span> <span class="p">.</span><span class="cm">/**/</span><span class="nx">SoftwareEngineeringforMachineLearning</span><span class="p">.</span><span class="nx">pdf</span>
+  <span class="nx">skip_cleanup</span><span class="o">:</span> <span class="kc">true</span>
+  <span class="nx">on</span><span class="o">:</span>
+    <span class="nx">repo</span><span class="o">:</span> <span class="nx">PurdueCAM2Project</span><span class="o">/</span><span class="nx">SE4ML</span>
+    <span class="nx">tags</span><span class="o">:</span> <span class="kc">true</span>
+</pre></div>
+</div>
+<p>Zenodo developed a GitHub integration to support permanent archival of a GitHub repository and any build artifacts it may produce.</p>
+<div class="figure align-default" id="id4">
+<img alt="../_images/zenodo-contents.png" src="../_images/zenodo-contents.png" />
+<p class="caption"><span class="caption-number">Figure 34 </span><span class="caption-text">Zenodo landing page (release contents)</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>For this to work, you need to use <cite>git tag</cite> for tagging your releases. We use Semantic Versioning <a class="reference internal" href="#semantic-versioning" id="id3"><span>[Semantic-Versioning]</span></a>, which essentially means to use <cite>vMAJOR.MINOR[.POINT]]</cite> where MAJOR is a number associated with a new software release; MINOR is typically when you have new features; and POINT is where you did some sort of bug fix or minor change but did not release any new features. All of this is rather subjective. For a major release, we typically use <cite>.0</cite>.</p>
+<div class="figure align-default" id="id5">
+<img alt="../_images/zenodo-git-tags.png" src="../_images/zenodo-git-tags.png" />
+<p class="caption"><span class="caption-number">Figure 35 </span><span class="caption-text">Git tags show up as new Zenodo artifacts</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>Zenodo metadata for including author info. You’re going to want this, because the Zenodo GitHub integration, by default, does not include the author information and derives most of it from GitHub ids, etc. This allows you to recognize all co-authors of your work and to include other useful information, such as the ORCID and other useful keyword metadata.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;creators&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Lu, Yung-Hsiang&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;affiliation&quot;</span><span class="o">:</span> <span class="s2">&quot;Purdue University&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;orcid&quot;</span><span class="o">:</span> <span class="s2">&quot;0000-0002-5491-7661&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Thiruvathukal, George K.&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;affiliation&quot;</span><span class="o">:</span> <span class="s2">&quot;Loyola University Chicago and Argonne National Laboratory&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;orcid&quot;</span><span class="o">:</span> <span class="s2">&quot;0000-0002-0452-5571&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;keywords&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">&quot;software engineering&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Python&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version control&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;continuous integration&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;unsupervised learning&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;supervised learning&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;testing&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;test-driven development&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;agile methodology&quot;</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;license&quot;</span><span class="o">:</span> <span class="s2">&quot;GPL-3.0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;upload_type&quot;</span><span class="o">:</span> <span class="s2">&quot;software&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If all goes according to plan, your artifact shows up with proper author information, which allows others to cite your work properly.</p>
+<div class="figure align-default" id="id6">
+<img alt="../_images/zenodo-doi-and-citation.png" src="../_images/zenodo-doi-and-citation.png" />
+<p class="caption"><span class="caption-number">Figure 36 </span><span class="caption-text">Zenodo DOIs and Citation</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<dl class="citation">
+<dt class="label" id="barba-praxis"><span class="brackets"><a class="fn-backref" href="#id1">Barba-Praxis</a></span></dt>
+<dd><p>Praxis of Reproducible Computational Science, <a class="reference external" href="https://doi.org/10.22541/au.153922477.77361922">https://doi.org/10.22541/au.153922477.77361922</a></p>
+</dd>
+<dt class="label" id="barba-thiruvathukal-rr"><span class="brackets"><a class="fn-backref" href="#id2">Barba-Thiruvathukal-RR</a></span></dt>
+<dd><p>Reproducible Research for Computing in Science &amp; Engineering, Computing in Science and Engineering, <a class="reference external" href="https://ieeexplore.ieee.org/document/8090467">https://ieeexplore.ieee.org/document/8090467</a></p>
+</dd>
+<dt class="label" id="semantic-versioning"><span class="brackets"><a class="fn-backref" href="#id3">Semantic-Versioning</a></span></dt>
+<dd><p>Semantic Versioning Specification, <a class="reference external" href="https://semver.org/">https://semver.org/</a></p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../unsupervised/chapter_ml.html" class="btn btn-neutral float-right" title="Machine Learning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="chapter_graphics.html" class="btn btn-neutral float-left" title="Graphics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yung-Hsiang Lu and George K. Thiruvathukal
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

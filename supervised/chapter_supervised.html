@@ -1,0 +1,804 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Supervised Machine Learning &mdash; Software Engineering for Machine Learning  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gradient Descent" href="chapter_gradient.html" />
+    <link rel="prev" title="Floating Point and Finite Precision" href="../unsupervised/chapter_floating_point.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Software Engineering for Machine Learning
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../frontmatter/preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/chapter_python.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/chapter_vc.html">Version Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/chapter_cr.html">Code Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/chapter_test.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/chapter_ws.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/chapter_ci.html">Continuous Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/chapter_graphics.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/chapter_reproducibility.html">Reproducibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_ml.html">Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_kmeans.html">K-Means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_hierarchical.html">Hierarchical Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_pca.html">Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_practical.html">Practical Considerations of Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_floating_point.html">Floating Point and Finite Precision</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Supervised Machine Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#distinguish-supervised-and-unsupervised-learning">Distinguish Supervised and Unsupervised Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#minimization-problem">Minimization Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#classification-and-regression-problems">Classification and Regression Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quantify-errors-in-classification">Quantify Errors in Classification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#precision-and-recall">Precision and Recall</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f1-score">F1 Score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#confusion-matrix">Confusion Matrix</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#regression-problems">Regression Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overfitting">Overfitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_gradient.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_svm.html">Support Vector Machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/chapter_building_the_book.html">Building the Book using Sphinx, GitHub Pages, and Travis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/chapter_sphinx_demo.html">Sphinx Demonstration</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Software Engineering for Machine Learning</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Supervised Machine Learning</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/supervised/chapter_supervised.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="supervised-machine-learning">
+<h1>Supervised Machine Learning<a class="headerlink" href="#supervised-machine-learning" title="Permalink to this headline">¶</a></h1>
+<p>Learning Objectives</p>
+<ul class="simple">
+<li><p>Understand supervised learning and the distinction from unsupervised learning</p></li>
+<li><p>Understand how supervised learning may be used</p></li>
+<li><p>Distinguish classification and regression problems</p></li>
+</ul>
+<div class="section" id="distinguish-supervised-and-unsupervised-learning">
+<h2>Distinguish Supervised and Unsupervised Learning<a class="headerlink" href="#distinguish-supervised-and-unsupervised-learning" title="Permalink to this headline">¶</a></h2>
+<p>Another type of learning is called <em>supervised learning</em>.
+Unsupervised learning means discovering patterns from data, just data.
+Supervised learning means associating data with <em>labels</em>. When a
+father holds a baby saying “Daddy”, this is supervised learning: The
+baby learns to associate the father’s face (data) with the sound of
+“Daddy” (label). When a user identifies an email as spam and clicks
+the “spam” button in a mail reader, this is supervised learning: The
+mail reader learns to associate the email: the data, may include the
+subject or the content or the sender, or all of them with the spam
+label.</p>
+<p>Supervised learning can be further divided into two types of problems:
+<em>classification</em> and <em>regression</em>.  For classification problems, the
+labels are discrete values. They can be words, numbers, a finite set
+of options, etc.  The labels are discrete because it makes no sense to
+have a label “between” two labels.  For example, the input is the
+voice of a person and the output is the gender, either female or male.</p>
+</div>
+<div class="section" id="minimization-problem">
+<h2>Minimization Problem<a class="headerlink" href="#minimization-problem" title="Permalink to this headline">¶</a></h2>
+<p>Supervised learning is essentially a “minimization problem”.  Suppose
+there is a collection of <span class="math notranslate nohighlight">\(n\)</span> images and each image can be
+represented by a word. Consider the following examples from the <code class="docutils literal notranslate"><span class="pre">COCO</span>
+<span class="pre">dataset</span></code>.</p>
+<div class="figure align-default" id="id1">
+<img alt="../_images/coco000000006040.jpg" src="../_images/coco000000006040.jpg" />
+<p class="caption"><span class="caption-number">Figure 56 </span><span class="caption-text">Tram</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id2">
+<img alt="../_images/coco000000007108.jpg" src="../_images/coco000000007108.jpg" />
+<p class="caption"><span class="caption-number">Figure 57 </span><span class="caption-text">Elephant</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id3">
+<img alt="../_images/coco000000042070.jpg" src="../_images/coco000000042070.jpg" />
+<p class="caption"><span class="caption-number">Figure 58 </span><span class="caption-text">Bus</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id4">
+<img alt="../_images/coco000000124975.jpg" src="../_images/coco000000124975.jpg" />
+<p class="caption"><span class="caption-number">Figure 59 </span><span class="caption-text">Zebra</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>The <span class="math notranslate nohighlight">\(n\)</span> images are the sequence of inputs <span class="math notranslate nohighlight">\({\bf x} = &lt;x_1, x_2,
+..., x_n&gt;\)</span>.  Each element <span class="math notranslate nohighlight">\(x_i\)</span> <span class="math notranslate nohighlight">\((1 \le i \le n)\)</span> can be
+a high-dimensional vector, such as an image. If an image has <span class="math notranslate nohighlight">\(w
+\times h\)</span> pixels, then <span class="math notranslate nohighlight">\(x_i\)</span> is a vector of <span class="math notranslate nohighlight">\(w \times h\)</span>
+dimensions, each pixel represents one dimension.  For <span class="math notranslate nohighlight">\(x_i\)</span>, there is
+a correct word <span class="math notranslate nohighlight">\(y_i\)</span> for describing the image.
+<span class="math notranslate nohighlight">\({\bf y} = &lt;y_1, y_2, ..., y_n&gt;\)</span> is the sequence of outputs.
+For the examples of images, <span class="math notranslate nohighlight">\({\bf x}\)</span> are the four images and
+<span class="math notranslate nohighlight">\({\bf y}\)</span> are <span class="math notranslate nohighlight">\(&lt;\text{Tram}, \text{Elephant}, \text{Bus}, \text{Zebra}&gt;\)</span>        Please notice that <span class="math notranslate nohighlight">\({\bf x}\)</span> and <span class="math notranslate nohighlight">\({\bf y}\)</span> are sequences because
+<span class="math notranslate nohighlight">\(y_i\)</span> is the correct output for <span class="math notranslate nohighlight">\(x_i\)</span>.  If <span class="math notranslate nohighlight">\({\bf x}\)</span> and <span class="math notranslate nohighlight">\({\bf y}\)</span>
+were sets (the order in a set does not matter), then we would have problems.</p>
+<p>Consider a machine model <span class="math notranslate nohighlight">\(f\)</span> that intends to learn the
+relationships between the inputs and outputs. Ideally, <span class="math notranslate nohighlight">\(f(x_i)\)</span>
+should be <span class="math notranslate nohighlight">\(y_i\)</span>, meaning that <span class="math notranslate nohighlight">\(f\)</span> maps each input
+<span class="math notranslate nohighlight">\(x_i\)</span> to the correct output <span class="math notranslate nohighlight">\(y_i\)</span>.  In reality, <span class="math notranslate nohighlight">\(f\)</span>
+may make mistakes. Because <span class="math notranslate nohighlight">\(f\)</span>’s output may be wrong, we define
+its actual output for <span class="math notranslate nohighlight">\(x_i\)</span> as <span class="math notranslate nohighlight">\(\tilde{y_i}\)</span>.  The mistake
+is defined as the difference between <span class="math notranslate nohighlight">\(\tilde{y_i}\)</span> (the actual
+output of <span class="math notranslate nohighlight">\(f\)</span>) and <span class="math notranslate nohighlight">\(y_i\)</span> (the desired output of
+<span class="math notranslate nohighlight">\(f\)</span>).  The differences between <span class="math notranslate nohighlight">\(y_i\)</span> and
+<span class="math notranslate nohighlight">\(\tilde{y_i}\)</span> are the mistakes.</p>
+<p>Usually, the quality of <span class="math notranslate nohighlight">\(f\)</span> is measured by how many and how much
+mistakes <span class="math notranslate nohighlight">\(f\)</span> makes.  One way to mesure is</p>
+<p><span class="math notranslate nohighlight">\(\underset{i}{\overset{n}{\sum}} |y_i - \tilde{y_i}|\)</span></p>
+<p>or</p>
+<p><span class="math notranslate nohighlight">\(\underset{i}{\overset{n}{\sum}} (y_i - \tilde{y_i})^2\)</span></p>
+<p>The goal is supervised learning is to find <span class="math notranslate nohighlight">\(f\)</span> so that the
+cumulative errors are as small as possible. Thus, this is a
+<em>minimization problem</em>.</p>
+</div>
+<div class="section" id="classification-and-regression-problems">
+<h2>Classification and Regression Problems<a class="headerlink" href="#classification-and-regression-problems" title="Permalink to this headline">¶</a></h2>
+<p>“Wait”, you will probably ask, these are <em>classification</em> questions:
+classifying the images into different categories: Tram, Elephant, Bus,
+and Zebra.  Does it make sense to write the distance between these
+categories?  The answer depends on how you define <span class="math notranslate nohighlight">\(y_i -
+\tilde{y_i}\)</span>.  It is possible to define it as <span class="math notranslate nohighlight">\(y_i -
+\tilde{y_i}\)</span> as 0 when they are the same and as 1 when they are
+different.  Using this definition, learning is still a minimization
+problem: The goal is to find <span class="math notranslate nohighlight">\(f\)</span> to minimize the number of pairs
+when <span class="math notranslate nohighlight">\(\tilde{y_i}\)</span> and <span class="math notranslate nohighlight">\(y_i\)</span> are different.</p>
+<p>Supervised learning can be generally divided into two types of
+problems:</p>
+<ul class="simple">
+<li><p>Classification Problems: The answers are “discrete”, such as nationalities, genders, brands of cars.  There is no “ordering” among these values and it makes no sense to “interpolate” between the values. It makes no sense to say <span class="math notranslate nohighlight">\(\frac{\text{USA} +\text{France}}{2}\)</span> (nobody can get a passport that is printed by USA and France). That’s why the labels are discrete.</p></li>
+<li><p>Regression Problems: The answers are numeric values, such as temperatures, speed of a car, the price of a house.</p></li>
+</ul>
+</div>
+<div class="section" id="quantify-errors-in-classification">
+<h2>Quantify Errors in Classification<a class="headerlink" href="#quantify-errors-in-classification" title="Permalink to this headline">¶</a></h2>
+<p>For
+classification problems, the answers are discrete and there is not
+definition of distance, other than whether <span class="math notranslate nohighlight">\(\tilde{y_i}\)</span> is the
+same as or different from <span class="math notranslate nohighlight">\(y_i\)</span>.  It does not make sense saying
+anything like <span class="math notranslate nohighlight">\(|\text{Tram} - \text{Elephant}| &lt; |\text{Bus} -
+\text{Zebra}|\)</span>.  For regression problems, the answers are numeric and
+distance can be defined.  If <span class="math notranslate nohighlight">\(y_i\)</span> is 1, then the answer 3 is
+worse than the answer 1.5.</p>
+<p>What are good ways to evaluate the quality of <span class="math notranslate nohighlight">\(f\)</span> for
+clssification problems?</p>
+<div class="section" id="precision-and-recall">
+<h3>Precision and Recall<a class="headerlink" href="#precision-and-recall" title="Permalink to this headline">¶</a></h3>
+<p>One common method is to calculate <em>precision</em>
+and <em>recall</em>.</p>
+<p>Consider the four images above (bus,  zebra,  tram,  elephant).</p>
+<p>Suppose <span class="math notranslate nohighlight">\(x\)</span> is an input image and a classification function <span class="math notranslate nohighlight">\(f\)</span> gives output
+<span class="math notranslate nohighlight">\(\tilde{y}\)</span> (i.e., <span class="math notranslate nohighlight">\(f(x) = \tilde{y}\)</span>). Consider the class “bus”, there are
+four possibilities:</p>
+<ul class="simple">
+<li><p>The image is a bus and <span class="math notranslate nohighlight">\(\tilde{y}\)</span> is “bus”. This is called <em>true positive</em> (TP).</p></li>
+<li><p>The image is not bus and <span class="math notranslate nohighlight">\(\tilde{y}\)</span> is “bus”. This is called <em>false positive</em> (FP).</p></li>
+<li><p>The image is a bus and <span class="math notranslate nohighlight">\(\tilde{y}\)</span> is not “bus”. This is called <em>false negative</em> (FN).</p></li>
+<li><p>The image is not bus and <span class="math notranslate nohighlight">\(\tilde{y}\)</span> is not “bus”. This is called <em>true negative</em> (TN).</p></li>
+</ul>
+<p>These four scenarios can be expressed by the table:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 15%" />
+<col style="width: 32%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="2"></th>
+<th class="head" colspan="2"><p><span class="math notranslate nohighlight">\(\tilde{y} = f(x)\)</span></p></th>
+</tr>
+<tr class="row-even"><th class="head" colspan="2"></th>
+<th class="head"><p>bus</p></th>
+<th class="head"><p>not bus</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td rowspan="2"><p><span class="math notranslate nohighlight">\(x\)</span></p></td>
+<td><p>bus</p></td>
+<td><p>true positive</p></td>
+<td><p>false negative</p></td>
+</tr>
+<tr class="row-even"><td><p>not bus</p></td>
+<td><p>false positive</p></td>
+<td><p>true negative</p></td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-default" id="id5">
+<img alt="../_images/positivenegative.png" src="../_images/positivenegative.png" />
+<p class="caption"><span class="caption-number">Figure 60 </span><span class="caption-text">Four possible outcomes of classification</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>In this figure, the left side (blue) means the object exists in the
+image. The right side means the object doest not exist in the image.</p>
+<p>A commonly used method to quantify a classification is called <em>presision</em>. It is defined as</p>
+<p><span class="math notranslate nohighlight">\(\frac{TP}{TP + FP}\)</span></p>
+<p>It means “among the reported positive cases, how many are actually
+positive?”</p>
+<p>Another commonly used method  is called <em>recall</em>. It is defined as</p>
+<p><span class="math notranslate nohighlight">\(\frac{TP}{TP + FN}\)</span></p>
+<p>It means “among all positive cases, how many are actually found?”</p>
+</div>
+<div class="section" id="f1-score">
+<h3>F1 Score<a class="headerlink" href="#f1-score" title="Permalink to this headline">¶</a></h3>
+<p>Precision or recall individually does not provide enough information to evaluate
+<span class="math notranslate nohighlight">\(f\)</span>. <em>F1 score</em> uses both precision and recall:</p>
+<p><span class="math notranslate nohighlight">\(2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}\)</span></p>
+</div>
+<div class="section" id="confusion-matrix">
+<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this headline">¶</a></h3>
+<p>Let’s add four more images:</p>
+<div class="figure align-default" id="id6">
+<img alt="../_images/coco000000001584.jpg" src="../_images/coco000000001584.jpg" />
+<p class="caption"><span class="caption-number">Figure 61 </span><span class="caption-text">Bus</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id7">
+<img alt="../_images/coco000000002006.jpg" src="../_images/coco000000002006.jpg" />
+<p class="caption"><span class="caption-number">Figure 62 </span><span class="caption-text">Bus</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id8">
+<img alt="../_images/coco000000005037.jpg" src="../_images/coco000000005037.jpg" />
+<p class="caption"><span class="caption-number">Figure 63 </span><span class="caption-text">Bus</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id9">
+<img alt="../_images/coco000000545129.jpg" src="../_images/coco000000545129.jpg" />
+<p class="caption"><span class="caption-number">Figure 64 </span><span class="caption-text">Zebra</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<p>Among the eight images, four are buses; two are zebra; one is a tram;
+the last is elephant.  The following table shows the situation if
+<span class="math notranslate nohighlight">\(f\)</span> is always correct.  The rows represent the inputs <span class="math notranslate nohighlight">\(x\)</span>.
+The columns represent the outputs <span class="math notranslate nohighlight">\(\tilde{y}\)</span>.  The table shows
+that there are four bus images (<span class="math notranslate nohighlight">\(x\)</span>) and all of them are
+classified as bus. No input bus image is classified as zebra, tram, or
+elephant.  Similiarly, the two zebra images are classified as zebra
+correctly.  The correct results should have non-zero values
+only along the diagonal.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 17%" />
+<col style="width: 23%" />
+<col style="width: 15%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" rowspan="2"><p>input</p></th>
+<th class="head" colspan="4"><p>Output</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>bus</p></th>
+<th class="head"><p>zebra</p></th>
+<th class="head"><p>tram</p></th>
+<th class="head"><p>elephant</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>bus</p></td>
+<td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>zebra</p></td>
+<td><p>0</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>tram</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>elephant</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p>Next, consider another function <span class="math notranslate nohighlight">\(f\)</span> that is not so good.
+The result is also expressed in a table:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 17%" />
+<col style="width: 23%" />
+<col style="width: 15%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" rowspan="2"><p>input</p></th>
+<th class="head" colspan="4"><p>Output</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>bus</p></th>
+<th class="head"><p>zebra</p></th>
+<th class="head"><p>tram</p></th>
+<th class="head"><p>elephant</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>bus</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>zebra</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>tram</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>elephant</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+<p>The four bus images are classified as 2 bus, 1 tram, and 1
+elephant. Please notice that the numbers in the row add to four.  The
+two zebra images are classified as 1 zebra and 1 tram.  The tram image
+is classified correctly. The elephant image is classified as tram.
+This is called a <em>confusion matrix</em>: it measures how many inputs are
+incorrectlly classified.</p>
+<p>The difference of these two matrices (the sum of absolute values or
+sum of squres) can measure how good <span class="math notranslate nohighlight">\(f\)</span> is.</p>
+</div>
+</div>
+<div class="section" id="regression-problems">
+<h2>Regression Problems<a class="headerlink" href="#regression-problems" title="Permalink to this headline">¶</a></h2>
+<p>Regression problems the values are continuous. Consider the following example.
+We have some values of <span class="math notranslate nohighlight">\((x,y)\)</span>.  What we want to do is to find the best
+estimate of <span class="math notranslate nohighlight">\(y\)</span> given a value of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>x</p></th>
+<th class="head"><p>y</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>-5.15729202513464</p></td>
+<td><p>-18.340290586929</p></td>
+</tr>
+<tr class="row-odd"><td><p>5.67238162670287</p></td>
+<td><p>6.22643565856931</p></td>
+</tr>
+<tr class="row-even"><td><p>6.40374670885682</p></td>
+<td><p>21.7357321986057</p></td>
+</tr>
+<tr class="row-odd"><td><p>5.65689483769905</p></td>
+<td><p>5.13168505805081</p></td>
+</tr>
+<tr class="row-even"><td><p>-7.47512108623663</p></td>
+<td><p>-20.8106624661057</p></td>
+</tr>
+<tr class="row-odd"><td><p>-0.711593755459095</p></td>
+<td><p>-2.54910987787733</p></td>
+</tr>
+<tr class="row-even"><td><p>-6.95917493967064</p></td>
+<td><p>-28.2506351240132</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.594903088106715</p></td>
+<td><p>1.93288808859777</p></td>
+</tr>
+<tr class="row-even"><td><p>-2.13227865685453</p></td>
+<td><p>-11.5116804440814</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.092071535500583</p></td>
+<td><p>2.97502762479007</p></td>
+</tr>
+<tr class="row-even"><td><p>1.41908176266247</p></td>
+<td><p>-1.61369639836753</p></td>
+</tr>
+<tr class="row-odd"><td><p>5.93255235081788</p></td>
+<td><p>12.6030743771715</p></td>
+</tr>
+<tr class="row-even"><td><p>3.0231412917473</p></td>
+<td><p>2.54359754526641</p></td>
+</tr>
+<tr class="row-odd"><td><p>-0.817471009793984</p></td>
+<td><p>-15.0948200499757</p></td>
+</tr>
+<tr class="row-even"><td><p>-6.83628619785253</p></td>
+<td><p>-19.3228061431844</p></td>
+</tr>
+<tr class="row-odd"><td><p>4.26187912325374</p></td>
+<td><p>13.3248920273636</p></td>
+</tr>
+<tr class="row-even"><td><p>5.645502603752</p></td>
+<td><p>5.38510507733904</p></td>
+</tr>
+<tr class="row-odd"><td><p>5.41713539454346</p></td>
+<td><p>10.7935811954502</p></td>
+</tr>
+<tr class="row-even"><td><p>0.546454811623898</p></td>
+<td><p>-6.86445487862335</p></td>
+</tr>
+<tr class="row-odd"><td><p>-7.61321344126601</p></td>
+<td><p>-24.6346836202365</p></td>
+</tr>
+<tr class="row-even"><td><p>9.06168077872272</p></td>
+<td><p>29.0798518348037</p></td>
+</tr>
+<tr class="row-odd"><td><p>-9.03699956534284</p></td>
+<td><p>-28.5123544071629</p></td>
+</tr>
+<tr class="row-even"><td><p>-6.54329007709694</p></td>
+<td><p>-28.8177837612506</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.852020463402736</p></td>
+<td><p>4.67263051840162</p></td>
+</tr>
+<tr class="row-even"><td><p>-3.7286914781359</p></td>
+<td><p>-9.12184292513442</p></td>
+</tr>
+<tr class="row-odd"><td><p>-5.15737565352333</p></td>
+<td><p>-17.2276338083982</p></td>
+</tr>
+<tr class="row-even"><td><p>-1.3996170643474</p></td>
+<td><p>-8.99958774263143</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.38724883946816</p></td>
+<td><p>-2.31967888256527</p></td>
+</tr>
+<tr class="row-even"><td><p>-8.0563844593181</p></td>
+<td><p>-29.4361617277288</p></td>
+</tr>
+<tr class="row-odd"><td><p>-4.10526781323183</p></td>
+<td><p>-14.0127370704183</p></td>
+</tr>
+<tr class="row-even"><td><p>-2.67167911783576</p></td>
+<td><p>-5.6033246889177</p></td>
+</tr>
+<tr class="row-odd"><td><p>-3.56273630648561</p></td>
+<td><p>-11.8145232865756</p></td>
+</tr>
+</tbody>
+</table>
+<p>The pairs are plotted below:</p>
+<div class="figure align-default">
+<img alt="../_images/xy11.png" src="../_images/xy11.png" />
+</div>
+<p>Next chapter (Gradient Descent) will explain how to find a line
+that has the least sum of error square.</p>
+</div>
+<div class="section" id="overfitting">
+<h2>Overfitting<a class="headerlink" href="#overfitting" title="Permalink to this headline">¶</a></h2>
+<p>Have you ever had the following experience: You studied extremely hard
+for an exam and could answer every practice question
+perfectly. However, you performed in the actual exam. How can this be
+possible?  This is called the <em>overfitting</em> problem in machine
+learning (seems to be applicable to human learning also).</p>
+<p>Consider the following figure (this figure has fewer data point.).</p>
+<div class="figure align-default">
+<img alt="../_images/xy21.png" src="../_images/xy21.png" />
+</div>
+<p>This is the data:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>x</p></th>
+<th class="head"><p>y</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>13.25288</p></td>
+<td><p>40.89277</p></td>
+</tr>
+<tr class="row-odd"><td><p>-14.8602</p></td>
+<td><p>-45.3906</p></td>
+</tr>
+<tr class="row-even"><td><p>-5.68594</p></td>
+<td><p>-22.806</p></td>
+</tr>
+<tr class="row-odd"><td><p>18.02815</p></td>
+<td><p>50.83212</p></td>
+</tr>
+<tr class="row-even"><td><p>-10.9294</p></td>
+<td><p>-30.8796</p></td>
+</tr>
+<tr class="row-odd"><td><p>-19.5857</p></td>
+<td><p>-60.713</p></td>
+</tr>
+<tr class="row-even"><td><p>-6.93697</p></td>
+<td><p>-32.6769</p></td>
+</tr>
+<tr class="row-odd"><td><p>-1.07072</p></td>
+<td><p>-3.18677</p></td>
+</tr>
+<tr class="row-even"><td><p>7.796119</p></td>
+<td><p>16.73295</p></td>
+</tr>
+<tr class="row-odd"><td><p>-11.9286</p></td>
+<td><p>-43.9226</p></td>
+</tr>
+<tr class="row-even"><td><p>13.36518</p></td>
+<td><p>28.79474</p></td>
+</tr>
+</tbody>
+</table>
+<p>If this trend is consistent, by interpolation, when <span class="math notranslate nohighlight">\(x\)</span> is 6,
+the value of <span class="math notranslate nohighlight">\(y\)</span> is around 13.  By observation, a straight line
+seems to be a pretty good way to express the relations between the
+values of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, as shown below.</p>
+<div class="figure align-default">
+<img alt="../_images/xy3.png" src="../_images/xy3.png" />
+</div>
+<p>The straight line, however, is not a “perfect” solution: it does not
+pass most points.  Would it be better if we can find a polynomial that
+passes every data point?  Given a list of <span class="math notranslate nohighlight">\(n\)</span> pairs of
+<span class="math notranslate nohighlight">\((x, y)\)</span>, it is always possible finding a polynomial of degree
+<span class="math notranslate nohighlight">\(n-1\)</span> passing every pair of point, as long as the <span class="math notranslate nohighlight">\(x\)</span>
+values are distinct.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">polyfit</span></code> function in MATLAB, it is possible to find a
+polynomial of the 10th degree passing all elevent points. The
+coefficients are</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Degree</p></th>
+<th class="head"><p>Coefficient</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x^{10}\)</span></p></td>
+<td><p>-0.000000005588280</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(x^{9}\)</span></p></td>
+<td><p>-0.000000016933579</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x^{8}\)</span></p></td>
+<td><p>0.000004911667751</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(x^{7}\)</span></p></td>
+<td><p>0.000019301830733</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x^{6}\)</span></p></td>
+<td><p>-0.001461105562290</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(x^{5}\)</span></p></td>
+<td><p>-0.007306583900806</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x^{4}\)</span></p></td>
+<td><p>0.166442447665419</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(x^{3}\)</span></p></td>
+<td><p>0.999911252411206</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x^{2}\)</span></p></td>
+<td><p>-5.336314308798566</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(x^{1}\)</span></p></td>
+<td><p>-34.670075611821026</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x^{0}\)</span></p></td>
+<td><p>-33.190351515165069</p></td>
+</tr>
+</tbody>
+</table>
+<p>The following shows the polynomial when <span class="math notranslate nohighlight">\(x\)</span> is between -20 and 20.</p>
+<div class="figure align-default">
+<img alt="../_images/xy5.png" src="../_images/xy5.png" />
+</div>
+<p>Zoom in the vertical axix, we can very clearly that this polynomail passes every data point</p>
+<div class="figure align-default">
+<img alt="../_images/xy4.png" src="../_images/xy4.png" />
+</div>
+<p>Is this polynomial a good representation of the data? Based on this
+polynomial, when <span class="math notranslate nohighlight">\(x\)</span> is -18, the <span class="math notranslate nohighlight">\(y\)</span> value is 329.303.
+When <span class="math notranslate nohighlight">\(x\)</span> is 6, the <span class="math notranslate nohighlight">\(y\)</span> value is -113.469.  Are these
+expected?  From the original data, we would expect that when <span class="math notranslate nohighlight">\(x\)</span>
+is -18, <span class="math notranslate nohighlight">\(y\)</span>’s value is around -50.  The problem is
+<em>overfitting</em>: the polynomial intends to match the data, including the
+noise. A better solution is to use a lower-degree (such as linear) and
+allow some errors.  Allowing some errors can be better generalizing
+the seen data to unseen data (such as when <span class="math notranslate nohighlight">\(x\)</span> is -18 or 6).</p>
+<p>How can this concept be applicable to human learning? Some people
+study “too much” and memorize the details, instead of fully
+understanding the concepts.  These people try to match problems with
+what they have already seen and answer based on these seen problems.
+If the new problems are different, these people may be unable to solve
+the new problems.  They can solve the seen problems perfectly (like
+the 10-th degree polynomial) but these people cannot handle new
+problems.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="chapter_gradient.html" class="btn btn-neutral float-right" title="Gradient Descent" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../unsupervised/chapter_floating_point.html" class="btn btn-neutral float-left" title="Floating Point and Finite Precision" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yung-Hsiang Lu and George K. Thiruvathukal
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

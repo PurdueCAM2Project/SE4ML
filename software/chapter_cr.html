@@ -1,0 +1,800 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Code Review &mdash; Software Engineering for Machine Learning  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Testing" href="chapter_test.html" />
+    <link rel="prev" title="Version Control" href="chapter_vc.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Software Engineering for Machine Learning
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../frontmatter/preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_python.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_vc.html">Version Control</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Code Review</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modern-code-review">Modern Code Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-start-a-code-review">How To Start A Code Review</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general-steps-to-start-a-code-review">General Steps To Start A Code Review</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#making-nano-commits">Making Nano-Commits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ensuring-your-code-is-complete">Ensuring Your Code Is Complete</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#what-to-review">What to Review</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#code-formatting-and-styling">Code Formatting and Styling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#comment-formatting-and-styling">Comment Formatting and Styling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code-logic">Code Logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#best-practice">Best Practice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-cases">Test Cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#things-to-take-into-consideration">Things to Take into Consideration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_test.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_ws.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_ci.html">Continuous Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_graphics.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_reproducibility.html">Reproducibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_ml.html">Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_kmeans.html">K-Means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_hierarchical.html">Hierarchical Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_pca.html">Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_practical.html">Practical Considerations of Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsupervised/chapter_floating_point.html">Floating Point and Finite Precision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supervised/chapter_supervised.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supervised/chapter_gradient.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supervised/chapter_svm.html">Support Vector Machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supervised/chapter_neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/chapter_building_the_book.html">Building the Book using Sphinx, GitHub Pages, and Travis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/chapter_sphinx_demo.html">Sphinx Demonstration</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Software Engineering for Machine Learning</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Code Review</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/software/chapter_cr.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="code-review">
+<h1>Code Review<a class="headerlink" href="#code-review" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This chapter is in draft status.</p>
+</div>
+<p>Code review is a software quality assurance activity during
+which a program is evaluate against a standardized list of
+expectations. During the evaluation, the program is carefully
+inspected for bugs that the original developer overlooked.
+Without standards to uphold, code reviewers will miss defects
+due to improper code review techniques.</p>
+<p>This chapter begins with a thorough description of code review
+and its benefits; then, it discusses how to initiate a code
+review followed by an extensive walk-through on how to perform a
+code review from start to finish.</p>
+<div class="section" id="modern-code-review">
+<h2>Modern Code Review<a class="headerlink" href="#modern-code-review" title="Permalink to this headline">¶</a></h2>
+<p>In the past, the author of a code change would sit down
+with reviewers to go through the code and find defects. However,
+it was found that code reviews with meetings consumed significantly
+more time and money than code reviews without meetings without
+providing a significant increase in defect detection
+<a class="reference internal" href="#johnson-tjahjono" id="id1"><span>[Johnson-Tjahjono]</span></a>. As a solution, code reviewers began to employ
+tools to make the process asynchronous, which means the reviewer
+can inspect code at any time. Through the use of source control
+tools, code writers began to make small, relevant changes
+rather than large, intricate changes. This approach came to
+be known as <em>modern code review</em>.</p>
+<p>Both open-source and industry software projects utilize modern code
+review <a class="reference internal" href="#sadowski-soderberg-bacchelli" id="id2"><span>[Sadowski-Soderberg-Bacchelli]</span></a>—and for good reasons: the
+reported benefits from reviewing code are abundant. While code reviews
+require a large time investment, an impressive return on investment has
+been shown. For instance, at Hewlett-Packard, code review was found to
+reduce the time for an application to get to market by 1.8 months
+<a class="reference internal" href="#grady-van-slack" id="id3"><span>[Grady-Van-Slack]</span></a>. It was further shown that code review has many positive
+side effects. Researchers at Microsoft have found that code review
+acts as a transfer of knowledge between the code reviewer and reviewee,
+increases team participation, and helps provide a productive way of
+finding alternative solutions to problems <a class="reference internal" href="#bacchelli-bird" id="id4"><span>[Bacchelli-Bird]</span></a>. The magnitude
+of these benefits greatly depends on the skill-level of the code reviewers
+involved. Therefore, it is critical to choose highly experienced reviewers
+when submitting code for inspection.</p>
+<p>Locating overlooked defects is the main motive for reviewing code submitted
+for inspection. These defects are generally split into two categories:
+<em>functionality</em> and <em>evolvability defects</em>. When discussing <em>functionality
+defects</em> during an inspection, the code reviewer is typically indicating
+that a code of code has logical issues. On the other hand, <em>evolvability
+defects</em> describe issues with the organization of code or the contents of
+documentation <a class="reference internal" href="#mantyla-lassenius" id="id5"><span>[Mantyla-Lassenius]</span></a>. Of the two kinds of defects, evolvability
+defects are the most damaging to a project over the course of the development
+life cycle. This is due to the large time investment required in order to
+rewrite a piece of software that has matured around evolvability defects.
+Unfortunately, they also happen to be the most common; therefore, most of
+efforts of code review are spent locating these kinds of bugs.</p>
+</div>
+<div class="section" id="how-to-start-a-code-review">
+<h2>How To Start A Code Review<a class="headerlink" href="#how-to-start-a-code-review" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="general-steps-to-start-a-code-review">
+<h3>General Steps To Start A Code Review<a class="headerlink" href="#general-steps-to-start-a-code-review" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Make sure your local commits have been pushed to your working branch/fork.
+You can accomplish this by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git push origin HEAD
+</pre></div>
+</div>
+</li>
+<li><p>Using a project’s respective version control
+service (e.g. GitHub, BitBucket), create a
+pull request to merge your commits into the parent
+version. Provide a title for what the feature adds
+and a longer description with a change
+log. <a class="reference internal" href="#pullrequest"><span class="std std-numref">Figure 30</span></a> and <a class="reference internal" href="#pullrequestform"><span class="std std-numref">Figure 31</span></a>
+demonstrate an example pull request in GitHub.</p>
+<div class="figure align-default" id="id10">
+<span id="pullrequest"></span><img alt="../_images/pullrequest.png" src="../_images/pullrequest.png" />
+<p class="caption"><span class="caption-number">Figure 30 </span><span class="caption-text">Press “Compare &amp; Pull Request” to review your changes
+and submit a pull request.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id11">
+<span id="pullrequestform"></span><img alt="../_images/pullrequestform.png" src="../_images/pullrequestform.png" />
+<p class="caption"><span class="caption-number">Figure 31 </span><span class="caption-text">Pull requests should have a title summarizing the
+new feature and a comment giving a more descriptive
+explanation of the changes the pull request will make.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>Request for another developer of the project to review
+your changes. Ideally, they should be an expert of the
+methods used to create the changes.</p></li>
+<li><p>Wait for (or bug) the assigned code reviewer to look over
+your changes. They may ask for you to clarify your methods
+or ask for you to make additional changes, so make sure you
+regularly check the pull request until it is rejected or
+accepted.</p></li>
+</ol>
+</div>
+<div class="section" id="making-nano-commits">
+<h3>Making Nano-Commits<a class="headerlink" href="#making-nano-commits" title="Permalink to this headline">¶</a></h3>
+<p><em>Nano-committing</em> is the act of submitting code for review in small,
+homogenous portions. In other words, the code is meant to complete
+a sub-task of the overarching feature being implemented. During the
+development process, making nano-commits can you help keep track of
+the work-flow. For instance, if a bug is found, then you can sift
+through the small changes until the bug either disappears or changes.
+This will help you make the necessary changes at the root, keeping
+the fix clean.</p>
+<p>Some tasks you may consider keeping as separate commits are:</p>
+<ul class="simple">
+<li><p>Refracting code before making changes to its logic;</p></li>
+<li><p>Adding or modifying documentation;</p></li>
+<li><p>Fixing a bug or creating a small feature;</p></li>
+<li><p>Or changing configuration settings.</p></li>
+</ul>
+<p>Keep in mind that you, as the developer, are responsible for
+making code as smooth to review as possible. Nano-commits can
+aid the code reviewer to follow your work-flow easily. Furthermore,
+while smaller commit sizes greatly reduce the likelihood of
+creating bugs <a class="reference internal" href="#purushothaman-perry" id="id6"><span>[Purushothaman-Perry]</span></a>, they still pose a risk
+and should be reviewed for correctness.</p>
+</div>
+<div class="section" id="ensuring-your-code-is-complete">
+<h3>Ensuring Your Code Is Complete<a class="headerlink" href="#ensuring-your-code-is-complete" title="Permalink to this headline">¶</a></h3>
+<p>Before committing your code, it is wise to do a <em>personal code review</em>
+to locate as many issues as you can before passing it along to another
+person. In doing so, you will avoid potentially wasting time on several
+more iterations of code review than necessary <a class="reference internal" href="#humphrey" id="id7"><span>[Humphrey]</span></a>. While you
+perform the personal code review, you should keep a checklist of
+common mistakes to look for. By utilizing a checklist, you will
+ensure both efficiency and consistency from your personal code reviews.</p>
+<p>Furthermore, it is important to be courteous of your code reviewer’s
+time.  Your code should be ready for customers and void of any obvious
+bugs. Ideally, the code reviewer should only have to make comments
+regarding the implementation and not about major issues that need fixed.
+A study from Microsoft found that only around 15% of comments
+during code review address bugs <a class="reference internal" href="#czerwonka-greiler-tilford" id="id8"><span>[Czerwonka-Greiler-Tilford]</span></a>, which
+indicates a greater emphasis on other areas, such as code styling or
+long-term maintainability. It is also important to keep the responsibilities
+of the code review in mind: it is not their job to fix your bugs; their
+purpose is to notice and bring small, easy-to-miss issues to your attention
+for you to go back and fix. If you submit incomplete code with known
+issues, then you waste both your and your code reviewer’s time. In
+order to collaborate as a team and achieve results, it is important to
+remain considerate of your collaborators efforts <a class="reference internal" href="#dreu-weingart" id="id9"><span>[Dreu-Weingart]</span></a>.</p>
+<p>A change that causes external features to fail is a less obvious
+sign of incomplete code. With an extensive system of unit tests,
+these issues are more obvious by validating that a change does not
+damage older features. With this in mind, it is vital to implement
+unit tests alongside new features. Implementation of unit tests
+guarantees protection from hidden bugs. In a similar vein, failure
+to compile is another sign of a project containing incomplete code.
+The error output of the compiler will normally indicate where the
+issue is located, so it is vital to read and understand what it says.
+It is crucial to verify that none of the unit tests fail and the
+build successfully compiles <em>before</em> submitting the change for
+a code review.</p>
+</div>
+</div>
+<div class="section" id="what-to-review">
+<h2>What to Review<a class="headerlink" href="#what-to-review" title="Permalink to this headline">¶</a></h2>
+<p>For experts, knowing what to review is almost second nature. However, for
+those just learning how to review code, it is crucial to have a checklist
+of standards. While reviewing code, you should refer to the checklist and
+ensure that every criteria has been met. In doing so, you will avoid missing
+vital steps that may catch many defects.</p>
+<p>It is important to note that extreme caution must be used while relying
+entirely on the checklist during code reviews. Unfortunately, here are too
+many possible kinds of defects, making it impossible to cover all
+of them within a checklist; therefore, as a reviewer, you must develop an ability
+to detect unique defects on the fly.</p>
+<p>Nevertheless, a checklist is helpful for learning, so please use the following
+sections as guidance while reviewing code.</p>
+<div class="section" id="code-formatting-and-styling">
+<h3>Code Formatting and Styling<a class="headerlink" href="#code-formatting-and-styling" title="Permalink to this headline">¶</a></h3>
+<p>As a reviewer, it is vital to ensure the submitted code meets the project’s
+code formatting standards. It can take a long time to manually check every
+standard, so utilizing automatic formatting tools helps boost
+the efficiency of a code review. Oftentimes, these tools come equipped with
+the ability to verify that the input files pass all the standards. For instance,
+if your codebase is written in Python and you are looking to follow the <em>pep8</em>
+standards, then you can do the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install --user autopep8
+$ find . -iname *.py -exec autopep8 --verbose --aggressive --aggressive -diff {}
+</pre></div>
+</div>
+<p>The above commands first install <em>autopep8</em> to the your user Python
+install directory. This will allow you to use the auto formatter on any Python
+project you write or review. Then, the command is recursively executed on every
+Python file within the current directory and all of its subdirectories. The use
+of the <code class="code docutils literal notranslate"><span class="pre">--diff</span></code> flag only prints the fixed violations to the console, leaving
+the files unchanged. If you want to change the contents of the file, use <code class="code docutils literal notranslate"><span class="pre">--in-line</span></code>
+instead of <code class="code docutils literal notranslate"><span class="pre">--diff</span></code>. See <a class="reference internal" href="#autoformatter"><span class="std std-numref">Figure 32</span></a> for a before and after comparison
+of one file that has been changed with <em>autopep8</em>.</p>
+<div class="figure align-default" id="id12">
+<span id="autoformatter"></span><img alt="../_images/autoformatter.png" src="../_images/autoformatter.png" />
+<p class="caption"><span class="caption-number">Figure 32 </span><span class="caption-text">Before (left) and after (right) using the <em>autopep8</em> auto-formatter. Notice
+how the code is much easier to read after it has been formatted properly.
+For code to be readable, it is vital for it to be properly formatted. Example
+code is from <a class="reference external" href="https://pypi.org/project/autopep8/">https://pypi.org/project/autopep8/</a>.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+<p>While tools that automate the process are extremely helpful, they do not
+catch every formatting issue. After applying the auto-formatter, you must
+double-check each file under review ensure the auto-formatter did not miss
+any important standards and did not raise a false-positive. In the case of
+the latter issue, auto-formatter tools often come equipped with the ability
+to suppress the false-positive. Refer to the documentation of the auto-
+formatter you are using for how to do this.</p>
+<p>There are also some standards that automated tools cannot detect. These tend
+to rely on human choice, such as proper method and variable names. For
+instance, take the following example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># badnaming.py</span>
+
+<span class="k">def</span> <span class="nf">printadd</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="n">x1</span><span class="o">/</span><span class="n">x2</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+   <span class="n">printadd</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You should notice two things that are wrong with this code. First, the method’s
+name misleads the user from its actual function. A good method name should
+describe exactly what its action is. Second, the names of the function’s
+parameters are vague. While they are not incorrect, for the sake of readability,
+it is advised to give a clear meaning behind their values. As a code reviewer,
+you will want to point out that the name choices used here are unclear, and
+advise the code reviewee to change the names. When they resubmit the code for
+review, you should see similar code to below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># goodnaming.py</span>
+
+<span class="k">def</span> <span class="nf">printdivide</span><span class="p">(</span><span class="n">dividend</span><span class="p">,</span> <span class="n">divisor</span><span class="p">):</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">dividend</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">divisor</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="n">dividend</span><span class="o">/</span><span class="n">divisor</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+   <span class="n">printdivide</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Another common mistake to keep an eye out for are <em>magic numbers</em>, or constants
+that are hard-coded into an algorithm. The following code demonstrates an important
+instance where this error occurs.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># magicnumbers.py</span>
+
+<span class="k">class</span> <span class="nc">MyMonth</span><span class="p">:</span>
+
+   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="n">month</span>
+
+   <span class="k">def</span> <span class="nf">printmonth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;January&quot;</span><span class="p">)</span>
+      <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;February&quot;</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+      <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
+         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;December&quot;</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not a real month&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+   <span class="n">month</span> <span class="o">=</span> <span class="n">MyMonth</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+   <span class="n">month</span><span class="o">.</span><span class="n">printmonth</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Magic numbers should be replaced by either stand alone constants or an enumeration of
+constant values. In this instance, it is more appropriate to use enumeration
+to declare the months as constants. Even though the order of months is common knowledge,
+it helps preserve the readability of code to declare the numerical values
+of the months as an appropriately labeled constant. In python, to obtain the
+library for enumeration, you must do</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install enum34
+</pre></div>
+</div>
+<p>The code that follows should give a clear example on how to achieve the desired
+result.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># enumeration.py</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="n">Month</span> <span class="o">=</span> <span class="n">Enum</span><span class="p">(</span><span class="s1">&#39;Month&#39;</span><span class="p">,</span> <span class="s1">&#39;January February ... December&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MyMonth</span><span class="p">:</span>
+
+   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="n">month</span>
+
+   <span class="k">def</span> <span class="nf">printmonth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="n">Month</span><span class="o">.</span><span class="n">January</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;January&quot;</span><span class="p">)</span>
+      <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="n">Month</span><span class="o">.</span><span class="n">February</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;February&quot;</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+      <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="n">Month</span><span class="o">.</span><span class="n">December</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;December&quot;</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not a real month&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+   <span class="n">month</span> <span class="o">=</span> <span class="n">MyMonth</span><span class="p">(</span><span class="n">Month</span><span class="o">.</span><span class="n">March</span><span class="p">)</span>
+   <span class="n">month</span><span class="o">.</span><span class="n">printmonth</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>So far, we have used the <code class="code docutils literal notranslate"><span class="pre">print</span></code> method in the examples in this
+chapter; however, it is often undesirable to use <code class="code docutils literal notranslate"><span class="pre">print</span></code> in production
+code. The more appropriate choice is to utilize a logging library. For instance,
+the previous example could be written like so with the python <code class="code docutils literal notranslate"><span class="pre">logging</span></code> library:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># log.py</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="n">Month</span> <span class="o">=</span> <span class="n">Enum</span><span class="p">(</span><span class="s1">&#39;Month&#39;</span><span class="p">,</span> <span class="s1">&#39;January February ... December&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MyMonth</span><span class="p">:</span>
+
+   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="n">month</span>
+
+   <span class="k">def</span> <span class="nf">printmonth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="n">Month</span><span class="o">.</span><span class="n">January</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;January&quot;</span><span class="p">)</span>
+      <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="n">Month</span><span class="o">.</span><span class="n">February</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;February&quot;</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+      <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="n">Month</span><span class="o">.</span><span class="n">December</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;December&quot;</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Not a real month&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+   <span class="n">month</span> <span class="o">=</span> <span class="n">MyMonth</span><span class="p">(</span><span class="n">Month</span><span class="o">.</span><span class="n">March</span><span class="p">)</span>
+   <span class="n">month</span><span class="o">.</span><span class="n">printmonth</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>By default, the <code class="code docutils literal notranslate"><span class="pre">logging</span></code> library only logs messages with severity
+level of <code class="code docutils literal notranslate"><span class="pre">WARNING</span></code> and above, so <code class="code docutils literal notranslate"><span class="pre">DEBUG</span></code> and <code class="code docutils literal notranslate"><span class="pre">INFO</span></code> are
+not included unless the basic configuration is changed. This is makes
+it easy to differentiate between information you do and do not want written
+to log files in the production build of an application. At the minimum, debugging
+information should <em>not</em> be written to log files in the production code.</p>
+<p>When reviewing code formatting, it is important to know your team’s standards.
+Without this knowledge, it is nearly impossible to locate the defects in
+the submitted source code. Using tools for automatic formatting is crucial for
+boosting code review efficiency, but they will not catch errors related to naming
+conventions and code organization.</p>
+</div>
+<div class="section" id="comment-formatting-and-styling">
+<h3>Comment Formatting and Styling<a class="headerlink" href="#comment-formatting-and-styling" title="Permalink to this headline">¶</a></h3>
+<p>For someone well-versed in programming language syntax, reading code should be as
+easy as reading a book. However, when details are obfuscated due to multiple levels
+of abstraction, even experts can find it difficult to discern the purpose of
+a block of code, especially if the original developer is no longer in contact
+with the project. But what if there were a trail of clues that helped you traverse
+the maze of logic?</p>
+<p>Comments play an integral part in the documentation of modern frameworks. As such,
+they should be treated carefully during the code review process. One bad comment
+can cause a world of problems months or years down the line. As the code reviewer, it
+is your job to ensure blatant documentation defects are caught early and before they
+cause any major issues.</p>
+<p>The first comments to check for are the documentation of all methods, classes, and modules,
+ensuring they properly explain the input parameter(s), return value(s), and what happens in between.
+In Python, documentation strings (docstrings) link documentation frameworks with methods, classes,
+and modules. There are several ways to format docstrings depending on the kind of automatic
+documentation framework being used. Regardless of the tool used, ensure that the comments conform
+to the required format required by the automatic documentation framework. One popular format is
+reStructuredText (reST), which uses Sphinx to generate the documentation. This is the same tool
+used to generate this book. The following example demonstrates how reST can be utilized.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># docstrings.py</span>
+
+<span class="k">class</span> <span class="nc">ExampleClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   This is a description of what ExampleClass does.</span>
+<span class="sd">   The purpose of this class is to demonstrate the</span>
+<span class="sd">   power of docstrings.</span>
+
+<span class="sd">   :param var: This is a variable argument</span>
+<span class="sd">   :type var: int</span>
+<span class="sd">   :param `*args`: The variable args</span>
+<span class="sd">   :param `**kwargs`: The keyowrd args</span>
+<span class="sd">   :ivar var1: This is where var1 is stored</span>
+<span class="sd">   :vartype var1: int</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+
+   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var1</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">var1</span> <span class="o">=</span> <span class="n">var1</span>
+
+   <span class="k">def</span> <span class="nf">ExampleMethod</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">,</span> <span class="n">var3</span><span class="p">):</span>
+      <span class="sd">&quot;&quot;&quot;This first method is part of the ExampleClass.</span>
+
+<span class="sd">      :param var1: This is the first variable for this method.</span>
+<span class="sd">      :type var1: int</span>
+<span class="sd">      :param var2: This is the second variable for this method.</span>
+<span class="sd">      :type var2: int</span>
+<span class="sd">      :param var3: This is the third variable for this method.</span>
+<span class="sd">      :type var3: int[]</span>
+<span class="sd">      :return: This is the return value for this method.</span>
+<span class="sd">      :rtype: str</span>
+<span class="sd">      &quot;&quot;&quot;</span>
+
+      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of arg1 is&quot;</span><span class="p">,</span> <span class="n">arg1</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of arg2 is&quot;</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The list of arg3 contains&quot;</span><span class="p">,</span> <span class="n">arg3</span><span class="p">)</span>
+
+      <span class="n">strVar</span> <span class="o">=</span> <span class="s2">&quot;Hello World&quot;</span>
+
+      <span class="k">return</span> <span class="n">strVar</span>
+</pre></div>
+</div>
+<p>While documenting method bodies, it is import to ensure it is completely accurate and comprehensive.
+This is where the interesting logic occurs, which can often be complicated and difficult to read.
+Therefore, providing step-by-step comments alongside the code can help an unfamiliar reader
+understand the program more easily. As a code reviewer, make sure you are able to completely understand
+the logic and provide suggestions on what to clarify when you fail to understand a part of the code.
+During this process, it is crucial to put yourself in the shoes of someone who has never seen
+the code before. The reason being is that newly hired developers will not have nearly the same level
+of experience a veteran reviewer (such as yourself), so it is important to keep thieir perspective
+in mind.</p>
+<p>At the bare minimum, a block of code should have docstrings (or a comparable equivalent depending
+on the langauge) and inline comments. When these are missing you must request changes from the
+author of the code. Below you will find an example of what a well-documented body of code looks like.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># goodcomments.py</span>
+
+<span class="k">def</span> <span class="nf">bubbleSort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;Sorts an array in ascending order.</span>
+
+<span class="sd">   :param arr: The array to be sorted.</span>
+<span class="sd">   :type arr: int[]</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+   <span class="c1"># Iterate through all elements n and its pairs</span>
+   <span class="c1"># in positions greater than it</span>
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+         <span class="c1"># Swap elements when the left element</span>
+         <span class="c1"># is larger than the right element</span>
+         <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The code above has comments that even a beginner programmer could understand. All
+of the important steps in the algorithm are described and the overarching goal
+of the algorithm is made clear. While this is the desired goal of comments, it will
+not always be the case that new programmers can understand it. Sometimes, there are
+programming concepts and strategies that only understood due to experience. In these
+cases, do your best to make the code as easy to understand as possible.</p>
+<p>Ultimately, the goal of every comment is to describe the code’s meaning
+in a clear and concise manner. Therefore, redundant comments must be avoided as
+well, as they may make the code unclear or confusing. Furthermore, commented out code
+should also be removed, especially when the code is for debugging purposes. When
+reviewing code, keep an eye out for ineffective comments. The block of code below
+shows an example of such comments.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># badcomments.py</span>
+
+<span class="k">def</span> <span class="nf">findMaxVal</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;Find the maximum value in an array.</span>
+
+<span class="sd">   :param arr: The array to be searched.</span>
+<span class="sd">   :type arr: int[]</span>
+<span class="sd">   :return: The maximum value.</span>
+<span class="sd">   :rtype: int</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="c1"># Initialize the max value to the first value of the array.</span>
+   <span class="nb">max</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+   <span class="c1"># Iterate through the array, skipping the first value</span>
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+      <span class="c1"># If the current value is greater than the max value</span>
+      <span class="k">if</span> <span class="nb">max</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">:</span>
+         <span class="c1"># print(&quot;New max found at&quot;, i, &quot;with value of&quot;, arr[i], &quot;.&quot;)</span>
+         <span class="nb">max</span> <span class="o">=</span> <span class="n">i</span> <span class="c1"># Make the current value the max value</span>
+   <span class="k">return</span> <span class="nb">max</span>
+</pre></div>
+</div>
+<p>It is also highly advised to clearly indicate, describe, and justify edge cases
+within a nearby comment. For similar reasons as before, this will help
+someone understand the rationale behind the sudden break in logic due to some
+condition handling the edge case. Take the following example for instance.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># edgecase.py</span>
+
+<span class="k">def</span> <span class="nf">findMaxVal</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;Find the maximum value in an array.</span>
+
+<span class="sd">   :param arr: The array to be searched. Must contain at least one element.</span>
+<span class="sd">   :type arr: int[]</span>
+<span class="sd">   :return: The maximum value.</span>
+<span class="sd">   :rtype: int</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="c1"># Ensure there is at least one element in the array</span>
+   <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="c1"># Initialize the max value to the first value of the array.</span>
+      <span class="nb">max</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+      <span class="c1"># Iterate through the array, skipping the first value</span>
+      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+         <span class="c1"># If the current value is greater than the max value</span>
+         <span class="k">if</span> <span class="nb">max</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">:</span>
+            <span class="nb">max</span> <span class="o">=</span> <span class="n">i</span> <span class="c1"># Make the current value the max value</span>
+      <span class="k">return</span> <span class="nb">max</span>
+   <span class="c1"># Otherwise, raise an error that there is an empty array</span>
+   <span class="k">else</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Array must have length of at least 1.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As noted above, the code checks that the array is not empty. Without this
+edge case, the code may raise vauge errors. In this example, the comments are not
+the only benefit resulting from careful placement of edge cases. If you look at the
+<code class="code docutils literal notranslate"><span class="pre">else</span></code> condition, you will notice that the reason the error was raised is
+explcitly stated, making it easy for a user of this function to understand what is going
+wrong during runtime.</p>
+</div>
+<div class="section" id="code-logic">
+<h3>Code Logic<a class="headerlink" href="#code-logic" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="best-practice">
+<h3>Best Practice<a class="headerlink" href="#best-practice" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="test-cases">
+<h3>Test Cases<a class="headerlink" href="#test-cases" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="things-to-take-into-consideration">
+<h3>Things to Take into Consideration<a class="headerlink" href="#things-to-take-into-consideration" title="Permalink to this headline">¶</a></h3>
+<dl class="citation">
+<dt class="label" id="sadowski-soderberg-bacchelli"><span class="brackets"><a class="fn-backref" href="#id2">Sadowski-Soderberg-Bacchelli</a></span></dt>
+<dd><p>Modern Code Review: A Case Study at Google, <a class="reference external" href="https://sback.it/publications/icse2018seip.pdf">https://sback.it/publications/icse2018seip.pdf</a></p>
+</dd>
+<dt class="label" id="grady-van-slack"><span class="brackets"><a class="fn-backref" href="#id3">Grady-Van-Slack</a></span></dt>
+<dd><p>Key lessons in achieving widespread inspection use, <a class="reference external" href="https://ieeexplore.ieee.org/document/300084">https://ieeexplore.ieee.org/document/300084</a></p>
+</dd>
+<dt class="label" id="bacchelli-bird"><span class="brackets"><a class="fn-backref" href="#id4">Bacchelli-Bird</a></span></dt>
+<dd><p>Expectations, outcomes, and challenges of modern code review, <a class="reference external" href="https://dl.acm.org/citation.cfm?id=2486882">https://dl.acm.org/citation.cfm?id=2486882</a></p>
+</dd>
+<dt class="label" id="purushothaman-perry"><span class="brackets"><a class="fn-backref" href="#id6">Purushothaman-Perry</a></span></dt>
+<dd><p>Toward Understanding the Rhetoric of Small Source Code Changes, <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/1463233">https://ieeexplore.ieee.org/abstract/document/1463233</a></p>
+</dd>
+<dt class="label" id="czerwonka-greiler-tilford"><span class="brackets"><a class="fn-backref" href="#id8">Czerwonka-Greiler-Tilford</a></span></dt>
+<dd><p>Code reviews do not find bugs: how the current code review best practice slows us down, <a class="reference external" href="https://dl.acm.org/citation.cfm?id=2819015">https://dl.acm.org/citation.cfm?id=2819015</a></p>
+</dd>
+<dt class="label" id="humphrey"><span class="brackets"><a class="fn-backref" href="#id7">Humphrey</a></span></dt>
+<dd><p>The Personal Software Process, <a class="reference external" href="https://resources.sei.cmu.edu/library/asset-view.cfm?assetid=5283">https://resources.sei.cmu.edu/library/asset-view.cfm?assetid=5283</a></p>
+</dd>
+<dt class="label" id="dreu-weingart"><span class="brackets"><a class="fn-backref" href="#id9">Dreu-Weingart</a></span></dt>
+<dd><p>Task Versus Relationship Conflict, Team Performance,and Team Member Satisfaction: A Meta-Analysis, <a class="reference external" href="https://psycnet.apa.org/record/2003-99635-017">https://psycnet.apa.org/record/2003-99635-017</a></p>
+</dd>
+<dt class="label" id="johnson-tjahjono"><span class="brackets"><a class="fn-backref" href="#id1">Johnson-Tjahjono</a></span></dt>
+<dd><p>Does Every Inspection Really Need a Meeting, <a class="reference external" href="https://link.springer.com/content/pdf/10.1023%2FA%3A1009787822215.pdf">https://link.springer.com/content/pdf/10.1023%2FA%3A1009787822215.pdf</a></p>
+</dd>
+<dt class="label" id="mantyla-lassenius"><span class="brackets"><a class="fn-backref" href="#id5">Mantyla-Lassenius</a></span></dt>
+<dd><p>What Types of Defects Are Really Discovered in Code Reviews?, <a class="reference external" href="https://ieeexplore-ieee-org.ezproxy.lib.purdue.edu/document/4604671/">https://ieeexplore-ieee-org.ezproxy.lib.purdue.edu/document/4604671/</a></p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="chapter_test.html" class="btn btn-neutral float-right" title="Testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="chapter_vc.html" class="btn btn-neutral float-left" title="Version Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yung-Hsiang Lu and George K. Thiruvathukal
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
