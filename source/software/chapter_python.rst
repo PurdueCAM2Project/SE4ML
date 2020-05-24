@@ -182,7 +182,7 @@ You can also run the script *explicitly* with Python:
    $ python3 SayHi.py
    Hello
 
-is a comment to the shell, the command interpreter on Linux. It tells
+``#!/usr/bin/env python`` is a comment to the shell, the command interpreter on Linux. It tells
 the shell that the way to execute this file is to execute the program in
 file ``/usr/bin/python`` , and pass it the rest of the file as its
 input. The print statement tells Python to write out the string Hello on
