@@ -400,14 +400,14 @@ can cause a world of problems months or years down the line. As the code reviewe
 is your job to ensure blatant documentation defects are caught early and before they
 cause any major issues.
 
-First, there must be a proper explanation of the input parameters, return value(s) and
-functionality of each method, class, and module. Typically, this is formatted through some
-standard, such as JavaDocs or JSDocs. In Python, this standard is implemented through documentation
-strings (docstrings), which links documentation frameworks towards methods, classes, and modules. 
-Depending on which documentation framework is used, docstrings can be formatted in many different
-ways, none of which are universally greater than all others. This book uses Sphinx to generate 
-documentation from reStructuredText (reST), one such popular format. Carefully review the 
-following example of reST.
+The first comments to check for are the documentation of all methods, classes, and modules,
+ensuring they properly explain the input parameter(s), return value(s), and what happens in between.
+In Python, documentation strings (docstrings) link documentation frameworks with methods, classes,
+and modules. There are several ways to format docstrings depending on the kind of automatic
+documentation framework being used. Regardless of the tool used, ensure that the comments conform
+to the required format required by the automatic documentation framework. One popular format is
+reStructuredText (reST), which uses Sphinx to generate the documentation. This is the same tool
+used to generate this book. The following example demonstrates how reST can be utilized.
 
 .. code:: python
 
@@ -416,21 +416,55 @@ following example of reST.
 
    class ExampleClass(object):
       """
-      Need to decide on a format.
+      This is a description of what ExampleClass does.
+      The purpose of this class is to demonstrate the
+      power of docstrings.
+
+      :param var: This is a variable argument
+      :type var: int
+      :param `*args`: The variable args
+      :param `**kwargs`: The keyowrd args
+      :ivar var1: This is where var1 is stored
+      :vartype var1: int
       """
+      
+      def __init__(self, var1, *args, **kwargs):
+         self.var1 = var1
 
-It is also important to document the method bodies. This is where the interesting logic
-occurs, which can often be complicated and difficult to read. Providing step-by-step comments
-alongside the computations can help an unfamiliar reader understand the program more easily.
-As a code reviewer, ensure you are able to completely follow the logic, and when you cannot,
-provide suggestions for where the code writer should clarify documentation. It is important during
-this process to put yourself in the shoes of a new hire who has never seen this code before.
-Newer hires will not have nearly the same experience with the code base as a veteran reviewer, so
-it is important to keep this in mind.
+      def ExampleMethod(var1, var2, var3):
+         """This first method is part of the ExampleClass.
 
-Ideally, a script should at least contain docstrings and a few inline comments. When these
-elements are missing you must request changes from the code author. Below you will find
-an example of what a well-documented body of code looks like.
+         :param var1: This is the first variable for this method.
+         :type var1: int
+         :param var2: This is the second variable for this method.
+         :type var2: int
+         :param var3: This is the third variable for this method.
+         :type var3: int[]
+         :return: This is the return value for this method.
+         :rtype: str
+         """
+
+         print("The value of arg1 is", arg1)
+         print("The value of arg2 is", arg2)
+         print("The list of arg3 contains", arg3)
+
+         strVar = "Hello World"
+
+         return strVar
+
+While documenting method bodies, it is import to ensure it is completely accurate and comprehensive.
+This is where the interesting logic occurs, which can often be complicated and difficult to read.
+Therefore, providing step-by-step comments alongside the code can help an unfamiliar reader
+understand the program more easily. As a code reviewer, make sure you are able to completely understand
+the logic and provide suggestions on what to clarify when you fail to understand a part of the code.
+During this process, it is crucial to put yourself in the shoes of someone who has never seen
+the code before. The reason being is that newly hired developers will not have nearly the same level
+of experience a veteran reviewer (such as yourself), so it is important to keep thieir perspective
+in mind.
+
+At the bare minimum, a block of code should have docstrings (or a comparable equivalent depending
+on the langauge) and inline comments. When these are missing you must request changes from the
+author of the code. Below you will find an example of what a well-documented body of code looks like.
 
 .. code:: python
 
@@ -453,25 +487,19 @@ an example of what a well-documented body of code looks like.
             if arr[j] > arr[j+1]:
                arr[j], arr[j+1] = arr[j+1], arr[j]
 
-The above snippet of code has explanations that even a new programmer should 
-understand. All of the important steps in the algorithm are described and the
-overarching goal of the algorithm is made clear. As a result, a new developer
-can figure out the functionality of the program when the original developer is
-absent from the project.
+The code above has comments that even a beginner programmer could understand. All
+of the important steps in the algorithm are described and the overarching goal
+of the algorithm is made clear. While this is the desired goal of comments, it will
+not always be the case that new programmers can understand it. Sometimes, there are
+programming concepts and strategies that only understood due to experience. In these
+cases, do your best to make the code as easy to understand as possible.
 
-There are several important areas to regularly check for documentation defects.
-For instance, make sure edge cases are properly described and justified. It is
-also important to document where future work needs to be completed if the work
-is out of the scope of the current feature (usually this is indicated by
-:code:`TODO:`). 
-
-Ultimately, the goal of every comment is to describe the meaning of the code
-in a clear and concise manner. Therefore, a code writer must avoid redundant
-comments, as they will make the algorithm unclear. Furthermore, commented out
-code should also be removed, especially when the code was originally used for
-debugging purposes. When reviewing code, keep an eye out for ineffective comments
-that may cause future confusion. The block of code below shows an example of poorly
-commented code.
+Ultimately, the goal of every comment is to describe the code's meaning
+in a clear and concise manner. Therefore, redundant comments must be avoided as
+well, as they may make the code unclear or confusing. Furthermore, commented out code
+should also be removed, especially when the code is for debugging purposes. When
+reviewing code, keep an eye out for ineffective comments. The block of code below
+shows an example of such comments.
 
 .. code:: python
 
@@ -481,34 +509,61 @@ commented code.
    def findMaxVal(arr):
       """Find the maximum value in an array.
       
-      :param arr: The array to be searched. This should be only non-negative numbers.
+      :param arr: The array to be searched.
       :type arr: int[]
       :return: The maximum value.
       :rtype: int
       """
-      # Initialize the max value to a negative number 
-      # since this is guaranteed to be smaller than
-      # the smallest value in the non-negative array.
-      max = -1
+      # Initialize the max value to the first value of the array.
+      max = arr[0]
 
-      # Iterate through the array
-      for i in arr:
+      # Iterate through the array, skipping the first value
+      for i in arr[1:]:
          # If the current value is greater than the max value
          if max < i:
-            # print("Found max!", "Value: ", i, "Old Max: ", max)
+            # print("New max found at", i, "with value of", arr[i], ".")
             max = i # Make the current value the max value
       return max
 
-For the sake of future developers, it is important to catch documentation
-defects early in the development process, especially before one of the original
-developers of the project is no longer involved. Furthermore, poor documentation
-can mislead developers into thinking that a particular piece of code can perform a
-falsely implied action, which can impede development until they discover the defect.
-If this goes unnoticed for long enough, an entire framework can build around these
-false assumptions, requiring for the framework to undergo large-scale refactoring.
-Any of these scenarios waste large amounts of project's resources, delaying
-important features from being implemented. As a code reviewer, it is your job to
-prevent these scenarios from occurring.
+It is also highly advised to clearly indicate, describe, and justify edge cases
+within a nearby comment. For similar reasons as before, this will help
+someone understand the rationale behind the sudden break in logic due to some
+condition handling the edge case. Take the following example for instance.
+
+.. code:: python
+
+   #!/usr/bin/python3
+   # edgecase.py
+
+   def findMaxVal(arr):
+      """Find the maximum value in an array.
+      
+      :param arr: The array to be searched. Must contain at least one element.
+      :type arr: int[]
+      :return: The maximum value.
+      :rtype: int
+      """
+      # Ensure there is at least one element in the array
+      if len(arr) > 0:
+         # Initialize the max value to the first value of the array.
+         max = arr[0]
+
+         # Iterate through the array, skipping the first value
+         for i in arr[1:]:
+            # If the current value is greater than the max value
+            if max < i:
+               max = i # Make the current value the max value
+         return max
+      # Otherwise, raise an error that there is an empty array
+      else:
+         raise ValueError("Array must have length of at least 1.") 
+
+As noted above, the code checks that the array is not empty. Without this
+edge case, the code may raise vauge errors. In this example, the comments are not
+the only benefit resulting from careful placement of edge cases. If you look at the
+:code:`else` condition, you will notice that the reason the error was raised is
+explcitly stated, making it easy for a user of this function to understand what is going
+wrong during runtime.
 
 Code Logic
 ~~~~~~~~~~
